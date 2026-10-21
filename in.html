@@ -916,6 +916,128 @@
                 scroll-behavior: auto
             }
         }
+
+        /* HCP Confirmation Dialog (Starting Pop-up) */
+        dialog.hcp {
+            position: fixed;
+            inset: 0;
+            margin: auto;
+            border: none;
+            padding: 0;
+            background: transparent;
+            max-width: min(540px, calc(100vw - 32px));
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: 0 24px 64px rgba(30, 20, 70, 0.28), 0 4px 16px rgba(75, 43, 176, 0.12);
+            z-index: 1000;
+            overflow: hidden;
+        }
+
+        dialog.hcp::backdrop {
+            background: rgba(17, 14, 38, 0.65);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+        }
+
+        .hcp-body {
+            background: #ffffff;
+            padding: clamp(24px, 4vw, 36px);
+            border-radius: 20px;
+            border: 1px solid rgba(124, 77, 255, 0.18);
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .hcp-body .eyebrow {
+            display: inline-block;
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--pri);
+            background: var(--soft);
+            padding: 4px 12px;
+            border-radius: 99px;
+            margin: 0 auto 14px;
+        }
+
+        .hcp-body h2 {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-size: clamp(20px, 2.5vw, 24px);
+            font-weight: 600;
+            color: var(--ink);
+            line-height: 1.25;
+            margin-bottom: 12px;
+        }
+
+        .hcp-body p {
+            font-size: 14.5px;
+            line-height: 1.6;
+            color: var(--mut);
+            margin-bottom: 24px;
+        }
+
+        .hcp-body .actions {
+            display: flex;
+            gap: 12px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .hcp-body .actions .btn {
+            flex: 1;
+            min-width: 180px;
+            padding: 12px 20px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 10px;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .hcp-body .actions .btn--primary {
+            background: var(--pri);
+            color: #ffffff;
+            border: 1px solid var(--pri);
+            box-shadow: 0 4px 14px rgba(75, 43, 176, 0.25);
+        }
+
+        .hcp-body .actions .btn--primary:hover {
+            background: #391e8e;
+            transform: translateY(-1px);
+        }
+
+        .hcp-body .actions .btn--secondary {
+            background: transparent;
+            color: var(--mut);
+            border: 1px solid rgba(124, 77, 255, 0.2);
+        }
+
+        .hcp-body .actions .btn--secondary:hover {
+            background: var(--soft);
+            color: var(--pri);
+            border-color: var(--pri);
+        }
+
+        #hcp-not {
+            margin-top: 18px;
+            padding: 14px 16px;
+            background: #fdf2f4;
+            border: 1px solid #f3b9c3;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #991b1b;
+            line-height: 1.5;
+            text-align: left;
+        }
+
+        #hcp-not a {
+            color: #7f1d1d;
+            font-weight: 600;
+            text-decoration: underline;
+        }
     </style>
 </head>
 
@@ -934,6 +1056,22 @@
         </div>
     </header>
     <main id="app"></main>
+
+    <!-- HCP Confirmation Pop-up Dialog -->
+    <dialog class="hcp" id="hcp-dialog" aria-labelledby="hcp-title">
+        <div class="hcp-body">
+            <span class="eyebrow">ZYPREXA (olanzapine)</span>
+            <h2 id="hcp-title">This website is intended for healthcare professionals</h2>
+            <p>It contains information about a prescription-only medicine, based on the EU Summary of Product Characteristics. Please confirm that you are a healthcare professional.</p>
+            <div class="actions">
+                <button class="btn btn--primary" id="hcp-yes" type="button">I am a healthcare professional</button>
+                <button class="btn btn--secondary" id="hcp-no" type="button">I am not</button>
+            </div>
+            <div id="hcp-not" style="display:none">
+                This website is not intended for you. If you have questions about your medicine, please speak with your doctor or pharmacist, or read the package leaflet on the <a href="https://www.ema.europa.eu/en/medicines/human/EPAR/zyprexa" target="_blank" rel="noopener">European Medicines Agency website</a>.
+            </div>
+        </div>
+    </dialog>
     <footer>
         <div class="w">
             <a href="#home" class="logo" style="display:inline-block;margin-bottom:8px">
@@ -1142,6 +1280,27 @@
             if (sec && document.getElementById(sec)) document.getElementById(sec).scrollIntoView(); else if (k !== cur || !sec) scrollTo(0, 0);
         }
         addEventListener("hashchange", route); route();
+
+        // HCP Confirmation Dialog Logic
+        const hcpDlg = document.getElementById("hcp-dialog");
+        if (hcpDlg && typeof hcpDlg.showModal === "function") {
+            try {
+                if (sessionStorage.getItem("zyp-hcp") !== "yes") {
+                    hcpDlg.showModal();
+                }
+            } catch (e) {
+                hcpDlg.showModal();
+            }
+            hcpDlg.addEventListener("cancel", e => e.preventDefault());
+            document.getElementById("hcp-yes")?.addEventListener("click", () => {
+                try { sessionStorage.setItem("zyp-hcp", "yes"); } catch (e) {}
+                hcpDlg.close();
+            });
+            document.getElementById("hcp-no")?.addEventListener("click", () => {
+                const notHcp = document.getElementById("hcp-not");
+                if (notHcp) notHcp.style.display = "block";
+            });
+        }
     </script>
 </body>
 

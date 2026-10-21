@@ -1151,3 +1151,130 @@ footer a:hover {
     scroll-behavior: auto;
   }
 }
+
+/* ==========================================================================
+   HCP Confirmation Dialog (Starting Pop-up)
+   ========================================================================== */
+dialog.hcp {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  border: none;
+  padding: 0;
+  background: transparent;
+  max-width: min(540px, calc(100vw - 32px));
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 24px 64px rgba(30, 20, 70, 0.28), 0 4px 16px rgba(75, 43, 176, 0.12);
+  z-index: 1000;
+  overflow: hidden;
+}
+
+dialog.hcp::backdrop {
+  background: rgba(17, 14, 38, 0.65);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.hcp-body {
+  background: #ffffff;
+  padding: clamp(24px, 4vw, 36px);
+  border-radius: 20px;
+  border: 1px solid rgba(124, 77, 255, 0.18);
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  position: relative;
+}
+
+.hcp-body .eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--pri, #4b2bb0);
+  background: rgba(124, 77, 255, 0.08);
+  padding: 4px 12px;
+  border-radius: 99px;
+  margin: 0 auto 14px;
+}
+
+.hcp-body h2 {
+  font-family: var(--font-playfair, 'Playfair Display', Georgia, serif);
+  font-size: clamp(20px, 2.5vw, 24px);
+  font-weight: 600;
+  color: var(--ink, #1e1a3a);
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.hcp-body p {
+  font-size: 14.5px;
+  line-height: 1.6;
+  color: var(--mut, #5e597c);
+  margin-bottom: 24px;
+}
+
+.hcp-body .actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.hcp-body .actions .btn {
+  flex: 1;
+  min-width: 180px;
+  padding: 12px 20px;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 10px;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.hcp-body .actions .btn--primary {
+  background: var(--pri, #4b2bb0);
+  color: #ffffff;
+  border: 1px solid var(--pri, #4b2bb0);
+  box-shadow: 0 4px 14px rgba(75, 43, 176, 0.25);
+}
+
+.hcp-body .actions .btn--primary:hover {
+  background: #391e8e;
+  border-color: #391e8e;
+  transform: translateY(-1px);
+}
+
+.hcp-body .actions .btn--secondary {
+  background: transparent;
+  color: var(--mut, #5e597c);
+  border: 1px solid rgba(124, 77, 255, 0.2);
+}
+
+.hcp-body .actions .btn--secondary:hover {
+  background: rgba(124, 77, 255, 0.06);
+  color: var(--pri, #4b2bb0);
+  border-color: var(--pri, #4b2bb0);
+}
+
+#hcp-not {
+  margin-top: 18px;
+  padding: 14px 16px;
+  background: #fdf2f4;
+  border: 1px solid #f3b9c3;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #991b1b;
+  line-height: 1.5;
+  text-align: left;
+}
+
+#hcp-not a {
+  color: #7f1d1d;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
