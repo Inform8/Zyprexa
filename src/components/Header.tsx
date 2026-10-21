@@ -207,14 +207,33 @@ export default function Header() {
             })}
           </ul>
 
-          {/* Prescribing Information CTA on Right */}
-          <Link
-            className="btn"
-            href="/safety-prescribing#dosing"
-            style={{ marginLeft: "auto" }}
-          >
-            Prescribing information
-          </Link>
+          {/* Header Action Buttons on Right */}
+          <div style={{ marginLeft: "auto", display: "flex", alignItems: "center", gap: "10px" }}>
+            <a
+              className="btn btn-outline"
+              href="/in.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                background: "transparent",
+                color: "var(--pri)",
+                border: "1px solid rgba(75, 43, 176, 0.25)",
+                whiteSpace: "nowrap",
+                fontSize: "13px",
+                padding: "8px 14px"
+              }}
+              title="Open the standalone single-page clinical presentation"
+            >
+              Interactive SPA ↗
+            </a>
+            <Link
+              className="btn"
+              href="/safety-prescribing#dosing"
+              style={{ whiteSpace: "nowrap", fontSize: "13px", padding: "8px 16px" }}
+            >
+              Prescribing info
+            </Link>
+          </div>
         </div>
       </header>
     </>
