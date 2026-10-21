@@ -1,0 +1,1110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <title>ZYPREXA (olanzapine) HCP</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Playfair+Display:wght@500;600&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --ink: #1e1a3a;
+            --mut: #625e82;
+            --pri: #4b2bb0;
+            --p2: #7c4dff;
+            --soft: #f1ecff;
+            --line: #e2dbf6;
+            --red: #d6334a;
+            --redbg: #fdecef;
+            --grn: #059669;
+            --pad: clamp(16px, 4vw, 72px)
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0
+        }
+
+        html {
+            scroll-behavior: smooth
+        }
+
+        body {
+            font: 15px/1.6 Inter, system-ui, sans-serif;
+            color: var(--ink);
+            background: linear-gradient(165deg, #e6dcff 0%, #f6f2ff 28%, #fff 55%, #f1ebff 100%) fixed;
+            min-height: 100vh
+        }
+
+        h1,
+        h2.serif {
+            font-family: 'Playfair Display', Georgia, serif;
+            font-weight: 500
+        }
+
+        a {
+            color: inherit;
+            text-decoration: none
+        }
+
+        :focus-visible {
+            outline: 2px solid var(--p2);
+            outline-offset: 2px
+        }
+
+        .w {
+            width: 100%;
+            padding: 0 var(--pad)
+        }
+
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(255, 255, 255, .92);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--line);
+            padding-top: env(safe-area-inset-top, 0)
+        }
+
+        .nv {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            min-height: 62px
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 22px;
+            letter-spacing: .03em;
+            color: var(--pri);
+            line-height: 1
+        }
+
+        .logo small {
+            display: block;
+            font: italic 12px 'Playfair Display', serif;
+            color: var(--mut);
+            letter-spacing: .1em;
+            margin-top: 2px
+        }
+
+        #nav {
+            display: flex;
+            gap: 2px;
+            margin-left: auto;
+            list-style: none;
+            padding: 0
+        }
+
+        #nav>li {
+            position: relative
+        }
+
+        #nav>li>a {
+            display: block;
+            padding: 20px 12px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--mut);
+            white-space: nowrap
+        }
+
+        #nav>li:hover>a,
+        #nav>li:focus-within>a,
+        #nav>li>a.on {
+            color: var(--pri);
+            box-shadow: inset 0 -3px var(--p2)
+        }
+
+        .dd {
+            position: absolute;
+            left: 0;
+            top: 100%;
+            min-width: 230px;
+            background: #fff;
+            border: 1px solid var(--line);
+            border-radius: 0 0 14px 14px;
+            box-shadow: 0 16px 36px #4b2bb026;
+            padding: 8px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(6px);
+            transition: .18s
+        }
+
+        #nav>li:last-child .dd,
+        #nav>li:nth-last-child(2) .dd {
+            left: auto;
+            right: 0
+        }
+
+        #nav>li:hover .dd,
+        #nav>li:focus-within .dd {
+            opacity: 1;
+            visibility: visible;
+            transform: none
+        }
+
+        .dd a {
+            display: block;
+            padding: 8px 12px;
+            border-radius: 8px;
+            font-size: 13px;
+            color: var(--ink)
+        }
+
+        .dd a:hover {
+            background: var(--soft);
+            color: var(--pri)
+        }
+
+        .btn {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            background: var(--pri);
+            color: #fff;
+            border: 1px solid var(--pri);
+            border-radius: 9px;
+            padding: 10px 18px;
+            font: 600 13px Inter;
+            cursor: pointer
+        }
+
+        .btn.g {
+            background: #fff;
+            color: var(--pri)
+        }
+
+        .btn.w2 {
+            background: #fff;
+            color: #2a1670;
+            border-color: #fff
+        }
+
+        #burger {
+            display: none;
+            margin-left: auto;
+            background: none;
+            border: 1px solid var(--line);
+            border-radius: 8px;
+            padding: 8px 12px;
+            font-size: 18px;
+            cursor: pointer
+        }
+
+        .sub {
+            position: sticky;
+            top: 62px;
+            z-index: 40;
+            background: rgba(255, 255, 255, .88);
+            backdrop-filter: blur(8px);
+            border-bottom: 1px solid var(--line);
+            overflow-x: auto;
+            white-space: nowrap
+        }
+
+        .sub a {
+            display: inline-block;
+            padding: 11px 14px;
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--mut)
+        }
+
+        .sub a:hover {
+            color: var(--pri)
+        }
+
+        .hero {
+            overflow: hidden
+        }
+
+        .hero .w {
+            display: grid;
+            grid-template-columns: 1.1fr .9fr;
+            gap: 32px;
+            align-items: center;
+            padding-top: 44px;
+            padding-bottom: 44px;
+            min-height: 340px
+        }
+
+        .hero h1 {
+            font-size: clamp(30px, 4.6vw, 56px);
+            line-height: 1.1;
+            margin-bottom: 14px
+        }
+
+        .hero p {
+            color: var(--mut);
+            max-width: 640px;
+            margin-bottom: 14px;
+            font-size: 16px
+        }
+
+        .brand {
+            font: 800 clamp(38px, 6vw, 76px)/1 Inter;
+            color: var(--pri);
+            letter-spacing: .02em
+        }
+
+        .brand i {
+            display: block;
+            font: italic 400 clamp(20px, 2.6vw, 30px) 'Playfair Display', serif;
+            color: var(--ink)
+        }
+
+        .eb {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--p2);
+            margin-bottom: 8px
+        }
+
+        .hero img {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 22px;
+            box-shadow: 0 20px 50px #4b2bb033
+        }
+
+        .row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            align-items: center
+        }
+
+        section.s {
+            padding: 40px 0 4px;
+            scroll-margin-top: 110px
+        }
+
+        h2 {
+            font-size: 22px;
+            margin-bottom: 6px;
+            font-weight: 700
+        }
+
+        h2+.lead {
+            color: var(--mut);
+            margin-bottom: 16px;
+            max-width: 900px
+        }
+
+        h3 {
+            font-size: 16px;
+            margin: 8px 0 4px
+        }
+
+        .grid {
+            display: grid;
+            gap: 16px
+        }
+
+        .g2 {
+            grid-template-columns: repeat(2, 1fr)
+        }
+
+        .g3 {
+            grid-template-columns: repeat(3, 1fr)
+        }
+
+        .g4 {
+            grid-template-columns: repeat(4, 1fr)
+        }
+
+        .g5 {
+            grid-template-columns: repeat(5, 1fr)
+        }
+
+        .g6 {
+            grid-template-columns: repeat(6, 1fr)
+        }
+
+        .card {
+            background: rgba(255, 255, 255, .92);
+            border: 1px solid var(--line);
+            border-radius: 16px;
+            padding: 18px;
+            box-shadow: 0 4px 18px #4b2bb010
+        }
+
+        .card p,
+        .card li {
+            font-size: 13.5px;
+            color: var(--mut)
+        }
+
+        .card ul {
+            padding-left: 18px
+        }
+
+        a.card:hover {
+            border-color: var(--p2);
+            box-shadow: 0 10px 26px #4b2bb022
+        }
+
+        .ic {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            display: grid;
+            place-items: center;
+            background: var(--soft);
+            color: var(--pri);
+            font-weight: 700;
+            font-size: 18px
+        }
+
+        .k1 {
+            background: #fdeaf0;
+            color: #c2185b
+        }
+
+        .k2 {
+            background: #fff0e1;
+            color: #c26a00
+        }
+
+        .k3 {
+            background: #e6f0ff;
+            color: #1d4ed8
+        }
+
+        .k4 {
+            background: #e4f6ee;
+            color: #047857
+        }
+
+        .tag {
+            display: inline-block;
+            padding: 3px 10px;
+            border-radius: 99px;
+            background: var(--soft);
+            color: var(--pri);
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 8px
+        }
+
+        .tag.r {
+            background: var(--redbg);
+            color: var(--red)
+        }
+
+        .pi {
+            background: linear-gradient(120deg, #2a1670, #5a2fc4 60%, #8a5cff);
+            color: #fff;
+            border-radius: 20px;
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1.2fr .8fr;
+            gap: 24px
+        }
+
+        .pi ul {
+            padding-left: 18px;
+            margin: 8px 0 14px
+        }
+
+        .pi li {
+            opacity: .92;
+            margin-bottom: 4px
+        }
+
+        .alert {
+            background: var(--redbg);
+            border: 1px solid #f3b9c3;
+            border-radius: 16px;
+            padding: 18px
+        }
+
+        .alert h3 {
+            color: var(--red);
+            margin-top: 0
+        }
+
+        .split {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 28px;
+            align-items: center
+        }
+
+        .split img {
+            width: 100%;
+            border-radius: 18px;
+            max-height: 340px;
+            object-fit: cover
+        }
+
+        .stat {
+            text-align: center
+        }
+
+        .stat b {
+            display: block;
+            font: 600 40px 'Playfair Display', serif;
+            color: var(--pri)
+        }
+
+        .tw {
+            overflow-x: auto
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13.5px
+        }
+
+        th,
+        td {
+            padding: 11px 14px;
+            text-align: left;
+            border-bottom: 1px solid var(--line);
+            vertical-align: top
+        }
+
+        th {
+            background: var(--soft);
+            color: var(--mut);
+            font-weight: 600;
+            white-space: nowrap
+        }
+
+        tr.hl td {
+            background: #f7f3ff
+        }
+
+        .dots {
+            color: var(--p2);
+            letter-spacing: 2px;
+            white-space: nowrap
+        }
+
+        .cols {
+            display: flex;
+            align-items: flex-end;
+            gap: clamp(8px, 2vw, 24px);
+            height: 210px;
+            padding: 0 8px;
+            border-bottom: 1px solid var(--line);
+            position: relative;
+            margin-top: 22px
+        }
+
+        .cols>div {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            height: 100%;
+            position: relative;
+            z-index: 1
+        }
+
+        .cols i {
+            display: block;
+            width: 100%;
+            max-width: 70px;
+            border-radius: 8px 8px 0 0;
+            transform-origin: bottom;
+            animation: gr .8s both
+        }
+
+        .cols b {
+            font-size: 12.5px;
+            margin-bottom: 4px
+        }
+
+        .cl {
+            display: flex;
+            gap: clamp(8px, 2vw, 24px);
+            padding: 6px 8px;
+            font-size: 11.5px;
+            color: var(--mut);
+            text-align: center
+        }
+
+        .cl span {
+            flex: 1
+        }
+
+        .band {
+            position: absolute;
+            left: 0;
+            right: 0;
+            background: #4b2bb01c;
+            border-top: 1px dashed var(--pri);
+            border-bottom: 1px dashed var(--pri);
+            z-index: 0;
+            font-size: 11px;
+            color: var(--pri);
+            padding-left: 6px
+        }
+
+        @keyframes gr {
+            from {
+                transform: scaleY(0)
+            }
+        }
+
+        .dn {
+            --p: 50;
+            --c: #7c4dff;
+            width: 112px;
+            height: 112px;
+            border-radius: 50%;
+            background: conic-gradient(var(--c) calc(var(--p)*1%), #e9e3fb 0);
+            display: grid;
+            place-items: center;
+            margin: 0 auto 8px;
+            position: relative
+        }
+
+        .dn::before {
+            content: "";
+            position: absolute;
+            inset: 14px;
+            background: #fff;
+            border-radius: 50%
+        }
+
+        .dn b {
+            position: relative;
+            font-size: 17px;
+            color: var(--ink)
+        }
+
+        .dnr {
+            display: flex;
+            gap: 22px;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            text-align: center;
+            font-size: 12.5px;
+            color: var(--mut);
+            margin-top: 12px
+        }
+
+        .leg {
+            display: flex;
+            gap: 14px;
+            flex-wrap: wrap;
+            font-size: 12px;
+            color: var(--mut);
+            margin-top: 8px
+        }
+
+        .leg i {
+            display: inline-block;
+            width: 10px;
+            height: 10px;
+            border-radius: 3px;
+            margin-right: 5px
+        }
+
+        .tabs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 14px
+        }
+
+        .tabs button {
+            border: 1px solid var(--line);
+            background: #fff;
+            border-radius: 99px;
+            padding: 8px 16px;
+            font: 600 13px Inter;
+            color: var(--mut);
+            cursor: pointer
+        }
+
+        .tabs button.on {
+            background: var(--pri);
+            color: #fff;
+            border-color: var(--pri)
+        }
+
+        .flow {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr auto 1fr;
+            gap: 12px;
+            align-items: stretch
+        }
+
+        .flow>span {
+            align-self: center;
+            color: var(--p2);
+            font-size: 26px
+        }
+
+        details {
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            padding: 13px 16px;
+            margin-bottom: 8px;
+            background: rgba(255, 255, 255, .92)
+        }
+
+        summary {
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14.5px
+        }
+
+        details p,
+        details ul {
+            margin-top: 8px;
+            color: var(--mut);
+            font-size: 13.5px
+        }
+
+        details ul {
+            padding-left: 18px
+        }
+
+        .range {
+            position: relative;
+            height: 16px;
+            border-radius: 99px;
+            background: #e9e3fb;
+            margin: 30px 0 28px
+        }
+
+        .range i {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            border-radius: 99px;
+            background: linear-gradient(90deg, #b9a2ff, #4b2bb0)
+        }
+
+        .range span {
+            position: absolute;
+            top: 22px;
+            font-size: 11.5px;
+            color: var(--mut);
+            transform: translateX(-50%)
+        }
+
+        .map {
+            position: relative;
+            aspect-ratio: 1.5;
+            min-height: 300px;
+            border-radius: 20px;
+            background: radial-gradient(circle, #fff, #e6dcff 75%);
+            border: 1px solid var(--line)
+        }
+
+        .map button {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            width: clamp(62px, 9vw, 96px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 3px solid #fff;
+            color: #fff;
+            font: 700 14px Inter;
+            cursor: pointer;
+            box-shadow: 0 8px 22px #4b2bb044
+        }
+
+        .map button.on {
+            outline: 4px solid #4b2bb055
+        }
+
+        .map .ctr {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            font: 600 clamp(20px, 3vw, 34px) 'Playfair Display', serif;
+            color: var(--pri);
+            pointer-events: none
+        }
+
+        .tl {
+            display: flex;
+            gap: 0;
+            overflow-x: auto;
+            margin: 14px 0
+        }
+
+        .tl div {
+            flex: 1;
+            min-width: 110px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--mut);
+            position: relative;
+            padding-top: 26px
+        }
+
+        .tl div::before {
+            content: "";
+            position: absolute;
+            top: 8px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: var(--p2)
+        }
+
+        .tl div::after {
+            content: "";
+            position: absolute;
+            top: 2px;
+            left: 50%;
+            width: 14px;
+            height: 14px;
+            margin-left: -7px;
+            border-radius: 50%;
+            background: #fff;
+            border: 3px solid var(--pri)
+        }
+
+        .tl b {
+            display: block;
+            color: var(--ink)
+        }
+
+        .src {
+            width: 100%;
+            padding: 12px 16px;
+            border: 1px solid var(--line);
+            border-radius: 12px;
+            font: 14px Inter;
+            background: #fff;
+            margin-bottom: 10px
+        }
+
+        .ref {
+            display: flex;
+            gap: 14px;
+            padding: 13px 0;
+            border-bottom: 1px solid var(--line);
+            font-size: 13.5px
+        }
+
+        .ref>b {
+            color: var(--p2);
+            min-width: 56px
+        }
+
+        .ref a {
+            color: var(--pri);
+            font-weight: 600
+        }
+
+        footer {
+            background: #1b1646;
+            color: #c9c3ee;
+            margin-top: 60px;
+            padding: 34px 0 calc(26px + env(safe-area-inset-bottom, 0));
+            font-size: 12.5px
+        }
+
+        footer .logo {
+            color: #fff
+        }
+
+        footer .row {
+            gap: 22px;
+            margin: 12px 0
+        }
+
+        @media(max-width:1100px) {
+
+            .g5,
+            .g6 {
+                grid-template-columns: repeat(3, 1fr)
+            }
+
+            .g4 {
+                grid-template-columns: repeat(2, 1fr)
+            }
+        }
+
+        @media(max-width:900px) {
+            #burger {
+                display: block
+            }
+
+            #nav {
+                display: none;
+                position: absolute;
+                left: 0;
+                right: 0;
+                top: 100%;
+                background: #fff;
+                flex-direction: column;
+                padding: 8px var(--pad) 16px;
+                border-bottom: 1px solid var(--line);
+                max-height: 75vh;
+                overflow: auto
+            }
+
+            #nav.open {
+                display: flex
+            }
+
+            #nav>li>a {
+                padding: 12px 4px
+            }
+
+            .dd {
+                position: static;
+                opacity: 1;
+                visibility: visible;
+                transform: none;
+                box-shadow: none;
+                border: 0;
+                padding: 0 0 6px 12px;
+                min-width: 0
+            }
+
+            .nv>.btn {
+                display: none
+            }
+
+            .hero .w,
+            .split,
+            .pi,
+            .g3,
+            .g2 {
+                grid-template-columns: 1fr
+            }
+
+            .g3.keep {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .flow {
+                grid-template-columns: 1fr
+            }
+
+            .flow>span {
+                transform: rotate(90deg);
+                justify-self: center
+            }
+
+            .sub {
+                top: 62px
+            }
+        }
+
+        @media(max-width:560px) {
+
+            .g4,
+            .g5,
+            .g6,
+            .g3.keep {
+                grid-template-columns: repeat(2, 1fr)
+            }
+
+            .cols {
+                height: 170px
+            }
+        }
+
+        @media(prefers-reduced-motion:reduce) {
+            * {
+                animation: none !important;
+                transition: none !important
+            }
+
+            html {
+                scroll-behavior: auto
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="w nv">
+            <a href="#home" class="logo">ZYPREXA<small>olanzapine</small></a>
+            <button id="burger" aria-label="Menu" aria-expanded="false">☰</button>
+            <ul id="nav"></ul>
+            <a class="btn" href="#safety/overview" style="margin-left:10px">Prescribing information</a>
+        </div>
+    </header>
+    <div id="subw"></div>
+    <main id="app"></main>
+    <footer>
+        <div class="w">
+            <a href="#home" class="logo">ZYPREXA</a>
+            <div class="row"><a href="#home/indications">Indications</a><a href="#safety/overview">Safety</a><a
+                    href="#refs/references">References</a><a href="#refs/medical">Contact</a></div>
+            <p>This site is intended for healthcare professionals only. Content is based on the approved EU SmPC for
+                ZYPREXA coated tablets; always consult the current approved product information before prescribing.</p>
+        </div>
+    </footer>
+
+    <script>
+        const fb = (a, b, t) => "data:image/svg+xml," + encodeURIComponent(`<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 600 360'><defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='${a}'/><stop offset='1' stop-color='${b}'/></linearGradient></defs><rect width='600' height='360' fill='url(#g)'/><circle cx='430' cy='140' r='90' fill='#fff' opacity='.18'/><circle cx='200' cy='250' r='60' fill='#fff' opacity='.14'/><text x='300' y='320' text-anchor='middle' font-family='sans-serif' font-size='18' fill='#fff' opacity='.85'>${t}</text></svg>`);
+        const U = "https://images.unsplash.com/";
+        const img = (u, a, b, t) => `<img src="${U + u}?w=900&q=70" alt="${t}" loading="lazy" onerror="this.onerror=null;this.src='${fb(a, b, t)}'">`;
+        const IM = { hero: ["photo-1559757175-5700dde675bc", "#7c4dff", "#2a1670", "3D neural network"], sch: ["photo-1500530855697-b586d89ba3ee", "#ff9a6b", "#5a2fc4", "Silhouette at sunrise"], bip: ["photo-1507525428034-b723cf961d3e", "#9b8cff", "#3a2d7a", "Coast at dawn"], ev: ["photo-1576091160399-112ba8d25d1d", "#a78bff", "#4b2bb0", "Clinical data"], moa: ["photo-1559757148-5c350d0d3c56", "#b9a2ff", "#4b2bb0", "Receptor artwork"], sf: ["photo-1584308666744-24d5c474f2ae", "#c4b5fd", "#4b2bb0", "Formulations"], ref: ["photo-1481627834876-b7833e8f5570", "#c4b5fd", "#4b2bb0", "Medical books"] };
+        const im = k => img(...IM[k]);
+        // ---------- components ----------
+        const C = (i, t, p, k = "") => `<div class="card"><div class="ic ${k}">${i}</div><h3>${t}</h3><p>${p || ""}</p></div>`;
+        const A = (h, i, t, p, k = "") => `<a class="card" href="${h}"><div class="ic ${k}">${i}</div><h3>${t}</h3><p>${p}</p></a>`;
+        const S = (id, t, lead, body) => `<section class="s" id="${id}"><h2>${t}</h2>${lead ? `<p class="lead">${lead}</p>` : ""}${body}</section>`;
+        const G = (n, a, x = "") => `<div class="grid g${n} ${x}">${a.join("")}</div>`;
+        const AC = a => a.map(([t, p], i) => `<details ${i == 0 ? "" : ""}><summary>${t}</summary>${p.startsWith("<") ? p : `<p>${p}</p>`}</details>`).join("");
+        const PAL = ["#7c4dff", "#b9a8ee", "#db2777", "#059669", "#d97706", "#2563eb"];
+        // vertical column chart: items [label, value, display, colorIdx]
+        const cols = (t, items, max, o = {}) => `<div class="card"><h3>${t}</h3>${o.sub ? `<p>${o.sub}</p>` : ""}<div class="cols">${o.band ? `<div class="band" style="bottom:${o.band[0] / max * 100}%;height:${(o.band[1] - o.band[0]) / max * 100}%">${o.bl || ""}</div>` : ""}${items.map(([l, v, d, c]) => `<div><b>${d}</b><i style="height:${v / max * (100 - 10)}%;background:${PAL[c || 0]}"></i></div>`).join("")}</div><div class="cl">${items.map(x => `<span>${x[0]}</span>`).join("")}</div>${o.note ? `<p style="margin-top:8px">${o.note}</p>` : ""}</div>`;
+        const dn = (p, l, c, txt) => `<div><div class="dn" style="--p:${p};--c:${c}"><b>${txt || p + "%"}</b></div>${l}</div>`;
+        const dnc = (t, a, note) => `<div class="card"><h3>${t}</h3><div class="dnr">${a.join("")}</div>${note ? `<p style="margin-top:10px">${note}</p>` : ""}</div>`;
+        const TB = (h, r, cls = "") => `<div class="card tw ${cls}" style="padding:0"><table><thead><tr>${h.map(x => `<th>${x}</th>`).join("")}</tr></thead><tbody>${r.map(x => `<tr>${x.map(c => `<td>${c}</td>`).join("")}</tr>`).join("")}</tbody></table></div>`;
+        const hero = (t, s, k, ex = "") => `<div class="hero"><div class="w"><div><h1 class="serif">${t}</h1><p>${s}</p>${ex}</div><div>${im(k)}</div></div></div>`;
+        const tabs = (id, a) => `<div data-tabs="${id}"><div class="tabs">${a.map((x, i) => `<button class="${i ? "" : "on"}" data-i="${i}">${x[0]}</button>`).join("")}</div>${a.map((x, i) => `<div class="tp" style="${i ? "display:none" : ""}">${x[1]}</div>`).join("")}</div>`;
+
+        // ---------- pages ----------
+        const P = {};
+        P.home = {
+            n: "Home", secs: [["indications", "Approved indications"], ["topics", "Explore key topics"], ["trusted", "Trusted in practice"], ["pi", "Prescribing information"], ["receptors", "Receptor profile"]],
+            html: () => `<div class="hero"><div class="w"><div><p class="eb">Medical information for healthcare professionals</p><div class="brand">ZYPREXA<i>olanzapine</i></div>
+<h1 class="serif" style="font-size:clamp(24px,3vw,38px);margin:16px 0 10px">Evidence-informed treatment in schizophrenia and bipolar disorder</h1>
+<p>Zyprexa (olanzapine) is an antipsychotic medicine indicated for the treatment of schizophrenia and for the treatment of moderate to severe manic episodes. In patients whose manic episode has responded to olanzapine, it is also indicated for preventing recurrence in bipolar disorder, in accordance with the applicable product information.<sup>[1, section 4.1]</sup></p>
+<div class="row"><a class="btn" href="#evidence/explorer">Explore clinical evidence →</a><a class="btn g" href="#safety/overview">Prescribing information</a></div></div><div>${im("hero")}</div></div></div>
+<div class="w">`+
+                S("indications", "Approved indications (EU SmPC 4.1)", "", G(3, [C("◉", "Schizophrenia", "Treatment of schizophrenia. Effective in maintaining clinical improvement during continuation therapy in patients who have shown an initial treatment response."), C("↯", "Acute manic episodes", "Treatment of moderate to severe manic episodes (monotherapy or combination therapy).", "k1"), C("∞", "Maintenance treatment in bipolar disorder", "Prevention of recurrence in bipolar disorder in patients whose manic episode has responded to olanzapine.", "k3")]) + `<p class="lead" style="margin-top:12px"><span class="tag">Scope note</span> Coated tablets only. Powder for solution for injection and ZYPADHERA have separate SmPCs.</p>`) +
+                S("topics", "Explore key topics", "", G(3, [A("#schizo", "◍", "Understanding Schizophrenia", "Positive, negative, cognitive domains, neurobiology and course of care."), A("#bipolar", "◔", "Understanding Bipolar Disorder", "Distinct mood episodes, treatment objectives, and recurrence prevention.", "k2"), A("#evidence", "▤", "Clinical Evidence", "9 clinical study descriptions in EU SmPC section 5.1 and interactive study explorer.", "k3"), A("#moa", "⚛", "Mechanism of Action", "Multi-receptor pharmacological profile across dopamine, serotonin, histamine, muscarinic, and adrenergic receptors."), A("#safety", "✚", "Safety, Monitoring & Prescribing", "Dosing guidance, contraindications, dementia warning, and metabolic monitoring.", "k1"), A("#refs", "❏", "References & Resources", "Official regulatory documents (SmPC, PIL), clinical citations, and medical abbreviations.", "k3")], "keep")) +
+                S("trusted", "A trusted treatment in clinical practice", "", G(4, [C("★", "Extensive clinical experience", "Established evidence base across adult populations."), C("▦", "Multiple formulations", "Coated tablets, rapid-acting IM injection, and long-acting injectable (ZYPADHERA).", "k3"), C("☰", "Guideline support", "Recommended in BAP (2016), APA (2021), and listed on WHO Essential Medicines List (2023).", "k4"), C("✔", "Comprehensive safety profile", "Proactive cardiometabolic monitoring and individualized posology.", "k1")])) +
+                S("pi", "Important Prescribing Information", "", `<div class="pi"><div><p class="eb" style="color:#d9ccff">Important Prescribing Information</p><h2 style="font-size:28px">Consult the approved product information before prescribing</h2><ul><li>Contraindicated in hypersensitivity and known risk of narrow-angle glaucoma.</li><li>Not recommended in elderly patients with dementia-related psychosis due to increased mortality and cerebrovascular risk.</li><li>Weight gain and changes in glucose and lipid parameters can occur; baseline and ongoing monitoring required.</li></ul><div class="row"><a class="btn w2" href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf" target="_blank" rel="noopener">View full PI →</a><a class="btn w2" style="background:transparent;color:#fff" href="#safety">Safety & prescribing summary</a></div></div><div style="display:grid;place-items:center;font-size:90px;opacity:.5">⛨</div></div>`) +
+                S("receptors", "Receptor profile at a glance", "Preclinical binding affinity (K<sub>i</sub> &lt; 100 nM).", G(5, [["D₂", "Dopamine", "Antipsychotic efficacy", "#2563eb"], ["5-HT₂A", "Serotonin", "Mood modulation & EPS mitigation", "#db2777"], ["H₁", "Histamine", "Calming/sedation & appetite regulation", "#059669"], ["M₁–₅", "Muscarinic", "Anticholinergic balance", "#7c3aed"], ["α₁", "Adrenergic", "Orthostatic & cardiovascular reflexes", "#d97706"]].map(r => `<a class="card" href="#moa/systems" style="text-align:center"><div class="ic" style="width:64px;height:64px;margin:0 auto;background:${r[3]};color:#fff;font-size:17px">${r[0]}</div><h3>${r[1]}</h3><p>${r[2]}</p></a>`))) + `</div>`
+        };
+
+        P.schizo = {
+            n: "Schizophrenia", secs: [["overview", "Overview"], ["symptoms", "Symptoms"], ["neurobiology", "Neurobiology"], ["phases", "Treatment phases"], ["olz", "Role of olanzapine"], ["care", "Care continuity"]],
+            html: () => hero("Understanding Schizophrenia", "Complex neurobiology. Real-world impact. A long-term need for effective management.", "sch") + `<div class="w">` +
+                S("overview", "Overview", "", `<div class="split"><div class="card"><div class="dnr">${dn(33, "~1 in 300 individuals worldwide", "#7c4dff", "1 : 300")}</div></div><p>Schizophrenia is a chronic, multidimensional illness requiring long-term collaborative care that balances symptom remission, functional recovery, and physical health monitoring.</p></div>`) +
+                S("symptoms", "Three core symptom domains", "Figure 1", G(3, [C("+", "Positive symptoms (+)", "Added experiences/behaviours: hallucinations (auditory/visual), delusions, disorganised speech and behaviour. Responsive to dopamine D₂ blockade.", "k1"), C("−", "Negative symptoms (−)", "Reduction/loss of baseline functioning: blunted affect, avolition, alogia, social withdrawal, anhedonia. Key driver of long-term disability.", "k3"), C("⚙", "Cognitive symptoms (⚙)", "Deficits in mental processing: impaired working memory, attention/vigilance, executive planning, and processing speed. Predicts vocational rehabilitation success.", "k4")])) +
+                S("neurobiology", "Neurobiology of schizophrenia", "Figure 2 – three interconnected hypotheses", `<div class="split"><div>${im("hero")}</div>${tabs("nb", [["Dopamine", `<div class="card"><h3>Dopamine hypothesis</h3><p>Mesolimbic dopamine D₂ hyperactivity drives positive psychotic symptoms; mesocortical hypodopaminergia correlates with negative and cognitive symptoms.</p></div>`], ["Glutamate / NMDA", `<div class="card"><h3>Glutamate / NMDA hypothesis</h3><p>Cortical NMDA receptor hypofunction impairs downstream GABAergic interneurons, causing secondary dopaminergic dysregulation.</p></div>`], ["Serotonin (5-HT₂A)", `<div class="card"><h3>Serotonin (5-HT₂A) modulation</h3><p>Cortical 5-HT₂A hyperfunction modulates striatal dopamine release. Dual 5-HT₂A/D₂ antagonism lowers extrapyramidal symptom (EPS) liability.</p></div>`]])}</div>`) +
+                S("phases", "Treatment across the course of care", "Figure 3", `<div class="flow">${C("01", "Acute phase", "Rapid symptom reduction, crisis stabilization, behavioural control, and baseline metabolic/ECG assessments.")}<span>→</span>${C("02", "Stabilisation", "Consolidating treatment response, managing tolerability, and supporting re-entry into daily life.", "k3")}<span>→</span>${C("03", "Maintenance", "Relapse prevention, sustaining clinical improvement, ongoing safety/metabolic monitoring, and social reintegration.", "k4")}</div>`) +
+                S("olz", "The role of olanzapine in schizophrenia", "", G(4, [C("◉", "Symptom domains", "Efficacy across positive, negative, and depressive symptom domains."), C("▤", "Evidence base", "Over 25 years of randomized controlled clinical trial evidence.", "k3"), C("▦", "Delivery options", "Coated oral tablets, rapid IM injection, and long-acting ZYPADHERA.", "k2"), C("♥", "Continuation therapy", "Proven maintenance of clinical improvement in continuation therapy for initial responders.", "k4")])) +
+                S("care", "Supporting continuity of care", "", G(3, [C("◔", "Ongoing monitoring", "Routine evaluation of weight, BMI, blood glucose, and lipid profiles to mitigate cardiometabolic risk."), C("☺", "Psychosocial support", "Integration of cognitive behavioural therapy, family psychoeducation, and supported employment.", "k3"), `<div class="card"><div class="ic k2">⚖</div><h3>Individualized posology</h3><p>Titration between 5–20 mg/day based on response and tolerability with patient-centered shared decision-making.</p><div class="range"><i style="left:0;right:0"></i><span style="left:0">5</span><span style="left:33%">10</span><span style="left:66%">15</span><span style="left:100%">20 mg/day</span></div></div>`])) + `</div>`
+        };
+
+        P.bipolar = {
+            n: "Bipolar disorder", secs: [["overview", "Overview"], ["episodes", "Mood episodes"], ["objectives", "Treatment objectives"], ["evidence", "Clinical evidence"], ["guidelines", "Guidelines"], ["safety", "Safety"]],
+            html: () => hero("Understanding Bipolar Disorder", "Distinct mood episodes. Long-term management. A comprehensive treatment approach.", "bip") + `<div class="w">` +
+                S("overview", "Overview", "", `<div class="split"><div class="card"><div class="dnr">${dn(2, "Adults affected: 1–2%", "#7c4dff", "1–2%")}</div></div><p>A chronic condition affecting 1–2% of adults, characterized by recurrent episodes of mania, mixed states, and depression. Treatment requirements differ fundamentally between acute phases and long-term recurrence prevention.</p></div>`) +
+                S("episodes", "Distinct mood episode profiles", "Figure 1", G(3, [`<div class="card"><div class="ic k1">↑</div><h3>Manic episodes (↑)</h3><p>Abnormally elevated, expansive, or irritable mood, racing thoughts, decreased need for sleep, grandiosity, and high-risk behaviour.</p><span class="tag">Approved indication for oral ZYPREXA</span></div>`, `<div class="card"><div class="ic k2">↕</div><h3>Mixed episodes (↕)</h3><p>Co-occurring manic and depressive symptoms with severe agitation, dysphoria, and high clinical risk.</p><span class="tag">Evaluated in acute bipolar trials</span></div>`, `<div class="card"><div class="ic k3">↓</div><h3>Depressive episodes (↓)</h3><p>Depressed mood, loss of interest/pleasure, fatigue, suicidal ideation.</p><span class="tag r">Oral ZYPREXA monotherapy is NOT indicated for bipolar depression</span></div>`])) +
+                S("objectives", "Treatment objectives", "", G(4, [C("↓", "Reduce acute symptoms", "Rapid control of acute mania or mixed states."), C("⛨", "Prevent recurrence", "Sustained prophylactic therapy against both manic and depressive relapses.", "k4"), C("☺", "Improve functioning", "Restoring vocational, cognitive, and social capability.", "k3"), C("♡", "Enhance quality of life", "Minimizing tolerability burdens and supporting physical wellbeing.", "k1")])) +
+                S("indications", "Approved indications vs. non-indications (EU SmPC 4.1)", "", G(2, [`<div class="card"><h3 style="color:var(--grn)">✔ Approved</h3><ul><li>Moderate to severe manic episodes (monotherapy or combined with lithium/valproate).</li><li>Prevention of recurrence in patients whose manic episode responded to olanzapine.</li></ul></div>`, `<div class="alert"><h3>✖ Non-indication warning</h3><p>Not indicated for acute bipolar depression monotherapy in the EU SmPC.</p></div>`])) +
+                S("evidence", "Key evidence in bipolar disorder", "", `<div class="grid g3">` + cols("Acute mania – YMRS reduction at Week 3", [["Olanzapine", 10.3, "−10.3", 0], ["Placebo", 4.9, "−4.9", 1]], 12, { sub: "Tohen et al. 1999; n = 139. p = 0.02", note: "Higher bar = greater reduction." }) + dnc("Response rate (≥50% YMRS reduction)", [dn(48.6, "Olanzapine", "#7c4dff"), dn(24.2, "Placebo", "#b9a8ee")], "48.6% vs 24.2% (p = 0.004)") + cols("12-month recurrence – bipolar recurrence rate (%)", [["Olanzapine", 30, "30.0%", 0], ["Lithium", 38.3, "38.3%", 1]], 50, { sub: "Study B; n = 431", note: "Statistically non-inferior to lithium (p = 0.055). Lower is better." }) + `</div><div class="card" style="margin-top:16px"><h3>18-month co-therapy study</h3><p>Olanzapine co-therapy with lithium/valproate was not statistically significantly superior to mood stabilizer monotherapy in delaying recurrence by syndromic criteria.</p></div>`) +
+                S("guidelines", "Guideline & formulary positioning", "", G(2, [C("☰", "BAP 2016", "Recommends olanzapine as effective oral dopamine antagonist in acute severe mania, and for prevention of manic relapse.", "k3"), C("☰", "WHO EML 2023", "Listed as a therapeutic alternative for bipolar disorders.", "k4")])) +
+                S("safety", "Safety in bipolar clinical trials (SmPC 4.8)", "", dnc("Safety signals", [dn(17.4, "≥7% body weight gain – acute 6-week combination therapy with lithium/divalproex", "#db2777"), dn(39.9, "≥7% body weight gain – 12-month long-term recurrence prevention monotherapy", "#d97706"), dn(4.1, "Neutropenia incidence with valproate co-therapy", "#2563eb")])) + `</div>`
+        };
+
+        const STU = [["Schizophrenia", "Schizophrenia (positive & negative symptoms, n > 2,900)", "2 placebo-controlled, 3 comparator-controlled trials", "Not stated", "Positive & negative symptoms", "Statistically significantly greater improvement in negative as well as positive symptoms in 2/2 placebo and 2/3 comparator trials."],
+        ["Schizophrenia", "Schizophrenia with depressive symptoms (n = 1,481, baseline MADRS 16.6)", "Double-blind vs. haloperidol", "Not stated", "Secondary: MADRS mood score change", "<b>−6.0 olanzapine vs. −3.1 haloperidol (p = 0.001).</b>"],
+        ["Acute mania", "Bipolar manic / mixed episode", "Double-blind vs. placebo", "3 weeks", "Manic symptom reduction", "Superior efficacy to placebo."],
+        ["Acute mania", "Bipolar manic / mixed episode", "Double-blind vs. divalproex", "3 weeks", "Manic symptom reduction", "Superior efficacy to divalproex."],
+        ["Acute mania", "Bipolar manic / mixed episode", "Double-blind vs. haloperidol", "6 & 12 weeks", "Symptomatic remission rate", "Comparable efficacy results to haloperidol."],
+        ["Acute mania", "Bipolar patients on lithium/valproate ≥ 2 weeks", "Add-on olanzapine 10 mg vs. monotherapy", "6 weeks", "Manic symptom reduction", "Greater symptom reduction than lithium or valproate monotherapy."],
+        ["Recurrence prevention", "Manic episode in remission on olanzapine", "Randomised vs. placebo", "12 months", "Primary: Bipolar recurrence", "<b>Statistically significant superiority over placebo</b>; prevented relapse into mania or depression."],
+        ["Recurrence prevention", "Manic episode in remission on olanzapine + lithium", "Randomised: olanzapine alone vs. lithium alone", "12 months", "Primary: Bipolar recurrence", "<b>Statistically non-inferior to lithium: 30.0% vs. 38.3% (p = 0.055).</b>"],
+        ["Long-term", "Manic/mixed episode on olanzapine + mood stabilizer", "Co-therapy vs. lithium/valproate alone", "18 months", "Delay of bipolar recurrence", "Not statistically significantly superior to monotherapy."]];
+
+        P.evidence = {
+            n: "Clinical evidence", secs: [["explorer", "Study explorer"], ["schizophrenia", "Schizophrenia"], ["mania", "Acute mania"], ["recurrence", "Recurrence prevention"], ["longterm", "Long-term"], ["guidelines", "Guidelines"]],
+            html: () => hero("Clinical Evidence", "A comprehensive review of the clinical data for olanzapine in schizophrenia and bipolar disorder.", "ev") + `<div class="w"><section class="s"><div class="card grid g3 keep stat"><div><b>9</b>Clinical studies in EU SmPC section 5.1</div><div><b>4</b>Study categories (Schizophrenia, Acute Mania, Recurrence, Long-Term)</div><div><b>12+</b>Evaluated primary and secondary endpoints</div></div></section>` +
+                S("explorer", "Interactive study explorer", "Complete 9-study dataset. Filter by category.", `<div class="tabs" id="flt">${["All", "Schizophrenia", "Acute mania", "Recurrence prevention", "Long-term"].map((x, i) => `<button class="${i ? "" : "on"}">${x}</button>`).join("")}</div><div class="card tw" style="padding:0"><table><thead><tr><th>Population</th><th>Design & comparator</th><th>Duration</th><th>Endpoint</th><th>Outcome reported in EU SmPC 5.1</th></tr></thead><tbody id="stb"></tbody></table></div>`) +
+                S("schizophrenia", "Schizophrenia – efficacy", "", `<div class="grid g3">` + cols("MADRS change (schizophrenia with depressive symptoms)", [["Olanzapine", 6.0, "−6.0", 0], ["Haloperidol", 3.1, "−3.1", 1]], 8, { sub: "n = 1,481; baseline MADRS 16.6; p = 0.001" }) + cols("Beasley 1996 – BPRS total change (Week 6 LOCF)", [["Placebo", 3.1, "−3.1", 1], ["Olz 5 mg", 6.7, "−6.7", 0], ["Olz 10 mg", 12.6, "−12.6*", 0], ["Olz 15 mg", 15.2, "−15.2*", 0], ["Haloperidol", 12.9, "−12.9*", 2]], 17, { sub: "* p ≤ 0.001 vs placebo (olanzapine 10/15 mg); p ≤ 0.01 (haloperidol)" }) + cols("Beasley 1996 – SANS negative symptoms change", [["Placebo", 1.9, "−1.9", 1], ["Olz 5 mg", 8.7, "−8.7*", 0], ["Olz 10 mg", 6.1, "−6.1", 0], ["Olz 15 mg", 13.5, "−13.5*†", 0], ["Haloperidol", 6.6, "−6.6", 2]], 16, { sub: "* p ≤ 0.05 (5 mg), p ≤ 0.001 (15 mg) vs placebo; † p ≤ 0.05 vs haloperidol" }) + `</div><div class="card" style="margin-top:16px"><h3>Beasley et al. 1996 – design</h3><p>6-week, randomised, double-blind trial in 335 patients comparing olanzapine (low 5 ± 2.5 mg, medium 10 ± 2.5 mg, high 15 ± 2.5 mg) with haloperidol (15 ± 5 mg) and placebo.</p></div><div class="grid g3" style="margin-top:16px">` + dnc("Somnolence (high dose vs placebo)", [dn(39.1, "Olanzapine 15 mg", "#7c4dff"), dn(16.2, "Placebo", "#b9a8ee")]) + dnc("Acute dystonia", [dn(0, "Olanzapine", "#7c4dff", "0%"), dn(13, "Haloperidol", "#d97706", "13.0%")]) + `<div class="card stat"><b>+3.5 kg</b><p>Mean weight gain on high-dose olanzapine in the trial.</p></div></div>`) +
+                S("mania", "Acute mania – Tohen et al. 1999", "3-week double-blind, parallel-group trial in 139 bipolar I manic/mixed patients.", `<div class="grid g2">` + cols("YMRS total change", [["Olanzapine", 10.26, "−10.26", 0], ["Placebo", 4.88, "−4.88", 1]], 12, { note: "Difference −5.38 points (p = 0.02)." }) + dnc("Responders (≥50% YMRS improvement)", [dn(48.6, "Olanzapine", "#7c4dff"), dn(24.2, "Placebo", "#b9a8ee")], "48.6% vs 24.2% (p = 0.004)") + `</div>`) +
+                S("recurrence", "Recurrence prevention", "12-month data in patients in remission after a manic episode on olanzapine.", `<div class="grid g2">` + cols("Bipolar recurrence rate (%)", [["Olanzapine", 30, "30.0%", 0], ["Lithium", 38.3, "38.3%", 1]], 50, { note: "Non-inferior to lithium (p = 0.055). Olanzapine was also statistically superior to placebo in a separate 12-month study." }) + C("✔", "Superiority vs. placebo", "Statistically significant superiority over placebo; prevented relapse into mania or depression.", "k4") + `</div>`) +
+                S("longterm", "Long-term – categorical weight gain in adults by exposure", "Figure 4", cols("Proportion of adults gaining weight", [["≥7% short-term", 22.2, "22.2%", 0], ["≥7% long-term", 64.4, "64.4%", 2], ["≥15% short-term", 4.2, "4.2%", 0], ["≥15% long-term", 31.7, "31.7%", 2], ["≥25% short-term", .8, "0.8%", 0], ["≥25% long-term", 12.3, "12.3%", 2]], 70, { note: "Short-term: median 47 days. Long-term: ≥ 48 weeks." }) + `<div class="leg"><span><i style="background:${PAL[0]}"></i>Short-term</span><span><i style="background:${PAL[2]}"></i>Long-term</span></div><div class="card" style="margin-top:16px"><h3>18-month co-therapy study</h3><p>Olanzapine co-therapy with lithium/valproate was not statistically significantly superior to mood stabilizer monotherapy in delaying bipolar recurrence.</p></div>`) +
+                S("guidelines", "Guideline context", "", G(3, [C("☰", "BAP 2016", "Acute severe mania and prevention of manic relapse.", "k3"), C("☰", "APA 2021", "Practice guideline for schizophrenia (3rd ed.).", "k4"), C("☰", "WHO EML 2023", "Listed on the Essential Medicines List.", "k1")])) + `</div>`
+        };
+
+        const REC = { D: ["D₂", "Dopamine D₂ (D₁–D₅)", "#2563eb", "●●●●○ (High)", "Antipsychotic and antimanic efficacy via mesolimbic antagonism. Modulated striatal occupancy maintains low EPS liability."], S: ["5-HT₂A", "Serotonin 5-HT₂A (5-HT₂A/2C, 3, 6)", "#db2777", "●●●●● (Very High)", "Low EPS risk through striatal dopamine disinhibition; modulation of cortical dopamine for mood and negative symptoms."], H: ["H₁", "Histamine H₁", "#059669", "●●●●● (Very High)", "Calming effect in acute agitation; somnolence; central appetite stimulation contributing to weight gain."], M: ["M₁–₅", "Muscarinic M₁–₅", "#7c3aed", "●●●●○ (High)", "Intrinsic anticholinergic protection against dystonia; can cause dry mouth, constipation, and blurred vision."], A: ["α₁", "Adrenergic α₁", "#d97706", "●●●●○ (Moderate-High)", "Peripheral vasodilation mediating orthostatic hypotension, reflex tachycardia, and transient postural dizziness."] };
+        const pos = { D: [78, 22], S: [22, 24], H: [18, 74], M: [82, 72], A: [50, 86] };
+        P.moa = {
+            n: "Mechanism of action", secs: [["overview", "Overview"], ["profile", "Receptor profile"], ["systems", "Receptor systems"], ["pet", "PET occupancy"], ["relevance", "Clinical relevance"]],
+            html: () => hero("Mechanism of Action", "A multi-receptor profile that may help address the complex symptoms of schizophrenia and bipolar disorder.", "moa") + `<div class="w">` +
+                S("overview", "Pharmacological profile overview", "", `<div class="card"><p>Atypical antipsychotic, antimanic, and mood-stabilizing agent binding dopamine, serotonin, histamine, muscarinic, and adrenergic receptors with high preclinical affinity (K<sub>i</sub> &lt; 100 nM).</p></div>`) +
+                S("profile", "Receptor-binding profile & clinical implications", "", TB(["Receptor system", "Relative affinity", "Potential clinical relevance"], Object.values(REC).map(r => [`<b>${r[1]}</b>`, `<span class="dots">${r[3]}</span>`, r[4]]))) +
+                S("systems", "Receptor systems – interactive map", "Select a receptor to see its clinical relevance.", `<div class="grid g2" style="grid-template-columns:1.2fr .8fr"><div class="map" id="map"><div class="ctr">olanzapine</div>${Object.entries(REC).map(([k, r]) => `<button data-k="${k}" style="left:${pos[k][0]}%;top:${pos[k][1]}%;background:${r[2]}">${r[0]}</button>`).join("")}</div><div class="card" id="rinf"></div></div>`) +
+                S("pet", "In vivo PET receptor occupancy", "Kapur et al. 1998; Figure 2", `<div class="grid g2">` + cols("Striatal D₂ occupancy at steady state (%)", [["5 mg/day", 55, "55%", 0], ["10 mg/day", 73, "73%", 0], ["15 mg/day", 75, "75%", 0], ["20 mg/day", 76, "76%", 0]], 100, { band: [70, 80], bl: "70–80% window", note: "Ranges: 43–64%, 71–75%, 73–76%, 74–80%." }) + `<div class="card"><h3>5-HT₂ occupancy</h3><div class="dnr">${dn(90, "Exceeded 90% across all clinical doses (5 to 20 mg/day)", "#db2777", "&gt;90%")}</div><h3 style="margin-top:14px">Therapeutic window</h3><p>Approved doses (10–20 mg/day) maintain striatal D₂ occupancy within the optimal 70%–80% window, providing full antipsychotic efficacy while staying below the 80% threshold where EPS incidence rises sharply.</p></div></div>`) +
+                S("relevance", "From pharmacology to clinical practice", "", G(3, [C("◉", "Symptom control", "Dual dopamine/serotonin blockade targets psychosis, mania, and secondary depressive symptoms."), C("✔", "Tolerability profile", "Sub-threshold D₂ occupancy preserves motor functioning and lowers prolactin elevation risk vs. typical neuroleptics.", "k4"), C("★", "Broad clinical utility", "Efficacy spans acute stabilization through long-term recurrence prevention in schizophrenia and bipolar I disorder.", "k3")])) + `</div>`
+        };
+
+        P.safety = {
+            n: "Safety & prescribing", secs: [["overview", "Overview"], ["dosing", "Dosing"], ["formulations", "Formulations"], ["warnings", "Warnings"], ["monitoring", "Monitoring"], ["interactions", "Interactions"], ["special", "Pregnancy & discontinuation"]],
+            html: () => hero("Safety, Monitoring & Prescribing", "Important safety information, dosing guidance and monitoring recommendations.", "sf") + `<div class="w">` +
+                S("overview", "Important Safety Information", "", `<div class="alert"><h3>⚠ Important Safety Information</h3><div class="grid g2" style="margin-top:10px"><div><p><b>Contraindications (SmPC 4.3):</b> known hypersensitivity to olanzapine; known risk of narrow-angle glaucoma.</p><p style="margin-top:8px"><b>Metabolic changes:</b> weight gain, hyperglycaemia, and dyslipidaemia; regular monitoring required.</p><p style="margin-top:8px"><b>NMS alert:</b> discontinue immediately if neuroleptic malignant syndrome signs or unexplained fever occur.</p></div><div><p><b>Dementia warning:</b> not recommended in elderly patients with dementia-related psychosis due to increased mortality and cerebrovascular events.</p><div class="dnr">${dn(3.5 * 10, "Mortality: 3.5% olanzapine vs 1.5% placebo", "#d6334a", "3.5%")}${dn(1.3 * 10, "Cerebrovascular events: 1.3% vs 0.4% placebo", "#d97706", "1.3%")}</div></div></div></div>`) +
+                S("dosing", "Dosing & administration (EU SmPC 4.2; Table 1)", "Approved dose range 5–20 mg/day. Dose escalations should occur at intervals of ≥ 24 hours.", `<div class="card"><div class="range"><i style="left:0;right:0"></i><span style="left:0">5 mg</span><span style="left:33%">10 mg</span><span style="left:66%">15 mg</span><span style="left:100%">20 mg/day</span></div></div><div style="margin-top:16px">` + TB(["Indication", "Starting dose"], [["Schizophrenia", "<b>10 mg/day</b> once daily"], ["Acute mania – monotherapy", "<b>15 mg/day</b> single daily dose"], ["Acute mania – combination therapy", "<b>10 mg/day</b> once daily"], ["Recurrence prevention in bipolar disorder", "<b>10 mg/day</b> (continue same dose if responding)"]]) + `</div><div class="card" style="margin-top:16px"><h3>Special populations</h3><p>Consider a 5 mg/day starting dose in elderly (≥ 65 years), renal/hepatic impairment, or multiple factors that slow metabolism (female, non-smoker, geriatric). Not recommended under 18 years. Food does not affect absorption.</p></div>`) +
+                S("formulations", "Formulations showcase", "", `<div class="split">${im("sf")}<div class="grid">${C("▣", "ZYPREXA coated tablets (oral)", "2.5 mg, 5 mg, 7.5 mg, 10 mg, 15 mg, 20 mg – primary focus of this site.")}${C("▣", "ZYPREXA powder for solution for injection", "10 mg vial for acute agitation in schizophrenia and mania.", "k3")}${C("▣", "ZYPADHERA (olanzapine pamoate)", "210 mg, 300 mg, 405 mg prolonged-release suspension for IM injection.", "k1")}</div></div>`) +
+                S("warnings", "Key warnings & precautions", "", AC([["1. Dementia-related psychosis", "2-fold increase in mortality; 3-fold increase in CVAE in elderly trials."], ["2. Metabolic effects", "Weight gain, dyslipidaemia, ketoacidosis, diabetes development/worsening."], ["3. Somnolence & dizziness", "Caution operating machinery/driving."], ["4. Neuroleptic malignant syndrome", "Immediate cessation of all antipsychotics."], ["5. Tardive dyskinesia", "Risk increases with duration; consider dose reduction or tapering."], ["6. Cardiovascular / orthostatic", "Monitor blood pressure, especially in elderly (≥ 65)."], ["7. Hepatic", "Monitor ALT/AST; discontinue if hepatitis diagnosed."], ["8. Other warnings", "Parkinson's disease (hallucinations/worsening motor symptoms), QT prolongation, VTE risk, seizure threshold, lactose content."]])) +
+                S("monitoring", "Monitoring recommendations", "Figure 1 & Table 2", G(4, [C("⚖", "Weight & BMI", "Baseline, weeks 4, 8, 12; then quarterly.", "k3"), C("◔", "Fasting glucose", "Baseline, week 12; then annually (more frequently in diabetes/risk).", ""), C("◈", "Lipid profile", "Baseline, week 12; then every 5 years.", "k1"), C("♥", "Blood pressure", "Baseline and periodic monitoring, particularly in patients over 65.", "k2")]) + `<div class="card" style="margin-top:16px"><h3>Monitoring timeline</h3><div class="tl"><div><b>Baseline</b>Weight/BMI, glucose, lipids, BP</div><div><b>Week 4</b>Weight/BMI</div><div><b>Week 8</b>Weight/BMI</div><div><b>Week 12</b>Weight/BMI, glucose, lipids</div><div><b>Quarterly</b>Weight/BMI</div><div><b>Annually</b>Glucose</div><div><b>Every 5 years</b>Lipids</div></div></div>`) +
+                S("interactions", "Drug interactions (SmPC 4.5; Table 3)", "", TB(["Interacting agent", "Effect & recommendation"], [["<b>CYP1A2 inducers</b> (smoking, carbamazepine)", "Increase metabolism; dose increase may be considered."], ["<b>CYP1A2 inhibitors</b> (fluvoxamine, ciprofloxacin)", "Fluvoxamine increases C<sub>max</sub> (54–77%) and AUC (52–108%); consider lower starting or maintenance dose."], ["<b>Activated charcoal</b>", "Decreases bioavailability by 50–60%; separate by ≥ 2 hours."], ["<b>CNS depressants & alcohol</b>", "Additive sedation; caution advised."], ["<b>Valproate</b>", "Higher rate of neutropenia observed with concomitant therapy."]])) +
+                S("special", "Pregnancy, lactation & discontinuation", "", G(3, [C("♡", "Pregnancy (SmPC 4.6)", "Use only if benefit justifies potential fetal risk. Third-trimester exposure carries risk of EPS and withdrawal symptoms in neonates.", "k1"), C("◔", "Lactation", "Excreted in human milk; patients should <b>not breastfeed</b> while taking olanzapine.", "k2"), C("↘", "Discontinuation", "Taper dose gradually to avoid acute withdrawal symptoms (sweating, insomnia, nausea).", "k3")])) + `</div>`
+        };
+
+        const REF = [["1", "ZYPREXA Summary of Product Characteristics (Annex I). CHEPLAPHARM / EMA.", "https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"], ["2", "ZYPREXA 10 mg powder for solution for injection SmPC. CHEPLAPHARM / EMA."], ["3", "ZYPADHERA powder and solvent for prolonged release suspension SmPC. CHEPLAPHARM / EMA.", "https://www.ema.europa.eu/en/medicines/human/EPAR/zypadhera"], ["4", "DSM-5-TR (Diagnostic and Statistical Manual of Mental Disorders, 5th ed. Text Revision). APA, 2022."], ["5", "Stahl SM. Beyond the dopamine hypothesis: three neural networks. <i>CNS Spectr</i>. 2018;23(3):187–191."], ["6", "American Psychiatric Association Practice Guideline for the Treatment of Patients With Schizophrenia (3rd ed.). APA, 2021."], ["7", "Goodwin GM et al. Evidence-based guidelines for treating bipolar disorder (3rd ed.). <i>J Psychopharmacol</i>. 2016;30(6):495–553."], ["8", "Tandon R et al. World Psychiatric Association statement on comparative effectiveness of antipsychotics. <i>Schizophr Res</i>. 2008;100:20–38."], ["9", "World Health Organization. 23rd Model List of Essential Medicines. WHO, 2023/2024."], ["10", "Beasley CM Jr et al. Olanzapine vs. placebo and haloperidol in schizophrenia. <i>Neuropsychopharmacology</i>. 1996;14(2):111–123."], ["11", "Tohen M et al. Olanzapine versus placebo in acute mania. <i>Am J Psychiatry</i>. 1999;156(5):702–709."], ["12", "Kapur S et al. 5-HT₂ and D₂ receptor occupancy of olanzapine: a PET investigation. <i>Am J Psychiatry</i>. 1998;155(7):921–928."], ["13", "ZYPREXA Prescribing Information (US FDA; Section 12.2 receptor pharmacology rationale)."]];
+        const ABB = [["ALT / AST", "Alanine / Aspartate aminotransferase"], ["AUC", "Area under the concentration–time curve"], ["BPRS", "Brief Psychiatric Rating Scale"], ["C<sub>max</sub>", "Maximum observed plasma concentration"], ["CNS", "Central nervous system"], ["CYP1A2", "Cytochrome P450 1A2 isoenzyme"], ["D₂", "Dopamine receptor subtype 2"], ["EMA", "European Medicines Agency"], ["EPS", "Extrapyramidal symptoms"], ["5-HT₂A", "5-hydroxytryptamine (serotonin) receptor subtype 2A"], ["K<sub>i</sub>", "Receptor inhibition binding constant"], ["LOCF", "Last observation carried forward"], ["MADRS", "Montgomery–Åsberg Depression Rating Scale"], ["NMDA", "N-methyl-D-aspartate glutamate receptor"], ["NMS", "Neuroleptic malignant syndrome"], ["PET", "Positron emission tomography"], ["QTc", "Corrected QT interval on ECG"], ["SANS", "Scale for the Assessment of Negative Symptoms"], ["SmPC", "Summary of Product Characteristics"], ["YMRS", "Young Mania Rating Scale"]];
+        P.refs = {
+            n: "References", secs: [["references", "References"], ["regulatory", "Regulatory"], ["guidelines", "Guidelines"], ["medical", "Medical information"], ["abbreviations", "Abbreviations"]],
+            html: () => hero("References & Resources", "Regulatory documents, full references, literature matrix and clinical resources.", "ref") + `<div class="w">` +
+                S("references", "Searchable master reference bibliography (13 references)", "", `<input class="src" id="rs" placeholder="Search references, topics or keywords…" aria-label="Search references"><div class="card" id="rl"></div>`) +
+                S("regulatory", "Official regulatory product documents", "", G(3, [`<a class="card" target="_blank" rel="noopener" href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"><div class="ic">⬇</div><h3>ZYPREXA SmPC</h3><p>EMA Annex I official prescribing document (PDF).</p></a>`, `<a class="card" target="_blank" rel="noopener" href="https://www.ema.europa.eu/en/medicines/human/EPAR/zyprexa"><div class="ic k3">⬇</div><h3>Patient Information Leaflet (PIL)</h3><p>EMA Annex III B official instructions for patients – EMA product page.</p></a>`, `<a class="card" target="_blank" rel="noopener" href="https://www.ema.europa.eu/en/medicines/human/EPAR/zypadhera"><div class="ic k1">⬇</div><h3>ZYPADHERA SmPC</h3><p>Separate official document for prolonged-release suspension – EMA ZYPADHERA page.</p></a>`])) +
+                S("guidelines", "Literature by clinical topic matrix", "", TB(["Clinical topic", "Supporting references"], [["Disease background", "Refs 4, 5"], ["Schizophrenia clinical efficacy", "Ref 1 (5.1), Ref 10"], ["Acute mania clinical efficacy", "Ref 1 (5.1), Ref 11"], ["Bipolar recurrence prevention", "Ref 1 (5.1)"], ["Guideline and formulary context", "Refs 6, 7, 8, 9"], ["Pharmacology and receptor binding", "Ref 1 (5.1), Refs 12, 13"], ["Safety, adverse reactions and metabolic monitoring", "Ref 1 (4.4, 4.8)"]])) +
+                S("medical", "Medical information & marketing authorisation contact", "", G(2, [C("⌂", "Marketing Authorisation Holder", "CHEPLAPHARM Registration GmbH<br>Weiler Straße 5e, 79540 Lörrach, Germany"), C("✉", "Medical enquiries protocol", "Contact national medical affairs or local representatives identified in the package leaflet.", "k3")])) +
+                S("abbreviations", "Master clinical abbreviations glossary", "", `<input class="src" id="as" placeholder="Search abbreviations…" aria-label="Search abbreviations">${`<div class="card tw" style="padding:0"><table><tbody id="ab"></tbody></table></div>`}`) + `</div>`
+        };
+
+        // ---------- nav ----------
+        const nav = document.getElementById("nav"), app = document.getElementById("app"), subw = document.getElementById("subw");
+        nav.innerHTML = Object.entries(P).map(([k, p]) => `<li><a href="#${k}" data-k="${k}">${p.n}</a><div class="dd">${p.secs.map(s => `<a href="#${k}/${s[0]}">${s[1]}</a>`).join("")}</div></li>`).join("");
+        document.getElementById("burger").onclick = e => { const o = nav.classList.toggle("open"); e.target.setAttribute("aria-expanded", o) };
+        let cur = "";
+        function render(k) {
+            cur = k; app.innerHTML = P[k].html();
+            subw.innerHTML = k == "home" ? "" : `<div class="sub"><div class="w">${P[k].secs.map(s => `<a href="#${k}/${s[0]}">${s[1]}</a>`).join("")}</div></div>`;
+            nav.querySelectorAll("a[data-k]").forEach(a => a.classList.toggle("on", a.dataset.k == k));
+            document.title = P[k].n + " · ZYPREXA HCP";
+            // tabs
+            app.querySelectorAll("[data-tabs]").forEach(t => t.querySelector(".tabs").onclick = e => { const i = e.target.dataset.i; if (i == null) return; t.querySelectorAll(".tabs button").forEach(b => b.classList.toggle("on", b === e.target)); t.querySelectorAll(".tp").forEach((p, j) => p.style.display = j == i ? "" : "none") });
+            // evidence explorer
+            const stb = document.getElementById("stb");
+            if (stb) {
+                const r = f => stb.innerHTML = STU.filter(s => f == "All" || s[0] == f).map(s => `<tr><td><b>${s[1]}</b></td><td>${s[2]}</td><td>${s[3]}</td><td>${s[4]}</td><td>${s[5]}</td></tr>`).join(""); r("All");
+                document.getElementById("flt").onclick = e => { if (e.target.tagName != "BUTTON") return; document.querySelectorAll("#flt button").forEach(b => b.classList.toggle("on", b === e.target)); r(e.target.textContent) }
+            }
+            // receptor map
+            const map = document.getElementById("map");
+            if (map) { const sel = k => { const r = REC[k]; map.querySelectorAll("button").forEach(b => b.classList.toggle("on", b.dataset.k == k)); document.getElementById("rinf").innerHTML = `<div class="ic" style="background:${r[2]};color:#fff">${r[0]}</div><h3>${r[1]}</h3><p><b>Relative affinity:</b> <span class="dots">${r[3]}</span></p><p style="margin-top:8px">${r[4]}</p>` }; map.onclick = e => { if (e.target.dataset.k) sel(e.target.dataset.k) }; sel("D") }
+            // references
+            const rl = document.getElementById("rl");
+            if (rl) {
+                const r = q => rl.innerHTML = REF.filter(x => x[1].toLowerCase().includes(q.toLowerCase()) || ("ref " + x[0]).includes(q.toLowerCase())).map(x => `<div class="ref"><b>Ref ${x[0]}</b><div>${x[1]}${x[2] ? ` <a href="${x[2]}" target="_blank" rel="noopener">Open ↗</a>` : ""}</div></div>`).join("") || "<p>No references match your search.</p>"; r(""); document.getElementById("rs").oninput = e => r(e.target.value);
+                const ab = document.getElementById("ab"), ra = q => ab.innerHTML = ABB.filter(x => (x[0] + x[1]).toLowerCase().includes(q.toLowerCase())).map(x => `<tr><td><b>${x[0]}</b></td><td>${x[1]}</td></tr>`).join(""); ra(""); document.getElementById("as").oninput = e => ra(e.target.value)
+            }
+        }
+        function route() {
+            const [k0, sec] = (location.hash || "#home").slice(1).split("/"); const k = P[k0] ? k0 : "home";
+            if (k !== cur) render(k);
+            nav.classList.remove("open");
+            if (sec && document.getElementById(sec)) document.getElementById(sec).scrollIntoView(); else if (k !== cur || !sec) scrollTo(0, 0);
+        }
+        addEventListener("hashchange", route); route();
+    </script>
+</body>
+
+</html>

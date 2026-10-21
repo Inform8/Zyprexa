@@ -4,97 +4,217 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
-const NAV_ITEMS = [
-  { href: "/schizophrenia", label: "Schizophrenia" },
-  { href: "/bipolar-disorder", label: "Bipolar disorder" },
-  { href: "/clinical-evidence", label: "Clinical evidence" },
-  { href: "/mechanism-of-action", label: "Mechanism of action" },
-  { href: "/safety-prescribing", label: "Safety & prescribing" },
-  { href: "/references", label: "References" },
+export interface NavSectionItem {
+  id: string;
+  title: string;
+}
+
+export interface NavItem {
+  name: string;
+  href: string;
+  secs: NavSectionItem[];
+}
+
+export const NAV_ITEMS: NavItem[] = [
+  {
+    name: "Home",
+    href: "/",
+    secs: [
+      { id: "indications", title: "Approved indications" },
+      { id: "topics", title: "Explore key topics" },
+      { id: "trusted", title: "Trusted in practice" },
+      { id: "pi", title: "Prescribing information" },
+      { id: "receptors", title: "Receptor profile" },
+    ],
+  },
+  {
+    name: "Schizophrenia",
+    href: "/schizophrenia",
+    secs: [
+      { id: "overview", title: "Overview" },
+      { id: "symptoms", title: "Symptoms" },
+      { id: "neurobiology", title: "Neurobiology" },
+      { id: "phases", title: "Treatment phases" },
+      { id: "olz", title: "Role of olanzapine" },
+      { id: "care", title: "Care continuity" },
+    ],
+  },
+  {
+    name: "Bipolar disorder",
+    href: "/bipolar-disorder",
+    secs: [
+      { id: "overview", title: "Overview" },
+      { id: "episodes", title: "Mood episodes" },
+      { id: "objectives", title: "Treatment objectives" },
+      { id: "indications", title: "Indications vs non-indications" },
+      { id: "evidence", title: "Clinical evidence" },
+      { id: "guidelines", title: "Guidelines" },
+      { id: "safety", title: "Safety" },
+    ],
+  },
+  {
+    name: "Clinical evidence",
+    href: "/clinical-evidence",
+    secs: [
+      { id: "explorer", title: "Study explorer" },
+      { id: "schizophrenia", title: "Schizophrenia" },
+      { id: "mania", title: "Acute mania" },
+      { id: "recurrence", title: "Recurrence prevention" },
+      { id: "longterm", title: "Long-term" },
+      { id: "guidelines", title: "Guidelines" },
+    ],
+  },
+  {
+    name: "Mechanism of action",
+    href: "/mechanism-of-action",
+    secs: [
+      { id: "overview", title: "Overview" },
+      { id: "profile", title: "Receptor profile" },
+      { id: "systems", title: "Receptor systems" },
+      { id: "pet", title: "PET occupancy" },
+      { id: "relevance", title: "Clinical relevance" },
+    ],
+  },
+  {
+    name: "Safety & prescribing",
+    href: "/safety-prescribing",
+    secs: [
+      { id: "overview", title: "Overview" },
+      { id: "dosing", title: "Dosing" },
+      { id: "formulations", title: "Formulations" },
+      { id: "warnings", title: "Warnings" },
+      { id: "monitoring", title: "Monitoring" },
+      { id: "interactions", title: "Interactions" },
+      { id: "special", title: "Pregnancy & discontinuation" },
+    ],
+  },
+  {
+    name: "References",
+    href: "/references",
+    secs: [
+      { id: "references", title: "References" },
+      { id: "regulatory", title: "Regulatory" },
+      { id: "guidelines", title: "Guidelines" },
+      { id: "medical", title: "Medical information" },
+      { id: "abbreviations", title: "Abbreviations" },
+    ],
+  },
 ];
 
 export default function Header() {
-  const [menuOpen, setMenuOpen] = useState(false);
   const pathname = usePathname();
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [activeDropdownIdx, setActiveDropdownIdx] = useState<number | null>(null);
 
+  // Close menus when route changes
   useEffect(() => {
-    setMenuOpen(false);
+    setMobileMenuOpen(false);
+    setActiveDropdownIdx(null);
   }, [pathname]);
-
-  useEffect(() => {
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && menuOpen) {
-        setMenuOpen(false);
-      }
-    };
-    document.addEventListener("keydown", handleKeyDown);
-    return () => document.removeEventListener("keydown", handleKeyDown);
-  }, [menuOpen]);
 
   return (
     <>
-      <a className="skip" href="#main">
+      <a className="skip" href="#app">
         Skip to content
       </a>
       <header className="site-header">
-        <div className="wrap">
-          <Link className="wordmark" href="/" aria-label="ZYPREXA olanzapine, home">
-            <b>
-              ZYPREXA<sup>®</sup>
-            </b>
-            <small>olanzapine</small>
-          </Link>
-          <nav
-            className={`primary-nav ${menuOpen ? "open" : ""}`}
-            id="primary-nav"
-            aria-label="Primary"
+        <div className="w nv">
+          {/* Logo on Left */}
+          <Link
+            href="/"
+            className="logo"
+            onClick={() => {
+              setMobileMenuOpen(false);
+              setActiveDropdownIdx(null);
+            }}
+            style={{ display: "flex", alignItems: "center", textDecoration: "none", padding: "4px 0" }}
           >
-            <ul>
-              {NAV_ITEMS.map((item) => {
-                const isActive = pathname === item.href;
-                return (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      aria-current={isActive ? "page" : undefined}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                );
-              })}
-              <li className="nav-pi">
-                <Link href="/safety-prescribing">Prescribing information</Link>
-              </li>
-            </ul>
-          </nav>
-          <Link className="pi-link" href="/safety-prescribing">
-            <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">
-              <path
-                d="M4 1.5h5.5L12.5 4.5V14.5h-8.5z M9.5 1.5v3h3 M6 8h4.5 M6 10.5h4.5"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="1.4"
-              />
-            </svg>
+            <img
+              src="/assets/zyprexa-logo.png"
+              alt="ZYPREXA® (olanzapine)"
+              style={{
+                height: "36px",
+                width: "auto",
+                maxWidth: "180px",
+                objectFit: "contain",
+                display: "block",
+              }}
+            />
+          </Link>
+
+          {/* Mobile Burger Button */}
+          <button
+            id="burger"
+            type="button"
+            aria-label="Toggle navigation menu"
+            aria-expanded={mobileMenuOpen}
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+          >
+            {mobileMenuOpen ? "✕" : "☰"}
+          </button>
+
+          {/* Center Navigation Bar */}
+          <ul id="nav" className={mobileMenuOpen ? "open" : ""}>
+            {NAV_ITEMS.map((item, idx) => {
+              const isActive =
+                item.href === "/"
+                  ? pathname === "/"
+                  : pathname.startsWith(item.href);
+              const isOpen = activeDropdownIdx === idx;
+
+              return (
+                <li
+                  key={item.href}
+                  onMouseEnter={() => setActiveDropdownIdx(idx)}
+                  onMouseLeave={() => setActiveDropdownIdx(null)}
+                >
+                  <Link
+                    href={item.href}
+                    className={isActive ? "on" : ""}
+                    onClick={() => {
+                      setMobileMenuOpen(false);
+                      setActiveDropdownIdx(null);
+                    }}
+                  >
+                    {item.name}
+                  </Link>
+
+                  {/* Dropdown: Exactly ONE dropdown rendered at any given time */}
+                  {isOpen && (
+                    <div className="dd is-visible">
+                      {item.secs.map((sec) => {
+                        const linkHref =
+                          pathname === item.href
+                            ? `#${sec.id}`
+                            : `${item.href}#${sec.id}`;
+                        return (
+                          <Link
+                            key={sec.id}
+                            href={linkHref}
+                            onClick={() => {
+                              setMobileMenuOpen(false);
+                              setActiveDropdownIdx(null);
+                            }}
+                          >
+                            {sec.title}
+                          </Link>
+                        );
+                      })}
+                    </div>
+                  )}
+                </li>
+              );
+            })}
+          </ul>
+
+          {/* Prescribing Information CTA on Right */}
+          <Link
+            className="btn"
+            href="/safety-prescribing#dosing"
+            style={{ marginLeft: "auto" }}
+          >
             Prescribing information
           </Link>
-          <button
-            className="menu-btn"
-            type="button"
-            aria-expanded={menuOpen}
-            aria-controls="primary-nav"
-            onClick={() => setMenuOpen(!menuOpen)}
-          >
-            <svg viewBox="0 0 16 16" aria-hidden="true">
-              <path
-                d="M2 4h12M2 8h12M2 12h12"
-                stroke="currentColor"
-                strokeWidth="1.6"
-              />
-            </svg>
-            Menu
-          </button>
         </div>
       </header>
     </>

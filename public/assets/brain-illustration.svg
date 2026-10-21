@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 800" fill="none">
+  <defs>
+    <radialGradient id="bg" cx="50%" cy="46%" r="60%">
+      <stop offset="0" stop-color="#E8DDF8"/>
+      <stop offset="0.55" stop-color="#F3EDFB"/>
+      <stop offset="1" stop-color="#FCFBFE"/>
+    </radialGradient>
+    <radialGradient id="glowPink" cx="30%" cy="70%" r="40%">
+      <stop offset="0" stop-color="#FFD9E6" stop-opacity=".75"/>
+      <stop offset="1" stop-color="#FFD9E6" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowBlue" cx="75%" cy="25%" r="40%">
+      <stop offset="0" stop-color="#CFE3FF" stop-opacity=".85"/>
+      <stop offset="1" stop-color="#CFE3FF" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="head" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#FFFFFF" stop-opacity=".95"/>
+      <stop offset="1" stop-color="#E4D7F6" stop-opacity=".8"/>
+    </linearGradient>
+    <linearGradient id="brain" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#9E6FD0"/>
+      <stop offset="0.55" stop-color="#6E3AA6"/>
+      <stop offset="1" stop-color="#3D1A6E"/>
+    </linearGradient>
+    <filter id="soft" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="14"/>
+    </filter>
+  </defs>
+  <rect width="800" height="800" fill="url(#bg)"/>
+  <rect width="800" height="800" fill="url(#glowPink)"/>
+  <rect width="800" height="800" fill="url(#glowBlue)"/>
+  <g opacity=".5" stroke="#8050B7" stroke-width="1">
+    <circle cx="400" cy="400" r="330" stroke-dasharray="2 8"/>
+    <circle cx="400" cy="400" r="270" stroke-opacity=".5"/>
+  </g>
+  <!-- head profile -->
+  <path d="M232 700C226 620 190 574 192 470C192 318 300 190 440 186C566 182 650 266 654 376C656 412 676 440 702 474C710 484 704 492 692 494L680 496C688 510 684 522 672 526C680 546 668 562 648 566C654 596 640 626 604 630L566 634C560 668 562 704 566 744L300 744C296 726 282 716 270 708Z"
+        fill="url(#head)" stroke="#B79CDD" stroke-width="2.5"/>
+  <!-- brain glow -->
+  <ellipse cx="428" cy="352" rx="190" ry="130" fill="#8050B7" opacity=".35" filter="url(#soft)"/>
+  <!-- brain -->
+  <path d="M258 372C238 330 262 262 322 246C344 214 400 202 438 220C486 206 546 226 560 270C612 286 628 350 594 392C602 440 556 478 508 466C484 496 428 500 400 474C356 492 308 468 304 430C268 428 250 402 258 372Z"
+        fill="url(#brain)" stroke="#2B0F52" stroke-opacity=".5" stroke-width="2"/>
+  <g stroke="#E8DDF8" stroke-opacity=".7" stroke-width="3.5" stroke-linecap="round" fill="none">
+    <path d="M300 290C330 270 352 300 380 280C408 262 432 296 462 276C490 258 520 290 548 276"/>
+    <path d="M284 350C316 334 340 366 372 348C404 330 428 366 460 346C492 328 520 360 560 344"/>
+    <path d="M296 408C326 396 346 424 376 410C408 396 432 428 466 410C496 396 530 424 570 404"/>
+    <path d="M360 232C352 262 372 280 360 304M446 232C438 262 458 280 448 306M520 244C512 270 532 290 524 316"/>
+    <path d="M330 320C322 346 342 366 332 392M410 322C402 350 422 372 412 400M492 322C486 350 506 372 498 400"/>
+    <path d="M390 440C396 462 416 470 436 460"/>
+  </g>
+  <!-- neural nodes -->
+  <g fill="#FFFFFF">
+    <circle cx="330" cy="290" r="6"/><circle cx="462" cy="276" r="6"/><circle cx="372" cy="348" r="6"/>
+    <circle cx="520" cy="360" r="6"/><circle cx="410" cy="410" r="6"/><circle cx="300" cy="408" r="5"/>
+    <circle cx="548" cy="290" r="5"/>
+  </g>
+  <g stroke="#FFFFFF" stroke-opacity=".55" stroke-width="1.5">
+    <path d="M330 290L372 348L462 276L520 360L410 410L300 408L372 348M462 276L548 290L520 360"/>
+  </g>
+  <g fill="#FFFFFF" fill-opacity=".35">
+    <circle cx="330" cy="290" r="14"/><circle cx="462" cy="276" r="14"/><circle cx="372" cy="348" r="14"/>
+    <circle cx="520" cy="360" r="14"/><circle cx="410" cy="410" r="14"/>
+  </g>
+  <!-- sparkles -->
+  <g fill="#8050B7" fill-opacity=".45">
+    <circle cx="120" cy="190" r="5"/><circle cx="700" cy="150" r="7"/><circle cx="90" cy="560" r="6"/>
+    <circle cx="720" cy="620" r="5"/><circle cx="640" cy="90" r="4"/>
+  </g>
+</svg>

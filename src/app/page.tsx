@@ -1,102 +1,262 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import {
+  IconBrain,
+  IconWave,
+  IconRepeat,
+  IconMolecule,
+  IconShield,
+  IconBook,
+  IconChart,
+  IconDoc,
+  IconPill,
+  IconCheck,
+  IconScale,
+} from "@/components/Icons";
 
 export const metadata: Metadata = {
   title: "Evidence-informed treatment in schizophrenia and bipolar disorder · ZYPREXA HCP",
-  description: "Information for healthcare professionals on ZYPREXA (olanzapine): approved indications, clinical evidence, pharmacology and prescribing information, based on the EU Summary of Product Characteristics.",
+  description:
+    "Information for healthcare professionals on ZYPREXA (olanzapine): approved indications, clinical evidence, pharmacology and prescribing information, based on the EU Summary of Product Characteristics.",
 };
 
 export default function HomePage() {
   return (
-    <main id="main">
-      <section className="home-open" aria-labelledby="home-title">
-  <div className="wrap">
-    <div>
-      <div className="product-id"><span className="name">ZYPREXA<sup>®</sup></span><span className="inn">olanzapine · coated tablets</span></div>
-      <h1 id="home-title">Evidence-informed treatment in schizophrenia and bipolar disorder</h1>
-      <p className="intro">Zyprexa (olanzapine) is an antipsychotic medicine indicated for the treatment of schizophrenia and for the treatment of moderate to severe manic episodes. In patients whose manic episode has responded to olanzapine, it is also indicated for preventing recurrence in bipolar disorder, in accordance with the applicable product information.<sup><a className="cite" href="/references#ref-1" aria-label="Reference 1, section 4.1">1</a></sup></p>
-      <p className="intro">Explore the clinical evidence, pharmacology and prescribing information for Zyprexa.</p>
-      <div className="actions">
-        <a className="btn btn--primary" href="/clinical-evidence">Explore clinical evidence <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" strokeWidth="1.6"/></svg></a>
-        <a className="btn btn--secondary" href="/safety-prescribing">View prescribing information</a>
+    <main id="app">
+      {/* Editorial Hero */}
+      <div className="hero">
+        <div className="w">
+          <div>
+            <p className="eb">Medical information for healthcare professionals</p>
+            <div className="brand">
+              ZYPREXA<i>olanzapine</i>
+            </div>
+            <h1 className="serif" style={{ fontSize: "clamp(24px, 3vw, 38px)", margin: "16px 0 10px" }}>
+              Evidence-informed treatment in schizophrenia and bipolar disorder
+            </h1>
+            <p>
+              Zyprexa (olanzapine) is an antipsychotic medicine indicated for the treatment of schizophrenia and
+              for the treatment of moderate to severe manic episodes. In patients whose manic episode has
+              responded to olanzapine, it is also indicated for preventing recurrence in bipolar disorder, in
+              accordance with the applicable product information.<sup>[1, section 4.1]</sup>
+            </p>
+            <div className="row">
+              <Link className="btn" href="/clinical-evidence">
+                Explore clinical evidence →
+              </Link>
+              <Link className="btn g" href="/safety-prescribing#dosing">
+                Prescribing information
+              </Link>
+            </div>
+          </div>
+          <div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/hero-brain-3d.jpg"
+              alt="3D neural network representation of atypical antipsychotic receptor activity"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </div>
-    </div>
-    <div className="indication-panel" aria-labelledby="ind-title">
-      <h2 id="ind-title">Approved indications in adults · EU SmPC 4.1</h2>
-      <ol>
-        <li><strong>Schizophrenia</strong><span>Treatment of schizophrenia. Effective in maintaining clinical improvement during continuation therapy in patients who have shown an initial treatment response.</span></li>
-        <li><strong>Moderate to severe manic episode</strong><span>As monotherapy or in combination therapy.</span></li>
-        <li><strong>Prevention of recurrence in bipolar disorder</strong><span>In patients whose manic episode has responded to olanzapine treatment.</span></li>
-      </ol>
-      <p className="scope">This website covers ZYPREXA coated tablets. ZYPREXA powder for solution for injection and ZYPADHERA (olanzapine pamoate) have their own Summaries of Product Characteristics, listed under <a href="/references#product-information">product information</a>.</p>
-    </div>
-  </div>
-</section>
 
-<section className="section" aria-labelledby="topics-title">
-  <div className="wrap">
-    <div className="section-head">
-      <span className="eyebrow">Clinical profile</span>
-      <h2 id="topics-title">A closer look at the clinical profile</h2>
-    </div>
-    <div className="topic-index">
-      <article className="topic">
-        <h3><a href="/schizophrenia">Schizophrenia</a></h3>
-        <p>Schizophrenia can affect perception, thought, motivation and everyday functioning. Treatment aims to reduce symptoms, support clinical stability and help patients maintain functioning over time.</p>
-        <a className="more" href="/schizophrenia">Explore schizophrenia <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" strokeWidth="1.6"/></svg></a>
-      </article>
-      <article className="topic">
-        <h3><a href="/bipolar-disorder">Bipolar disorder</a></h3>
-        <p>Bipolar disorder involves episodes of mood disturbance that can affect behaviour, relationships and daily life. Treatment objectives vary according to the current episode and the individual's clinical needs.</p>
-        <a className="more" href="/bipolar-disorder">Explore bipolar disorder <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" strokeWidth="1.6"/></svg></a>
-      </article>
-      <article className="topic">
-        <h3><a href="/clinical-evidence">Clinical evidence</a></h3>
-        <p>Clinical trials have evaluated olanzapine in schizophrenia and in manic episodes associated with bipolar disorder, including studies of continued treatment and recurrence prevention.</p>
-        <a className="more" href="/clinical-evidence">Review the evidence <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" strokeWidth="1.6"/></svg></a>
-      </article>
-      <article className="topic">
-        <h3><a href="/safety-prescribing">Safety and prescribing</a></h3>
-        <p>Appropriate treatment selection requires consideration of individual clinical circumstances, contraindications, interactions and the need for ongoing safety monitoring.</p>
-        <a className="more" href="/safety-prescribing">Review safety information <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" strokeWidth="1.6"/></svg></a>
-      </article>
-    </div>
-  </div>
-</section>
+      <div className="w">
+        {/* Approved indications */}
+        <section className="s" id="indications">
+          <h2>Approved indications (EU SmPC 4.1)</h2>
+          <div className="grid g3">
+            <div className="card">
+              <h3>Schizophrenia</h3>
+              <p>
+                Treatment of schizophrenia. Effective in maintaining clinical improvement during continuation
+                therapy in patients who have shown an initial treatment response.
+              </p>
+            </div>
+            <div className="card">
+              <h3>Acute manic episodes</h3>
+              <p>Treatment of moderate to severe manic episodes (monotherapy or combination therapy).</p>
+            </div>
+            <div className="card">
+              <h3>Maintenance treatment in bipolar disorder</h3>
+              <p>
+                Prevention of recurrence in bipolar disorder in patients whose manic episode has responded to
+                olanzapine.
+              </p>
+            </div>
+          </div>
+          <p className="lead" style={{ marginTop: "14px" }}>
+            <span className="tag">Scope note</span> Coated tablets only. Powder for solution for injection and
+            ZYPADHERA have separate SmPCs.
+          </p>
+        </section>
 
-<section className="section section--surface" aria-labelledby="about-title">
-  <div className="wrap about-olz">
-    <div className="stack">
-      <span className="eyebrow">Pharmacology</span>
-      <h2 id="about-title">About olanzapine</h2>
-      <p>Olanzapine is an atypical antipsychotic with activity across multiple neurotransmitter receptor systems, including dopamine and serotonin receptors. Its pharmacological profile is relevant to its therapeutic effects and adverse-reaction profile.</p>
-      <p>Understanding this profile alongside the clinical evidence and approved product information supports informed prescribing decisions.</p>
-      <a className="more" href="/mechanism-of-action">Explore mechanism of action <svg viewBox="0 0 16 16" aria-hidden="true" focusable="false"><path d="M3 8h9M8.5 4.5 12 8l-3.5 3.5" fill="none" stroke="currentColor" strokeWidth="1.6"/></svg></a>
-    </div>
-    <figure className="fig">
-      <div className="receptor-strip" role="list" aria-label="Receptor families with olanzapine affinity in preclinical studies">
-        <div role="listitem"><b>D<sub>1–5</sub></b><span>Dopamine</span></div>
-        <div role="listitem"><b>5-HT</b><span>Serotonin 2A/2C, 3, 6</span></div>
-        <div role="listitem"><b>H<sub>1</sub></b><span>Histamine</span></div>
-        <div role="listitem"><b>M<sub>1–5</sub></b><span>Muscarinic</span></div>
-        <div role="listitem"><b>α<sub>1</sub></b><span>Adrenergic</span></div>
+        {/* Explore key topics */}
+        <section className="s" id="topics">
+          <h2>Explore key topics</h2>
+          <div className="grid g3 keep">
+            <Link className="card" href="/schizophrenia">
+              <h3>Understanding Schizophrenia</h3>
+              <p>Positive, negative, cognitive domains, neurobiology and course of care.</p>
+            </Link>
+            <Link className="card" href="/bipolar-disorder">
+              <h3>Understanding Bipolar Disorder</h3>
+              <p>Distinct mood episodes, treatment objectives, and recurrence prevention.</p>
+            </Link>
+            <Link className="card" href="/clinical-evidence">
+              <h3>Clinical Evidence</h3>
+              <p>9 clinical study descriptions in EU SmPC section 5.1 and interactive study explorer.</p>
+            </Link>
+            <Link className="card" href="/mechanism-of-action">
+              <h3>Mechanism of Action</h3>
+              <p>
+                Multi-receptor pharmacological profile across dopamine, serotonin, histamine, muscarinic, and
+                adrenergic receptors.
+              </p>
+            </Link>
+            <Link className="card" href="/safety-prescribing">
+              <h3>Safety, Monitoring &amp; Prescribing</h3>
+              <p>Dosing guidance, contraindications, dementia warning, and metabolic monitoring.</p>
+            </Link>
+            <Link className="card" href="/references">
+              <h3>References &amp; Resources</h3>
+              <p>Official regulatory documents (SmPC, PIL), clinical citations, and medical abbreviations.</p>
+            </Link>
+          </div>
+        </section>
+
+        {/* Trusted in practice */}
+        <section className="s" id="trusted">
+          <h2>A trusted treatment in clinical practice</h2>
+          <div className="grid g4">
+            <div className="card">
+              <h3>Extensive clinical experience</h3>
+              <p>Established evidence base across adult populations with over 25 years of real-world use.</p>
+            </div>
+            <div className="card">
+              <h3>Multiple formulations</h3>
+              <p>Coated tablets, rapid-acting IM injection, and long-acting injectable (ZYPADHERA).</p>
+            </div>
+            <div className="card">
+              <h3>Guideline support</h3>
+              <p>
+                Recommended in BAP (2016), APA (2021), and listed on the WHO Essential Medicines List (2023).
+              </p>
+            </div>
+            <div className="card">
+              <h3>Comprehensive safety profile</h3>
+              <p>Proactive cardiometabolic monitoring protocols and individualized posology titration.</p>
+            </div>
+          </div>
+        </section>
+
+        {/* Prescribing information callout */}
+        <section className="s" id="pi">
+          <h2>Important Prescribing Information</h2>
+          <div className="pi">
+            <div>
+              <p className="eb" style={{ color: "#d9ccff" }}>
+                Important Prescribing Information
+              </p>
+              <h2 style={{ fontSize: "28px" }}>Consult the approved product information before prescribing</h2>
+              <ul>
+                <li>Contraindicated in hypersensitivity and known risk of narrow-angle glaucoma.</li>
+                <li>
+                  Not recommended in elderly patients with dementia-related psychosis due to increased
+                  mortality and cerebrovascular risk.
+                </li>
+                <li>
+                  Weight gain and changes in glucose and lipid parameters can occur; baseline and ongoing
+                  monitoring required.
+                </li>
+              </ul>
+              <div className="row">
+                <a
+                  className="btn w2"
+                  href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  View full PI (PDF) →
+                </a>
+                <Link
+                  className="btn w2"
+                  style={{ background: "transparent", color: "#fff", borderColor: "rgba(255,255,255,0.4)" }}
+                  href="/safety-prescribing"
+                >
+                  Safety &amp; prescribing summary
+                </Link>
+              </div>
+            </div>
+            <div style={{ display: "grid", placeItems: "center" }}>
+              <IconShield style={{ width: "80px", height: "80px", opacity: 0.5, strokeWidth: 1.2 }} />
+            </div>
+          </div>
+        </section>
+
+        {/* Receptor profile */}
+        <section className="s" id="receptors">
+          <h2>Receptor profile at a glance</h2>
+          <p className="lead">Preclinical binding affinity (Ki &lt; 100 nM).</p>
+          <div className="grid g5">
+            {[
+              {
+                code: "D₂",
+                name: "Dopamine",
+                desc: "Antipsychotic efficacy",
+                color: "#2563eb",
+              },
+              {
+                code: "5-HT₂A",
+                name: "Serotonin",
+                desc: "Mood modulation & EPS mitigation",
+                color: "#db2777",
+              },
+              {
+                code: "H₁",
+                name: "Histamine",
+                desc: "Calming/sedation & appetite regulation",
+                color: "#059669",
+              },
+              {
+                code: "M₁–₅",
+                name: "Muscarinic",
+                desc: "Anticholinergic balance",
+                color: "#7c3aed",
+              },
+              {
+                code: "α₁",
+                name: "Adrenergic",
+                desc: "Orthostatic & cardiovascular reflexes",
+                color: "#d97706",
+              },
+            ].map((r) => (
+              <Link
+                key={r.code}
+                className="card"
+                href="/mechanism-of-action#systems"
+                style={{ textAlign: "center" }}
+              >
+                <div
+                  className="badge-code"
+                  style={{
+                    width: "56px",
+                    height: "56px",
+                    margin: "0 auto 10px",
+                    background: r.color,
+                    color: "#fff",
+                    fontSize: "16px",
+                    fontWeight: 700,
+                  }}
+                >
+                  {r.code}
+                </div>
+                <h3>{r.name}</h3>
+                <p>{r.desc}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
       </div>
-      <figcaption>Receptor families at which olanzapine showed affinity (K<sub>i</sub> &lt; 100 nM) in preclinical studies. Order does not indicate relative affinity.<sup><a className="cite" href="/references#ref-1" aria-label="Reference 1, section 5.1">1</a></sup></figcaption>
-    </figure>
-  </div>
-</section>
-
-<section className="pi-band" aria-labelledby="ipi-title">
-  <div className="wrap stack">
-    <span className="eyebrow">Important prescribing information</span>
-    <h2 id="ipi-title">Consult the approved product information before prescribing</h2>
-    <p>Zyprexa is a prescription medicine. Treatment should be initiated and monitored by an appropriately qualified healthcare professional. The approved product information should be consulted before prescribing, particularly for contraindications, metabolic effects, interactions, special populations and other important precautions.</p>
-    <div className="actions">
-      <a className="btn btn--primary ext" href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf" target="_blank" rel="noopener">Access the full Summary of Product Characteristics</a>
-      <a className="btn btn--secondary" href="/safety-prescribing">Safety and prescribing summary</a>
-    </div>
-  </div>
-</section>
     </main>
   );
 }

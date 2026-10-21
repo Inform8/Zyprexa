@@ -1,192 +1,358 @@
-import type { Metadata } from "next";
-import Link from "next/link";
+"use client";
 
-export const metadata: Metadata = {
-  title: "References and Resources · ZYPREXA HCP",
-  description: "Product information documents for ZYPREXA (olanzapine), the references cited on this website and medical information.",
-};
+import { useState } from "react";
+import {
+  IconDownload,
+  IconBuilding,
+  IconMail,
+  IconSearch,
+  IconDoc,
+} from "@/components/Icons";
+
+interface Reference {
+  id: string;
+  citation: string;
+  link?: string;
+}
+
+const REFERENCES: Reference[] = [
+  {
+    id: "1",
+    citation: "ZYPREXA Summary of Product Characteristics (Annex I). CHEPLAPHARM / EMA.",
+    link: "https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf",
+  },
+  {
+    id: "2",
+    citation: "ZYPREXA 10 mg powder for solution for injection SmPC. CHEPLAPHARM / EMA.",
+  },
+  {
+    id: "3",
+    citation: "ZYPADHERA powder and solvent for prolonged release suspension SmPC. CHEPLAPHARM / EMA.",
+    link: "https://www.ema.europa.eu/en/medicines/human/EPAR/zypadhera",
+  },
+  {
+    id: "4",
+    citation: "DSM-5-TR (Diagnostic and Statistical Manual of Mental Disorders, 5th ed. Text Revision). APA, 2022.",
+  },
+  {
+    id: "5",
+    citation: "Stahl SM. Beyond the dopamine hypothesis: three neural networks. CNS Spectr. 2018;23(3):187–191.",
+  },
+  {
+    id: "6",
+    citation:
+      "American Psychiatric Association Practice Guideline for the Treatment of Patients With Schizophrenia (3rd ed.). APA, 2021.",
+  },
+  {
+    id: "7",
+    citation: "Goodwin GM et al. Evidence-based guidelines for treating bipolar disorder (3rd ed.). J Psychopharmacol. 2016;30(6):495–553.",
+  },
+  {
+    id: "8",
+    citation: "Tandon R et al. World Psychiatric Association statement on comparative effectiveness of antipsychotics. Schizophr Res. 2008;100:20–38.",
+  },
+  {
+    id: "9",
+    citation: "World Health Organization. 23rd Model List of Essential Medicines. WHO, 2023/2024.",
+  },
+  {
+    id: "10",
+    citation: "Beasley CM Jr et al. Olanzapine vs. placebo and haloperidol in schizophrenia. Neuropsychopharmacology. 1996;14(2):111–123.",
+  },
+  {
+    id: "11",
+    citation: "Tohen M et al. Olanzapine versus placebo in acute mania. Am J Psychiatry. 1999;156(5):702–709.",
+  },
+  {
+    id: "12",
+    citation: "Kapur S et al. 5-HT₂ and D₂ receptor occupancy of olanzapine: a PET investigation. Am J Psychiatry. 1998;155(7):921–928.",
+  },
+  {
+    id: "13",
+    citation: "ZYPREXA Prescribing Information (US FDA; Section 12.2 receptor pharmacology rationale).",
+  },
+];
+
+const ABBREVIATIONS = [
+  ["ALT / AST", "Alanine / Aspartate aminotransferase"],
+  ["AUC", "Area under the concentration–time curve"],
+  ["BPRS", "Brief Psychiatric Rating Scale"],
+  ["Cmax", "Maximum observed plasma concentration"],
+  ["CNS", "Central nervous system"],
+  ["CYP1A2", "Cytochrome P450 1A2 isoenzyme"],
+  ["D₂", "Dopamine receptor subtype 2"],
+  ["EMA", "European Medicines Agency"],
+  ["EPS", "Extrapyramidal symptoms"],
+  ["5-HT₂A", "5-hydroxytryptamine (serotonin) receptor subtype 2A"],
+  ["Ki", "Receptor inhibition binding constant"],
+  ["LOCF", "Last observation carried forward"],
+  ["MADRS", "Montgomery–Åsberg Depression Rating Scale"],
+  ["NMDA", "N-methyl-D-aspartate glutamate receptor"],
+  ["NMS", "Neuroleptic malignant syndrome"],
+  ["PET", "Positron emission tomography"],
+  ["QTc", "Corrected QT interval on ECG"],
+  ["SANS", "Scale for the Assessment of Negative Symptoms"],
+  ["SmPC", "Summary of Product Characteristics"],
+  ["YMRS", "Young Mania Rating Scale"],
+];
 
 export default function ReferencesPage() {
+  const [refQuery, setRefQuery] = useState("");
+  const [abbQuery, setAbbQuery] = useState("");
+
+  const filteredRefs = REFERENCES.filter((r) => {
+    const q = refQuery.toLowerCase();
+    return (
+      r.citation.toLowerCase().includes(q) ||
+      `ref ${r.id}`.includes(q) ||
+      r.id.includes(q)
+    );
+  });
+
+  const filteredAbbs = ABBREVIATIONS.filter(([abbr, def]) => {
+    const q = abbQuery.toLowerCase();
+    return abbr.toLowerCase().includes(q) || def.toLowerCase().includes(q);
+  });
+
   return (
-    <main id="main">
-      <header className="page-head">
-  <div className="wrap grid grid--7-5">
-    <div>
-      <span className="eyebrow">Library</span>
-      <h1>Scientific references and product resources</h1>
-    </div>
-    <p style={{ alignSelf: 'end' }}>Explore the approved product information and scientific literature supporting the clinical and pharmacological information presented on this website.</p>
-  </div>
-</header>
-
-<section className="section" id="product-information" aria-labelledby="pi-title">
-  <div className="wrap">
-    <div className="section-head">
-      <span className="eyebrow">Approved documents</span>
-      <h2 id="pi-title">Product information</h2>
-      <p>Current EU product information is published by the European Medicines Agency. Use the version approved for your market.</p>
-    </div>
-    <div className="pi-docs">
-      <article className="pi-doc">
-        <span className="doc-type">Summary of Product Characteristics</span>
-        <h3>ZYPREXA coated tablets and powder for solution for injection</h3>
-        <p>EU product information, Annex I. Basis for all prescribing content on this website.</p>
-        <a className="more ext" href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf" target="_blank" rel="noopener">Open PDF on ema.europa.eu</a>
-      </article>
-      <article className="pi-doc">
-        <span className="doc-type">Package leaflet</span>
-        <h3>Information for the patient</h3>
-        <p>Approved patient-facing information, in Annex III B of the same document. Translations are listed on the EMA product page.</p>
-        <a className="more ext" href="https://www.ema.europa.eu/en/medicines/human/EPAR/zyprexa" target="_blank" rel="noopener">EMA product page</a>
-      </article>
-      <article className="pi-doc">
-        <span className="doc-type">Separate product</span>
-        <h3>ZYPADHERA (olanzapine pamoate)</h3>
-        <p>Prolonged-release suspension for injection. Has its own SmPC and is not covered by the prescribing content on this site.</p>
-        <a className="more ext" href="https://www.ema.europa.eu/en/medicines/human/EPAR/zypadhera" target="_blank" rel="noopener">EMA product page</a>
-      </article>
-    </div>
-  </div>
-</section>
-
-<section className="section section--surface" id="literature" aria-labelledby="lit-title">
-  <div className="wrap grid grid--8-4">
-    <div>
-      <div className="section-head">
-        <span className="eyebrow">Cited on this website</span>
-        <h2 id="lit-title">References</h2>
+    <main id="app">
+      {/* Editorial Hero */}
+      <div className="hero">
+        <div className="w">
+          <div>
+            <p className="eb">Documentation &amp; Evidence Library</p>
+            <h1 className="serif">References &amp; Resources</h1>
+            <p>Regulatory documents, full references, literature matrix and clinical resources.</p>
+            <div className="row">
+              <a className="btn" href="#references">
+                Search references ↓
+              </a>
+              <a className="btn g" href="#regulatory">
+                Regulatory documents
+              </a>
+            </div>
+          </div>
+          <div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/assets/medical-books-stack.jpg"
+              alt="Medical reference books and clinical journal archive"
+              loading="lazy"
+            />
+          </div>
+        </div>
       </div>
-      <h3 className="refs-group">Product information</h3>
-      <ol className="refs">
-        <li id="ref-1" data-n="1"><div>
-          <p className="ref-title">ZYPREXA 2.5 mg, 5 mg, 7.5 mg, 10 mg, 15 mg and 20 mg coated tablets. Summary of Product Characteristics.</p>
-          <p className="ref-meta">CHEPLAPHARM Registration GmbH. EU product information, Annex I. European Medicines Agency.</p>
-          <p className="ref-used">Cited for indications (4.1), posology (4.2), contraindications (4.3), warnings (4.4), interactions (4.5), pregnancy (4.6), driving (4.7), adverse reactions (4.8) and pharmacology and clinical efficacy (5.1).</p>
-          <div className="ref-links"><a className="ext" href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf" target="_blank" rel="noopener">Product information PDF</a></div>
-        </div></li>
-        <li id="ref-2" data-n="2"><div>
-          <p className="ref-title">ZYPREXA 10 mg powder for solution for injection. Summary of Product Characteristics.</p>
-          <p className="ref-meta">CHEPLAPHARM Registration GmbH. EU product information, Annex I. European Medicines Agency.</p>
-          <p className="ref-used">Cited to distinguish the intramuscular formulation.</p>
-          <div className="ref-links"><a className="ext" href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf" target="_blank" rel="noopener">Product information PDF</a></div>
-        </div></li>
-        <li id="ref-3" data-n="3"><div>
-          <p className="ref-title">ZYPADHERA 210 mg, 300 mg and 405 mg powder and solvent for prolonged release suspension for injection. Summary of Product Characteristics.</p>
-          <p className="ref-meta">CHEPLAPHARM Registration GmbH. EU product information, Annex I. European Medicines Agency.</p>
-          <p className="ref-used">Cited to distinguish the long-acting formulation.</p>
-          <div className="ref-links"><a className="ext" href="https://www.ema.europa.eu/en/documents/product-information/zypadhera-epar-product-information_en.pdf" target="_blank" rel="noopener">Product information PDF</a></div>
-        </div></li>
-      </ol>
-      <h3 className="refs-group">Scientific literature</h3>
-      <ol className="refs" start={4}>
-        <li id="ref-4" data-n="4"><div>
-          <p className="ref-title">Diagnostic and Statistical Manual of Mental Disorders, Fifth Edition, Text Revision (DSM-5-TR).</p>
-          <p className="ref-meta">American Psychiatric Association. Washington, DC: American Psychiatric Association Publishing; 2022.</p>
-          <p className="ref-used">Cited for symptom domains of schizophrenia and features of mood episodes.</p>
-        </div></li>
-        <li id="ref-5" data-n="5"><div>
-          <p className="ref-title">Beyond the dopamine hypothesis of schizophrenia to three neural networks of psychosis: dopamine, serotonin, and glutamate.</p>
-          <p className="ref-meta">Stahl SM. <i>CNS Spectr</i>. 2018;23(3):187–191.</p>
-          <p className="ref-used">Cited for the dopamine, glutamate and serotonin hypotheses (schizophrenia, Figure 2).</p>
-          <div className="ref-links"><a className="ext" href="https://doi.org/10.1017/S1092852918001013" target="_blank" rel="noopener">doi:10.1017/S1092852918001013</a></div>
-        </div></li>
-        <li id="ref-6" data-n="6"><div>
-          <p className="ref-title">The American Psychiatric Association Practice Guideline for the Treatment of Patients With Schizophrenia, Third Edition.</p>
-          <p className="ref-meta">Keepers GA, Fochtmann LJ, Anzia JM, et al. Washington, DC: American Psychiatric Association; 2021. Executive summary: <i>Am J Psychiatry</i>. 2020;177(9):868–872.</p>
-          <p className="ref-used">Cited for guideline statements on antipsychotic treatment, continuation and long-acting injectables.</p>
-          <div className="ref-links"><a className="ext" href="https://doi.org/10.1176/appi.ajp.2020.177901" target="_blank" rel="noopener">Executive summary, doi:10.1176/appi.ajp.2020.177901</a></div>
-        </div></li>
-        <li id="ref-7" data-n="7"><div>
-          <p className="ref-title">Evidence-based guidelines for treating bipolar disorder: revised third edition recommendations from the British Association for Psychopharmacology.</p>
-          <p className="ref-meta">Goodwin GM, Haddad PM, Ferrier IN, et al. <i>J Psychopharmacol</i>. 2016;30(6):495–553.</p>
-          <p className="ref-used">Cited for guideline context in acute mania and long-term treatment of bipolar disorder.</p>
-          <div className="ref-links"><a className="ext" href="https://doi.org/10.1177/0269881116636545" target="_blank" rel="noopener">doi:10.1177/0269881116636545</a></div>
-        </div></li>
-        <li id="ref-8" data-n="8"><div>
-          <p className="ref-title">World Psychiatric Association Pharmacopsychiatry Section statement on comparative effectiveness of antipsychotics in the treatment of schizophrenia.</p>
-          <p className="ref-meta">Tandon R, Belmaker RH, Gattaz WF, et al. <i>Schizophr Res</i>. 2008;100(1–3):20–38.</p>
-          <p className="ref-used">Cited for comparative efficacy and tolerability context, and for comparator-dose limitations.</p>
-          <div className="ref-links"><a className="ext" href="https://doi.org/10.1016/j.schres.2007.11.033" target="_blank" rel="noopener">doi:10.1016/j.schres.2007.11.033</a></div>
-        </div></li>
-        <li id="ref-9" data-n="9"><div>
-          <p className="ref-title">The selection and use of essential medicines 2023: report of the WHO Expert Committee on Selection and Use of Essential Medicines, 2023 (including the 23rd WHO Model List of Essential Medicines).</p>
-          <p className="ref-meta">World Health Organization. Geneva: WHO; 2024 (WHO Technical Report Series, No. 1049). ISBN 978-92-4-008926-6.</p>
-          <p className="ref-used">Cited for the listing of olanzapine as a therapeutic alternative.</p>
-        </div></li>
-        <li id="ref-10" data-n="10"><div>
-          <p className="ref-title">Olanzapine versus placebo and haloperidol: acute phase results of the North American double-blind olanzapine trial.</p>
-          <p className="ref-meta">Beasley CM Jr, Tollefson G, Tran P, et al. <i>Neuropsychopharmacology</i>. 1996;14(2):111–123.</p>
-          <p className="ref-used">Cited for the published schizophrenia trial (clinical evidence, Figure 2).</p>
-          <div className="ref-links"><a className="ext" href="https://www.nature.com/articles/1380403" target="_blank" rel="noopener">Publisher page</a></div>
-        </div></li>
-        <li id="ref-11" data-n="11"><div>
-          <p className="ref-title">Olanzapine versus placebo in the treatment of acute mania.</p>
-          <p className="ref-meta">Tohen M, Sanger TM, McElroy SL, et al. <i>Am J Psychiatry</i>. 1999;156(5):702–709.</p>
-          <p className="ref-used">Cited for the published acute mania trial (clinical evidence, Figure 3).</p>
-          <div className="ref-links"><a className="ext" href="https://doi.org/10.1176/ajp.156.5.702" target="_blank" rel="noopener">doi:10.1176/ajp.156.5.702</a></div>
-        </div></li>
-        <li id="ref-12" data-n="12"><div>
-          <p className="ref-title">5-HT<sub>2</sub> and D<sub>2</sub> receptor occupancy of olanzapine in schizophrenia: a PET investigation.</p>
-          <p className="ref-meta">Kapur S, Zipursky RB, Remington G, et al. <i>Am J Psychiatry</i>. 1998;155(7):921–928.</p>
-          <p className="ref-used">Cited for receptor occupancy at clinical doses (mechanism of action, Figure 2).</p>
-          <div className="ref-links"><a className="ext" href="https://doi.org/10.1176/ajp.155.7.921" target="_blank" rel="noopener">doi:10.1176/ajp.155.7.921</a></div>
-        </div></li>
-        <li id="ref-13" data-n="13"><div>
-          <p className="ref-title">ZYPREXA (olanzapine) Prescribing Information.</p>
-          <p className="ref-meta">U.S. Food and Drug Administration. Silver Spring, MD: FDA; 2021.</p>
-          <p className="ref-used">Cited only for the proposed relationship between receptor antagonism and certain adverse effects (section 12.2). It is not the approved label in the EU and is not used for dosing or indications.</p>
-        </div></li>
-      </ol>
-    </div>
-    <div className="stack">
-      <h3>Literature by topic</h3>
-      <p className="small muted">Where each topic on this website is substantiated.</p>
-      <ul className="cat-list" style={{ display: 'block' }}>
-        <li style={{ display: 'block' }}><strong>Disease background</strong><br /><span className="small">Refs. 4, 5</span></li>
-        <li style={{ display: 'block' }}><strong>Clinical efficacy in schizophrenia</strong><br /><span className="small">Ref. 1, section 5.1; ref. 10</span></li>
-        <li style={{ display: 'block' }}><strong>Clinical efficacy in acute mania</strong><br /><span className="small">Ref. 1, section 5.1; ref. 11</span></li>
-        <li style={{ display: 'block' }}><strong>Recurrence prevention in bipolar disorder</strong><br /><span className="small">Ref. 1, section 5.1</span></li>
-        <li style={{ display: 'block' }}><strong>Guideline and formulary context</strong><br /><span className="small">Refs. 6–9</span></li>
-        <li style={{ display: 'block' }}><strong>Pharmacology and mechanism of action</strong><br /><span className="small">Ref. 1, section 5.1; refs. 12, 13</span></li>
-        <li style={{ display: 'block' }}><strong>Safety, tolerability and metabolic monitoring</strong><br /><span className="small">Ref. 1, sections 4.4 and 4.8</span></li>
-      </ul>
-    </div>
-  </div>
-</section>
 
-<section className="section section--surface" id="medical-information" aria-labelledby="mi-title">
-  <div className="wrap grid grid--2">
-    <div className="stack">
-      <span className="eyebrow">Contact</span>
-      <h2 id="mi-title">Medical information</h2>
-      <p>For questions about Zyprexa, its approved indications or prescribing information, contact the appropriate medical information service for your market. Local representatives of the marketing authorisation holder are listed in the package leaflet.</p>
-      <p><strong>Marketing authorisation holder</strong><br />CHEPLAPHARM Registration GmbH<br />Weiler Straße 5e<br />79540 Lörrach, Germany</p>
-      <a className="more ext" href="https://www.ema.europa.eu/en/medicines/human/EPAR/zyprexa" target="_blank" rel="noopener">Find the package leaflet on the EMA website</a>
-    </div>
-    <div>
-      <h3 style={{ marginBottom: '1rem' }}>Abbreviations</h3>
-      <dl className="abbr">
-        <dt>ALT, AST</dt><dd>Alanine and aspartate aminotransferase</dd>
-        <dt>BPRS</dt><dd>Brief Psychiatric Rating Scale</dd>
-        <dt>AUC</dt><dd>Area under the concentration–time curve</dd>
-        <dt>CNS</dt><dd>Central nervous system</dd>
-        <dt>C<sub>max</sub></dt><dd>Maximum plasma concentration</dd>
-        <dt>CYP1A2</dt><dd>Cytochrome P450 1A2</dd>
-        <dt>EMA</dt><dd>European Medicines Agency</dd>
-        <dt>LOCF</dt><dd>Last observation carried forward</dd>
-        <dt>K<sub>i</sub></dt><dd>Inhibition constant (binding affinity)</dd>
-        <dt>MADRS</dt><dd>Montgomery–Åsberg Depression Rating Scale</dd>
-        <dt>NMDA</dt><dd>N-methyl-D-aspartate (glutamate receptor)</dd>
-        <dt>NMS</dt><dd>Neuroleptic malignant syndrome</dd>
-        <dt>PET</dt><dd>Positron emission tomography</dd>
-        <dt>QTc</dt><dd>Heart-rate-corrected QT interval</dd>
-        <dt>SANS</dt><dd>Scale for the Assessment of Negative Symptoms</dd>
-        <dt>SmPC</dt><dd>Summary of Product Characteristics</dd>
-        <dt>YMRS</dt><dd>Young Mania Rating Scale</dd>
-      </dl>
-    </div>
-  </div>
-</section>
+      <div className="w">
+        {/* Searchable Bibliography */}
+        <section className="s" id="references">
+          <h2>Searchable master reference bibliography (13 references)</h2>
+          <div style={{ position: "relative" }}>
+            <input
+              className="src"
+              type="search"
+              value={refQuery}
+              onChange={(e) => setRefQuery(e.target.value)}
+              placeholder="Search references, authors, topics or keywords…"
+              aria-label="Search references"
+              style={{ paddingLeft: "42px" }}
+            />
+            <IconSearch
+              style={{
+                position: "absolute",
+                left: "14px",
+                top: "14px",
+                width: "18px",
+                height: "18px",
+                color: "var(--mut)",
+                pointerEvents: "none",
+              }}
+            />
+          </div>
+
+          <div className="card">
+            {filteredRefs.length === 0 ? (
+              <p style={{ padding: "12px 0", color: "var(--mut)" }}>
+                No references match your search query &ldquo;{refQuery}&rdquo;.
+              </p>
+            ) : (
+              filteredRefs.map((r) => (
+                <div key={r.id} className="ref">
+                  <b>Ref {r.id}</b>
+                  <div>
+                    <span>{r.citation}</span>
+                    {r.link && (
+                      <>
+                        {" "}
+                        <a href={r.link} target="_blank" rel="noopener noreferrer">
+                          Open ↗
+                        </a>
+                      </>
+                    )}
+                  </div>
+                </div>
+              ))
+            )}
+          </div>
+        </section>
+
+        {/* Official Regulatory Product Documents */}
+        <section className="s" id="regulatory">
+          <h2>Official regulatory product documents</h2>
+          <div className="grid g3">
+            <a
+              className="card"
+              href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <h3>ZYPREXA SmPC</h3>
+              <p>EMA Annex I official prescribing summary of product characteristics (PDF).</p>
+            </a>
+            <a
+              className="card"
+              href="https://www.ema.europa.eu/en/medicines/human/EPAR/zyprexa"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <h3>Patient Information Leaflet (PIL)</h3>
+              <p>EMA Annex III B official instructions and information for patients – EMA product page.</p>
+            </a>
+            <a
+              className="card"
+              href="https://www.ema.europa.eu/en/medicines/human/EPAR/zypadhera"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <h3>ZYPADHERA SmPC</h3>
+              <p>Separate official prescribing document for prolonged-release suspension – EMA page.</p>
+            </a>
+          </div>
+        </section>
+
+        {/* Literature Matrix by Clinical Topic */}
+        <section className="s" id="guidelines">
+          <h2>Literature by clinical topic matrix</h2>
+          <div className="card tw" style={{ padding: 0 }}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Clinical topic</th>
+                  <th>Supporting references</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    <b>Disease background &amp; neurobiology</b>
+                  </td>
+                  <td>Refs 4, 5</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Schizophrenia clinical efficacy</b>
+                  </td>
+                  <td>Ref 1 (Section 5.1), Ref 10 (Beasley 1996)</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Acute mania clinical efficacy</b>
+                  </td>
+                  <td>Ref 1 (Section 5.1), Ref 11 (Tohen 1999)</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Bipolar recurrence prevention</b>
+                  </td>
+                  <td>Ref 1 (Section 5.1)</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Guideline and formulary context</b>
+                  </td>
+                  <td>Refs 6 (APA), 7 (BAP), 8 (WPA), 9 (WHO EML)</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Pharmacology and receptor binding</b>
+                  </td>
+                  <td>Ref 1 (Section 5.1), Refs 12 (Kapur 1998), 13 (FDA 12.2)</td>
+                </tr>
+                <tr>
+                  <td>
+                    <b>Safety, adverse reactions and metabolic monitoring</b>
+                  </td>
+                  <td>Ref 1 (Sections 4.4, 4.8)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        {/* Medical Information Contact */}
+        <section className="s" id="medical">
+          <h2>Medical information &amp; marketing authorisation contact</h2>
+          <div className="grid g2" style={{ alignItems: "stretch" }}>
+            <div className="card">
+              <h3>Marketing Authorisation Holder</h3>
+              <p style={{ marginTop: "6px" }}>
+                CHEPLAPHARM Registration GmbH
+                <br />
+                Weiler Straße 5e, 79540 Lörrach, Germany
+              </p>
+            </div>
+            <div className="card">
+              <h3>Medical enquiries protocol</h3>
+              <p style={{ marginTop: "6px" }}>
+                Healthcare professionals seeking further medical or scientific information regarding ZYPREXA should
+                contact national medical affairs or the local representatives identified in the package leaflet.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Abbreviations Glossary */}
+        <section className="s" id="abbreviations">
+          <h2>Master clinical abbreviations glossary</h2>
+          <div style={{ position: "relative" }}>
+            <input
+              className="src"
+              type="search"
+              value={abbQuery}
+              onChange={(e) => setAbbQuery(e.target.value)}
+              placeholder="Search abbreviations or definitions…"
+              aria-label="Search abbreviations"
+              style={{ paddingLeft: "42px" }}
+            />
+            <IconSearch
+              style={{
+                position: "absolute",
+                left: "14px",
+                top: "14px",
+                width: "18px",
+                height: "18px",
+                color: "var(--mut)",
+                pointerEvents: "none",
+              }}
+            />
+          </div>
+
+          <div className="card tw" style={{ padding: 0 }}>
+            <table>
+              <tbody>
+                {filteredAbbs.map(([abbr, def]) => (
+                  <tr key={abbr}>
+                    <td style={{ width: "25%" }}>
+                      <b>{abbr}</b>
+                    </td>
+                    <td>{def}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
     </main>
   );
 }

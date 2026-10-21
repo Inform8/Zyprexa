@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Public_Sans, Spectral, IBM_Plex_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import UtilityBar from "@/components/UtilityBar";
 import Header from "@/components/Header";
@@ -8,33 +8,25 @@ import HcpDialog from "@/components/HcpDialog";
 import ScrollCue from "@/components/ScrollCue";
 import InteractiveEnhancements from "@/components/InteractiveEnhancements";
 
-const publicSans = Public_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  variable: "--font-body",
+  weight: ["400", "500", "600", "700", "800"],
+  variable: "--font-inter",
   display: "swap",
 });
 
-const spectral = Spectral({
+const playfair = Playfair_Display({
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["500", "600", "700"],
   style: ["normal", "italic"],
-  variable: "--font-display",
-  display: "swap",
-});
-
-const ibmPlexMono = IBM_Plex_Mono({
-  subsets: ["latin"],
-  weight: ["400", "500", "600"],
-  variable: "--font-mono",
+  variable: "--font-playfair",
   display: "swap",
 });
 
 export const metadata: Metadata = {
   title: {
     template: "%s · ZYPREXA HCP",
-    default: "ZYPREXA HCP",
+    default: "ZYPREXA (olanzapine) HCP",
   },
   description:
     "Information for healthcare professionals on ZYPREXA (olanzapine): approved indications, clinical evidence, pharmacology and prescribing information, based on the EU Summary of Product Characteristics.",
@@ -48,10 +40,9 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${publicSans.variable} ${spectral.variable} ${ibmPlexMono.variable}`}
+      className={`${inter.variable} ${playfair.variable}`}
     >
       <body>
-        <UtilityBar />
         <Header />
         {children}
         <Footer />
@@ -62,3 +53,4 @@ export default function RootLayout({
     </html>
   );
 }
+
