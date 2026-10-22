@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Cite } from "@/components/Cite";
-import { HeroBrain, TopicArt } from "@/components/HomeVisuals";
 
 export const metadata: Metadata = {
   title: "Evidence-informed treatment in schizophrenia and manic episodes in bipolar disorder · ZYPREXA HCP",
@@ -42,7 +41,8 @@ export default function HomePage() {
             </div>
           </div>
           <div className="hero-art">
-            <HeroBrain />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img src="/assets/zyprexa-packs.png?v=2" alt="ZYPREXA coated tablet packs" />
           </div>
         </div>
       </div>
@@ -103,7 +103,7 @@ export default function HomePage() {
                 <p>Positive, negative, and cognitive domains, neurobiology, and the course of care.</p>
               </div>
               <div className="topic-tile__art">
-                <TopicArt kind="brain" />
+                <img src="/assets/topics/understanding-schizophrenia.png" alt="" />
               </div>
               <span className="topic-tile__go" aria-hidden="true">
                 →
@@ -115,7 +115,7 @@ export default function HomePage() {
                 <p>Distinct mood episodes, treatment objectives, and recurrence prevention.</p>
               </div>
               <div className="topic-tile__art">
-                <TopicArt kind="wave" />
+                <img src="/assets/topics/understanding-bipolar-disorder.png" alt="" />
               </div>
               <span className="topic-tile__go" aria-hidden="true">
                 →
@@ -127,7 +127,7 @@ export default function HomePage() {
                 <p>Nine study descriptions from EU SmPC section 5.1, with an interactive explorer.</p>
               </div>
               <div className="topic-tile__art">
-                <TopicArt kind="bars" />
+                <img src="/assets/topics/clinical-evidence.png" alt="" />
               </div>
               <span className="topic-tile__go" aria-hidden="true">
                 →
@@ -139,7 +139,7 @@ export default function HomePage() {
                 <p>Dopamine, serotonin, histamine, muscarinic, and adrenergic receptor profile.</p>
               </div>
               <div className="topic-tile__art">
-                <TopicArt kind="network" />
+                <img src="/assets/topics/mechanism-of-action.png" alt="" />
               </div>
               <span className="topic-tile__go" aria-hidden="true">
                 →
@@ -151,7 +151,7 @@ export default function HomePage() {
                 <p>Dosing, contraindications, the dementia warning, and metabolic monitoring.</p>
               </div>
               <div className="topic-tile__art">
-                <TopicArt kind="shield" />
+                <img src="/assets/topics/safety-monitoring-prescribing.png" alt="" />
               </div>
               <span className="topic-tile__go" aria-hidden="true">
                 →
@@ -163,7 +163,7 @@ export default function HomePage() {
                 <p>SmPC, PIL, clinical citations, and medical abbreviations.</p>
               </div>
               <div className="topic-tile__art">
-                <TopicArt kind="book" />
+                <img src="/assets/topics/references-resources.png" alt="" />
               </div>
               <span className="topic-tile__go" aria-hidden="true">
                 →
@@ -230,7 +230,7 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="s" id="pi">
+        <section className="s s--open" id="pi">
           <div className="pi">
             <div>
               <p className="eb">Important prescribing information</p>
