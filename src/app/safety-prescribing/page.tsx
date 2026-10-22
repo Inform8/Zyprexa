@@ -68,7 +68,7 @@ export default function SafetyPrescribingPage() {
 
         {/* Dosing and Administration */}
         <section className="s" id="dosing">
-          <h2 className="smpc-heading">Dosing &amp; administration · EU SmPC 4.2 (Table 1)</h2>
+          <h2>Dosing &amp; administration (EU SmPC 4.2; Table 1)</h2>
           <p className="lead">
             Approved dose range: 5–20 mg/day. Daily dosage may subsequently be adjusted on the basis of
             individual clinical status. An increase above the recommended starting dose should occur only after
@@ -78,18 +78,7 @@ export default function SafetyPrescribingPage() {
             <Cite n={1} section="4.2" />
           </p>
 
-          <div className="card">
-            <h3 style={{ marginBottom: "14px" }}>Therapeutic dose range</h3>
-            <div className="range">
-              <i style={{ left: 0, right: 0 }} />
-              <span style={{ left: 0 }}>5 mg</span>
-              <span style={{ left: "33%" }}>10 mg</span>
-              <span style={{ left: "66%" }}>15 mg</span>
-              <span style={{ left: "100%" }}>20 mg/day</span>
-            </div>
-          </div>
-
-          <div className="card tw" style={{ padding: 0, marginTop: "16px" }}>
+          <div className="card tw" style={{ padding: 0 }}>
             <table>
               <thead>
                 <tr>
@@ -318,7 +307,7 @@ export default function SafetyPrescribingPage() {
 
         {/* Drug Interactions */}
         <section className="s" id="interactions">
-          <h2 className="smpc-heading">Drug interactions · EU SmPC 4.5 (Table 3)</h2>
+          <h2>Drug interactions (SmPC 4.5; Table 3)</h2>
           <p className="story">
             Olanzapine is cleared largely through CYP1A2, so smoking and medicines that speed up or slow that enzyme
             change exposure. The figures below are the ones stated in the European product information.
@@ -376,7 +365,7 @@ export default function SafetyPrescribingPage() {
           <h2>Pregnancy, lactation &amp; discontinuation</h2>
           <div className="grid g3">
             <div className="card">
-              <h3 className="smpc-heading">Pregnancy · EU SmPC 4.6</h3>
+              <h3>Pregnancy (SmPC 4.6)</h3>
               <p>
                 Use only if the potential benefit justifies the potential risk to the fetus. Neonates exposed to
                 antipsychotics during the third trimester of pregnancy are at risk of extrapyramidal and/or

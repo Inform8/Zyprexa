@@ -1,8 +1,9 @@
 "use client";
 
-import { useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { AreaChart } from "@/components/Figures";
 import { Cite } from "@/components/Cite";
+import { IconAlert, IconBook, IconChart, IconDoc, IconRepeat } from "@/components/Icons";
 
 interface ReceptorInfo {
   code: string;
@@ -10,11 +11,11 @@ interface ReceptorInfo {
   short: string;
   system: string;
   color: string;
-  dots: string;
   desc: string;
   note: string;
-  label: [number, number];
-  dot: [number, number];
+  dot: { x: number; y: number };
+  badge: { x: number; y: number; w: number; h: number };
+  line: { x1: number; y1: number; x2: number; y2: number };
 }
 
 const RECEPTORS: Record<string, ReceptorInfo> = {
@@ -23,119 +24,86 @@ const RECEPTORS: Record<string, ReceptorInfo> = {
     name: "Dopamine D₂ (D₁–D₅)",
     short: "D₂ Dopamine",
     system: "Dopaminergic system · Antagonist profile",
-    color: "#3b6fd8",
-    dots: "Ki < 100 nM · preclinical",
+    color: "#0084ff",
     desc: "Olanzapine has affinity for dopamine receptors, including D2 receptors. Dopamine receptor antagonism is relevant to its antipsychotic activity. Dopaminergic signalling is involved in multiple brain functions, and the relationship between receptor activity and individual symptom domains is complex.",
     note: "Described in relation to antipsychotic activity. Relative affinity is not shown, and the SmPC does not assign a single clinical effect to this receptor alone.",
-    label: [50, 14],
-    dot: [50, 11],
+    dot: { x: 481, y: 275 },
+    badge: { x: 404, y: 32, w: 180, h: 42 },
+    line: { x1: 494, y1: 74, x2: 481, y2: 275 },
   },
   S: {
     code: "5-HT₂A",
     name: "Serotonin 5-HT₂A (5-HT₂A/2C, 3, 6)",
     short: "5-HT₂A Serotonin",
     system: "Serotonergic system · Antagonist profile",
-    color: "#e23b8c",
-    dots: "Ki < 100 nM · preclinical",
+    color: "#ff2a70",
     desc: "Olanzapine also has affinity for serotonin receptors, including 5-HT2A and 5-HT2C. Its serotonin and dopamine receptor activity contributes to its overall pharmacological profile. The clinical effects of olanzapine cannot be attributed to one receptor interaction alone.",
     note: "Described in relation to antipsychotic activity. Relative affinity is not shown, and the SmPC does not assign a single clinical effect to this receptor alone.",
-    label: [74, 32],
-    dot: [74, 30],
-  },
-  H: {
-    code: "H₁",
-    name: "Histamine H₁",
-    short: "H₁ Histamine",
-    system: "Histaminergic system · Antagonist profile",
-    color: "#7c3aed",
-    dots: "Ki < 100 nM · preclinical",
-    desc: "Preclinical binding profiles indicate affinity for histamine H1 receptors. In vitro affinity does not translate directly into clinical efficacy, potency, or a causal link to a particular adverse reaction.",
-    note: "The SmPC reports receptor affinity. It does not attribute somnolence or increased appetite to this receptor alone.",
-    label: [72, 80],
-    dot: [68, 70],
-  },
-  M: {
-    code: "M₁–₅",
-    name: "Muscarinic M₁–₅",
-    short: "M₁–M₅ Muscarinic",
-    system: "Muscarinic system · Antagonist profile",
-    color: "#14919b",
-    dots: "Ki < 100 nM · preclinical",
-    desc: "Preclinical binding profiles indicate affinity for muscarinic M1–M5 receptors. In vitro affinity does not by itself establish a clinical effect.",
-    note: "The SmPC reports receptor affinity. It does not attribute anticholinergic adverse effects to these receptors alone.",
-    label: [30, 80],
-    dot: [56, 74],
+    dot: { x: 613, y: 240 },
+    badge: { x: 704, y: 166, w: 194, h: 42 },
+    line: { x1: 704, y1: 187, x2: 613, y2: 240 },
   },
   A: {
     code: "α₁",
     name: "Adrenergic α₁",
     short: "α₁ Adrenergic",
     system: "Adrenergic system · Antagonist profile",
-    color: "#e08a1e",
-    dots: "Ki < 100 nM · preclinical",
+    color: "#ff7e00",
     desc: "Preclinical binding profiles indicate affinity for alpha-1 adrenergic receptors. In vitro affinity does not by itself establish a clinical effect.",
     note: "The SmPC reports receptor affinity. It does not attribute orthostatic hypotension or dizziness to this receptor alone.",
-    label: [26, 32],
-    dot: [30, 34],
+    dot: { x: 323, y: 268 },
+    badge: { x: 52, y: 184, w: 180, h: 42 },
+    line: { x1: 232, y1: 205, x2: 323, y2: 268 },
+  },
+  M: {
+    code: "M₁–M₅",
+    name: "Muscarinic M₁–₅",
+    short: "M₁–M₅ Muscarinic",
+    system: "Muscarinic system · Antagonist profile",
+    color: "#00b894",
+    desc: "Preclinical binding profiles indicate affinity for muscarinic M1–M5 receptors. In vitro affinity does not by itself establish a clinical effect.",
+    note: "The SmPC reports receptor affinity. It does not attribute anticholinergic adverse effects to these receptors alone.",
+    dot: { x: 447, y: 344 },
+    badge: { x: 142, y: 448, w: 196, h: 42 },
+    line: { x1: 338, y1: 460, x2: 447, y2: 344 },
+  },
+  H: {
+    code: "H₁",
+    name: "Histamine H₁",
+    short: "H₁ Histamine",
+    system: "Histaminergic system · Antagonist profile",
+    color: "#5822b4",
+    desc: "Preclinical binding profiles indicate affinity for histamine H1 receptors. In vitro affinity does not translate directly into clinical efficacy, potency, or a causal link to a particular adverse reaction.",
+    note: "The SmPC reports receptor affinity. It does not attribute somnolence or increased appetite to this receptor alone.",
+    dot: { x: 601, y: 424 },
+    badge: { x: 688, y: 482, w: 176, h: 42 },
+    line: { x1: 688, y1: 496, x2: 601, y2: 424 },
   },
 };
 
+function receptorFromLocation() {
+  if (typeof window === "undefined") return "";
+  const key = new URLSearchParams(window.location.search).get("r") ?? "";
+  return key in RECEPTORS ? key : "";
+}
+
 export default function MechanismOfActionPage() {
-  const [selectedKey, setSelectedKey] = useState<string>("D");
+  const [selectedKey, setSelectedKey] = useState<string>("H");
   const selected = RECEPTORS[selectedKey];
-  const stageRef = useRef<HTMLDivElement>(null);
-  const [lines, setLines] = useState<Record<string, { x1: number; y1: number; x2: number; y2: number }>>({});
 
-  useLayoutEffect(() => {
-    const stage = stageRef.current;
-    if (!stage) return;
+  const selectReceptor = (key: string) => {
+    setSelectedKey(key);
+    const url = new URL(window.location.href);
+    url.searchParams.set("r", key);
+    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
+  };
 
-    const measure = () => {
-      const sr = stage.getBoundingClientRect();
-      if (sr.width < 2 || sr.height < 2) return;
-      const next: Record<string, { x1: number; y1: number; x2: number; y2: number }> = {};
-      for (const key of Object.keys(RECEPTORS)) {
-        const dot = stage.querySelector<HTMLElement>(`[data-dot="${key}"]`);
-        const label = stage.querySelector<HTMLElement>(`[data-label="${key}"]`);
-        if (!dot || !label) continue;
-        const d = dot.getBoundingClientRect();
-        const l = label.getBoundingClientRect();
-        next[key] = {
-          x1: d.left + d.width / 2 - sr.left,
-          y1: d.top + d.height / 2 - sr.top,
-          x2: l.left + l.width / 2 - sr.left,
-          y2: l.top + l.height / 2 - sr.top,
-        };
-      }
-      setLines((prev) => {
-        const keys = Object.keys(next);
-        if (keys.length === Object.keys(prev).length && keys.every((key) => {
-          const a = prev[key];
-          const b = next[key];
-          return a && Math.abs(a.x1 - b.x1) < 0.5 && Math.abs(a.y1 - b.y1) < 0.5 && Math.abs(a.x2 - b.x2) < 0.5 && Math.abs(a.y2 - b.y2) < 0.5;
-        })) {
-          return prev;
-        }
-        return next;
-      });
-    };
-
-    measure();
-    const ro = new ResizeObserver(measure);
-    ro.observe(stage);
-    const img = stage.querySelector("img");
-    img?.addEventListener("load", measure);
-    const enter = stage.closest(".page-enter");
-    enter?.addEventListener("animationend", measure);
-    const frame = window.requestAnimationFrame(measure);
-    const later = window.setTimeout(measure, 650);
-    return () => {
-      ro.disconnect();
-      img?.removeEventListener("load", measure);
-      enter?.removeEventListener("animationend", measure);
-      window.cancelAnimationFrame(frame);
-      window.clearTimeout(later);
-    };
+  useEffect(() => {
+    const linked = receptorFromLocation();
+    if (linked) setSelectedKey(linked);
+    if (window.location.hash === "#systems") {
+      document.getElementById("systems")?.scrollIntoView({ block: "start" });
+    }
   }, []);
 
   return (
@@ -158,26 +126,104 @@ export default function MechanismOfActionPage() {
           </div>
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/moa-receptors.jpg"
-              alt="Brain with dopamine, serotonin, histamine, muscarinic, and adrenergic receptor pathways"
-              loading="lazy"
-            />
+            <img src="/assets/hero-brain-3d.jpg" alt="Brain neural network illustration" />
           </div>
         </div>
       </div>
 
       <div className="w">
-        {/* Overview */}
+        {/* Core Receptor Systems */}
         <section className="s" id="overview">
-          <h2>Pharmacological profile overview</h2>
-          <p className="story">
-            Olanzapine is an antipsychotic, antimanic and mood-stabilising agent with activity across several
-            neurotransmitter receptor systems.
+          <h2>Receptor profile overview</h2>
+          <p className="lead">
+            Olanzapine exhibits a broad in vitro receptor-binding profile across multiple neurotransmitter systems.
+            European SmPC section 5.1 describes preclinical affinities for serotonin, dopamine, muscarinic, histamine
+            and adrenergic receptor families.
             <Cite n={1} section="5.1" />
           </p>
-          <p className="story">
-            Its pharmacological profile includes activity at serotonin, dopamine, muscarinic, histamine and alpha-1
+          <div className="grid g3">
+            <div className="card">
+              <h3>Dopaminergic system</h3>
+              <p>
+                Preclinical binding to dopamine D₁, D₂, D₃, D₄, and D₅ receptors. Dopamine antagonism is a recognized
+                mechanism in antipsychotic activity.
+              </p>
+            </div>
+            <div className="card">
+              <h3>Serotonergic system</h3>
+              <p>
+                Affinity for serotonin 5-HT₂A, 5-HT₂C, 5-HT₃, and 5-HT₆ receptors. The 5-HT₂A/D₂ ratio is a defining
+                characteristic of atypical antipsychotics.
+              </p>
+            </div>
+            <div className="card">
+              <h3>Other systems</h3>
+              <p>
+                In vitro affinity for cholinergic muscarinic receptors (M₁–M₅), histamine H₁ receptors, and α₁-adrenergic
+                receptors.
+              </p>
+            </div>
+          </div>
+          <p className="source-line">
+            Source: EU SmPC section 5.1. The table of binding profiles in the SmPC reports affinity for 5-HT₂A/2C, 5-HT₃,
+            5-HT₆; D₁, D₂, D₃, D₄, D₅; muscarinic M₁–M₅; histamine H₁; and α₁-adrenergic receptors.
+            <Cite n={1} section="5.1" />
+          </p>
+        </section>
+
+        {/* Receptor systems comparison */}
+        <section className="s" id="systems-overview">
+          <h2>Receptor systems &amp; clinical relevance</h2>
+          <p className="lead">
+            The pharmacological profile involves simultaneous interactions across dopaminergic, serotonergic,
+            cholinergic, histaminergic and adrenergic systems.
+          </p>
+          <div className="table-wrap card">
+            <table>
+              <thead>
+                <tr>
+                  <th>Receptor System</th>
+                  <th>Receptors Identified in SmPC</th>
+                  <th>Preclinical Binding</th>
+                  <th>Clinical Context from SmPC</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Serotonergic</b></td>
+                  <td>5-HT₂A, 5-HT₂C, 5-HT₃, 5-HT₆</td>
+                  <td>Affinity (K<sub>i</sub> &lt; 100 nM)</td>
+                  <td>Antipsychotic activity; 5-HT₂A antagonism contributes to atypical profile</td>
+                </tr>
+                <tr>
+                  <td><b>Dopaminergic</b></td>
+                  <td>D₁, D₂, D₃, D₄, D₅</td>
+                  <td>Affinity (K<sub>i</sub> &lt; 100 nM)</td>
+                  <td>Antipsychotic activity mediated primarily through D₂ antagonism</td>
+                </tr>
+                <tr>
+                  <td><b>Muscarinic</b></td>
+                  <td>M₁–M₅</td>
+                  <td>Affinity (K<sub>i</sub> &lt; 100 nM)</td>
+                  <td>Anticholinergic effects; preclinical evidence of receptor interaction</td>
+                </tr>
+                <tr>
+                  <td><b>Histaminergic</b></td>
+                  <td>H₁</td>
+                  <td>Affinity (K<sub>i</sub> &lt; 100 nM)</td>
+                  <td>Associated with somnolence and weight gain in clinical use</td>
+                </tr>
+                <tr>
+                  <td><b>Adrenergic</b></td>
+                  <td>α₁</td>
+                  <td>Affinity (K<sub>i</sub> &lt; 100 nM)</td>
+                  <td>May contribute to orthostatic hypotension</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p className="source-line">
+            *EU SmPC section 5.1 notes affinities for 5-HT₂A/2C, 5-HT₃, 5-HT₆; D₁, D₂, D₃, D₄, D₅; muscarinic M₁–M₅; H₁; and α₁
             adrenergic receptors. Affinity in preclinical studies (Ki &lt; 100 nM) does not translate directly into
             clinical efficacy or potency, and the EU SmPC does not assign individual adverse reactions to single
             receptors.
@@ -188,85 +234,150 @@ export default function MechanismOfActionPage() {
         <section className="s" id="systems">
           <div className="spectrum-head">
             <h2>Receptor binding map</h2>
-            <p>Click any receptor node to inspect binding affinity and clinical correlation<Cite n={1} section="5.1" /></p>
+            <p>Select a receptor to view binding data and clinical context<Cite n={1} section="5.1" /></p>
           </div>
           <div className="bind">
-            <div className="bind__stage" ref={stageRef}>
-              <svg
-                className="bind__links"
-                viewBox={`0 0 ${stageRef.current?.clientWidth || 100} ${stageRef.current?.clientHeight || 100}`}
-                preserveAspectRatio="none"
-                aria-hidden="true"
-              >
-                {Object.entries(RECEPTORS).map(([key, r]) => {
-                  const line = lines[key];
-                  if (!line) return null;
-                  const on = selectedKey === key;
-                  return (
-                    <line
-                      key={key}
-                      x1={line.x1}
-                      y1={line.y1}
-                      x2={line.x2}
-                      y2={line.y2}
-                      stroke={r.color}
-                      strokeWidth={on ? 2 : 1.25}
-                      vectorEffect="non-scaling-stroke"
-                      opacity={on ? 1 : 0.28}
-                    />
-                  );
-                })}
-              </svg>
-              <div className="bind__figure">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src="/assets/receptor-brain.png" alt="" className="bind__brain" />
-                {Object.entries(RECEPTORS).map(([key, r]) => (
-                  <button
-                    key={`${key}-dot`}
-                    type="button"
-                    data-dot={key}
-                    className={selectedKey === key ? "bind__dot is-on" : "bind__dot"}
-                    style={{ left: `${r.dot[0]}%`, top: `${r.dot[1]}%`, background: r.color }}
-                    onClick={() => setSelectedKey(key)}
-                    aria-label={r.short}
+            <div className="bind__stage">
+              <div className="bind__stage-wrapper">
+                <svg
+                  className="bind__svg"
+                  viewBox="0 0 930 638"
+                  preserveAspectRatio="xMidYMid meet"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <filter id="badgeShadow" x="-10%" y="-20%" width="120%" height="150%">
+                      <feDropShadow dx="0" dy="4" stdDeviation="5" floodColor="rgba(0,0,0,0.12)" />
+                    </filter>
+                    <filter id="activeShadow" x="-15%" y="-25%" width="130%" height="160%">
+                      <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="rgba(88,34,180,0.32)" />
+                    </filter>
+                  </defs>
+
+                  {/* Subtle radial glow behind brain */}
+                  <radialGradient id="brainGlow" cx="50%" cy="50%" r="50%">
+                    <stop offset="0%" stopColor="rgba(244, 240, 255, 0.7)" />
+                    <stop offset="100%" stopColor="rgba(255, 255, 255, 0)" />
+                  </radialGradient>
+                  <ellipse cx="465" cy="320" rx="420" ry="280" fill="url(#brainGlow)" />
+
+                  {/* Clean High-Resolution Brain Illustration */}
+                  <image
+                    href="/assets/receptor-brain-hd.png"
+                    x="55"
+                    y="46"
+                    width="820"
+                    height="546"
+                    preserveAspectRatio="xMidYMid meet"
                   />
-                ))}
+
+                  {/* Leader Lines */}
+                  {Object.entries(RECEPTORS).map(([key, r]) => {
+                    const active = selectedKey === key;
+                    return (
+                      <line
+                        key={`line-${key}`}
+                        x1={r.line.x1}
+                        y1={r.line.y1}
+                        x2={r.line.x2}
+                        y2={r.line.y2}
+                        stroke={r.color}
+                        strokeWidth={active ? 3.5 : 2}
+                        opacity={active ? 1 : 0.75}
+                        strokeLinecap="round"
+                        className="bind__leader"
+                      />
+                    );
+                  })}
+
+                  {/* Target Halos & Dots */}
+                  {Object.entries(RECEPTORS).map(([key, r]) => {
+                    const active = selectedKey === key;
+                    return (
+                      <g
+                        key={`target-${key}`}
+                        className="bind__target-grp"
+                        onClick={() => selectReceptor(key)}
+                        role="button"
+                        tabIndex={0}
+                        style={{ cursor: "pointer" }}
+                        aria-label={`Target ${r.short}`}
+                      >
+                        <circle
+                          cx={r.dot.x}
+                          cy={r.dot.y}
+                          r={active ? 30 : 24}
+                          fill={r.color}
+                          fillOpacity={active ? 0.32 : 0.2}
+                          className="bind__target-halo"
+                        />
+                        <circle
+                          cx={r.dot.x}
+                          cy={r.dot.y}
+                          r={10}
+                          fill={r.color}
+                          stroke="#ffffff"
+                          strokeWidth={2.5}
+                        />
+                      </g>
+                    );
+                  })}
+
+                  {/* Callout Badges */}
+                  {Object.entries(RECEPTORS).map(([key, r]) => {
+                    const active = selectedKey === key;
+                    const displayName = r.short.replace(r.code, "").trim();
+                    return (
+                      <g
+                        key={`badge-${key}`}
+                        className="bind__badge-grp"
+                        onClick={() => selectReceptor(key)}
+                        role="button"
+                        tabIndex={0}
+                        style={{ cursor: "pointer" }}
+                        aria-pressed={active}
+                        aria-label={r.short}
+                      >
+                        <rect
+                          x={r.badge.x}
+                          y={r.badge.y}
+                          width={r.badge.w}
+                          height={r.badge.h}
+                          rx={21}
+                          fill={active ? r.color : "#ffffff"}
+                          stroke={r.color}
+                          strokeWidth={2}
+                          filter={active ? "url(#activeShadow)" : "url(#badgeShadow)"}
+                          className="bind__badge-rect"
+                        />
+                        <text x={r.badge.x + r.badge.w / 2} y={r.badge.y + 26} textAnchor="middle">
+                          <tspan
+                            fill={active ? "#ffffff" : r.color}
+                            fontSize={15}
+                            fontWeight={700}
+                            fontFamily="var(--font-inter), 'Inter', sans-serif"
+                          >
+                            {r.code}
+                          </tspan>
+                          <tspan
+                            fill={active ? "#ffffff" : r.color}
+                            fontSize={15}
+                            fontWeight={700}
+                            dx={6}
+                            fontFamily="var(--font-inter), 'Inter', sans-serif"
+                          >
+                            {displayName}
+                          </tspan>
+                        </text>
+                      </g>
+                    );
+                  })}
+                </svg>
               </div>
-              {Object.entries(RECEPTORS).map(([key, r]) => {
-                const on = selectedKey === key;
-                return (
-                  <button
-                    key={key}
-                    type="button"
-                    data-label={key}
-                    className={on ? "bind__node is-on" : "bind__node"}
-                    style={{ left: `${r.label[0]}%`, top: `${r.label[1]}%`, color: r.color, borderColor: r.color }}
-                    onClick={() => setSelectedKey(key)}
-                    aria-pressed={on}
-                  >
-                    <i style={{ background: r.color }} />
-                    {r.short}
-                  </button>
-                );
-              })}
             </div>
             <aside className="bind__detail">
-              <div className="bind__legend" role="tablist" aria-label="Receptor systems">
-                {Object.entries(RECEPTORS).map(([key, r]) => (
-                  <button
-                    key={key}
-                    type="button"
-                    role="tab"
-                    aria-selected={selectedKey === key}
-                    className={selectedKey === key ? "is-on" : ""}
-                    onClick={() => setSelectedKey(key)}
-                  >
-                    {r.code}
-                  </button>
-                ))}
-              </div>
               <div className="bind__head">
-                <b style={{ color: selected.color }}>{selected.code}</b>
+                <b className="bind__code" style={{ color: selected.color }}>{selected.code}</b>
                 <div>
                   <h3>{selected.name}</h3>
                   <p>
@@ -302,6 +413,12 @@ export default function MechanismOfActionPage() {
                   </p>
                 )}
               </div>
+              <p className="bind__note">
+                <span>
+                  In vitro affinity does not translate directly into clinical efficacy or potency, and the EU SmPC
+                  does not assign individual adverse reactions to a single receptor.
+                </span>
+              </p>
             </aside>
           </div>
         </section>

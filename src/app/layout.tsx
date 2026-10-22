@@ -4,6 +4,7 @@ import "./globals.css";
 import UtilityBar from "@/components/UtilityBar";
 import Header from "@/components/Header";
 import SectionNav from "@/components/SectionNav";
+import PageNav from "@/components/PageNav";
 import Footer from "@/components/Footer";
 import HcpDialog from "@/components/HcpDialog";
 import ScrollCue from "@/components/ScrollCue";
@@ -34,6 +35,7 @@ export default function RootLayout({
     <html
       lang="en"
       className={inter.variable}
+      data-scroll-behavior="smooth"
     >
       <body>
         <div className="bg-circles" aria-hidden="true">
@@ -47,6 +49,7 @@ export default function RootLayout({
         <Header />
         <SectionNav />
         {children}
+        <PageNav />
         <Footer />
         <HcpDialog />
         <ScrollCue />

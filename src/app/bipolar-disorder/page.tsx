@@ -41,56 +41,40 @@ export default function BipolarDisorderPage() {
       </div>
 
       <div className="w">
-        {/* Overview: Balanced 2-Column Grid */}
         <section className="s" id="overview">
           <h2>Overview &amp; Clinical Impact</h2>
-          <div className="grid g2" style={{ alignItems: "stretch", marginTop: "16px" }}>
-            {/* Left Card: Epidemiology & Prevalence */}
-            <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-              <div>
-                <h3 style={{ fontSize: "17px", marginBottom: "12px" }}>Epidemiology &amp; Prevalence</h3>
-                <p>
-                  Bipolar disorder is a lifelong, severe mental health condition affecting approximately 1% to 2%
-                  of the global adult population, representing more than 45 million people worldwide.
-                </p>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "20px",
-                  background: "var(--soft)",
-                  padding: "16px",
-                  borderRadius: "12px",
-                  marginTop: "16px",
-                }}
-              >
-                <div
-                  className="dn"
-                  style={
-                    {
-                      "--p": 2,
-                      "--c": "#7c4dff",
-                      margin: 0,
-                      flexShrink: 0,
-                    } as React.CSSProperties
-                  }
-                >
-                  <b>1–2%</b>
-                </div>
-                <div style={{ fontSize: "13px", color: "var(--ink)" }}>
-                  <b>Adult population affected</b>
-                  <p style={{ margin: "4px 0 0", color: "var(--mut)", fontSize: "12.5px" }}>
-                    Typically emerges during late adolescence or early twenties, following an episodic and often
-                    recurrent lifelong course.
-                  </p>
-                </div>
-              </div>
+          <article className="prevalence">
+            <div className="prevalence__copy">
+              <p className="prevalence__kicker">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                  <path
+                    d="M3 12h18M12 3c2.4 2.7 3.6 5.7 3.6 9s-1.2 6.3-3.6 9c-2.4-2.7-3.6-5.7-3.6-9s1.2-6.3 3.6-9z"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                  />
+                </svg>
+                Global prevalence
+              </p>
+              <p className="prevalence__stat">1–2%</p>
+              <p className="prevalence__lead">of adults worldwide are affected by bipolar disorder.</p>
+              <p className="prevalence__note">
+                A lifelong, severe mental health condition representing more than 45 million people worldwide. It
+                typically emerges during late adolescence or early twenties, following an episodic and often
+                recurrent course.
+              </p>
             </div>
+            <div className="prevalence__art">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/bipolar-prevalence-art.jpg?v=1"
+                alt="A crowd of people with one figure highlighted"
+              />
+            </div>
+          </article>
 
-            {/* Right Card: Dual-Phase Clinical Course */}
-            <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <div className="card" style={{ display: "flex", flexDirection: "column", marginTop: "16px" }}>
               <div>
                 <h3 style={{ fontSize: "17px", marginBottom: "12px" }}>Dual-Phase Treatment Imperative</h3>
                 <p>
@@ -112,7 +96,6 @@ export default function BipolarDisorderPage() {
                 Treatment decisions should balance rapid efficacy with long-term cardiometabolic tolerability.
               </p>
             </div>
-          </div>
         </section>
 
         {/* Mood Episodes */}
@@ -152,12 +135,15 @@ export default function BipolarDisorderPage() {
 
         {/* Indications vs Non-indications */}
         <section className="s" id="indications">
-          <h2 className="smpc-heading">Approved indications vs. non-indications · EU SmPC 4.1</h2>
+          <h2>Approved indications vs. non-indications (EU SmPC 4.1)</h2>
           <div className="grid g2" style={{ alignItems: "stretch" }}>
             <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <div>
-                <h3 style={{ color: "var(--grn)", display: "flex", alignItems: "center", gap: "8px" }}>
-                  <IconCheck style={{ width: "20px", height: "20px" }} /> Approved Indications
+                <h3 style={{ fontSize: "17px", fontWeight: 700, color: "var(--ink)", display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+                  <span style={{ width: "28px", height: "28px", borderRadius: "50%", background: "#f3eeff", color: "var(--pri)", display: "grid", placeItems: "center", border: "1px solid #e0d5f8", flexShrink: 0 }}>
+                    <IconCheck style={{ width: "16px", height: "16px" }} />
+                  </span>
+                  Approved Indications
                 </h3>
                 <ul style={{ marginTop: "12px", display: "grid", gap: "8px" }}>
                   <li>
@@ -175,14 +161,17 @@ export default function BipolarDisorderPage() {
               </p>
             </div>
 
-            <div className="alert" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+            <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <div>
-                <h3 style={{ display: "flex", alignItems: "center", gap: "8px" }}>
-                  <IconAlert style={{ width: "20px", height: "20px" }} /> Non-Indication Warning
+                <h3 style={{ fontSize: "17px", fontWeight: 700, color: "var(--ink)", display: "flex", alignItems: "center", gap: "10px", marginBottom: "12px" }}>
+                  <span style={{ width: "28px", height: "28px", borderRadius: "50%", background: "#f5edf8", color: "#641e83", display: "grid", placeItems: "center", border: "1px solid #e2d1eb", flexShrink: 0 }}>
+                    <IconAlert style={{ width: "16px", height: "16px" }} />
+                  </span>
+                  Non-Indication Warning
                 </h3>
                 <ul style={{ marginTop: "12px", display: "grid", gap: "8px" }}>
                   <li>
-                    <b>Acute bipolar depression:</b> Oral ZYPREXA monotherapy is <b>NOT</b> indicated in the EU SmPC.
+                    <b>Acute bipolar depression:</b> Oral ZYPREXA monotherapy is <span style={{ color: "#641e83", fontWeight: 700, background: "#f5edf8", padding: "1px 6px", borderRadius: "4px" }}>NOT</span> indicated in the EU SmPC.
                   </li>
                   <li>
                     <b>Depressive episodes:</b> Evaluate dedicated guideline recommendations and approved therapeutic

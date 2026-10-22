@@ -50,8 +50,8 @@ export default function HomePage() {
       <div className="w">
         {/* Approved indications */}
         <section className="s s--open" id="indications">
-          <div className="smpc-heading">
-            <h2>Approved indications in adults · EU SmPC 4.1</h2>
+          <div className="home-head">
+            <h2>Approved indications in adults (EU SmPC 4.1)</h2>
             <a
               href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"
               target="_blank"
@@ -192,34 +192,39 @@ export default function HomePage() {
             </div>
             <figure id="receptors">
               <div className="receptor-row" role="list" aria-label="Receptor families with olanzapine affinity in preclinical studies">
-                <div role="listitem">
+                <Link role="listitem" className="receptor-btn" href="/mechanism-of-action?r=D#systems">
                   <b>
                     D<sub>1–5</sub>
                   </b>
                   <span>Dopamine</span>
-                </div>
-                <div role="listitem">
+                  <em>View on map</em>
+                </Link>
+                <Link role="listitem" className="receptor-btn" href="/mechanism-of-action?r=S#systems">
                   <b>5-HT</b>
                   <span>Serotonin 2A/2C, 3, 6</span>
-                </div>
-                <div role="listitem">
+                  <em>View on map</em>
+                </Link>
+                <Link role="listitem" className="receptor-btn" href="/mechanism-of-action?r=H#systems">
                   <b>
                     H<sub>1</sub>
                   </b>
                   <span>Histamine</span>
-                </div>
-                <div role="listitem">
+                  <em>View on map</em>
+                </Link>
+                <Link role="listitem" className="receptor-btn" href="/mechanism-of-action?r=M#systems">
                   <b>
                     M<sub>1–5</sub>
                   </b>
                   <span>Muscarinic</span>
-                </div>
-                <div role="listitem">
+                  <em>View on map</em>
+                </Link>
+                <Link role="listitem" className="receptor-btn" href="/mechanism-of-action?r=A#systems">
                   <b>
                     α<sub>1</sub>
                   </b>
                   <span>Adrenergic</span>
-                </div>
+                  <em>View on map</em>
+                </Link>
               </div>
               <figcaption>
                 Receptor families at which olanzapine showed affinity (K<sub>i</sub> &lt; 100 nM) in preclinical

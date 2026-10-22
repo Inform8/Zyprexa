@@ -60,53 +60,39 @@ export default function SchizophreniaPage() {
         {/* Overview: Balanced 2-Column Grid */}
         <section className="s" id="overview">
           <h2>Overview &amp; Global Impact</h2>
-          <div className="grid g2" style={{ alignItems: "stretch", marginTop: "16px" }}>
-            {/* Left Card: Epidemiology */}
-            <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-              <div>
-                <h3 style={{ fontSize: "17px", marginBottom: "12px" }}>Global Prevalence &amp; Onset</h3>
-                <p>
-                  Schizophrenia is a chronic, multidimensional psychiatric illness affecting approximately 24 million
-                  people worldwide, or roughly 1 in 300 individuals globally.
-                </p>
-              </div>
-
-              <div
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "20px",
-                  background: "var(--soft)",
-                  padding: "16px",
-                  borderRadius: "12px",
-                  marginTop: "16px",
-                }}
-              >
-                <div
-                  className="dn"
-                  style={
-                    {
-                      "--p": 33,
-                      "--c": "#7c4dff",
-                      margin: 0,
-                      flexShrink: 0,
-                    } as React.CSSProperties
-                  }
-                >
-                  <b>1 : 300</b>
-                </div>
-                <div style={{ fontSize: "13px", color: "var(--ink)" }}>
-                  <b>Prevalence: ~1 in 300 worldwide</b>
-                  <p style={{ margin: "4px 0 0", color: "var(--mut)", fontSize: "12.5px" }}>
-                    Typically diagnosed during late adolescence through early adulthood, presenting a persistent need
-                    for structured medical support.
-                  </p>
-                </div>
-              </div>
+          <article className="prevalence">
+            <div className="prevalence__copy">
+              <p className="prevalence__kicker">
+                <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" fill="none" stroke="currentColor" strokeWidth="1.6" />
+                  <path
+                    d="M3 12h18M12 3c2.4 2.7 3.6 5.7 3.6 9s-1.2 6.3-3.6 9c-2.4-2.7-3.6-5.7-3.6-9s1.2-6.3 3.6-9z"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="1.6"
+                  />
+                </svg>
+                Global prevalence
+              </p>
+              <p className="prevalence__stat">
+                <span>1 in</span> 300
+              </p>
+              <p className="prevalence__lead">people worldwide are affected by schizophrenia.</p>
+              <p className="prevalence__note">
+                Schizophrenia is a chronic, multidimensional psychiatric illness affecting approximately 24 million
+                people worldwide.
+              </p>
             </div>
+            <div className="prevalence__art">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/assets/global-prevalence-art.jpg?v=2"
+                alt="A crowd of people with one figure highlighted, in front of a faint world map"
+              />
+            </div>
+          </article>
 
-            {/* Right Card: Collaborative Care Model */}
-            <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+          <div className="card" style={{ display: "flex", flexDirection: "column", marginTop: "16px" }}>
               <div>
                 <h3 style={{ fontSize: "17px", marginBottom: "12px" }}>Multidimensional Care Paradigm</h3>
                 <p>
@@ -132,7 +118,6 @@ export default function SchizophreniaPage() {
                 Early pharmacological stability provides the foundation for sustainable rehabilitation.
               </p>
             </div>
-          </div>
         </section>
 
         {/* Symptoms */}

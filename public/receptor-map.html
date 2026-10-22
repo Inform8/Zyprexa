@@ -1,0 +1,601 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ZYPREXA - Receptor Binding Map</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f8f6fc;
+      --card-bg: #ffffff;
+      --pri: #641e83;
+      --ink: #1e1333;
+      --mut: #685d79;
+      --border: #dfd4f6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 40px 20px;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1200px;
+    }
+
+    .header {
+      margin-bottom: 24px;
+    }
+
+    .header h1 {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      color: var(--mut);
+      font-size: 15px;
+    }
+
+    .split-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    @media (max-width: 960px) {
+      .split-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    /* Left Stage: Vector-locked Receptor Brain Map */
+    .stage-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px -10px rgba(100, 30, 131, 0.08);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stage-wrapper {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 930 / 638;
+      max-width: 100%;
+    }
+
+    .stage-svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+      user-select: none;
+    }
+
+    /* SVG Interactive Elements */
+    .receptor-group {
+      cursor: pointer;
+      outline: none;
+      transition: transform 0.2s ease;
+    }
+
+    .receptor-group:hover .badge-rect {
+      filter: drop-shadow(0 6px 16px rgba(0, 0, 0, 0.16));
+    }
+
+    .receptor-group:hover .target-halo {
+      transform: scale(1.15);
+      transform-origin: center;
+    }
+
+    .target-halo {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .badge-rect {
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .badge-text-code,
+    .badge-text-name {
+      font-family: "Inter", system-ui, sans-serif;
+      font-weight: 700;
+      pointer-events: none;
+      transition: fill 0.2s ease;
+    }
+
+    .leader-line {
+      transition: stroke-width 0.25s ease, opacity 0.25s ease;
+    }
+
+    /* Right Detail Card */
+    .detail-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px -10px rgba(100, 30, 131, 0.08);
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .detail-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .detail-tab {
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: #faf8ff;
+      color: var(--mut);
+      font-size: 13px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .detail-tab:hover {
+      background: #f0eaff;
+      color: var(--ink);
+    }
+
+    .detail-tab.active {
+      background: var(--active-color, #641e83);
+      border-color: var(--active-color, #641e83);
+      color: #ffffff;
+      box-shadow: 0 4px 12px rgba(100, 30, 131, 0.25);
+    }
+
+    .detail-head {
+      border-bottom: 1px solid #eee8fb;
+      padding-bottom: 16px;
+    }
+
+    .detail-title {
+      font-size: 26px;
+      font-weight: 800;
+      color: var(--ink);
+      line-height: 1.2;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .detail-system {
+      color: var(--mut);
+      font-size: 14px;
+      margin-top: 4px;
+      font-weight: 500;
+    }
+
+    .info-box {
+      background: #faf8ff;
+      border: 1px solid #ede5fc;
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .info-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #7b5ca8;
+      margin-bottom: 6px;
+    }
+
+    .info-val {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--ink);
+    }
+
+    .detail-body {
+      color: #3d3552;
+      font-size: 14.5px;
+      line-height: 1.6;
+    }
+
+    .zoom-hint {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: #f4f0fd;
+      border-radius: 10px;
+      font-size: 13px;
+      color: #554471;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Receptor Systems &amp; Binding Profile</h1>
+      <p>Interactive mapping of receptor targets and preclinical binding affinities</p>
+    </div>
+
+    <div class="split-layout">
+      <!-- Left Brain Map -->
+      <div class="stage-card">
+        <div class="stage-wrapper">
+          <svg
+            id="receptorSvg"
+            class="stage-svg"
+            viewBox="0 0 930 638"
+            preserveAspectRatio="xMidYMid meet"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <!-- Drop Shadow Filter for Badges -->
+            <defs>
+              <filter id="badgeShadow" x="-10%" y="-20%" width="120%" height="150%">
+                <feDropShadow dx="0" dy="4" stdDeviation="5" flood-color="rgba(0,0,0,0.14)" />
+              </filter>
+              <filter id="activeShadow" x="-15%" y="-25%" width="130%" height="160%">
+                <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="rgba(88,34,180,0.35)" />
+              </filter>
+            </defs>
+
+            <!-- Background subtle glow -->
+            <radialGradient id="brainGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="rgba(244, 240, 255, 0.7)" />
+              <stop offset="100%" stop-color="rgba(255, 255, 255, 0)" />
+            </radialGradient>
+            <ellipse cx="465" cy="320" rx="420" ry="280" fill="url(#brainGlow)" />
+
+            <!-- Clean High-Resolution Brain Illustration -->
+            <image
+              href="/assets/receptor-brain-hd.png"
+              x="55"
+              y="46"
+              width="820"
+              height="546"
+              preserveAspectRatio="xMidYMid meet"
+            />
+
+            <!-- LEADER LINES -->
+            <!-- D2 Dopamine Line -->
+            <line
+              id="line-D"
+              class="leader-line"
+              x1="494" y1="74"
+              x2="481" y2="275"
+              stroke="#0084ff"
+              stroke-width="2.5"
+            />
+
+            <!-- 5-HT2A Serotonin Line -->
+            <line
+              id="line-S"
+              class="leader-line"
+              x1="704" y1="187"
+              x2="613" y2="240"
+              stroke="#ff2a70"
+              stroke-width="2.5"
+            />
+
+            <!-- alpha1 Adrenergic Line -->
+            <line
+              id="line-A"
+              class="leader-line"
+              x1="232" y1="205"
+              x2="323" y2="268"
+              stroke="#ff7e00"
+              stroke-width="2.5"
+            />
+
+            <!-- M1-M5 Muscarinic Line -->
+            <line
+              id="line-M"
+              class="leader-line"
+              x1="338" y1="460"
+              x2="447" y2="344"
+              stroke="#00b894"
+              stroke-width="2.5"
+            />
+
+            <!-- H1 Histamine Line -->
+            <line
+              id="line-H"
+              class="leader-line"
+              x1="688" y1="496"
+              x2="601" y2="424"
+              stroke="#5822b4"
+              stroke-width="2.5"
+            />
+
+            <!-- TARGET CIRCLES ON BRAIN -->
+            <!-- D2 Dot -->
+            <g id="target-D" class="receptor-group" onclick="selectReceptor('D')">
+              <circle class="target-halo" cx="481" cy="275" r="24" fill="rgba(0,132,255,0.22)" />
+              <circle cx="481" cy="275" r="10" fill="#0084ff" stroke="#ffffff" stroke-width="2.5" />
+            </g>
+
+            <!-- 5-HT2A Dot -->
+            <g id="target-S" class="receptor-group" onclick="selectReceptor('S')">
+              <circle class="target-halo" cx="613" cy="240" r="24" fill="rgba(255,42,112,0.22)" />
+              <circle cx="613" cy="240" r="10" fill="#ff2a70" stroke="#ffffff" stroke-width="2.5" />
+            </g>
+
+            <!-- alpha1 Dot -->
+            <g id="target-A" class="receptor-group" onclick="selectReceptor('A')">
+              <circle class="target-halo" cx="323" cy="268" r="24" fill="rgba(255,126,0,0.22)" />
+              <circle cx="323" cy="268" r="10" fill="#ff7e00" stroke="#ffffff" stroke-width="2.5" />
+            </g>
+
+            <!-- M1-M5 Dot -->
+            <g id="target-M" class="receptor-group" onclick="selectReceptor('M')">
+              <circle class="target-halo" cx="447" cy="344" r="24" fill="rgba(0,184,148,0.22)" />
+              <circle cx="447" cy="344" r="10" fill="#00b894" stroke="#ffffff" stroke-width="2.5" />
+            </g>
+
+            <!-- H1 Dot -->
+            <g id="target-H" class="receptor-group" onclick="selectReceptor('H')">
+              <circle class="target-halo" cx="601" cy="424" r="24" fill="rgba(88,34,180,0.22)" />
+              <circle cx="601" cy="424" r="10" fill="#5822b4" stroke="#ffffff" stroke-width="2.5" />
+            </g>
+
+            <!-- BADGES / CALLOUT PILLS -->
+            <!-- D2 Dopamine Badge -->
+            <g id="badge-D" class="receptor-group" onclick="selectReceptor('D')" role="button" tabindex="0">
+              <rect class="badge-rect" x="404" y="32" width="180" height="42" rx="21"
+                fill="#ffffff" stroke="#0084ff" stroke-width="2" filter="url(#badgeShadow)" />
+              <text x="494" y="58" text-anchor="middle">
+                <tspan class="badge-text-code" fill="#0084ff" font-size="15">D₂</tspan>
+                <tspan class="badge-text-name" fill="#0084ff" font-size="15" dx="6">Dopamine</tspan>
+              </text>
+            </g>
+
+            <!-- 5-HT2A Serotonin Badge -->
+            <g id="badge-S" class="receptor-group" onclick="selectReceptor('S')" role="button" tabindex="0">
+              <rect class="badge-rect" x="704" y="166" width="194" height="42" rx="21"
+                fill="#ffffff" stroke="#ff2a70" stroke-width="2" filter="url(#badgeShadow)" />
+              <text x="801" y="192" text-anchor="middle">
+                <tspan class="badge-text-code" fill="#ff2a70" font-size="15">5-HT₂A</tspan>
+                <tspan class="badge-text-name" fill="#ff2a70" font-size="15" dx="6">Serotonin</tspan>
+              </text>
+            </g>
+
+            <!-- alpha1 Adrenergic Badge -->
+            <g id="badge-A" class="receptor-group" onclick="selectReceptor('A')" role="button" tabindex="0">
+              <rect class="badge-rect" x="52" y="184" width="180" height="42" rx="21"
+                fill="#ffffff" stroke="#ff7e00" stroke-width="2" filter="url(#badgeShadow)" />
+              <text x="142" y="210" text-anchor="middle">
+                <tspan class="badge-text-code" fill="#ff7e00" font-size="15">α₁</tspan>
+                <tspan class="badge-text-name" fill="#ff7e00" font-size="15" dx="6">Adrenergic</tspan>
+              </text>
+            </g>
+
+            <!-- M1-M5 Muscarinic Badge -->
+            <g id="badge-M" class="receptor-group" onclick="selectReceptor('M')" role="button" tabindex="0">
+              <rect class="badge-rect" x="142" y="448" width="196" height="42" rx="21"
+                fill="#ffffff" stroke="#00b894" stroke-width="2" filter="url(#badgeShadow)" />
+              <text x="240" y="474" text-anchor="middle">
+                <tspan class="badge-text-code" fill="#00b894" font-size="15">M₁–M₅</tspan>
+                <tspan class="badge-text-name" fill="#00b894" font-size="15" dx="6">Muscarinic</tspan>
+              </text>
+            </g>
+
+            <!-- H1 Histamine Badge (initially active like in second image) -->
+            <g id="badge-H" class="receptor-group" onclick="selectReceptor('H')" role="button" tabindex="0">
+              <rect class="badge-rect" x="688" y="482" width="176" height="42" rx="21"
+                fill="#5822b4" stroke="#5822b4" stroke-width="2" filter="url(#activeShadow)" />
+              <text x="776" y="508" text-anchor="middle">
+                <tspan class="badge-text-code" fill="#ffffff" font-size="15">H₁</tspan>
+                <tspan class="badge-text-name" fill="#ffffff" font-size="15" dx="6">Histamine</tspan>
+              </text>
+            </g>
+          </svg>
+        </div>
+
+        <div class="zoom-hint">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="11" y1="8" x2="11" y2="14"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+          <span>Vector locked: Zooming in or out preserves 100% exact pointing alignment.</span>
+        </div>
+      </div>
+
+      <!-- Right Receptor Details -->
+      <div class="detail-card">
+        <div class="detail-nav" role="tablist">
+          <button class="detail-tab" data-key="D" onclick="selectReceptor('D')">D₂</button>
+          <button class="detail-tab" data-key="S" onclick="selectReceptor('S')">5-HT₂A</button>
+          <button class="detail-tab" data-key="H" onclick="selectReceptor('H')">H₁</button>
+          <button class="detail-tab" data-key="M" onclick="selectReceptor('M')">M₁–₅</button>
+          <button class="detail-tab" data-key="A" onclick="selectReceptor('A')">α₁</button>
+        </div>
+
+        <div class="detail-head">
+          <div class="detail-title" id="receptorTitle">
+            <span id="receptorCode" style="color: #5822b4;">H₁</span>
+            <span id="receptorName">Histamine H₁</span>
+          </div>
+          <p class="detail-system" id="receptorSystem">Histaminergic system · Antagonist profile</p>
+        </div>
+
+        <div class="info-box">
+          <div class="info-label">Preclinical Binding Affinity</div>
+          <div class="info-val">K<sub>i</sub> &lt; 100 nM</div>
+        </div>
+
+        <div class="info-box">
+          <div class="info-label">Data Source</div>
+          <div class="info-val">EU SmPC section 5.1</div>
+        </div>
+
+        <div>
+          <div class="info-label">About this receptor</div>
+          <p class="detail-body" id="receptorDesc">
+            Preclinical binding profiles indicate affinity for histamine H1 receptors. In vitro affinity does not translate directly into clinical efficacy, potency, or a causal link to a particular adverse reaction.
+          </p>
+        </div>
+
+        <div>
+          <div class="info-label">Clinical context</div>
+          <p class="detail-body" id="receptorNote">
+            The SmPC reports receptor affinity. It does not attribute somnolence or increased appetite to this receptor alone.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const RECEPTORS = {
+      D: {
+        code: "D₂",
+        name: "Dopamine D₂ (D₁–D₅)",
+        system: "Dopaminergic system · Antagonist profile",
+        color: "#0084ff",
+        desc: "Olanzapine has affinity for dopamine receptors, including D2 receptors. Dopamine receptor antagonism is relevant to its antipsychotic activity. Dopaminergic signalling is involved in multiple brain functions, and the relationship between receptor activity and individual symptom domains is complex.",
+        note: "Described in relation to antipsychotic activity. Relative affinity is not shown, and the SmPC does not assign a single clinical effect to this receptor alone."
+      },
+      S: {
+        code: "5-HT₂A",
+        name: "Serotonin 5-HT₂A (5-HT₂A/2C, 3, 6)",
+        system: "Serotonergic system · Antagonist profile",
+        color: "#ff2a70",
+        desc: "Olanzapine also has affinity for serotonin receptors, including 5-HT2A and 5-HT2C. Its serotonin and dopamine receptor activity contributes to its overall pharmacological profile. The clinical effects of olanzapine cannot be attributed to one receptor interaction alone.",
+        note: "Described in relation to antipsychotic activity. Relative affinity is not shown, and the SmPC does not assign a single clinical effect to this receptor alone."
+      },
+      A: {
+        code: "α₁",
+        name: "Adrenergic α₁",
+        system: "Adrenergic system · Antagonist profile",
+        color: "#ff7e00",
+        desc: "Preclinical binding profiles indicate affinity for alpha-1 adrenergic receptors. In vitro affinity does not by itself establish a clinical effect.",
+        note: "The SmPC reports receptor affinity. It does not attribute orthostatic hypotension or dizziness to this receptor alone."
+      },
+      M: {
+        code: "M₁–M₅",
+        name: "Muscarinic M₁–₅",
+        system: "Muscarinic system · Antagonist profile",
+        color: "#00b894",
+        desc: "Preclinical binding profiles indicate affinity for muscarinic M1–M5 receptors. In vitro affinity does not by itself establish a clinical effect.",
+        note: "The SmPC reports receptor affinity. It does not attribute anticholinergic adverse effects to these receptors alone."
+      },
+      H: {
+        code: "H₁",
+        name: "Histamine H₁",
+        system: "Histaminergic system · Antagonist profile",
+        color: "#5822b4",
+        desc: "Preclinical binding profiles indicate affinity for histamine H1 receptors. In vitro affinity does not translate directly into clinical efficacy, potency, or a causal link to a particular adverse reaction.",
+        note: "The SmPC reports receptor affinity. It does not attribute somnolence or increased appetite to this receptor alone."
+      }
+    };
+
+    let currentKey = "H";
+
+    function selectReceptor(key) {
+      if (!RECEPTORS[key]) return;
+      currentKey = key;
+      const data = RECEPTORS[key];
+
+      // Update right panel
+      document.getElementById("receptorCode").innerText = data.code;
+      document.getElementById("receptorCode").style.color = data.color;
+      document.getElementById("receptorName").innerText = data.name;
+      document.getElementById("receptorSystem").innerText = data.system;
+      document.getElementById("receptorDesc").innerText = data.desc;
+      document.getElementById("receptorNote").innerText = data.note;
+
+      // Update tab buttons
+      document.querySelectorAll(".detail-tab").forEach(tab => {
+        const k = tab.getAttribute("data-key");
+        if (k === key) {
+          tab.classList.add("active");
+          tab.style.setProperty("--active-color", data.color);
+        } else {
+          tab.classList.remove("active");
+          tab.style.removeProperty("--active-color");
+        }
+      });
+
+      // Update SVG badges and target dots
+      Object.keys(RECEPTORS).forEach(k => {
+        const item = RECEPTORS[k];
+        const badgeG = document.getElementById("badge-" + k);
+        const rect = badgeG ? badgeG.querySelector(".badge-rect") : null;
+        const codeText = badgeG ? badgeG.querySelector(".badge-text-code") : null;
+        const nameText = badgeG ? badgeG.querySelector(".badge-text-name") : null;
+        const line = document.getElementById("line-" + k);
+        const targetG = document.getElementById("target-" + k);
+        const halo = targetG ? targetG.querySelector(".target-halo") : null;
+
+        if (k === key) {
+          // ACTIVE
+          if (rect) {
+            rect.setAttribute("fill", item.color);
+            rect.setAttribute("stroke", item.color);
+            rect.setAttribute("filter", "url(#activeShadow)");
+          }
+          if (codeText) codeText.setAttribute("fill", "#ffffff");
+          if (nameText) nameText.setAttribute("fill", "#ffffff");
+          if (line) {
+            line.setAttribute("stroke-width", "3.5");
+            line.setAttribute("opacity", "1");
+          }
+          if (halo) {
+            halo.setAttribute("r", "30");
+            halo.setAttribute("fill-opacity", "0.35");
+          }
+        } else {
+          // INACTIVE
+          if (rect) {
+            rect.setAttribute("fill", "#ffffff");
+            rect.setAttribute("stroke", item.color);
+            rect.setAttribute("filter", "url(#badgeShadow)");
+          }
+          if (codeText) codeText.setAttribute("fill", item.color);
+          if (nameText) nameText.setAttribute("fill", item.color);
+          if (line) {
+            line.setAttribute("stroke-width", "2");
+            line.setAttribute("opacity", "0.75");
+          }
+          if (halo) {
+            halo.setAttribute("r", "24");
+            halo.setAttribute("fill-opacity", "0.22");
+          }
+        }
+      });
+    }
+
+    // Initialize with H1 (as in user screenshot)
+    selectReceptor("H");
+  </script>
+</body>
+</html>
