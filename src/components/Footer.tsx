@@ -6,10 +6,26 @@ export default function Footer() {
       <div className="w">
         <div className="footer-grid">
           <div className="footer-brand">
-            <p className="footer-wordmark">
-              <b>ZYPREXA<sup>®</sup></b> <span>(olanzapine)</span>
-            </p>
-            <p>Information for healthcare professionals.</p>
+            <div className="footer-logo-wrap">
+              <Link href="/" style={{ display: "inline-block", textDecoration: "none" }}>
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src="/assets/zyprexa-logo-white.png"
+                  alt="ZYPREXA® (olanzapine)"
+                  style={{
+                    height: "36px",
+                    width: "auto",
+                    maxWidth: "180px",
+                    objectFit: "contain",
+                    display: "block",
+                  }}
+                />
+              </Link>
+              <div style={{ color: "#dcc4ee", fontSize: "14px", marginTop: "4px", letterSpacing: "0.02em" }}>
+                (olanzapine)
+              </div>
+            </div>
+            <p style={{ marginTop: "12px" }}>Information for healthcare professionals.</p>
             <p className="footer-note">
               Marketing authorisation holder: CHEPLAPHARM Registration GmbH, Weiler Straße 5e, 79540 Lörrach,
               Germany.

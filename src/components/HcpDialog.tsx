@@ -36,33 +36,22 @@ export default function HcpDialog() {
       onCancel={(e) => e.preventDefault()}
     >
       <div className="hcp-body">
-        <span className="eyebrow">ZYPREXA (olanzapine)</span>
+        <p className="eb">ZYPREXA (olanzapine)</p>
         <h2 id="hcp-title">This website is intended for healthcare professionals</h2>
         <p>
-          It contains information about a prescription-only medicine, based on
-          the EU Summary of Product Characteristics. Please confirm that you are a
-          healthcare professional.
+          It contains information about a prescription-only medicine, based on the EU Summary of Product
+          Characteristics. Please confirm that you are a healthcare professional.
         </p>
         <div className="actions">
-          <button
-            className="btn btn--primary"
-            id="hcp-yes"
-            type="button"
-            onClick={handleConfirm}
-          >
+          <button className="btn" id="hcp-yes" type="button" onClick={handleConfirm}>
             I am a healthcare professional
           </button>
-          <button
-            className="btn btn--secondary"
-            id="hcp-no"
-            type="button"
-            onClick={handleDecline}
-          >
+          <button className="btn g" id="hcp-no" type="button" onClick={handleDecline}>
             I am not
           </button>
         </div>
         {showNotHcp && (
-          <p id="hcp-not" className="small" tabIndex={-1} style={{ marginTop: "1rem" }}>
+          <p id="hcp-not" tabIndex={-1}>
             This website is not intended for you. If you have questions about your
             medicine, please speak with your doctor or pharmacist, or read the
             package leaflet on the{" "}

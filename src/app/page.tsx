@@ -51,7 +51,7 @@ export default function HomePage() {
         {/* Approved indications */}
         <section className="s s--open" id="indications">
           <div className="home-head">
-            <h2>Approved indications in adults (EU SmPC 4.1)</h2>
+            <h2>Approved indications in adults · EU SmPC 4.1</h2>
             <a
               href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"
               target="_blank"

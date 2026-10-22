@@ -12,10 +12,8 @@ const FILTERS: { id: RefFilter; label: string }[] = [
   { id: "regulatory", label: "Regulatory" },
 ];
 
-function kicker(category: RefCategory, kind: string) {
-  const label =
-    category === "study" ? "Clinical study" : category === "guideline" ? "Guideline" : "Regulatory";
-  return `${label} · ${kind}`;
+function categoryLabel(category: RefCategory) {
+  return category === "study" ? "Clinical study" : category === "guideline" ? "Guideline" : "Regulatory";
 }
 
 const ABBREVIATIONS = [
@@ -128,32 +126,56 @@ export default function ReferencesPage() {
             {filteredRefs.length === 0 ? (
               <p className="ref-empty">No references match “{refQuery.trim()}”.</p>
             ) : (
-              <ol className="ref-rows">
-                {filteredRefs.map((r) => (
-                  <li key={r.n} id={`ref-${r.n}`} className="ref-row">
-                    <span className="ref-badge" aria-hidden="true">
-                      {String(r.n).padStart(2, "0")}
-                    </span>
-                    <div>
-                      <p className="ref-kicker">{kicker(r.category, r.kind)}</p>
-                      <h3>
-                        {r.authors}. {r.title}
-                      </h3>
-                      <p>
-                        {r.source}
-                        {r.year ? ` · ${r.year}` : ""}. {r.usedFor}
-                      </p>
-                      {r.links[0] ? (
-                        <a href={r.links[0].href} target="_blank" rel="noopener noreferrer">
-                          {r.links[0].label} ↗
-                        </a>
-                      ) : (
-                        <span className="ref-nolink">No external link available</span>
-                      )}
-                    </div>
-                  </li>
-                ))}
-              </ol>
+              <div className="ref-catalog-wrap">
+                <table className="ref-table ref-catalog">
+                  <colgroup>
+                    <col className="ref-catalog__col-n" />
+                    <col className="ref-catalog__col-type" />
+                    <col className="ref-catalog__col-cite" />
+                    <col className="ref-catalog__col-source" />
+                    <col className="ref-catalog__col-use" />
+                    <col className="ref-catalog__col-link" />
+                  </colgroup>
+                  <thead>
+                    <tr>
+                      <th scope="col">No.</th>
+                      <th scope="col">Type</th>
+                      <th scope="col">Reference</th>
+                      <th scope="col">Source</th>
+                      <th scope="col">Cited for</th>
+                      <th scope="col">Link</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filteredRefs.map((r) => (
+                      <tr key={r.n} id={`ref-${r.n}`}>
+                        <td className="ref-catalog__n">{String(r.n).padStart(2, "0")}</td>
+                        <td className="ref-catalog__type">
+                          <span>{categoryLabel(r.category)}</span>
+                          <span>{r.kind}</span>
+                        </td>
+                        <td className="ref-catalog__cite">
+                          <b>{r.authors}.</b> {r.title}
+                        </td>
+                        <td>
+                          {r.source}
+                          {r.year ? ` · ${r.year}` : ""}
+                        </td>
+                        <td>{r.usedFor}</td>
+                        <td>
+                          {r.links[0] ? (
+                            <a href={r.links[0].href} target="_blank" rel="noopener noreferrer">
+                              {r.links[0].label} ↗
+                            </a>
+                          ) : (
+                            <span className="ref-nolink">No external link</span>
+                          )}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             )}
           </div>
         </section>
