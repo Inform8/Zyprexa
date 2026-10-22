@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import { usePathname } from "next/navigation";
 
 /**
@@ -11,6 +11,39 @@ import { usePathname } from "next/navigation";
  */
 export default function InteractiveEnhancements() {
   const pathname = usePathname();
+
+  useLayoutEffect(() => {
+    const sections = Array.from(document.querySelectorAll<HTMLElement>("main section.s"));
+    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!sections.length || reduce || !("IntersectionObserver" in window)) {
+      sections.forEach((el) => el.classList.add("is-visible"));
+      return;
+    }
+
+    document.documentElement.classList.add("reveal-ready");
+    const io = new IntersectionObserver(
+      (entries) =>
+        entries.forEach((en) => {
+          if (en.isIntersecting) {
+            en.target.classList.add("is-visible");
+            io.unobserve(en.target);
+          }
+        }),
+      { rootMargin: "0px 0px -6% 0px", threshold: 0.08 },
+    );
+
+    sections.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight * 0.9 && rect.bottom > 0) return;
+      el.classList.add("is-pending");
+      io.observe(el);
+    });
+
+    return () => {
+      io.disconnect();
+      document.documentElement.classList.remove("reveal-ready");
+    };
+  }, [pathname]);
 
   useEffect(() => {
     const ac = new AbortController();

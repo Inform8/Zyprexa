@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function SafetyPrescribingPage() {
   return (
-    <main id="app">
+    <main id="app" className="safety">
       {/* Editorial Hero */}
       <div className="hero">
         <div className="w">
@@ -30,10 +30,9 @@ export default function SafetyPrescribingPage() {
           </div>
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/zyprexa-formulations.jpg"
-              alt="ZYPREXA product packaging and formulation display"
-              loading="lazy"
+              <img
+              src="/assets/zyprexa-packs.png?v=2"
+              alt="ZYPREXA coated tablet packs"
             />
           </div>
         </div>
@@ -41,24 +40,24 @@ export default function SafetyPrescribingPage() {
 
       <div className="w">
         {/* Important Safety Information Box */}
-        <section className="s">
-          <p className="story">
-            Before prescribing Zyprexa, consult the current approved product information for the intended market.
-            The following content summarises selected considerations from the European SmPC and does not replace the
-            full prescribing document.
-          </p>
-        </section>
-
         <section className="s" id="contraindications">
           <h2>Contraindications</h2>
-          <p className="story">
-            According to the European SmPC, oral Zyprexa is contraindicated in patients with:
+          <p className="lead">
+            Before prescribing Zyprexa, consult the current approved product information for the intended market.
+            This page summarises selected considerations from the European SmPC and does not replace that document.
+            Oral Zyprexa is contraindicated in patients with the following:
             <Cite n={1} section="4.3" />
           </p>
-          <ul className="plain-list">
-            <li>Hypersensitivity to olanzapine or to any of the excipients listed in section 6.1.</li>
-            <li>Known risk of narrow-angle glaucoma.</li>
-          </ul>
+          <div className="safety-split">
+            <article className="card safety-point">
+              <span>01</span>
+              <p>Hypersensitivity to olanzapine or to any of the excipients listed in section 6.1.</p>
+            </article>
+            <article className="card safety-point">
+              <span>02</span>
+              <p>Known risk of narrow-angle glaucoma.</p>
+            </article>
+          </div>
           <p className="source-line">
             Excipients include lactose monohydrate. The full qualitative list in SmPC section 6.1 also covers the
             tablet core and the colour coating, and it differs by strength. That complete list was not reproduced
@@ -69,7 +68,7 @@ export default function SafetyPrescribingPage() {
 
         {/* Dosing and Administration */}
         <section className="s" id="dosing">
-          <h2>Dosing &amp; administration (EU SmPC 4.2; Table 1)</h2>
+          <h2 className="smpc-heading">Dosing &amp; administration · EU SmPC 4.2 (Table 1)</h2>
           <p className="lead">
             Approved dose range: 5–20 mg/day. Daily dosage may subsequently be adjusted on the basis of
             individual clinical status. An increase above the recommended starting dose should occur only after
@@ -167,45 +166,35 @@ export default function SafetyPrescribingPage() {
 
         {/* Formulations Showcase */}
         <section className="s" id="formulations">
-          <h2>Formulations showcase</h2>
-          <div className="grid g2" style={{ alignItems: "stretch" }}>
-            <div style={{ borderRadius: "18px", overflow: "hidden", minHeight: "320px" }}>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/assets/zyprexa-formulations.jpg"
-                alt="ZYPREXA coated tablets and packaging"
-                loading="lazy"
-                style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "18px" }}
-              />
-            </div>
-            <div className="grid" style={{ gap: "12px" }}>
-              <div className="card">
-                <h3>ZYPREXA coated tablets (oral)</h3>
-                <p>
-                  All dosing and safety content on this page refers to the oral formulation.
-                  <Cite n={1} />
-                </p>
-              </div>
-              <div className="card">
-                <h3>ZYPREXA powder for solution for injection</h3>
-                <p>Short-term intramuscular use for agitation. Different dosing and precautions.<Cite n={2} /></p>
-              </div>
-              <div className="card">
-                <h3>ZYPADHERA (olanzapine pamoate)</h3>
-                <p>
-                  Prolonged-release injection with its own dosing and post-injection observation requirements.
-                  <Cite n={3} />
-                </p>
-              </div>
-              <div className="card">
-                <h3>ZYPREXA VELOTAB (orodispersible tablets)</h3>
-                <p>
-                  A separate oral formulation. Its SmPC was not supplied, so dose, administration and excipients for
-                  VELOTAB are not stated on this page. Use the approved VELOTAB product information for the target
-                  market.
-                </p>
-              </div>
-            </div>
+          <h2>Formulations</h2>
+          <p className="lead">Oral coated tablets are the formulation covered on this page. The other presentations have their own product information.</p>
+          <div className="safety-split safety-split--2">
+            <article className="card">
+              <h3>ZYPREXA coated tablets (oral)</h3>
+              <p>
+                All dosing and safety content on this page refers to the oral formulation.
+                <Cite n={1} />
+              </p>
+            </article>
+            <article className="card">
+              <h3>ZYPREXA powder for solution for injection</h3>
+              <p>Short-term intramuscular use for agitation. Different dosing and precautions.<Cite n={2} /></p>
+            </article>
+            <article className="card">
+              <h3>ZYPADHERA (olanzapine pamoate)</h3>
+              <p>
+                Prolonged-release injection with its own dosing and post-injection observation requirements.
+                <Cite n={3} />
+              </p>
+            </article>
+            <article className="card">
+              <h3>ZYPREXA VELOTAB (orodispersible tablets)</h3>
+              <p>
+                A separate oral formulation. Its SmPC was not supplied, so dose, administration and excipients for
+                VELOTAB are not stated on this page. Use the approved VELOTAB product information for the target
+                market.
+              </p>
+            </article>
           </div>
         </section>
 
@@ -329,7 +318,7 @@ export default function SafetyPrescribingPage() {
 
         {/* Drug Interactions */}
         <section className="s" id="interactions">
-          <h2>Drug interactions (SmPC 4.5; Table 3)</h2>
+          <h2 className="smpc-heading">Drug interactions · EU SmPC 4.5 (Table 3)</h2>
           <p className="story">
             Olanzapine is cleared largely through CYP1A2, so smoking and medicines that speed up or slow that enzyme
             change exposure. The figures below are the ones stated in the European product information.
@@ -387,7 +376,7 @@ export default function SafetyPrescribingPage() {
           <h2>Pregnancy, lactation &amp; discontinuation</h2>
           <div className="grid g3">
             <div className="card">
-              <h3>Pregnancy (SmPC 4.6)</h3>
+              <h3 className="smpc-heading">Pregnancy · EU SmPC 4.6</h3>
               <p>
                 Use only if the potential benefit justifies the potential risk to the fetus. Neonates exposed to
                 antipsychotics during the third trimester of pregnancy are at risk of extrapyramidal and/or
@@ -424,7 +413,7 @@ export default function SafetyPrescribingPage() {
           </p>
           <h3>Reported in at least 1% of patients in clinical trials</h3>
           <p className="source-line">As listed in the SmPC summary of the safety profile, in adults.<Cite n={1} section="4.8" /></p>
-          <ul className="plain-list">
+          <ul className="chip-list">
             {[
               "Somnolence",
               "Weight gain",

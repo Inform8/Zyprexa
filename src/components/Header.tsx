@@ -111,6 +111,34 @@ export default function Header() {
     setActiveDropdownIdx(null);
   }, [pathname]);
 
+  useEffect(() => {
+    const header = document.querySelector<HTMLElement>("header.site-header");
+    if (!header) return;
+    let last = window.scrollY;
+
+    const apply = (hidden: boolean) => {
+      header.classList.toggle("is-hidden", hidden);
+      const height = hidden ? 0 : header.offsetHeight;
+      document.documentElement.style.setProperty("--header-offset", `${height}px`);
+    };
+
+    const onScroll = () => {
+      const y = window.scrollY;
+      if (mobileMenuOpen) {
+        apply(false);
+        last = y;
+        return;
+      }
+      if (y > last + 6 && y > header.offsetHeight + 20) apply(true);
+      else if (y < last - 6 || y < 12) apply(false);
+      last = y;
+    };
+
+    apply(false);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [mobileMenuOpen, pathname]);
+
   return (
     <>
       <a className="skip" href="#app">

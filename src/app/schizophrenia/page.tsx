@@ -137,43 +137,47 @@ export default function SchizophreniaPage() {
 
         {/* Symptoms */}
         <section className="s" id="symptoms">
-          <div className="spectrum-head">
-            <h2>Three core symptom domains</h2>
-            <p>Clinical manifestations of schizophrenia across domains</p>
-          </div>
+          <h2>Three core symptom domains</h2>
+          <p className="lead">Clinical manifestations of schizophrenia across domains</p>
           <div className="domains">
-            <article className="domain domain--pos">
-              <span>Positive domain</span>
-              <h3>Positive symptoms</h3>
-              <p>Added experiences and behaviours, highly responsive to mesolimbic dopamine D₂ receptor blockade:</p>
-              <ul>
-                <li>Auditory and visual hallucinations</li>
-                <li>Persecutory or referential delusions</li>
-                <li>Disorganised speech</li>
-                <li>Agitated behaviour</li>
-              </ul>
+            <article className="domain">
+              <span className="domain__num">01</span>
+              <div>
+                <h3>Positive symptoms</h3>
+                <p>Added experiences and behaviours, highly responsive to mesolimbic dopamine D₂ receptor blockade:</p>
+                <ul>
+                  <li>Auditory and visual hallucinations</li>
+                  <li>Persecutory or referential delusions</li>
+                  <li>Disorganised speech</li>
+                  <li>Agitated behaviour</li>
+                </ul>
+              </div>
             </article>
-            <article className="domain domain--neg">
-              <span>Negative domain</span>
-              <h3>Negative symptoms</h3>
-              <p>Reduction or loss of baseline functioning, and the main driver of long-term disability:</p>
-              <ul>
-                <li>Blunted affect</li>
-                <li>Avolition</li>
-                <li>Alogia</li>
-                <li>Severe social withdrawal and anhedonia</li>
-              </ul>
+            <article className="domain">
+              <span className="domain__num">02</span>
+              <div>
+                <h3>Negative symptoms</h3>
+                <p>Reduction or loss of baseline functioning, and the main driver of long-term disability:</p>
+                <ul>
+                  <li>Blunted affect</li>
+                  <li>Avolition</li>
+                  <li>Alogia</li>
+                  <li>Severe social withdrawal and anhedonia</li>
+                </ul>
+              </div>
             </article>
-            <article className="domain domain--cog">
-              <span>Cognitive domain</span>
-              <h3>Cognitive symptoms</h3>
-              <p>Deficits in mental processing that correlate with real-world functional independence:</p>
-              <ul>
-                <li>Impaired working memory</li>
-                <li>Sustained attention and vigilance</li>
-                <li>Executive planning</li>
-                <li>Processing speed</li>
-              </ul>
+            <article className="domain">
+              <span className="domain__num">03</span>
+              <div>
+                <h3>Cognitive symptoms</h3>
+                <p>Deficits in mental processing that correlate with real-world functional independence:</p>
+                <ul>
+                  <li>Impaired working memory</li>
+                  <li>Sustained attention and vigilance</li>
+                  <li>Executive planning</li>
+                  <li>Processing speed</li>
+                </ul>
+              </div>
             </article>
           </div>
         </section>
@@ -184,34 +188,30 @@ export default function SchizophreniaPage() {
           <p className="lead">
             A conceptual educational model of three hypotheses. This is not clinical-trial evidence for olanzapine.
           </p>
-          <div className="grid g2" style={{ alignItems: "stretch" }}>
-            <div>
-              {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img
-                src="/assets/schizophrenia-network.jpg"
-                alt="Brain with connected neural pathways"
-                loading="lazy"
-                style={{ display: "block", width: "100%", height: "auto", borderRadius: "18px" }}
-              />
-            </div>
-            <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-              <div>
-                <div className="tabs">
-                  {tabsData.map((tab, idx) => (
-                    <button
-                      key={tab.title}
-                      type="button"
-                      className={activeTab === idx ? "on" : ""}
-                      onClick={() => setActiveTab(idx)}
-                    >
-                      {tab.title}
-                    </button>
-                  ))}
-                </div>
-                <h3 style={{ fontSize: "17px", marginTop: "12px" }}>{tabsData[activeTab].heading}</h3>
-                <p style={{ marginTop: "10px", lineHeight: "1.6" }}>{tabsData[activeTab].content}</p>
+          <div className="neuro">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="neuro__img"
+              src="/assets/schizophrenia-network.jpg"
+              alt="Brain with connected neural pathways"
+              loading="lazy"
+            />
+            <div className="neuro__copy">
+              <div className="tabs">
+                {tabsData.map((tab, idx) => (
+                  <button
+                    key={tab.title}
+                    type="button"
+                    className={activeTab === idx ? "on" : ""}
+                    onClick={() => setActiveTab(idx)}
+                  >
+                    {tab.title}
+                  </button>
+                ))}
               </div>
-              <p style={{ fontSize: "12px", color: "var(--mut)", marginTop: "16px" }}>
+              <h3>{tabsData[activeTab].heading}</h3>
+              <p>{tabsData[activeTab].content}</p>
+              <p className="neuro__note">
                 Conceptual model after Stahl 2018, cited for education. It is not a trial result, and it does not
                 by itself explain the clinical effects of olanzapine.
               </p>
@@ -314,13 +314,6 @@ export default function SchizophreniaPage() {
                 Titration between 5–20 mg/day based on clinical response and tolerability with patient-centered
                 shared decision-making.
               </p>
-              <div className="range">
-                <i style={{ left: 0, right: 0 }} />
-                <span style={{ left: 0 }}>5</span>
-                <span style={{ left: "33%" }}>10</span>
-                <span style={{ left: "66%" }}>15</span>
-                <span style={{ left: "100%" }}>20 mg/day</span>
-              </div>
             </div>
           </div>
         </section>

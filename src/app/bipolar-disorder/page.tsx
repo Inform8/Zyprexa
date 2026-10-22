@@ -152,7 +152,7 @@ export default function BipolarDisorderPage() {
 
         {/* Indications vs Non-indications */}
         <section className="s" id="indications">
-          <h2>Approved indications vs. non-indications (EU SmPC 4.1)</h2>
+          <h2 className="smpc-heading">Approved indications vs. non-indications · EU SmPC 4.1</h2>
           <div className="grid g2" style={{ alignItems: "stretch" }}>
             <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
               <div>

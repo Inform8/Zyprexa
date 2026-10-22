@@ -29,7 +29,7 @@ export default function HomePage() {
               Zyprexa (olanzapine) is an antipsychotic medicine indicated for the treatment of schizophrenia and
               for the treatment of moderate to severe manic episodes. In patients whose manic episode has
               responded to olanzapine, it is also indicated for preventing recurrence in bipolar disorder, in
-              accordance with the applicable product information.<sup>[1, section 4.1]</sup>
+              accordance with the applicable product information.<Cite n={1} section="4.1" />
             </p>
             <div className="row">
               <Link className="btn" href="/clinical-evidence">
@@ -50,8 +50,8 @@ export default function HomePage() {
       <div className="w">
         {/* Approved indications */}
         <section className="s s--open" id="indications">
-          <div className="home-head">
-            <h2>Approved indications (EU SmPC 4.1)</h2>
+          <div className="smpc-heading">
+            <h2>Approved indications in adults · EU SmPC 4.1</h2>
             <a
               href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"
               target="_blank"

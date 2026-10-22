@@ -372,7 +372,7 @@ export default function ClinicalEvidencePage() {
                   <p className="muted" style={{ fontSize: "12.5px" }}>Fixed 6-week acute exposure window</p>
                   <div className="viz-box" style={{ justifyContent: "center", alignItems: "center" }}>
                     <div style={{ background: "rgba(124, 77, 255, 0.08)", padding: "18px 24px", borderRadius: "16px", border: "1px solid rgba(124, 77, 255, 0.16)", width: "100%" }}>
-                      <b style={{ fontSize: "40px", color: "var(--pri)", display: "block", fontFamily: "var(--font-playfair), Georgia, serif", lineHeight: 1 }}>
+                      <b style={{ fontSize: "40px", color: "var(--pri)", display: "block", fontFamily: "var(--font-inter), sans-serif", fontWeight: 700, lineHeight: 1 }}>
                         +3.5 kg
                       </b>
                       <p style={{ marginTop: "8px", fontSize: "12.5px", color: "var(--mut)" }}>
@@ -514,7 +514,7 @@ export default function ClinicalEvidencePage() {
                   <p className="muted" style={{ fontSize: "12.5px" }}>Placebo-controlled recurrence prevention trial</p>
                   <div className="viz-box" style={{ justifyContent: "center", alignItems: "center", textAlign: "center" }}>
                     <div style={{ background: "rgba(124, 77, 255, 0.08)", padding: "18px 20px", borderRadius: "16px", border: "1px solid rgba(124, 77, 255, 0.16)", width: "100%" }}>
-                      <b style={{ fontSize: "22px", color: "var(--pri)", display: "block", fontFamily: "var(--font-playfair), Georgia, serif", marginBottom: "6px" }}>
+                      <b style={{ fontSize: "22px", color: "var(--pri)", display: "block", fontFamily: "var(--font-inter), sans-serif", fontWeight: 700, marginBottom: "6px" }}>
                         Dual Relapse Prevention
                       </b>
                       <p style={{ margin: 0, fontSize: "12.5px", color: "var(--ink)" }}>
