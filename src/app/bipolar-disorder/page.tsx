@@ -1,19 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ColumnChart, StepRail } from "@/components/Figures";
+import { StepRail } from "@/components/Figures";
 import MoodSpectrum from "@/components/MoodSpectrum";
-import SectionNav from "@/components/SectionNav";
-import {
-  IconWave,
-  IconRepeat,
-  IconShield,
-  IconPill,
-  IconUser,
-  IconScale,
-  IconCheck,
-  IconAlert,
-  IconDoc,
-} from "@/components/Icons";
+import { IconCheck, IconAlert } from "@/components/Icons";
 
 export const metadata: Metadata = {
   title: "Understanding Bipolar Disorder · ZYPREXA HCP",
@@ -43,15 +32,13 @@ export default function BipolarDisorderPage() {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/bipolar-person.jpg"
-              alt="Contemplative perspective at dawn representing mood balance"
+              src="/assets/bipolar-mood.jpg"
+              alt="Brain divided between a bright mood and a darker mood"
               loading="lazy"
             />
           </div>
         </div>
       </div>
-
-      <SectionNav />
 
       <div className="w">
         {/* Overview: Balanced 2-Column Grid */}
@@ -210,98 +197,56 @@ export default function BipolarDisorderPage() {
           </div>
         </section>
 
-        {/* Clinical Evidence */}
+        {/* Clinical Evidence — summary only; charts live on the evidence page */}
         <section className="s" id="evidence">
-          <div className="sec-card">
-            <div className="sec-head">
-              <h2>Key Clinical Evidence in Bipolar Disorder</h2>
-              <p>Randomized clinical trial outcomes reported in EU SmPC Section 5.1.</p>
+          <h2>Clinical evidence in bipolar disorder</h2>
+          <p className="lead">
+            Positioning summary from EU SmPC section 5.1. Trial design, charts and the study explorer are on the
+            clinical evidence page.
+          </p>
+          <div className="grid g2" style={{ alignItems: "stretch" }}>
+            <div className="card">
+              <h3>Acute manic episodes</h3>
+              <p>
+                The SmPC describes superiority to placebo and to divalproex over 3 weeks in manic or mixed episodes.
+                The published placebo-controlled trial is Tohen et al. 1999.
+              </p>
+              <p style={{ marginTop: "12px" }}>
+                <Link href="/clinical-evidence#mania">
+                  View complete trial design and data charts in Clinical Evidence →
+                </Link>
+              </p>
             </div>
-            <div className="grid g3">
-              {/* Column Chart 1: Acute Mania YMRS */}
-              <div className="card">
-                <div>
-                  <h3>Acute mania – YMRS reduction</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>Tohen et al. 1999; n = 139</p>
-                  <ColumnChart
-                    label="Acute mania YMRS reduction"
-                    bars={[
-                      { label: "Olanzapine", value: 10.3, display: "−10.3" },
-                      { label: "Placebo", value: 4.9, display: "−4.9", tone: "soft" },
-                    ]}
-                  />
-                </div>
-                <div className="stat-note highlight">
-                  p = 0.02 vs placebo
-                </div>
-              </div>
-
-              {/* Donut Chart: Response Rate */}
-              <div className="card">
-                <div>
-                  <h3>Response rate (≥50% reduction)</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>Tohen et al. 1999 responder threshold</p>
-                  <div className="dnr">
-                    <div>
-                      <div
-                        className="dn"
-                        style={
-                          {
-                            "--p": 48.6,
-                            "--c": "#7c4dff",
-                          } as React.CSSProperties
-                        }
-                      >
-                        <b>48.6%</b>
-                      </div>
-                      <span style={{ fontSize: "12px", fontWeight: 600 }}>Olanzapine</span>
-                    </div>
-                    <div>
-                      <div
-                        className="dn"
-                        style={
-                          {
-                            "--p": 24.2,
-                            "--c": "#b9a8ee",
-                          } as React.CSSProperties
-                        }
-                      >
-                        <b>24.2%</b>
-                      </div>
-                      <span style={{ fontSize: "12px", fontWeight: 600 }}>Placebo</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="stat-note highlight">
-                  48.6% vs 24.2% (p = 0.004)
-                </div>
-              </div>
-
-              {/* Column Chart 2: 12-month recurrence */}
-              <div className="card">
-                <div>
-                  <h3>12-month recurrence rate (%)</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>Study B active comparator; n = 431</p>
-                  <ColumnChart
-                    label="12-month recurrence rate"
-                    bars={[
-                      { label: "Olanzapine", value: 30, display: "30.0%" },
-                      { label: "Lithium", value: 38.3, display: "38.3%", tone: "soft" },
-                    ]}
-                  />
-                </div>
-                <div className="stat-note highlight">
-                  Non-inferior to lithium (p = 0.055)
-                </div>
-              </div>
+            <div className="card">
+              <h3>Study A · olanzapine versus placebo</h3>
+              <p>
+                A 12-month study in patients who had achieved remission from a manic episode with olanzapine.
+                Continuation of olanzapine was statistically significantly superior to placebo for bipolar
+                recurrence, including recurrence into mania or into depression.
+              </p>
+              <p style={{ marginTop: "10px" }}>
+                Sample size, baseline characteristics, blinding, the exact definition of recurrence, inclusion
+                criteria and numerical recurrence rates are not stated in EU SmPC 5.1, so they are not shown. A
+                primary publication for Study A was not supplied.
+              </p>
             </div>
-
-            <div className="card" style={{ marginTop: "16px", background: "rgba(255, 255, 255, 0.72)" }}>
-              <h3 style={{ fontSize: "15px", marginBottom: "4px" }}>18-month co-therapy study (SmPC Section 5.1)</h3>
-              <p style={{ margin: 0, fontSize: "13px" }}>
-                In an 18-month study of patients stabilized on olanzapine with lithium or valproate, long-term
-                olanzapine co-therapy was not statistically significantly superior to mood stabilizer monotherapy
-                in delaying bipolar recurrence by syndromic criteria.
+            <div className="card">
+              <h3>Study B · olanzapine versus lithium</h3>
+              <p>
+                Patients who achieved remission on olanzapine plus lithium were randomised to olanzapine or lithium
+                alone for 12 months. Recurrence was 30.0% versus 38.3% (p = 0.055). Olanzapine was statistically
+                non-inferior to lithium.
+              </p>
+              <p style={{ marginTop: "12px" }}>
+                <Link href="/clinical-evidence#recurrence">Numerical comparison in Clinical Evidence →</Link>
+              </p>
+            </div>
+            <div className="card">
+              <h3>18-month co-therapy</h3>
+              <p>
+                In patients stabilised on olanzapine plus lithium or valproate, long-term olanzapine co-therapy was
+                not statistically significantly superior to the mood stabiliser alone in delaying bipolar recurrence
+                defined by syndromic (diagnostic) criteria.
               </p>
             </div>
           </div>
@@ -314,8 +259,13 @@ export default function BipolarDisorderPage() {
             <div className="card">
               <h3>BAP 2016 Guidelines</h3>
               <p>
-                British Association for Psychopharmacology recommends olanzapine as an effective oral dopamine
-                antagonist in acute severe mania, and for prevention of manic relapse in maintenance therapy.
+                The British Association for Psychopharmacology lists olanzapine among oral dopamine antagonists that
+                are particularly effective in severe mania. For long-term treatment it recommends considering lithium
+                as initial monotherapy. Olanzapine is among agents shown to prevent manic relapse; it is not described
+                as first-line for long-term treatment.
+              </p>
+              <p style={{ marginTop: "12px" }}>
+                <Link href="/clinical-evidence#guidelines">Full guideline context in Clinical Evidence →</Link>
               </p>
             </div>
             <div className="card">
@@ -328,55 +278,17 @@ export default function BipolarDisorderPage() {
           </div>
         </section>
 
-        {/* Safety in Bipolar Trials */}
         <section className="s" id="safety">
-          <h2>Safety in bipolar clinical trials (SmPC 4.8)</h2>
+          <h2>Safety considerations during treatment</h2>
           <div className="card">
-            <h3>Safety signals &amp; metabolic observations</h3>
-            <div className="dnr">
-              <div>
-                <div
-                  className="dn"
-                  style={
-                    {
-                      "--p": 17.4,
-                      "--c": "#db2777",
-                    } as React.CSSProperties
-                  }
-                >
-                  <b>17.4%</b>
-                </div>
-                ≥7% weight gain: acute 6-wk + lithium/valproate
-              </div>
-              <div>
-                <div
-                  className="dn"
-                  style={
-                    {
-                      "--p": 39.9,
-                      "--c": "#d97706",
-                    } as React.CSSProperties
-                  }
-                >
-                  <b>39.9%</b>
-                </div>
-                ≥7% weight gain: 12-mo recurrence monotherapy
-              </div>
-              <div>
-                <div
-                  className="dn"
-                  style={
-                    {
-                      "--p": 4.1,
-                      "--c": "#2563eb",
-                    } as React.CSSProperties
-                  }
-                >
-                  <b>4.1%</b>
-                </div>
-                Neutropenia incidence with valproate co-therapy
-              </div>
-            </div>
+            <p>
+              Weight gain, increased appetite, and changes in glucose and lipids should be considered when selecting
+              and monitoring treatment. Numerical thresholds from long-term exposure, and the monitoring schedule,
+              are maintained on the safety page.
+            </p>
+            <p style={{ marginTop: "12px" }}>
+              <Link href="/safety-prescribing#monitoring">Metabolic monitoring schedule →</Link>
+            </p>
           </div>
         </section>
       </div>

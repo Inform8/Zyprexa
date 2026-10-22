@@ -71,7 +71,8 @@ export const REFERENCES: Reference[] = [
     category: "guideline",
     kind: "Diagnostic classification",
     topics: ["Disease background"],
-    usedFor: "Cited for symptom domains of schizophrenia and features of mood episodes.",
+    usedFor:
+      "Cited for symptom domains of schizophrenia and features of mood episodes. No stable open-access URL was supplied; use the American Psychiatric Association Publishing edition (2022).",
     links: [],
   },
   {
@@ -172,19 +173,6 @@ export const REFERENCES: Reference[] = [
     topics: ["Pharmacology"],
     usedFor: "Cited for receptor occupancy at clinical doses (mechanism of action, Figure 2).",
     links: [{ label: "doi:10.1176/ajp.155.7.921", href: "https://doi.org/10.1176/ajp.155.7.921" }],
-  },
-  {
-    n: 13,
-    title: "ZYPREXA (olanzapine) Prescribing Information.",
-    authors: "U.S. Food and Drug Administration",
-    source: "Silver Spring, MD: FDA",
-    year: 2021,
-    category: "regulatory",
-    kind: "US prescribing information",
-    topics: ["Pharmacology", "Product information"],
-    usedFor:
-      "Cited only for the proposed relationship between receptor antagonism and certain adverse effects (section 12.2). It is not the approved label in the EU and is not used for dosing or indications.",
-    links: [],
   },
 ];
 

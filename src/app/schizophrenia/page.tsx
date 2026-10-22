@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import SectionNav from "@/components/SectionNav";
 import { StepRail } from "@/components/Figures";
 
 export default function SchizophreniaPage() {
@@ -49,15 +48,13 @@ export default function SchizophreniaPage() {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/schizophrenia-person.jpg"
-              alt="Contemplative silhouette representing long-term schizophrenia recovery"
+              src="/assets/schizophrenia-network.jpg"
+              alt="Brain with connected neural pathways"
               loading="lazy"
             />
           </div>
         </div>
       </div>
-
-      <SectionNav />
 
       <div className="w">
         {/* Overview: Balanced 2-Column Grid */}
@@ -184,15 +181,17 @@ export default function SchizophreniaPage() {
         {/* Neurobiology */}
         <section className="s" id="neurobiology">
           <h2>Neurobiology of schizophrenia</h2>
-          <p className="lead">Three interconnected pathophysiological hypotheses</p>
+          <p className="lead">
+            A conceptual educational model of three hypotheses. This is not clinical-trial evidence for olanzapine.
+          </p>
           <div className="grid g2" style={{ alignItems: "stretch" }}>
-            <div style={{ borderRadius: "18px", overflow: "hidden", minHeight: "260px" }}>
+            <div>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/assets/hero-brain-3d.jpg"
-                alt="Neural connectivity and neurotransmitter pathway model"
+                src="/assets/schizophrenia-network.jpg"
+                alt="Brain with connected neural pathways"
                 loading="lazy"
-                style={{ width: "100%", height: "100%", objectFit: "cover", borderRadius: "18px" }}
+                style={{ display: "block", width: "100%", height: "auto", borderRadius: "18px" }}
               />
             </div>
             <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
@@ -213,7 +212,8 @@ export default function SchizophreniaPage() {
                 <p style={{ marginTop: "10px", lineHeight: "1.6" }}>{tabsData[activeTab].content}</p>
               </div>
               <p style={{ fontSize: "12px", color: "var(--mut)", marginTop: "16px" }}>
-                Multi-system neurotransmitter interplay underpins atypical antipsychotic mechanism.
+                Conceptual model after Stahl 2018, cited for education. It is not a trial result, and it does not
+                by itself explain the clinical effects of olanzapine.
               </p>
             </div>
           </div>
@@ -267,8 +267,20 @@ export default function SchizophreniaPage() {
                   <td>Coated oral tablets, rapid intramuscular injection, and long-acting injectable ZYPADHERA.</td>
                 </tr>
                 <tr>
+                  <td><b>Acute study duration</b></td>
+                  <td>
+                    The SmPC programme in positive and negative symptoms does not state a duration. The cited
+                    North American publication (Beasley et al. 1996) is a 6-week acute trial.
+                  </td>
+                </tr>
+                <tr>
                   <td><b>Continuation therapy</b></td>
-                  <td>Maintenance of clinical improvement in continuation therapy for patients with an initial response.</td>
+                  <td>
+                    EU SmPC 4.1 states that olanzapine is effective in maintaining clinical improvement during
+                    continuation therapy in patients who have shown an initial treatment response. The SmPC does not
+                    give the continuation-study duration or a separate primary publication. Source: EU SmPC sections
+                    4.1 and 5.1; Beasley et al. 1996 for the acute trial.
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -282,8 +294,11 @@ export default function SchizophreniaPage() {
             <div className="card">
               <h3>Ongoing monitoring</h3>
               <p>
-                Routine evaluation of weight, BMI, fasting glucose, and lipid profiles to mitigate
-                cardiometabolic risk.
+                Weight, glucose and lipids need follow-up during treatment. The schedule and the long-term weight
+                thresholds are kept on the safety page.
+              </p>
+              <p style={{ marginTop: "10px" }}>
+                <a href="/safety-prescribing#monitoring">Metabolic monitoring schedule →</a>
               </p>
             </div>
             <div className="card">

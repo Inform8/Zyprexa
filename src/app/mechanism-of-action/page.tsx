@@ -1,14 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import SectionNav from "@/components/SectionNav";
 import { AreaChart } from "@/components/Figures";
-import {
-  IconBrain,
-  IconCheck,
-  IconShield,
-  IconTarget,
-} from "@/components/Icons";
+import { Cite } from "@/components/Cite";
 
 interface ReceptorInfo {
   code: string;
@@ -30,9 +24,9 @@ const RECEPTORS: Record<string, ReceptorInfo> = {
     short: "D₂ (Dopamine)",
     system: "Dopaminergic system · Antagonist profile",
     color: "#2563eb",
-    dots: "●●●●○ (High)",
-    desc: "Antipsychotic and antimanic efficacy via mesolimbic antagonism. Modulated striatal occupancy (70–80%) maintains low extrapyramidal symptom (EPS) liability.",
-    note: "Approved doses of 10–20 mg/day keep striatal D₂ occupancy in the 70–80% window, below the level where EPS incidence rises sharply.",
+    dots: "Ki < 100 nM · preclinical",
+    desc: "Olanzapine has affinity for dopamine receptors, including D2 receptors. Dopamine receptor antagonism is relevant to its antipsychotic activity. Dopaminergic signalling is involved in multiple brain functions, and the relationship between receptor activity and individual symptom domains is complex.",
+    note: "Described in relation to antipsychotic activity. Relative affinity is not shown.",
     x: 50,
     y: 16,
   },
@@ -42,9 +36,9 @@ const RECEPTORS: Record<string, ReceptorInfo> = {
     short: "5-HT₂A (Serotonin)",
     system: "Serotonergic system · Antagonist profile",
     color: "#db2777",
-    dots: "●●●●● (Very High)",
-    desc: "Low EPS risk through striatal dopamine disinhibition; modulation of cortical dopamine transmission for negative and depressive symptom improvement.",
-    note: "5-HT₂ occupancy exceeded 90% across clinical doses from 5 to 20 mg/day.",
+    dots: "Ki < 100 nM · preclinical",
+    desc: "Olanzapine also has affinity for serotonin receptors, including 5-HT2A and 5-HT2C. Its serotonin and dopamine receptor activity contributes to its overall pharmacological profile. The clinical effects of olanzapine cannot be attributed to one receptor interaction alone.",
+    note: "Described in relation to antipsychotic activity. Relative affinity is not shown.",
     x: 78,
     y: 40,
   },
@@ -54,9 +48,9 @@ const RECEPTORS: Record<string, ReceptorInfo> = {
     short: "H₁ (Histamine)",
     system: "Histaminergic system · Antagonist profile",
     color: "#059669",
-    dots: "●●●●● (Very High)",
-    desc: "Calming and sedating effect in acute agitation; somnolence; central appetite stimulation contributing to clinical weight gain and metabolic changes.",
-    note: "Very high preclinical affinity (Ki < 100 nM). Somnolence and weight gain are the related clinical observations.",
+    dots: "Ki < 100 nM · preclinical",
+    desc: "Preclinical binding profiles indicate affinity for histamine H1 receptors. In vitro affinity does not translate directly into clinical efficacy, potency, or a causal link to a particular adverse reaction.",
+    note: "EU SmPC section 5.1 lists the affinity. It does not attribute somnolence or increased appetite to this receptor.",
     x: 62,
     y: 80,
   },
@@ -66,9 +60,9 @@ const RECEPTORS: Record<string, ReceptorInfo> = {
     short: "M₁–M₅ (Muscarinic)",
     system: "Muscarinic system · Antagonist profile",
     color: "#7c3aed",
-    dots: "●●●●○ (High)",
-    desc: "Intrinsic anticholinergic activity providing protection against acute dystonia; can contribute to peripheral anticholinergic effects (dry mouth, constipation).",
-    note: "High preclinical affinity (Ki < 100 nM), with some protection against acute dystonia.",
+    dots: "Ki < 100 nM · preclinical",
+    desc: "Preclinical binding profiles indicate affinity for muscarinic M1–M5 receptors, which may be relevant to observed clinical tolerability. In vitro affinity does not by itself establish a clinical effect.",
+    note: "EU SmPC section 5.1 lists the affinity. It does not attribute anticholinergic adverse effects to these receptors.",
     x: 30,
     y: 80,
   },
@@ -78,9 +72,9 @@ const RECEPTORS: Record<string, ReceptorInfo> = {
     short: "α₁ (Adrenergic)",
     system: "Adrenergic system · Antagonist profile",
     color: "#d97706",
-    dots: "●●●●○ (Moderate-High)",
-    desc: "Peripheral vasodilation mediating transient orthostatic hypotension, reflex tachycardia, and dizziness, especially during initial dose titration.",
-    note: "Moderate to high preclinical affinity. Orthostatic effects are most likely during initial dose titration.",
+    dots: "Ki < 100 nM · preclinical",
+    desc: "Preclinical binding profiles indicate affinity for alpha-1 adrenergic receptors, which may be relevant to observed clinical tolerability. In vitro affinity does not by itself establish a clinical effect.",
+    note: "EU SmPC section 5.1 lists the affinity. It does not attribute orthostatic hypotension or dizziness to this receptor.",
     x: 18,
     y: 40,
   },
@@ -96,12 +90,9 @@ export default function MechanismOfActionPage() {
       <div className="hero">
         <div className="w">
           <div>
-            <p className="eb">Pharmacology &amp; Neurobiology</p>
-            <h1 className="serif">Mechanism of Action</h1>
-            <p>
-              A multi-receptor profile that may help address the complex symptoms of schizophrenia and bipolar
-              disorder.
-            </p>
+            <p className="eb">Pharmacology</p>
+            <h1 className="serif">Understanding the pharmacology of olanzapine</h1>
+            <p>A broad receptor-binding profile contributes to its pharmacological effects.</p>
             <div className="row">
               <a className="btn" href="#systems">
                 Interactive receptor map ↓
@@ -114,63 +105,36 @@ export default function MechanismOfActionPage() {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/moa-brain-receptors.jpg"
-              alt="Artistic multi-receptor ligand binding model"
+              src="/assets/moa-receptors.jpg"
+              alt="Brain with dopamine, serotonin, histamine, muscarinic, and adrenergic receptor pathways"
               loading="lazy"
             />
           </div>
         </div>
       </div>
 
-      <SectionNav />
-
       <div className="w">
         {/* Overview */}
         <section className="s" id="overview">
           <h2>Pharmacological profile overview</h2>
-          <div className="card">
-            <p style={{ fontSize: "16px", lineHeight: "1.6" }}>
-              Olanzapine is an atypical antipsychotic, antimanic, and mood-stabilizing agent characterized by a
-              broad in vitro binding profile across dopamine, serotonin, histamine, muscarinic, and adrenergic
-              receptors with high preclinical affinity (K<sub>i</sub> &lt; 100 nM).
-            </p>
-          </div>
-        </section>
-
-        {/* Receptor Binding Table */}
-        <section className="s" id="profile">
-          <h2>Receptor-binding profile &amp; clinical implications</h2>
-          <div className="card tw" style={{ padding: 0 }}>
-            <table>
-              <thead>
-                <tr>
-                  <th>Receptor system</th>
-                  <th>Relative affinity</th>
-                  <th>Potential clinical relevance</th>
-                </tr>
-              </thead>
-              <tbody>
-                {Object.values(RECEPTORS).map((r) => (
-                  <tr key={r.code}>
-                    <td>
-                      <b>{r.name}</b>
-                    </td>
-                    <td>
-                      <span className="dots">{r.dots}</span>
-                    </td>
-                    <td>{r.desc}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
+          <p className="story">
+            Olanzapine is an antipsychotic, antimanic and mood-stabilising agent with activity across several
+            neurotransmitter receptor systems.
+            <Cite n={1} section="5.1" />
+          </p>
+          <p className="story">
+            Its pharmacological profile includes activity at serotonin, dopamine, muscarinic, histamine and alpha-1
+            adrenergic receptors. Affinity in preclinical studies (Ki &lt; 100 nM) does not translate directly into
+            clinical efficacy or potency, and the EU SmPC does not assign individual adverse reactions to single
+            receptors.
+          </p>
         </section>
 
         {/* Interactive Receptor Map */}
         <section className="s" id="systems">
           <div className="spectrum-head">
             <h2>Receptor binding map</h2>
-            <p>Click any receptor node to inspect binding affinity and clinical correlation</p>
+            <p>Click any receptor node to inspect binding affinity and clinical correlation<Cite n={1} section="5.1" /></p>
           </div>
           <div className="bind">
             <div className="bind__stage">
@@ -210,9 +174,20 @@ export default function MechanismOfActionPage() {
               <p className="bind__system">{selected.system}</p>
               <div className="bind__stat">
                 <span>Preclinical binding affinity</span>
-                <b>Ki &lt; 100 nM · {selected.dots}</b>
+                <b>{selected.dots}</b>
               </div>
               <p>{selected.desc}</p>
+              <p className="source-line">
+                Affinity from EU SmPC section 5.1.
+                <Cite n={1} section="5.1" />
+                {(selectedKey === "D" || selectedKey === "S") && (
+                  <>
+                    {" "}
+                    Occupancy at clinical doses from Kapur 1998.
+                    <Cite n={12} />
+                  </>
+                )}
+              </p>
               <div className="bind__note" style={{ color: selected.color, borderColor: selected.color }}>
                 {selected.note}
               </div>
@@ -231,7 +206,6 @@ export default function MechanismOfActionPage() {
                 <AreaChart
                   label="Striatal D2 occupancy by dose"
                   yMax={100}
-                  band={{ from: 70, to: 80, label: "70–80% window" }}
                   points={[
                     { label: "5 mg", value: 55, display: "55% · observed range 43–64%" },
                     { label: "10 mg", value: 73, display: "73% · observed range 71–75%" },
@@ -265,15 +239,17 @@ export default function MechanismOfActionPage() {
                   </div>
                 </div>
 
-                <h3 style={{ marginTop: "16px" }}>Therapeutic window</h3>
+                <h3 style={{ marginTop: "16px" }}>How to read the occupancy data</h3>
                 <p style={{ marginTop: "6px" }}>
-                  Approved clinical doses (10–20 mg/day) maintain striatal D₂ receptor occupancy within the optimal
-                  70%–80% window, providing full antipsychotic efficacy while staying below the 80% threshold where
-                  extrapyramidal symptom (EPS) incidence rises sharply.
+                  Across 10–20 mg/day, individual D<sub>2</sub> occupancy ranged from 71% to 80%. Twelve patients
+                  were studied (three per dose). Receptor occupancy does not by itself predict the clinical response
+                  of an individual patient.
+                  <Cite n={12} />
                 </p>
               </div>
               <p style={{ fontSize: "12px", color: "var(--mut)", marginTop: "16px" }}>
                 Source: Kapur S et al. Am J Psychiatry. 1998;155(7):921–928.
+                <Cite n={12} />
               </p>
             </div>
           </div>
@@ -282,28 +258,22 @@ export default function MechanismOfActionPage() {
         {/* Clinical Relevance */}
         <section className="s" id="relevance">
           <h2>From pharmacology to clinical practice</h2>
-          <div className="grid g3">
-            <div className="card">
-              <h3>Symptom control</h3>
-              <p>
-                Dual dopamine/serotonin antagonism effectively targets psychotic symptoms, mania, and
-                secondary depressive features.
-              </p>
-            </div>
-            <div className="card">
-              <h3>Tolerability profile</h3>
-              <p>
-                Sub-threshold D₂ occupancy preserves motor functioning and lowers prolactin elevation liability
-                compared to first-generation neuroleptics.
-              </p>
-            </div>
-            <div className="card">
-              <h3>Broad clinical utility</h3>
-              <p>
-                Efficacy spans acute emergency stabilization through long-term recurrence prevention in
-                schizophrenia and bipolar I disorder.
-              </p>
-            </div>
+          <p className="story">
+            A mechanism-of-action explanation provides context for understanding the pharmacology of olanzapine. It
+            does not, by itself, establish the magnitude of clinical benefit or predict the response of an individual
+            patient.
+          </p>
+          <p className="story">
+            Clinical efficacy and safety should be evaluated using the relevant clinical evidence and approved
+            product information.
+          </p>
+          <div className="row">
+            <a className="btn" href="/clinical-evidence">
+              Review the clinical evidence
+            </a>
+            <a className="btn g" href="/safety-prescribing">
+              Safety and prescribing
+            </a>
           </div>
         </section>
       </div>

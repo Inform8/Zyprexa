@@ -1,18 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { ScheduleMatrix } from "@/components/Figures";
-import SectionNav from "@/components/SectionNav";
-import {
-  IconShield,
-  IconAlert,
-  IconPill,
-  IconWave,
-  IconRepeat,
-  IconScale,
-  IconClock,
-  IconChart,
-  IconHeart,
-} from "@/components/Icons";
+import { Cite } from "@/components/Cite";
 
 export const metadata: Metadata = {
   title: "Safety, Monitoring & Prescribing · ZYPREXA HCP",
@@ -28,8 +17,8 @@ export default function SafetyPrescribingPage() {
         <div className="w">
           <div>
             <p className="eb">Prescribing &amp; Safety Information</p>
-            <h1 className="serif">Safety, Monitoring &amp; Prescribing</h1>
-            <p>Important safety information, dosing guidance and monitoring recommendations.</p>
+            <h1 className="serif">Safety, monitoring and prescribing</h1>
+            <p>Individualized treatment requires consideration of contraindications, precautions and ongoing monitoring.</p>
             <div className="row">
               <a className="btn" href="#dosing">
                 Dosing &amp; administration ↓
@@ -50,75 +39,32 @@ export default function SafetyPrescribingPage() {
         </div>
       </div>
 
-      <SectionNav />
-
       <div className="w">
         {/* Important Safety Information Box */}
-        <section className="s" id="overview">
-          <div className="alert">
-            <h3 style={{ fontSize: "20px", display: "flex", alignItems: "center", gap: "8px" }}>
-              <IconAlert style={{ width: "22px", height: "22px" }} /> Important Safety Information
-            </h3>
-            <div className="grid g2" style={{ marginTop: "14px", alignItems: "stretch" }}>
-              <div>
-                <p>
-                  <b>Contraindications (SmPC 4.3):</b> Known hypersensitivity to olanzapine; known risk of
-                  narrow-angle glaucoma.
-                </p>
-                <p style={{ marginTop: "10px" }}>
-                  <b>Metabolic changes:</b> Clinically significant weight gain, hyperglycaemia, and
-                  dyslipidaemia can occur; regular baseline and periodic metabolic monitoring is required.
-                </p>
-                <p style={{ marginTop: "10px" }}>
-                  <b>NMS alert:</b> Discontinue immediately if clinical manifestations of neuroleptic malignant
-                  syndrome (NMS) or unexplained high fever occur.
-                </p>
-              </div>
-              <div
-                style={{
-                  background: "rgba(255,255,255,0.7)",
-                  padding: "16px",
-                  borderRadius: "12px",
-                  border: "1px solid rgba(214, 51, 74, 0.2)",
-                }}
-              >
-                <p>
-                  <b>Dementia warning:</b> Not recommended in elderly patients with dementia-related psychosis
-                  due to an observed increased incidence of mortality and cerebrovascular events.
-                </p>
-                <div className="dnr" style={{ marginTop: "12px" }}>
-                  <div>
-                    <div
-                      className="dn"
-                      style={
-                        {
-                          "--p": 35,
-                          "--c": "#d6334a",
-                        } as React.CSSProperties
-                      }
-                    >
-                      <b>3.5%</b>
-                    </div>
-                    Mortality: 3.5% olz vs 1.5% placebo
-                  </div>
-                  <div>
-                    <div
-                      className="dn"
-                      style={
-                        {
-                          "--p": 13,
-                          "--c": "#d97706",
-                        } as React.CSSProperties
-                      }
-                    >
-                      <b>1.3%</b>
-                    </div>
-                    Cerebrovascular: 1.3% vs 0.4% placebo
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <section className="s">
+          <p className="story">
+            Before prescribing Zyprexa, consult the current approved product information for the intended market.
+            The following content summarises selected considerations from the European SmPC and does not replace the
+            full prescribing document.
+          </p>
+        </section>
+
+        <section className="s" id="contraindications">
+          <h2>Contraindications</h2>
+          <p className="story">
+            According to the European SmPC, oral Zyprexa is contraindicated in patients with:
+            <Cite n={1} section="4.3" />
+          </p>
+          <ul className="plain-list">
+            <li>Hypersensitivity to olanzapine or to any of the excipients listed in section 6.1.</li>
+            <li>Known risk of narrow-angle glaucoma.</li>
+          </ul>
+          <p className="source-line">
+            Excipients include lactose monohydrate. The full qualitative list in SmPC section 6.1 also covers the
+            tablet core and the colour coating, and it differs by strength. That complete list was not reproduced
+            here. Consult section 6.1 of the current SmPC for the strength to be prescribed before treating a
+            patient with a known excipient hypersensitivity.
+          </p>
         </section>
 
         {/* Dosing and Administration */}
@@ -126,7 +72,11 @@ export default function SafetyPrescribingPage() {
           <h2>Dosing &amp; administration (EU SmPC 4.2; Table 1)</h2>
           <p className="lead">
             Approved dose range: 5–20 mg/day. Daily dosage may subsequently be adjusted on the basis of
-            individual clinical status. Dose escalations should occur at intervals of not less than 24 hours.
+            individual clinical status. An increase above the recommended starting dose should occur only after
+            appropriate clinical reassessment, and generally at intervals of not less than 24 hours. Olanzapine can
+            be given without regard to meals, as absorption is not affected by food. For patients who have been
+            receiving olanzapine for a manic episode, therapy for preventing recurrence continues at the same dose.
+            <Cite n={1} section="4.2" />
           </p>
 
           <div className="card">
@@ -187,16 +137,31 @@ export default function SafetyPrescribingPage() {
 
           <div className="card" style={{ marginTop: "16px" }}>
             <h3>Special populations</h3>
-            <p>
-              A lower starting dose of <b>5 mg/day</b> should be considered for elderly patients (≥ 65 years)
-              when clinical factors warrant. Consider a starting dose of 5 mg/day in patients with severe renal
-              or moderate hepatic impairment. Consider 5 mg/day when more than one factor is present that might
-              result in slower metabolism (female gender, geriatric age, non-smoking status).
-            </p>
-            <p style={{ marginTop: "8px" }}>
-              <b>Paediatric use:</b> ZYPREXA is not recommended for use in children and adolescents below 18 years
-              due to a lack of data on safety and efficacy and greater magnitude of weight gain.
-            </p>
+            <ul className="plain-list">
+              <li>
+                <strong>Older patients (65 years and over).</strong> A lower starting dose (5 mg/day) is not
+                routinely indicated but should be considered when clinical factors warrant.
+              </li>
+              <li>
+                <strong>Renal and/or hepatic impairment.</strong> A lower starting dose (5 mg) should be considered.
+                In moderate hepatic insufficiency (cirrhosis, Child-Pugh Class A or B), the starting dose should be
+                5 mg and only increased with caution.
+              </li>
+              <li>
+                <strong>Factors that may slow metabolism.</strong> When more than one factor is present (female
+                gender, geriatric age, non-smoking status), consider decreasing the starting dose. Dose escalation
+                should be conservative.
+              </li>
+              <li>
+                <strong>Smokers.</strong> Starting dose and range need not be routinely altered. Metabolism may be
+                induced by smoking; clinical monitoring is recommended and a dose increase may be considered if
+                necessary.
+              </li>
+              <li>
+                <strong>Children and adolescents.</strong> Not recommended below 18 years of age due to a lack of
+                data on safety and efficacy.
+              </li>
+            </ul>
           </div>
         </section>
 
@@ -217,22 +182,27 @@ export default function SafetyPrescribingPage() {
               <div className="card">
                 <h3>ZYPREXA coated tablets (oral)</h3>
                 <p>
-                  2.5 mg, 5 mg, 7.5 mg, 10 mg, 15 mg, and 20 mg strengths. Primary focus of this website; once-daily
-                  oral dosing.
+                  All dosing and safety content on this page refers to the oral formulation.
+                  <Cite n={1} />
                 </p>
               </div>
               <div className="card">
                 <h3>ZYPREXA powder for solution for injection</h3>
-                <p>
-                  10 mg vial for rapid control of agitation and disturbed behaviours in schizophrenia or mania
-                  when oral therapy is unsuitable.
-                </p>
+                <p>Short-term intramuscular use for agitation. Different dosing and precautions.<Cite n={2} /></p>
               </div>
               <div className="card">
                 <h3>ZYPADHERA (olanzapine pamoate)</h3>
                 <p>
-                  210 mg, 300 mg, and 405 mg prolonged-release suspension for IM injection every 2 to 4 weeks.
-                  Subject to post-injection observation.
+                  Prolonged-release injection with its own dosing and post-injection observation requirements.
+                  <Cite n={3} />
+                </p>
+              </div>
+              <div className="card">
+                <h3>ZYPREXA VELOTAB (orodispersible tablets)</h3>
+                <p>
+                  A separate oral formulation. Its SmPC was not supplied, so dose, administration and excipients for
+                  VELOTAB are not stated on this page. Use the approved VELOTAB product information for the target
+                  market.
                 </p>
               </div>
             </div>
@@ -248,6 +218,7 @@ export default function SafetyPrescribingPage() {
               In elderly patients with dementia-related psychosis, placebo-controlled trials showed a two-fold
               increase in mortality (3.5% vs 1.5%) and a three-fold increase in cerebrovascular events (1.3% vs
               0.4%). Olanzapine is not recommended in this population.
+              <Cite n={1} section="4.4" />
             </p>
           </details>
           <details>
@@ -256,6 +227,7 @@ export default function SafetyPrescribingPage() {
               Weight gain, hyperglycaemia, diabetic ketoacidosis, and dyslipidaemia have been reported. Clinical
               monitoring including baseline and periodic assessment of body weight, fasting plasma glucose, and
               fasting lipid profiles is recommended.
+              <Cite n={1} section="4.4" />
             </p>
           </details>
           <details>
@@ -264,6 +236,7 @@ export default function SafetyPrescribingPage() {
               Somnolence and postural dizziness are common adverse reactions. Patients should be cautioned about
               operating hazardous machinery, including motor vehicles, until they are reasonably certain that
               olanzapine therapy does not adversely affect them.
+              <Cite n={1} section="4.7" />
             </p>
           </details>
           <details>
@@ -272,6 +245,7 @@ export default function SafetyPrescribingPage() {
               NMS is a potentially fatal symptom complex associated with antipsychotic medicinal products. Clinical
               manifestations include hyperpyrexia, muscle rigidity, altered mental status, and autonomic
               instability. Discontinue all antipsychotic medicinal products immediately.
+              <Cite n={1} section="4.4" />
             </p>
           </details>
           <details>
@@ -280,6 +254,7 @@ export default function SafetyPrescribingPage() {
               The risk of tardive dyskinesia increases with long-term exposure. If signs or symptoms of tardive
               dyskinesia appear in a patient on olanzapine, dose reduction or medicinal product discontinuation
               should be considered.
+              <Cite n={1} section="4.4" />
             </p>
           </details>
           <details>
@@ -287,6 +262,7 @@ export default function SafetyPrescribingPage() {
             <p>
               Postural hypotension with or without tachycardia or syncope may occur, especially during the initial
               dose-titration period. Periodic blood pressure measurement is recommended in patients over 65 years.
+              <Cite n={1} section="4.4" />
             </p>
           </details>
           <details>
@@ -295,14 +271,23 @@ export default function SafetyPrescribingPage() {
               Transient, asymptomatic elevations of hepatic aminotransferases (ALT, AST) are frequently observed.
               Caution should be exercised in patients with signs and symptoms of hepatic impairment; assess liver
               function if clinically indicated.
+              <Cite n={1} section="4.4" />
             </p>
           </details>
           <details>
-            <summary>8. Other precautions</summary>
+            <summary>8. Other warnings in the SmPC</summary>
+            <ul>
+              <li><b>Parkinson&apos;s disease.</b> Not recommended for dopamine agonist-associated psychosis; worsening of parkinsonian symptoms and hallucinations was reported very commonly.</li>
+              <li><b>QT interval.</b> Caution with medicines known to increase QTc, especially in the elderly, congenital long QT syndrome, congestive heart failure, heart hypertrophy, hypokalaemia or hypomagnesaemia.</li>
+              <li><b>Thromboembolism.</b> Venous thromboembolism has been reported uncommonly. Identify risk factors such as immobilisation.</li>
+              <li><b>Seizures.</b> Use cautiously in patients with a history of seizures or factors that may lower the seizure threshold.</li>
+              <li><b>Sudden cardiac death.</b> In an observational study, the risk with olanzapine was approximately twice that in patients not using antipsychotics.</li>
+              <li><b>Anticholinergic activity.</b> Caution in prostatic hypertrophy, paralytic ileus and related conditions.</li>
+              <li><b>General CNS activity.</b> Caution with alcohol and other centrally acting medicines. Olanzapine may antagonise the effects of dopamine agonists.</li>
+              <li><b>Lactose.</b> Patients with rare hereditary galactose intolerance, total lactase deficiency or glucose-galactose malabsorption should not take this medicine.</li>
+            </ul>
             <p>
-              Exercise caution in patients with a history of seizures or with conditions that lower the seizure
-              threshold. In patients with Parkinson&apos;s disease, olanzapine is not recommended as it may worsen
-              parkinsonian symptoms and provoke hallucinations. Coated tablets contain lactose.
+              <Cite n={1} section="4.4" />
             </p>
           </details>
         </section>
@@ -310,7 +295,11 @@ export default function SafetyPrescribingPage() {
         {/* Monitoring Recommendations & Timeline */}
         <section className="s" id="monitoring">
           <h2>Monitoring recommendations</h2>
-          <p className="lead">Structured monitoring framework for metabolic and physical health parameters</p>
+          <p className="lead">
+            Structured monitoring framework for metabolic and physical health parameters. Intervals below are the
+            examples given in the product information, not a timetable that replaces clinical judgement.
+            <Cite n={1} section="4.4" />
+          </p>
           <ScheduleMatrix
             columns={["Baseline", "Week 4", "Week 8", "Week 12", "Quarterly", "Annually", "Every 5 yrs"]}
             rows={[
@@ -341,6 +330,11 @@ export default function SafetyPrescribingPage() {
         {/* Drug Interactions */}
         <section className="s" id="interactions">
           <h2>Drug interactions (SmPC 4.5; Table 3)</h2>
+          <p className="story">
+            Olanzapine is cleared largely through CYP1A2, so smoking and medicines that speed up or slow that enzyme
+            change exposure. The figures below are the ones stated in the European product information.
+            <Cite n={1} section="4.5" />
+          </p>
           <div className="card tw" style={{ padding: 0 }}>
             <table>
               <thead>
@@ -398,6 +392,7 @@ export default function SafetyPrescribingPage() {
                 Use only if the potential benefit justifies the potential risk to the fetus. Neonates exposed to
                 antipsychotics during the third trimester of pregnancy are at risk of extrapyramidal and/or
                 withdrawal symptoms following delivery.
+                <Cite n={1} section="4.6" />
               </p>
             </div>
             <div className="card">
@@ -405,16 +400,117 @@ export default function SafetyPrescribingPage() {
               <p>
                 Olanzapine was found to be excreted in human milk. Patients should be advised <b>not to breastfeed</b>{" "}
                 an infant if they are taking olanzapine.
+                <Cite n={1} section="4.6" />
               </p>
             </div>
             <div className="card">
               <h3>Discontinuation</h3>
               <p>
-                Acute symptoms such as sweating, insomnia, tremor, anxiety, nausea, or vomiting have been reported
-                very rarely when olanzapine is stopped abruptly. Gradual dose tapering is recommended.
+                Acute symptoms such as sweating, insomnia, tremor, anxiety, nausea or vomiting have been reported
+                rarely when olanzapine is stopped abruptly. Gradual tapering of the dose should be considered.
+                <Cite n={[1]} section="4.4" />
               </p>
             </div>
           </div>
+        </section>
+
+        <section className="s" id="adverse-reactions">
+          <h2>Adverse reactions</h2>
+          <p className="story">
+            Frequently reported adverse reactions include somnolence, weight gain, increased appetite, dizziness,
+            orthostatic hypotension and changes in glucose and lipid parameters. The full product information gives
+            the complete profile and frequency categories.
+            <Cite n={1} section="4.8" />
+          </p>
+          <h3>Reported in at least 1% of patients in clinical trials</h3>
+          <p className="source-line">As listed in the SmPC summary of the safety profile, in adults.<Cite n={1} section="4.8" /></p>
+          <ul className="plain-list">
+            {[
+              "Somnolence",
+              "Weight gain",
+              "Eosinophilia",
+              "Elevated prolactin",
+              "Elevated cholesterol, glucose and triglyceride levels",
+              "Glucosuria",
+              "Increased appetite",
+              "Dizziness",
+              "Akathisia",
+              "Parkinsonism",
+              "Leukopenia",
+              "Neutropenia",
+              "Dyskinesia",
+              "Orthostatic hypotension",
+              "Anticholinergic effects",
+              "Transient asymptomatic elevations of hepatic aminotransferases",
+              "Rash",
+              "Asthenia",
+              "Fatigue",
+              "Pyrexia",
+              "Arthralgia",
+              "Increased alkaline phosphatase",
+              "High gamma glutamyltransferase",
+              "High uric acid",
+              "High creatine phosphokinase",
+              "Oedema",
+            ].map((item) => (
+              <li key={item}>{item}</li>
+            ))}
+          </ul>
+          <p className="story">
+            In trials of up to 12 weeks, plasma prolactin exceeded the upper limit of normal in approximately 30% of
+            patients with normal baseline values. Elevations were generally mild.
+            <Cite n={1} section="4.8" />
+          </p>
+          <div id="reporting">
+            <h3>Reporting suspected adverse reactions</h3>
+            <p className="story">
+              Reporting suspected adverse reactions after authorisation is important. It allows continued monitoring
+              of the benefit/risk balance. Healthcare professionals are asked to report any suspected adverse
+              reactions via the national reporting system listed in Appendix V of the product information for their
+              market.
+              <Cite n={1} section="4.8" />
+            </p>
+            <p className="source-line">
+              Insert the confirmed contact for the target market before release. The rows below are placeholders,
+              not live reporting channels.
+            </p>
+            <div className="card tw" style={{ padding: 0, marginTop: "12px" }}>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Item</th>
+                    <th>Target-market detail</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>National competent authority</td>
+                    <td>To be confirmed (for example HPRA, MHRA or BfArM, depending on the market)</td>
+                  </tr>
+                  <tr>
+                    <td>Online reporting</td>
+                    <td>To be confirmed</td>
+                  </tr>
+                  <tr>
+                    <td>Telephone</td>
+                    <td>To be confirmed</td>
+                  </tr>
+                  <tr>
+                    <td>Postal address</td>
+                    <td>To be confirmed</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <a
+            className="more-link"
+            href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Full adverse-reaction table in the SmPC
+          </a>
         </section>
       </div>
     </main>

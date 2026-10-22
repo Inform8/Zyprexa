@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import UtilityBar from "@/components/UtilityBar";
 import Header from "@/components/Header";
+import SectionNav from "@/components/SectionNav";
 import Footer from "@/components/Footer";
 import HcpDialog from "@/components/HcpDialog";
 import ScrollCue from "@/components/ScrollCue";
@@ -44,6 +45,7 @@ export default function RootLayout({
     >
       <body>
         <Header />
+        <SectionNav />
         {children}
         <Footer />
         <HcpDialog />

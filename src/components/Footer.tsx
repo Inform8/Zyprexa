@@ -2,47 +2,71 @@ import Link from "next/link";
 
 export default function Footer() {
   return (
-    <footer>
+    <footer className="site-footer">
       <div className="w">
-        <Link href="/" className="logo" style={{ display: "inline-flex", alignItems: "center" }}>
-          <img
-            src="/assets/zyprexa-logo.png"
-            alt="ZYPREXA® (olanzapine)"
-            style={{
-              height: "32px",
-              width: "auto",
-              filter: "brightness(0) invert(1)",
-              opacity: 0.9,
-              display: "block",
-            }}
-          />
-        </Link>
-        <div className="row" style={{ marginTop: "14px", marginBottom: "14px" }}>
-          <Link href="/#indications">Indications</Link>
-          <Link href="/schizophrenia">Schizophrenia</Link>
-          <Link href="/bipolar-disorder">Bipolar Disorder</Link>
-          <Link href="/clinical-evidence">Clinical Evidence</Link>
-          <Link href="/mechanism-of-action">Mechanism of Action</Link>
-          <Link href="/safety-prescribing">Safety</Link>
-          <Link href="/references">References</Link>
-          <Link href="/references#medical">Contact</Link>
-          <a
-            href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            EMA SmPC (PDF) ↗
-          </a>
+        <div className="footer-grid">
+          <div className="footer-brand">
+            <p className="footer-wordmark">
+              <b>ZYPREXA<sup>®</sup></b> <span>(olanzapine)</span>
+            </p>
+            <p>Information for healthcare professionals.</p>
+            <p className="footer-note">
+              Marketing authorisation holder: CHEPLAPHARM Registration GmbH, Weiler Straße 5e, 79540 Lörrach,
+              Germany.
+            </p>
+          </div>
+
+          <nav aria-label="Footer">
+            <h2>On this site</h2>
+            <ul className="footer-links">
+              <li>
+                <Link href="/references#regulatory">Product information</Link>
+              </li>
+              <li>
+                <Link href="/safety-prescribing">Safety information</Link>
+              </li>
+              <li>
+                <Link href="/references#references">Scientific references</Link>
+              </li>
+              <li>
+                <Link href="/references#medical">Medical information</Link>
+              </li>
+            </ul>
+          </nav>
+
+          <div>
+            <h2>Reporting adverse reactions</h2>
+            <p className="footer-note">
+              Report suspected adverse reactions through the national system for your market. Contact details are
+              listed under pharmacovigilance on the safety page.
+            </p>
+            <p className="footer-note">
+              <Link href="/safety-prescribing#reporting">National reporting contacts</Link>
+            </p>
+          </div>
         </div>
-        <p>
-          This site is intended for healthcare professionals only. Content is based on the approved EU SmPC for
-          ZYPREXA coated tablets; always consult the current approved product information before prescribing.
-        </p>
-        <p style={{ marginTop: "8px", fontSize: "11.5px", opacity: 0.75 }}>
-          Marketing Authorisation Holder: CHEPLAPHARM Registration GmbH, Weiler Straße 5e, 79540 Lörrach, Germany.
-          Reporting suspected adverse reactions after authorisation of the medicinal product is important. It allows
-          continued monitoring of the benefit/risk balance.
-        </p>
+
+        <div className="footer-legal">
+          <p>
+            This site is intended for healthcare professionals only. Content is based on the approved EU SmPC for
+            ZYPREXA coated tablets; always consult the current approved product information before prescribing.
+            ZYPREXA® is a registered trademark of CHEPLAPHARM.
+          </p>
+          <p>Prepared October 2026. Job code to be assigned for the target market.</p>
+          <nav aria-label="Legal">
+            <ul className="footer-links">
+              <li>
+                <Link href="/legal#privacy">Privacy Policy</Link>
+              </li>
+              <li>
+                <Link href="/legal#cookies">Cookie Preferences</Link>
+              </li>
+              <li>
+                <Link href="/legal#terms">Terms of Use</Link>
+              </li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </footer>
   );

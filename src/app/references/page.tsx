@@ -1,78 +1,22 @@
 "use client";
 
-import { useState } from "react";
-import SectionNav from "@/components/SectionNav";
-import {
-  IconDownload,
-  IconBuilding,
-  IconMail,
-  IconSearch,
-  IconDoc,
-} from "@/components/Icons";
+import { useMemo, useState } from "react";
+import { REFERENCES, type RefCategory } from "@/lib/references";
 
-interface Reference {
-  id: string;
-  citation: string;
-  link?: string;
-}
+type RefFilter = "all" | RefCategory;
 
-const REFERENCES: Reference[] = [
-  {
-    id: "1",
-    citation: "ZYPREXA Summary of Product Characteristics (Annex I). CHEPLAPHARM / EMA.",
-    link: "https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf",
-  },
-  {
-    id: "2",
-    citation: "ZYPREXA 10 mg powder for solution for injection SmPC. CHEPLAPHARM / EMA.",
-  },
-  {
-    id: "3",
-    citation: "ZYPADHERA powder and solvent for prolonged release suspension SmPC. CHEPLAPHARM / EMA.",
-    link: "https://www.ema.europa.eu/en/medicines/human/EPAR/zypadhera",
-  },
-  {
-    id: "4",
-    citation: "DSM-5-TR (Diagnostic and Statistical Manual of Mental Disorders, 5th ed. Text Revision). APA, 2022.",
-  },
-  {
-    id: "5",
-    citation: "Stahl SM. Beyond the dopamine hypothesis: three neural networks. CNS Spectr. 2018;23(3):187–191.",
-  },
-  {
-    id: "6",
-    citation:
-      "American Psychiatric Association Practice Guideline for the Treatment of Patients With Schizophrenia (3rd ed.). APA, 2021.",
-  },
-  {
-    id: "7",
-    citation: "Goodwin GM et al. Evidence-based guidelines for treating bipolar disorder (3rd ed.). J Psychopharmacol. 2016;30(6):495–553.",
-  },
-  {
-    id: "8",
-    citation: "Tandon R et al. World Psychiatric Association statement on comparative effectiveness of antipsychotics. Schizophr Res. 2008;100:20–38.",
-  },
-  {
-    id: "9",
-    citation: "World Health Organization. 23rd Model List of Essential Medicines. WHO, 2023/2024.",
-  },
-  {
-    id: "10",
-    citation: "Beasley CM Jr et al. Olanzapine vs. placebo and haloperidol in schizophrenia. Neuropsychopharmacology. 1996;14(2):111–123.",
-  },
-  {
-    id: "11",
-    citation: "Tohen M et al. Olanzapine versus placebo in acute mania. Am J Psychiatry. 1999;156(5):702–709.",
-  },
-  {
-    id: "12",
-    citation: "Kapur S et al. 5-HT₂ and D₂ receptor occupancy of olanzapine: a PET investigation. Am J Psychiatry. 1998;155(7):921–928.",
-  },
-  {
-    id: "13",
-    citation: "ZYPREXA Prescribing Information (US FDA; Section 12.2 receptor pharmacology rationale).",
-  },
+const FILTERS: { id: RefFilter; label: string }[] = [
+  { id: "all", label: "All" },
+  { id: "study", label: "Clinical studies" },
+  { id: "guideline", label: "Guidelines" },
+  { id: "regulatory", label: "Regulatory" },
 ];
+
+function kicker(category: RefCategory, kind: string) {
+  const label =
+    category === "study" ? "Clinical study" : category === "guideline" ? "Guideline" : "Regulatory";
+  return `${label} · ${kind}`;
+}
 
 const ABBREVIATIONS = [
   ["ALT / AST", "Alanine / Aspartate aminotransferase"],
@@ -99,16 +43,23 @@ const ABBREVIATIONS = [
 
 export default function ReferencesPage() {
   const [refQuery, setRefQuery] = useState("");
+  const [refFilter, setRefFilter] = useState<RefFilter>("all");
   const [abbQuery, setAbbQuery] = useState("");
 
-  const filteredRefs = REFERENCES.filter((r) => {
-    const q = refQuery.toLowerCase();
-    return (
-      r.citation.toLowerCase().includes(q) ||
-      `ref ${r.id}`.includes(q) ||
-      r.id.includes(q)
-    );
-  });
+  const filteredRefs = useMemo(() => {
+    const q = refQuery.trim().toLowerCase();
+    return REFERENCES.filter((r) => {
+      if (refFilter !== "all" && r.category !== refFilter) return false;
+      if (!q) return true;
+      return [String(r.n), r.title, r.authors, r.source, r.kind, r.usedFor, r.topics.join(" ")]
+        .join(" ")
+        .toLowerCase()
+        .includes(q);
+    });
+  }, [refQuery, refFilter]);
+
+  const counts = (id: RefFilter) =>
+    REFERENCES.filter((r) => id === "all" || r.category === id).length;
 
   const filteredAbbs = ABBREVIATIONS.filter(([abbr, def]) => {
     const q = abbQuery.toLowerCase();
@@ -144,100 +95,74 @@ export default function ReferencesPage() {
         </div>
       </div>
 
-      <SectionNav />
-
       <div className="w">
         {/* Searchable Bibliography */}
         <section className="s" id="references">
-          <h2>Searchable master reference bibliography (13 references)</h2>
-          <div style={{ position: "relative" }}>
-            <input
-              className="src"
-              type="search"
-              value={refQuery}
-              onChange={(e) => setRefQuery(e.target.value)}
-              placeholder="Search references, authors, topics or keywords…"
-              aria-label="Search references"
-              style={{ paddingLeft: "42px" }}
-            />
-            <IconSearch
-              style={{
-                position: "absolute",
-                left: "14px",
-                top: "14px",
-                width: "18px",
-                height: "18px",
-                color: "var(--mut)",
-                pointerEvents: "none",
-              }}
-            />
-          </div>
+          <h2>References ({REFERENCES.length})</h2>
+          <div className="ref-board">
+            <div className="ref-toolbar">
+              <input
+                className="src"
+                type="search"
+                value={refQuery}
+                onChange={(e) => setRefQuery(e.target.value)}
+                placeholder="Search references, topics or keywords…"
+                aria-label="Search references"
+              />
+              <div className="ref-filters" role="tablist" aria-label="Filter references">
+                {FILTERS.map((filter) => (
+                  <button
+                    key={filter.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={refFilter === filter.id}
+                    className={refFilter === filter.id ? "is-on" : ""}
+                    onClick={() => setRefFilter(filter.id)}
+                  >
+                    {filter.label} <span>({counts(filter.id)})</span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
-          <div className="card">
             {filteredRefs.length === 0 ? (
-              <p style={{ padding: "12px 0", color: "var(--mut)" }}>
-                No references match your search query &ldquo;{refQuery}&rdquo;.
-              </p>
+              <p className="ref-empty">No references match “{refQuery.trim()}”.</p>
             ) : (
-              filteredRefs.map((r) => (
-                <div key={r.id} className="ref">
-                  <b>Ref {r.id}</b>
-                  <div>
-                    <span>{r.citation}</span>
-                    {r.link && (
-                      <>
-                        {" "}
-                        <a href={r.link} target="_blank" rel="noopener noreferrer">
-                          Open ↗
+              <ol className="ref-rows">
+                {filteredRefs.map((r) => (
+                  <li key={r.n} id={`ref-${r.n}`} className="ref-row">
+                    <span className="ref-badge" aria-hidden="true">
+                      {String(r.n).padStart(2, "0")}
+                    </span>
+                    <div>
+                      <p className="ref-kicker">{kicker(r.category, r.kind)}</p>
+                      <h3>
+                        {r.authors}. {r.title}
+                      </h3>
+                      <p>
+                        {r.source}
+                        {r.year ? ` · ${r.year}` : ""}. {r.usedFor}
+                      </p>
+                      {r.links[0] ? (
+                        <a href={r.links[0].href} target="_blank" rel="noopener noreferrer">
+                          {r.links[0].label} ↗
                         </a>
-                      </>
-                    )}
-                  </div>
-                </div>
-              ))
+                      ) : (
+                        <span className="ref-nolink">No external link available</span>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ol>
             )}
-          </div>
-        </section>
-
-        {/* Official Regulatory Product Documents */}
-        <section className="s" id="regulatory">
-          <h2>Official regulatory product documents</h2>
-          <div className="grid g3">
-            <a
-              className="card"
-              href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h3>ZYPREXA SmPC</h3>
-              <p>EMA Annex I official prescribing summary of product characteristics (PDF).</p>
-            </a>
-            <a
-              className="card"
-              href="https://www.ema.europa.eu/en/medicines/human/EPAR/zyprexa"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h3>Patient Information Leaflet (PIL)</h3>
-              <p>EMA Annex III B official instructions and information for patients – EMA product page.</p>
-            </a>
-            <a
-              className="card"
-              href="https://www.ema.europa.eu/en/medicines/human/EPAR/zypadhera"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h3>ZYPADHERA SmPC</h3>
-              <p>Separate official prescribing document for prolonged-release suspension – EMA page.</p>
-            </a>
           </div>
         </section>
 
         {/* Literature Matrix by Clinical Topic */}
         <section className="s" id="guidelines">
-          <h2>Literature by clinical topic matrix</h2>
-          <div className="card tw" style={{ padding: 0 }}>
-            <table>
+          <h2>Literature matrix</h2>
+          <div className="ref-board ref-board--table">
+            <table className="ref-table">
               <thead>
                 <tr>
                   <th>Clinical topic</th>
@@ -279,7 +204,7 @@ export default function ReferencesPage() {
                   <td>
                     <b>Pharmacology and receptor binding</b>
                   </td>
-                  <td>Ref 1 (Section 5.1), Refs 12 (Kapur 1998), 13 (FDA 12.2)</td>
+                  <td>Ref 1 (Section 5.1), Ref 12 (Kapur 1998). Receptor–adverse-effect links from the US label are not used.</td>
                 </tr>
                 <tr>
                   <td>
@@ -289,6 +214,48 @@ export default function ReferencesPage() {
                 </tr>
               </tbody>
             </table>
+          </div>
+        </section>
+
+        {/* Official Regulatory Product Documents */}
+        <section className="s" id="regulatory">
+          <h2>Official regulatory product documents</h2>
+          <div className="grid g2">
+            <a
+              className="card"
+              href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <h3>ZYPREXA SmPC</h3>
+              <p>EMA Annex I official prescribing summary of product characteristics (PDF).</p>
+            </a>
+            <a
+              className="card"
+              href="https://www.ema.europa.eu/en/medicines/human/EPAR/zyprexa"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <h3>Patient Information Leaflet (PIL)</h3>
+              <p>EMA Annex III B official instructions and information for patients – EMA product page.</p>
+            </a>
+            <a
+              className="card"
+              href="https://www.ema.europa.eu/en/medicines/human/EPAR/zypadhera"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <h3>ZYPADHERA SmPC</h3>
+              <p>Separate official prescribing document for prolonged-release suspension – EMA page.</p>
+            </a>
+            <div className="card">
+              <h3>ZYPREXA VELOTAB</h3>
+              <p>
+                Orodispersible tablets are a separate oral formulation. They are mentioned in related product
+                literature. A VELOTAB SmPC was not supplied for this site, so dosing and excipients for VELOTAB are
+                not described here. Use the SmPC approved for that formulation in the target market.
+              </p>
+            </div>
           </div>
         </section>
 
@@ -305,10 +272,17 @@ export default function ReferencesPage() {
               </p>
             </div>
             <div className="card">
-              <h3>Medical enquiries protocol</h3>
+              <h3>Medical enquiries</h3>
               <p style={{ marginTop: "6px" }}>
-                Healthcare professionals seeking further medical or scientific information regarding ZYPREXA should
-                contact national medical affairs or the local representatives identified in the package leaflet.
+                A market-specific medical information telephone number, email and web form were not supplied. Until
+                they are confirmed, use the local representatives listed in the package leaflet.
+              </p>
+              <p style={{ marginTop: "10px" }}>
+                Telephone: to be confirmed for the target market
+                <br />
+                Email: to be confirmed for the target market
+                <br />
+                Enquiry form: to be confirmed for the target market
               </p>
             </div>
           </div>
@@ -317,7 +291,7 @@ export default function ReferencesPage() {
         {/* Abbreviations Glossary */}
         <section className="s" id="abbreviations">
           <h2>Master clinical abbreviations glossary</h2>
-          <div style={{ position: "relative" }}>
+          <div className="ref-board ref-board--table">
             <input
               className="src"
               type="search"
@@ -325,23 +299,8 @@ export default function ReferencesPage() {
               onChange={(e) => setAbbQuery(e.target.value)}
               placeholder="Search abbreviations or definitions…"
               aria-label="Search abbreviations"
-              style={{ paddingLeft: "42px" }}
             />
-            <IconSearch
-              style={{
-                position: "absolute",
-                left: "14px",
-                top: "14px",
-                width: "18px",
-                height: "18px",
-                color: "var(--mut)",
-                pointerEvents: "none",
-              }}
-            />
-          </div>
-
-          <div className="card tw" style={{ padding: 0 }}>
-            <table>
+            <table className="ref-table">
               <tbody>
                 {filteredAbbs.map(([abbr, def]) => (
                   <tr key={abbr}>

@@ -18,7 +18,7 @@ function pageForPath(pathname: string) {
 function readOffset(bar: HTMLElement | null) {
   const root = getComputedStyle(document.documentElement);
   const headerH = parseFloat(root.getPropertyValue("--header-height")) || 64;
-  const barH = bar?.getBoundingClientRect().height || parseFloat(root.getPropertyValue("--section-nav-height")) || 58;
+  const barH = bar?.getBoundingClientRect().height || 0;
   return headerH + barH + SCROLL_GAP;
 }
 
@@ -44,15 +44,14 @@ export default function SectionNav() {
     const header = document.querySelector<HTMLElement>("header.site-header");
     const apply = () => {
       if (header) {
-        const height = Math.round(header.getBoundingClientRect().height);
+        const collapsed = header.classList.contains("is-hidden");
+        const height = collapsed ? 0 : Math.round(header.offsetHeight);
         document.documentElement.style.setProperty("--header-height", `${height}px`);
       }
       const nav = navRef.current;
       if (nav) {
         const height = Math.round(nav.getBoundingClientRect().height);
         document.documentElement.style.setProperty("--section-nav-height", `${height}px`);
-      } else {
-        document.documentElement.style.setProperty("--section-nav-height", "0px");
       }
     };
 
@@ -146,7 +145,11 @@ export default function SectionNav() {
   };
 
   return (
-    <nav ref={navRef} className="section-nav" aria-label="On this page">
+    <nav
+      ref={navRef}
+      className="section-nav"
+      aria-label="On this page"
+    >
       <div className="w">
         <div className="section-nav__row" ref={rowRef}>
           {sections.map((sec) => {

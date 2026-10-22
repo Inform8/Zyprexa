@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -22,9 +22,9 @@ export const NAV_ITEMS: NavItem[] = [
     secs: [
       { id: "indications", title: "Approved indications" },
       { id: "topics", title: "Explore key topics" },
-      { id: "trusted", title: "Trusted in practice" },
-      { id: "pi", title: "Prescribing information" },
+      { id: "about", title: "About olanzapine" },
       { id: "receptors", title: "Receptor profile" },
+      { id: "pi", title: "Prescribing information" },
     ],
   },
   {
@@ -69,7 +69,6 @@ export const NAV_ITEMS: NavItem[] = [
     href: "/mechanism-of-action",
     secs: [
       { id: "overview", title: "Overview" },
-      { id: "profile", title: "Receptor profile" },
       { id: "systems", title: "Receptor systems" },
       { id: "pet", title: "PET occupancy" },
       { id: "relevance", title: "Clinical relevance" },
@@ -79,13 +78,14 @@ export const NAV_ITEMS: NavItem[] = [
     name: "Safety & prescribing",
     href: "/safety-prescribing",
     secs: [
-      { id: "overview", title: "Overview" },
+      { id: "contraindications", title: "Contraindications" },
       { id: "dosing", title: "Dosing" },
       { id: "formulations", title: "Formulations" },
       { id: "warnings", title: "Warnings" },
       { id: "monitoring", title: "Monitoring" },
       { id: "interactions", title: "Interactions" },
-      { id: "special", title: "Pregnancy & discontinuation" },
+      { id: "special", title: "Pregnancy" },
+      { id: "adverse-reactions", title: "Adverse reactions" },
     ],
   },
   {
@@ -93,8 +93,8 @@ export const NAV_ITEMS: NavItem[] = [
     href: "/references",
     secs: [
       { id: "references", title: "References" },
-      { id: "regulatory", title: "Regulatory" },
-      { id: "guidelines", title: "Guidelines" },
+      { id: "guidelines", title: "Literature matrix" },
+      { id: "regulatory", title: "Regulatory documents" },
       { id: "medical", title: "Medical information" },
       { id: "abbreviations", title: "Abbreviations" },
     ],
@@ -106,7 +106,6 @@ export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdownIdx, setActiveDropdownIdx] = useState<number | null>(null);
 
-  // Close menus when route changes
   useEffect(() => {
     setMobileMenuOpen(false);
     setActiveDropdownIdx(null);

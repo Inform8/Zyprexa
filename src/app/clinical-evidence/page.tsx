@@ -1,13 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import SectionNav from "@/components/SectionNav";
 import { ColumnChart } from "@/components/Figures";
-import {
-  IconCheck,
-  IconDoc,
-  IconShield,
-} from "@/components/Icons";
+import { Cite } from "@/components/Cite";
 
 interface Study {
   cat: string;
@@ -23,7 +18,7 @@ const STUDIES: Study[] = [
     cat: "Schizophrenia",
     pop: "Schizophrenia (positive & negative symptoms, n > 2,900)",
     design: "2 placebo-controlled, 3 comparator-controlled trials",
-    dur: "Not stated in SmPC",
+    dur: "Not stated in SmPC 5.1",
     endpoint: "Positive & negative symptoms",
     outcome:
       "Statistically significantly greater improvement in negative as well as positive symptoms in 2/2 placebo and 2/3 comparator trials.",
@@ -32,8 +27,8 @@ const STUDIES: Study[] = [
     cat: "Schizophrenia",
     pop: "Schizophrenia with depressive symptoms (n = 1,481, baseline MADRS 16.6)",
     design: "Double-blind vs. haloperidol",
-    dur: "6 weeks",
-    endpoint: "Secondary: MADRS mood score change",
+    dur: "Not stated in SmPC 5.1",
+    endpoint: "Secondary analysis: MADRS mood score change",
     outcome: "−6.0 olanzapine vs. −3.1 haloperidol (p = 0.001). Statistically significant mood improvement.",
   },
   {
@@ -41,16 +36,16 @@ const STUDIES: Study[] = [
     pop: "Bipolar manic / mixed episode (monotherapy)",
     design: "Double-blind vs. placebo",
     dur: "3 weeks",
-    endpoint: "Primary: Manic symptom reduction",
-    outcome: "Superior efficacy to placebo in reducing manic symptoms across primary endpoints.",
+    endpoint: "Not specified in SmPC: reduction of manic symptoms",
+    outcome: "Superior efficacy to placebo in reduction of manic symptoms over 3 weeks.",
   },
   {
     cat: "Acute mania",
     pop: "Bipolar manic / mixed episode (active comparator)",
     design: "Double-blind vs. divalproex",
     dur: "3 weeks",
-    endpoint: "Primary: Manic symptom reduction",
-    outcome: "Superior efficacy to divalproex in manic symptom reduction.",
+    endpoint: "Not specified in SmPC: reduction of manic symptoms",
+    outcome: "Superior efficacy to divalproex in reduction of manic symptoms over 3 weeks.",
   },
   {
     cat: "Acute mania",
@@ -85,8 +80,8 @@ const STUDIES: Study[] = [
     outcome: "Statistically non-inferior to lithium: 30.0% vs. 38.3% (p = 0.055).",
   },
   {
-    cat: "Long-term",
-    pop: "Manic/mixed episode on olanzapine + mood stabilizer",
+    cat: "Recurrence prevention",
+    pop: "Manic or mixed episode, stabilised on olanzapine plus lithium or valproate",
     design: "Co-therapy vs. lithium/valproate alone",
     dur: "18 months",
     endpoint: "Delay of bipolar recurrence",
@@ -98,7 +93,7 @@ const STUDIES: Study[] = [
 export default function ClinicalEvidencePage() {
   const [filter, setFilter] = useState("All");
 
-  const categories = ["All", "Schizophrenia", "Acute mania", "Recurrence prevention", "Long-term"];
+  const categories = ["All", "Schizophrenia", "Acute mania", "Recurrence prevention"];
 
   const filteredStudies =
     filter === "All" ? STUDIES : STUDIES.filter((s) => s.cat === filter);
@@ -110,8 +105,11 @@ export default function ClinicalEvidencePage() {
         <div className="w">
           <div>
             <p className="eb">Clinical Evidence · EU SmPC Section 5.1</p>
-            <h1 className="serif">Clinical Evidence</h1>
-            <p>A comprehensive review of the clinical data for olanzapine in schizophrenia and bipolar disorder.</p>
+            <h1 className="serif">Clinical evidence for olanzapine</h1>
+            <p>
+              Reviewing clinical outcomes in schizophrenia, manic episodes, and recurrence prevention in bipolar
+              disorder.
+            </p>
             <div className="row">
               <a className="btn" href="#explorer">
                 Study explorer ↓
@@ -124,39 +122,34 @@ export default function ClinicalEvidencePage() {
           <div>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/assets/hero-brain-3d.jpg"
-              alt="Clinical neuropharmacology and study evaluation model"
+              src="/assets/clinical-studies.jpg"
+              alt="Clinical study charts, laboratory slide, and research documents"
               loading="lazy"
             />
           </div>
         </div>
       </div>
 
-      <SectionNav />
-
       <div className="w">
-        {/* Metric stats banner */}
-        <section className="s" style={{ paddingTop: "20px" }}>
-          <div className="card grid g3 keep stat">
-            <div>
-              <b>9</b>
-              Clinical studies in EU SmPC section 5.1
-            </div>
-            <div>
-              <b>4</b>
-              Study categories (Schizophrenia, Acute Mania, Recurrence, Long-Term)
-            </div>
-            <div>
-              <b>12+</b>
-              Evaluated primary and secondary endpoints
-            </div>
-          </div>
+        <section className="s">
+          <p className="story">
+            The clinical evidence for olanzapine includes studies of symptom improvement in schizophrenia, treatment
+            of manic episodes and prevention of recurrence in bipolar disorder.
+          </p>
+          <p className="story">
+            Evidence should be considered in the context of the indication, patient population, comparator, endpoint
+            and duration of follow-up. Individual study results do not necessarily predict the response of every
+            patient.
+          </p>
         </section>
 
         {/* Interactive Study Explorer */}
         <section className="s" id="explorer">
           <h2>Interactive study explorer</h2>
-          <p className="lead">Complete 9-study dataset from EU SmPC section 5.1. Filter by category.</p>
+          <p className="lead">
+            Complete 9-study dataset from EU SmPC section 5.1. Filter by category.
+            <Cite n={1} section="5.1" />
+          </p>
 
           <div className="tabs" id="flt">
             {categories.map((c) => (
@@ -197,6 +190,16 @@ export default function ClinicalEvidencePage() {
               </tbody>
             </table>
           </div>
+          <p className="source-line">
+            * Duration and other parameters are those of the EU registration trials summarised in SmPC section 5.1.
+            Where the SmPC does not state duration, endpoint, sample size, blinding or inclusion criteria, the cell
+            says so. Those details are not inferred.
+          </p>
+          <p className="source-line">
+            Primary publications cited here: Beasley et al. 1996 (reference 10) for the 6-week North American
+            schizophrenia trial, and Tohen et al. 1999 (reference 11) for the published acute mania versus placebo
+            trial. The other rows are an EU SmPC section 5.1 summary; their primary publications were not supplied.
+          </p>
         </section>
 
         {/* Schizophrenia Efficacy Section */}
@@ -204,7 +207,10 @@ export default function ClinicalEvidencePage() {
           <div className="sec-card">
             <div className="sec-head">
               <h2>Schizophrenia – Pivotal Efficacy &amp; Safety Profile</h2>
-              <p>Beasley et al. 1996 and pivotal multi-center clinical trials reported in EU SmPC 5.1.</p>
+              <p>
+                Beasley et al. 1996 and pivotal multi-center clinical trials reported in EU SmPC 5.1.
+                <Cite n={[10, 1]} />
+              </p>
             </div>
 
             {/* Row 1: Core Efficacy Outcomes */}
@@ -388,7 +394,10 @@ export default function ClinicalEvidencePage() {
           <div className="sec-card">
             <div className="sec-head">
               <h2>Acute mania – Tohen et al. 1999</h2>
-              <p>3-week double-blind, parallel-group trial in 139 bipolar I manic/mixed patients (EU SmPC 5.1).</p>
+              <p>
+                3-week double-blind, parallel-group trial in 139 bipolar I manic/mixed patients (EU SmPC 5.1).
+                <Cite n={[11, 1]} />
+              </p>
             </div>
             <div className="grid g2">
               {/* Left Card: YMRS Total Score Change */}
@@ -467,7 +476,10 @@ export default function ClinicalEvidencePage() {
           <div className="sec-card">
             <div className="sec-head">
               <h2>Bipolar Recurrence Prevention – 12-Month Studies</h2>
-              <p>Relapse prevention data in patients achieving remission on olanzapine (EU SmPC 5.1).</p>
+              <p>
+                Relapse prevention data in patients achieving remission on olanzapine (EU SmPC 5.1).
+                <Cite n={1} section="5.1" />
+              </p>
             </div>
             <div className="grid g2">
               <div className="card">
@@ -524,7 +536,10 @@ export default function ClinicalEvidencePage() {
           <div className="sec-card">
             <div className="sec-head">
               <h2>Long-Term Exposure &amp; Categorical Weight Gain</h2>
-              <p>EU SmPC Section 4.8 weight gain threshold analysis and 18-month co-therapy study findings.</p>
+              <p>
+                EU SmPC Section 4.8 weight gain threshold analysis and 18-month co-therapy study findings.
+                <Cite n={1} section="4.8" />
+              </p>
             </div>
             <div className="grid g2">
               <div className="card">
@@ -598,8 +613,8 @@ export default function ClinicalEvidencePage() {
                     </div>
                   </div>
                 </div>
-                <div className="stat-note highlight">
-                  Monotherapy maintenance is standard protocol
+                <div className="stat-note">
+                  Not statistically significantly superior to lithium or valproate alone
                 </div>
               </div>
             </div>
@@ -610,8 +625,11 @@ export default function ClinicalEvidencePage() {
         <section className="s" id="guidelines">
           <div className="sec-card">
             <div className="sec-head">
-              <h2>International Clinical Practice Guidelines</h2>
-              <p>Consensus recommendations across leading psychiatric governing bodies.</p>
+              <h2>Guideline and formulary context</h2>
+              <p>
+                Treatment guidelines place olanzapine among several options. Recommendations depend on the phase of
+                illness, the patient&apos;s preferences and how well the adverse-effect profile suits that person.
+              </p>
             </div>
             <div className="grid g3">
               <div className="card">
@@ -619,11 +637,14 @@ export default function ClinicalEvidencePage() {
                   <h3>BAP 2016</h3>
                   <p className="muted" style={{ fontSize: "12.5px" }}>British Association for Psychopharmacology</p>
                   <p style={{ marginTop: "10px" }}>
-                    Recommended as first-line intervention for acute severe mania and prevention of manic relapse in maintenance therapy.
+                    For severe mania, haloperidol, olanzapine, risperidone and quetiapine are described as particularly
+                    effective. In long-term treatment, lithium is recommended as initial monotherapy. Olanzapine is
+                    among the agents shown to prevent manic relapse. Weight gain is noted as a prominent adverse effect.
+                    <Cite n={7} />
                   </p>
                 </div>
-                <div className="stat-note highlight">
-                  Grade A Recommendation
+                <div className="stat-note">
+                  Bipolar disorder
                 </div>
               </div>
               <div className="card">
@@ -631,23 +652,42 @@ export default function ClinicalEvidencePage() {
                   <h3>APA 2021</h3>
                   <p className="muted" style={{ fontSize: "12.5px" }}>American Psychiatric Association</p>
                   <p style={{ marginTop: "10px" }}>
-                    Practice guideline recommendation for schizophrenia maintenance, relapse prevention, and acute symptom remission.
+                    Treat with an antipsychotic and monitor response and adverse effects. Continue an antipsychotic
+                    after symptoms improve, preferably the same one. The guideline does not rank individual
+                    antipsychotics. A long-acting injection may be used if the patient prefers it or adherence has
+                    been poor.
+                    <Cite n={6} />
                   </p>
                 </div>
-                <div className="stat-note highlight">
-                  Primary Guideline Support
+                <div className="stat-note">
+                  Schizophrenia
                 </div>
+              </div>
+              <div className="card">
+                <div>
+                  <h3>WPA 2008</h3>
+                  <p className="muted" style={{ fontSize: "12.5px" }}>World Psychiatric Association</p>
+                  <p style={{ marginTop: "10px" }}>
+                    Apart from clozapine, the review found no consistent efficacy differences between second-generation
+                    antipsychotics. Olanzapine is associated with more weight gain and metabolic adverse effects than
+                    most comparators.
+                    <Cite n={8} />
+                  </p>
+                </div>
+                <div className="stat-note">Schizophrenia</div>
               </div>
               <div className="card">
                 <div>
                   <h3>WHO EML 2023</h3>
                   <p className="muted" style={{ fontSize: "12.5px" }}>World Health Organization</p>
                   <p style={{ marginTop: "10px" }}>
-                    Recognized essential therapeutic agent and listed on the WHO Model List of Essential Medicines worldwide.
+                    Olanzapine is listed as a therapeutic alternative to risperidone for psychotic disorders and to
+                    quetiapine for bipolar disorders.
+                    <Cite n={9} />
                   </p>
                 </div>
-                <div className="stat-note highlight">
-                  Essential Medicine
+                <div className="stat-note">
+                  Formulary listing
                 </div>
               </div>
             </div>
