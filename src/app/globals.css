@@ -2044,6 +2044,7 @@ dialog.hcp::backdrop {
 
 .bind__code {
   display: inline-block;
+  align-self: flex-start;
   padding: 3px 10px;
   border-radius: 999px;
   background: var(--soft);
