@@ -1,6 +1,6 @@
 "use client";
 
-import { useId, useState } from "react";
+import { useId, useState, type KeyboardEvent } from "react";
 import Link from "next/link";
 
 type Tone = "brand" | "soft" | "alt";
@@ -275,27 +275,54 @@ export function FigurePicker({ items, label }: { items: PickItem[]; label: strin
 
 export function StepRail({ steps, label }: { steps: { title: string; body: string }[]; label: string }) {
   const [active, setActive] = useState(0);
+  const baseId = useId();
   const current = steps[active];
+
+  const move = (event: KeyboardEvent<HTMLDivElement>, next: number) => {
+    event.preventDefault();
+    const index = (next + steps.length) % steps.length;
+    setActive(index);
+    event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="tab"]')[index]?.focus();
+  };
 
   return (
     <div className="card fig-steps">
-      <div className="fig-steps__rail" role="tablist" aria-label={label}>
+      <div
+        className="fig-steps__rail"
+        role="tablist"
+        aria-label={label}
+        onKeyDown={(event) => {
+          if (event.key === "ArrowRight") move(event, active + 1);
+          if (event.key === "ArrowLeft") move(event, active - 1);
+        }}
+      >
         {steps.map((step, index) => (
           <button
             key={step.title}
+            id={`${baseId}-tab-${index}`}
             type="button"
             role="tab"
             aria-selected={index === active}
-            className={index === active ? "is-on" : undefined}
+            aria-controls={`${baseId}-panel`}
+            tabIndex={index === active ? 0 : -1}
+            className={index === active ? "is-on" : index < active ? "is-done" : undefined}
             onClick={() => setActive(index)}
           >
-            <span>{String(index + 1).padStart(2, "0")}</span>
-            {step.title}
+            <span className="fig-steps__mark">{String(index + 1).padStart(2, "0")}</span>
+            <span className="fig-steps__name">{step.title}</span>
           </button>
         ))}
       </div>
       {current && (
-        <div className="fig-steps__body" role="tabpanel">
+        <div
+          className="fig-steps__body"
+          role="tabpanel"
+          id={`${baseId}-panel`}
+          aria-labelledby={`${baseId}-tab-${active}`}
+        >
+          <p className="fig-steps__kicker">
+            Step {String(active + 1).padStart(2, "0")} of {String(steps.length).padStart(2, "0")}
+          </p>
           <h3>{current.title}</h3>
           <p>{current.body}</p>
         </div>
