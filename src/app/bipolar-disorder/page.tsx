@@ -193,14 +193,18 @@ export default function BipolarDisorderPage() {
                 <h3 style={{ display: "flex", alignItems: "center", gap: "8px" }}>
                   <IconAlert style={{ width: "20px", height: "20px" }} /> Non-Indication Warning
                 </h3>
-                <p style={{ marginTop: "12px", lineHeight: "1.6" }}>
-                  Oral ZYPREXA monotherapy is <b>NOT</b> indicated for acute bipolar depression in the EU SmPC.
-                  Healthcare professionals should evaluate dedicated guideline recommendations and approved therapeutic
-                  regimens for depressive episodes.
-                </p>
+                <ul style={{ marginTop: "12px", display: "grid", gap: "8px" }}>
+                  <li>
+                    <b>Acute bipolar depression:</b> Oral ZYPREXA monotherapy is <b>NOT</b> indicated in the EU SmPC.
+                  </li>
+                  <li>
+                    <b>Depressive episodes:</b> Evaluate dedicated guideline recommendations and approved therapeutic
+                    regimens.
+                  </li>
+                </ul>
               </div>
-              <p style={{ fontSize: "12px", color: "var(--red)", marginTop: "14px", opacity: 0.9 }}>
-                Important clinical boundary for prescribing practice.
+              <p style={{ fontSize: "12px", color: "var(--mut)", marginTop: "14px" }}>
+                Source: EU Summary of Product Characteristics, section 4.1.
               </p>
             </div>
           </div>

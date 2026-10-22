@@ -24,7 +24,8 @@ function readOffset(bar: HTMLElement | null) {
 
 export default function SectionNav() {
   const pathname = usePathname();
-  const page = pageForPath(pathname);
+  const isHome = pathname === "/";
+  const page = isHome ? null : pageForPath(pathname);
   const sections = page?.secs ?? [];
   const firstId = sections[0]?.id ?? "";
   const [activeId, setActiveId] = useState(firstId);
@@ -50,6 +51,8 @@ export default function SectionNav() {
       if (nav) {
         const height = Math.round(nav.getBoundingClientRect().height);
         document.documentElement.style.setProperty("--section-nav-height", `${height}px`);
+      } else {
+        document.documentElement.style.setProperty("--section-nav-height", "0px");
       }
     };
 

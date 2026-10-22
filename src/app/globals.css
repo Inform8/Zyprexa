@@ -155,6 +155,7 @@ header {
 
 #nav {
   display: flex;
+  align-items: center;
   gap: 2px;
   margin-left: auto;
   list-style: none;
@@ -163,17 +164,22 @@ header {
 
 #nav > li {
   position: relative;
+  display: flex;
+  align-items: center;
+  align-self: stretch;
 }
 
 #nav > li > a {
-  display: block;
-  padding: 20px 11px;
+  display: flex;
+  align-items: center;
+  padding: 8px 11px;
   font-size: 13px;
   font-weight: 600;
+  line-height: 1.2;
   color: var(--mut);
   white-space: nowrap;
   text-decoration: none;
-  transition: color 0.15s ease;
+  transition: color 0.15s ease, background 0.15s ease;
 }
 
 #nav > li:hover > a,
@@ -1212,6 +1218,7 @@ footer a:hover {
 
   #nav {
     display: none;
+    align-items: stretch;
     position: absolute;
     left: 0;
     right: 0;
@@ -1689,9 +1696,23 @@ dialog.hcp::backdrop {
   margin-top: 8px;
 }
 
+.card.fig-steps {
+  padding: 0;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--line);
+  box-shadow: 0 10px 28px #4b2bb014;
+}
+
+.card.fig-steps:hover {
+  transform: none;
+  box-shadow: 0 10px 28px #4b2bb014;
+}
+
 .fig-steps__rail {
   display: flex;
   border-bottom: 1px solid var(--line);
+  background: #fff;
 }
 
 .fig-steps__rail button {
@@ -1719,16 +1740,33 @@ dialog.hcp::backdrop {
   border-right: 0;
 }
 
+.fig-steps__rail button:first-child {
+  border-top-left-radius: 17px;
+}
+
+.fig-steps__rail button:last-child {
+  border-top-right-radius: 17px;
+}
+
 .fig-steps__rail button span {
   font-size: 11px;
+  font-weight: 600;
   letter-spacing: 0.08em;
-  color: var(--p2);
+  color: #8d86ad;
 }
 
 .fig-steps__rail button.is-on {
-  color: var(--pri);
-  background: var(--soft);
+  color: var(--ink);
+  background: #f4efff;
   box-shadow: inset 0 -2px 0 var(--pri);
+}
+
+.fig-steps__rail button.is-on span {
+  color: var(--pri);
+}
+
+.fig-steps__body {
+  background: #fbfaff;
 }
 
 .fig-matrix tr {
@@ -1810,14 +1848,6 @@ dialog.hcp::backdrop {
     grid-template-columns: 1fr;
   }
 
-  .fig-steps__rail {
-    flex-direction: column;
-  }
-
-  .fig-steps__rail button {
-    min-height: 0;
-  }
-
   .fig-pick__nav {
     flex-direction: row;
     overflow-x: auto;
@@ -1831,11 +1861,6 @@ dialog.hcp::backdrop {
     border-right: 1px solid var(--line);
   }
 
-  .fig-steps__rail button {
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-
   .fig-pick__nav button:last-child {
     border-right: 0;
   }
@@ -1844,6 +1869,23 @@ dialog.hcp::backdrop {
 @media (max-width: 640px) {
   .topic-mosaic {
     grid-template-columns: 1fr;
+  }
+
+  .fig-steps__rail {
+    flex-direction: column;
+  }
+
+  .fig-steps__rail button {
+    min-height: 0;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+  }
+
+  .fig-steps__rail button:first-child {
+    border-top-left-radius: 17px;
+    border-top-right-radius: 17px;
   }
 }
 
@@ -1947,10 +1989,20 @@ dialog.hcp::backdrop {
   box-shadow: var(--card-shadow);
 }
 
+.bind__links {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .bind__brain {
   position: absolute;
   left: 50%;
   top: 48%;
+  z-index: 1;
   width: 168px;
   height: 168px;
   transform: translate(-50%, -50%);
@@ -1962,6 +2014,7 @@ dialog.hcp::backdrop {
 
 .bind__node {
   position: absolute;
+  z-index: 2;
   transform: translate(-50%, -50%);
   background: #fff;
   border: 1.5px solid currentColor;
@@ -1979,11 +2032,14 @@ dialog.hcp::backdrop {
 }
 
 .bind__detail {
-  background: rgba(255, 255, 255, 0.72);
-  border: 1px solid var(--card-border);
+  display: flex;
+  flex-direction: column;
+  background: #fff;
+  border: 1px solid var(--line);
   border-radius: var(--card-radius);
-  box-shadow: var(--card-shadow);
+  box-shadow: var(--shadow-sm);
   padding: 22px 20px;
+  min-width: 0;
 }
 
 .bind__code {
@@ -1999,7 +2055,8 @@ dialog.hcp::backdrop {
 
 .bind__detail h3 {
   margin: 12px 0 4px;
-  font-size: 22px;
+  font-size: 20px;
+  line-height: 1.3;
 }
 
 .bind__system {
@@ -2038,11 +2095,11 @@ dialog.hcp::backdrop {
 }
 
 .bind__note {
-  margin-top: 14px;
+  margin-top: auto;
   padding: 12px 14px;
   border-radius: 12px;
   border: 1px solid;
-  background: rgba(255, 255, 255, 0.7);
+  background: #fff;
   font-size: 13px;
   font-weight: 600;
   line-height: 1.45;

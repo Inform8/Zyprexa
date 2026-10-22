@@ -174,6 +174,21 @@ export default function MechanismOfActionPage() {
           </div>
           <div className="bind">
             <div className="bind__stage">
+              <svg className="bind__links" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+                {Object.entries(RECEPTORS).map(([key, r]) => (
+                  <line
+                    key={key}
+                    x1={r.x}
+                    y1={r.y}
+                    x2={50}
+                    y2={48}
+                    stroke={r.color}
+                    strokeWidth={selectedKey === key ? 2.5 : 1.5}
+                    vectorEffect="non-scaling-stroke"
+                    opacity={selectedKey === key ? 0.95 : 0.4}
+                  />
+                ))}
+              </svg>
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img src="/assets/moa-brain-receptors.jpg" alt="" className="bind__brain" />
               {Object.entries(RECEPTORS).map(([key, r]) => (
