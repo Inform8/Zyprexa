@@ -44,6 +44,14 @@ export default function RootLayout({
       className={`${inter.variable} ${playfair.variable}`}
     >
       <body>
+        <div className="bg-circles" aria-hidden="true">
+          <span className="c1" />
+          <span className="c2" />
+          <span className="c3" />
+          <span className="c4" />
+          <span className="c5" />
+          <span className="c6" />
+        </div>
         <Header />
         <SectionNav />
         {children}

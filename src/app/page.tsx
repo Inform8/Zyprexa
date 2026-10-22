@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Cite } from "@/components/Cite";
+import { HeroBrain, TopicArt } from "@/components/HomeVisuals";
 
 export const metadata: Metadata = {
   title: "Evidence-informed treatment in schizophrenia and manic episodes in bipolar disorder · ZYPREXA HCP",
@@ -12,10 +13,10 @@ export default function HomePage() {
   return (
     <main id="app">
       {/* Editorial Hero */}
-      <div className="hero hero--text">
+      <div className="hero hero--home">
         <div className="w">
           <div>
-            <p className="eb">Medical information for healthcare professionals</p>
+            <p className="eb eb--rule">Medical information for healthcare professionals</p>
             <div className="brand">
               ZYPREXA<i>olanzapine</i>
             </div>
@@ -40,68 +41,138 @@ export default function HomePage() {
               </Link>
             </div>
           </div>
+          <div className="hero-art">
+            <HeroBrain />
+          </div>
         </div>
       </div>
 
       <div className="w">
         {/* Approved indications */}
-        <section className="s" id="indications">
-          <h2>Approved indications (EU SmPC 4.1)</h2>
+        <section className="s s--open" id="indications">
+          <div className="home-head">
+            <h2>Approved indications (EU SmPC 4.1)</h2>
+            <a
+              href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View full indication details →
+            </a>
+          </div>
           <p className="lead">Oral coated tablets in adults. Injection and ZYPADHERA have their own product information.</p>
-          <ol className="index-table">
+          <ol className="ind-cards">
             <li>
-              <h3>Schizophrenia</h3>
-              <p>
-                Treatment of schizophrenia. Effective in maintaining clinical improvement during continuation therapy
-                in patients who have shown an initial treatment response.
-              </p>
+              <span className="ind-num">01</span>
+              <div>
+                <h3>Schizophrenia</h3>
+                <p>
+                  Treatment of schizophrenia. Effective in maintaining clinical improvement during continuation therapy
+                  in patients who have shown an initial treatment response.
+                </p>
+              </div>
             </li>
             <li>
-              <h3>Acute manic episodes</h3>
-              <p>Treatment of moderate to severe manic episodes, as monotherapy or in combination therapy.</p>
+              <span className="ind-num">02</span>
+              <div>
+                <h3>Acute manic episodes</h3>
+                <p>Treatment of moderate to severe manic episodes, as monotherapy or in combination therapy.</p>
+              </div>
             </li>
             <li>
-              <h3>Maintenance in bipolar disorder</h3>
-              <p>
-                Prevention of recurrence in bipolar disorder in patients whose manic episode has responded to
-                olanzapine.
-              </p>
+              <span className="ind-num">03</span>
+              <div>
+                <h3>Maintenance in bipolar disorder</h3>
+                <p>
+                  Prevention of recurrence in bipolar disorder in patients whose manic episode has responded to
+                  olanzapine.
+                </p>
+              </div>
             </li>
           </ol>
         </section>
 
         {/* Explore key topics */}
-        <section className="s" id="topics">
+        <section className="s s--open" id="topics">
           <h2>Explore key topics</h2>
+          <p className="lead">Find detailed information across the key areas relevant to clinical practice.</p>
           <div className="topic-mosaic">
-            <Link className="card topic-tile" href="/schizophrenia">
-              <h3>Understanding Schizophrenia</h3>
-              <p>Positive, negative, and cognitive domains, neurobiology, and the course of care.</p>
+            <Link className="topic-tile" href="/schizophrenia">
+              <div>
+                <h3>Understanding Schizophrenia</h3>
+                <p>Positive, negative, and cognitive domains, neurobiology, and the course of care.</p>
+              </div>
+              <div className="topic-tile__art">
+                <TopicArt kind="brain" />
+              </div>
+              <span className="topic-tile__go" aria-hidden="true">
+                →
+              </span>
             </Link>
-            <Link className="card topic-tile" href="/bipolar-disorder">
-              <h3>Understanding Bipolar Disorder</h3>
-              <p>Distinct mood episodes, treatment objectives, and recurrence prevention.</p>
+            <Link className="topic-tile" href="/bipolar-disorder">
+              <div>
+                <h3>Understanding Bipolar Disorder</h3>
+                <p>Distinct mood episodes, treatment objectives, and recurrence prevention.</p>
+              </div>
+              <div className="topic-tile__art">
+                <TopicArt kind="wave" />
+              </div>
+              <span className="topic-tile__go" aria-hidden="true">
+                →
+              </span>
             </Link>
-            <Link className="card topic-tile" href="/clinical-evidence">
-              <h3>Clinical Evidence</h3>
-              <p>Nine study descriptions from EU SmPC section 5.1, with an interactive explorer.</p>
+            <Link className="topic-tile" href="/clinical-evidence">
+              <div>
+                <h3>Clinical Evidence</h3>
+                <p>Nine study descriptions from EU SmPC section 5.1, with an interactive explorer.</p>
+              </div>
+              <div className="topic-tile__art">
+                <TopicArt kind="bars" />
+              </div>
+              <span className="topic-tile__go" aria-hidden="true">
+                →
+              </span>
             </Link>
-            <Link className="card topic-tile" href="/mechanism-of-action">
-              <h3>Mechanism of Action</h3>
-              <p>Dopamine, serotonin, histamine, muscarinic, and adrenergic receptor profile.</p>
+            <Link className="topic-tile" href="/mechanism-of-action">
+              <div>
+                <h3>Mechanism of Action</h3>
+                <p>Dopamine, serotonin, histamine, muscarinic, and adrenergic receptor profile.</p>
+              </div>
+              <div className="topic-tile__art">
+                <TopicArt kind="network" />
+              </div>
+              <span className="topic-tile__go" aria-hidden="true">
+                →
+              </span>
             </Link>
-            <Link className="card topic-tile" href="/safety-prescribing">
-              <h3>Safety, Monitoring &amp; Prescribing</h3>
-              <p>Dosing, contraindications, the dementia warning, and metabolic monitoring.</p>
+            <Link className="topic-tile" href="/safety-prescribing">
+              <div>
+                <h3>Safety, Monitoring &amp; Prescribing</h3>
+                <p>Dosing, contraindications, the dementia warning, and metabolic monitoring.</p>
+              </div>
+              <div className="topic-tile__art">
+                <TopicArt kind="shield" />
+              </div>
+              <span className="topic-tile__go" aria-hidden="true">
+                →
+              </span>
             </Link>
-            <Link className="card topic-tile" href="/references">
-              <h3>References &amp; Resources</h3>
-              <p>SmPC, PIL, clinical citations, and medical abbreviations.</p>
+            <Link className="topic-tile" href="/references">
+              <div>
+                <h3>References &amp; Resources</h3>
+                <p>SmPC, PIL, clinical citations, and medical abbreviations.</p>
+              </div>
+              <div className="topic-tile__art">
+                <TopicArt kind="book" />
+              </div>
+              <span className="topic-tile__go" aria-hidden="true">
+                →
+              </span>
             </Link>
           </div>
         </section>
 
-        <section className="s" id="about">
+        <section className="s s--open" id="about">
           <div className="about-block">
             <div>
               <p className="eb">Pharmacology</p>
