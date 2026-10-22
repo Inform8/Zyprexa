@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import SectionNav from "@/components/SectionNav";
+import { ColumnChart } from "@/components/Figures";
 import {
   IconCheck,
   IconDoc,
@@ -130,6 +132,8 @@ export default function ClinicalEvidencePage() {
         </div>
       </div>
 
+      <SectionNav />
+
       <div className="w">
         {/* Metric stats banner */}
         <section className="s" style={{ paddingTop: "20px" }}>
@@ -210,22 +214,13 @@ export default function ClinicalEvidencePage() {
                 <div>
                   <h3>MADRS change (depressive symptoms)</h3>
                   <p className="muted" style={{ fontSize: "12.5px" }}>n = 1,481; baseline MADRS 16.6</p>
-                  <div className="viz-box">
-                    <div className="cols">
-                      <div>
-                        <b>−6.0</b>
-                        <i style={{ height: "75%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>−3.1</b>
-                        <i style={{ height: "39%", background: "#b9a8ee" }} />
-                      </div>
-                    </div>
-                    <div className="cl">
-                      <span>Olanzapine</span>
-                      <span>Haloperidol</span>
-                    </div>
-                  </div>
+                  <ColumnChart
+                    label="MADRS change"
+                    bars={[
+                      { label: "Olanzapine", value: 6, display: "−6.0" },
+                      { label: "Haloperidol", value: 3.1, display: "−3.1", tone: "alt" },
+                    ]}
+                  />
                 </div>
                 <div className="stat-note highlight">
                   p = 0.001 vs haloperidol
@@ -237,37 +232,16 @@ export default function ClinicalEvidencePage() {
                 <div>
                   <h3>Beasley 1996 – BPRS total change (Wk 6)</h3>
                   <p className="muted" style={{ fontSize: "12.5px" }}>* p ≤ 0.001 vs placebo; haloperidol p ≤ 0.01</p>
-                  <div className="viz-box">
-                    <div className="cols">
-                      <div>
-                        <b>−3.1</b>
-                        <i style={{ height: "18%", background: "#b9a8ee" }} />
-                      </div>
-                      <div>
-                        <b>−6.7</b>
-                        <i style={{ height: "40%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>−12.6*</b>
-                        <i style={{ height: "74%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>−15.2*</b>
-                        <i style={{ height: "90%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>−12.9*</b>
-                        <i style={{ height: "76%", background: "#db2777" }} />
-                      </div>
-                    </div>
-                    <div className="cl">
-                      <span>Plac</span>
-                      <span>5mg</span>
-                      <span>10mg</span>
-                      <span>15mg</span>
-                      <span>Halo</span>
-                    </div>
-                  </div>
+                  <ColumnChart
+                    label="BPRS total change at week 6"
+                    bars={[
+                      { label: "Placebo", value: 3.1, display: "−3.1", tone: "soft" },
+                      { label: "5 mg", value: 6.7, display: "−6.7" },
+                      { label: "10 mg", value: 12.6, display: "−12.6" },
+                      { label: "15 mg", value: 15.2, display: "−15.2" },
+                      { label: "Halo", value: 12.9, display: "−12.9", tone: "alt" },
+                    ]}
+                  />
                 </div>
                 <div className="stat-note highlight">
                   High dose −15.2 vs Plac −3.1 (p ≤ 0.001)
@@ -279,37 +253,16 @@ export default function ClinicalEvidencePage() {
                 <div>
                   <h3>Beasley 1996 – SANS negative symptoms</h3>
                   <p className="muted" style={{ fontSize: "12.5px" }}>* p ≤ 0.05 vs placebo; † p ≤ 0.05 vs haloperidol</p>
-                  <div className="viz-box">
-                    <div className="cols">
-                      <div>
-                        <b>−1.9</b>
-                        <i style={{ height: "12%", background: "#b9a8ee" }} />
-                      </div>
-                      <div>
-                        <b>−8.7*</b>
-                        <i style={{ height: "54%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>−6.1</b>
-                        <i style={{ height: "38%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>−13.5*†</b>
-                        <i style={{ height: "85%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>−6.6</b>
-                        <i style={{ height: "41%", background: "#db2777" }} />
-                      </div>
-                    </div>
-                    <div className="cl">
-                      <span>Plac</span>
-                      <span>5mg</span>
-                      <span>10mg</span>
-                      <span>15mg</span>
-                      <span>Halo</span>
-                    </div>
-                  </div>
+                  <ColumnChart
+                    label="SANS negative symptom change"
+                    bars={[
+                      { label: "Placebo", value: 1.9, display: "−1.9", tone: "soft" },
+                      { label: "5 mg", value: 8.7, display: "−8.7" },
+                      { label: "10 mg", value: 6.1, display: "−6.1" },
+                      { label: "15 mg", value: 13.5, display: "−13.5" },
+                      { label: "Halo", value: 6.6, display: "−6.6", tone: "alt" },
+                    ]}
+                  />
                 </div>
                 <div className="stat-note highlight">
                   High dose −13.5 vs Plac −1.9 (p ≤ 0.05)

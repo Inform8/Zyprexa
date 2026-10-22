@@ -1,5 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ColumnChart, StepRail } from "@/components/Figures";
+import MoodSpectrum from "@/components/MoodSpectrum";
+import SectionNav from "@/components/SectionNav";
 import {
   IconWave,
   IconRepeat,
@@ -47,6 +50,8 @@ export default function BipolarDisorderPage() {
           </div>
         </div>
       </div>
+
+      <SectionNav />
 
       <div className="w">
         {/* Overview: Balanced 2-Column Grid */}
@@ -125,57 +130,37 @@ export default function BipolarDisorderPage() {
 
         {/* Mood Episodes */}
         <section className="s" id="episodes">
-          <h2>Distinct mood episode profiles</h2>
-          <p className="lead">Clinical characteristics across bipolar affective states</p>
-          <div className="grid g3">
-            <div className="card">
-              <h3>Manic episodes</h3>
-              <p>
-                Abnormally elevated, expansive, or irritable mood, racing thoughts, decreased need for sleep,
-                grandiosity, and high-risk impulsive behaviour.
-              </p>
-              <span className="tag">Approved indication for oral ZYPREXA</span>
-            </div>
-            <div className="card">
-              <h3>Mixed episodes</h3>
-              <p>
-                Co-occurring manic and depressive symptoms with severe agitation, emotional dysregulation, dysphoria,
-                and heightened clinical vulnerability.
-              </p>
-              <span className="tag">Evaluated in acute bipolar trials</span>
-            </div>
-            <div className="card">
-              <h3>Depressive episodes</h3>
-              <p>
-                Persistent low mood, profound loss of interest/pleasure, debilitating fatigue, psychomotor slowing,
-                and suicidal ideation.
-              </p>
-              <span className="tag r">Oral ZYPREXA monotherapy is NOT indicated</span>
-            </div>
+          <div className="spectrum-head">
+            <h2>Mood episode spectrum</h2>
+            <p>Longitudinal fluctuation across euthymia, hypomania, mania, and depression</p>
           </div>
+          <MoodSpectrum />
         </section>
 
         {/* Treatment Objectives */}
         <section className="s" id="objectives">
           <h2>Treatment objectives</h2>
-          <div className="grid g4">
-            <div className="card">
-              <h3>Reduce acute symptoms</h3>
-              <p>Rapid control of acute mania, agitation, psychosis, or mixed affective states.</p>
-            </div>
-            <div className="card">
-              <h3>Prevent recurrence</h3>
-              <p>Sustained prophylactic therapy against both manic and depressive relapses.</p>
-            </div>
-            <div className="card">
-              <h3>Improve functioning</h3>
-              <p>Restoring vocational, cognitive, interpersonal, and social capabilities.</p>
-            </div>
-            <div className="card">
-              <h3>Enhance quality of life</h3>
-              <p>Minimizing tolerability burdens and proactively supporting cardiometabolic health.</p>
-            </div>
-          </div>
+          <StepRail
+            label="Treatment objectives"
+            steps={[
+              {
+                title: "Reduce acute symptoms",
+                body: "Rapid control of acute mania, agitation, psychosis, or mixed affective states.",
+              },
+              {
+                title: "Prevent recurrence",
+                body: "Sustained prophylactic therapy against both manic and depressive relapses.",
+              },
+              {
+                title: "Improve functioning",
+                body: "Restoring vocational, cognitive, interpersonal, and social capabilities.",
+              },
+              {
+                title: "Quality of life",
+                body: "Minimizing tolerability burdens and proactively supporting cardiometabolic health.",
+              },
+            ]}
+          />
         </section>
 
         {/* Indications vs Non-indications */}
@@ -234,22 +219,13 @@ export default function BipolarDisorderPage() {
                 <div>
                   <h3>Acute mania – YMRS reduction</h3>
                   <p className="muted" style={{ fontSize: "12.5px" }}>Tohen et al. 1999; n = 139</p>
-                  <div className="viz-box">
-                    <div className="cols">
-                      <div>
-                        <b>−10.3</b>
-                        <i style={{ height: "85%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>−4.9</b>
-                        <i style={{ height: "40%", background: "#b9a8ee" }} />
-                      </div>
-                    </div>
-                    <div className="cl">
-                      <span>Olanzapine</span>
-                      <span>Placebo</span>
-                    </div>
-                  </div>
+                  <ColumnChart
+                    label="Acute mania YMRS reduction"
+                    bars={[
+                      { label: "Olanzapine", value: 10.3, display: "−10.3" },
+                      { label: "Placebo", value: 4.9, display: "−4.9", tone: "soft" },
+                    ]}
+                  />
                 </div>
                 <div className="stat-note highlight">
                   p = 0.02 vs placebo
@@ -302,22 +278,13 @@ export default function BipolarDisorderPage() {
                 <div>
                   <h3>12-month recurrence rate (%)</h3>
                   <p className="muted" style={{ fontSize: "12.5px" }}>Study B active comparator; n = 431</p>
-                  <div className="viz-box">
-                    <div className="cols">
-                      <div>
-                        <b>30.0%</b>
-                        <i style={{ height: "60%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>38.3%</b>
-                        <i style={{ height: "76%", background: "#b9a8ee" }} />
-                      </div>
-                    </div>
-                    <div className="cl">
-                      <span>Olanzapine</span>
-                      <span>Lithium</span>
-                    </div>
-                  </div>
+                  <ColumnChart
+                    label="12-month recurrence rate"
+                    bars={[
+                      { label: "Olanzapine", value: 30, display: "30.0%" },
+                      { label: "Lithium", value: 38.3, display: "38.3%", tone: "soft" },
+                    ]}
+                  />
                 </div>
                 <div className="stat-note highlight">
                   Non-inferior to lithium (p = 0.055)

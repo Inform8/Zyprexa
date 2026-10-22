@@ -1,17 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
-import {
-  IconBrain,
-  IconWave,
-  IconShield,
-  IconRepeat,
-  IconPill,
-  IconUser,
-  IconScale,
-  IconDoc,
-} from "@/components/Icons";
+import SectionNav from "@/components/SectionNav";
+import { StepRail } from "@/components/Figures";
 
 export default function SchizophreniaPage() {
   const [activeTab, setActiveTab] = useState(0);
@@ -65,6 +56,8 @@ export default function SchizophreniaPage() {
           </div>
         </div>
       </div>
+
+      <SectionNav />
 
       <div className="w">
         {/* Overview: Balanced 2-Column Grid */}
@@ -147,32 +140,44 @@ export default function SchizophreniaPage() {
 
         {/* Symptoms */}
         <section className="s" id="symptoms">
-          <h2>Three core symptom domains</h2>
-          <p className="lead">Clinical manifestations of schizophrenia across domains</p>
-          <div className="grid g3">
-            <div className="card">
+          <div className="spectrum-head">
+            <h2>Three core symptom domains</h2>
+            <p>Clinical manifestations of schizophrenia across domains</p>
+          </div>
+          <div className="domains">
+            <article className="domain domain--pos">
+              <span>Positive domain</span>
               <h3>Positive symptoms</h3>
-              <p>
-                Added experiences and behaviours: auditory and visual hallucinations, persecutory or referential
-                delusions, disorganised speech, and agitated behavior. Highly responsive to mesolimbic dopamine D₂
-                receptor blockade.
-              </p>
-            </div>
-            <div className="card">
+              <p>Added experiences and behaviours, highly responsive to mesolimbic dopamine D₂ receptor blockade:</p>
+              <ul>
+                <li>Auditory and visual hallucinations</li>
+                <li>Persecutory or referential delusions</li>
+                <li>Disorganised speech</li>
+                <li>Agitated behaviour</li>
+              </ul>
+            </article>
+            <article className="domain domain--neg">
+              <span>Negative domain</span>
               <h3>Negative symptoms</h3>
-              <p>
-                Reduction or loss of baseline functioning: blunted affect, avolition, alogia, severe social
-                withdrawal, and anhedonia. Represents the primary clinical driver of long-term disability and
-                vocational impairment.
-              </p>
-            </div>
-            <div className="card">
+              <p>Reduction or loss of baseline functioning, and the main driver of long-term disability:</p>
+              <ul>
+                <li>Blunted affect</li>
+                <li>Avolition</li>
+                <li>Alogia</li>
+                <li>Severe social withdrawal and anhedonia</li>
+              </ul>
+            </article>
+            <article className="domain domain--cog">
+              <span>Cognitive domain</span>
               <h3>Cognitive symptoms</h3>
-              <p>
-                Deficits in mental processing: impaired working memory, sustained attention/vigilance, executive
-                planning, and processing speed. Strongly correlates with real-world functional independence.
-              </p>
-            </div>
+              <p>Deficits in mental processing that correlate with real-world functional independence:</p>
+              <ul>
+                <li>Impaired working memory</li>
+                <li>Sustained attention and vigilance</li>
+                <li>Executive planning</li>
+                <li>Processing speed</li>
+              </ul>
+            </article>
           </div>
         </section>
 
@@ -218,53 +223,55 @@ export default function SchizophreniaPage() {
         <section className="s" id="phases">
           <h2>Treatment across the course of care</h2>
           <p className="lead">Phased management framework from initial episode to long-term recovery</p>
-          <div className="flow">
-            <div className="card">
-              <h3>Acute phase</h3>
-              <p>
-                Rapid symptom reduction, crisis stabilization, behavioural control, and baseline metabolic/ECG
-                assessments.
-              </p>
-            </div>
-            <span>→</span>
-            <div className="card">
-              <h3>Stabilisation</h3>
-              <p>
-                Consolidating treatment response, managing tolerability, and supporting structured re-entry
-                into daily life.
-              </p>
-            </div>
-            <span>→</span>
-            <div className="card">
-              <h3>Maintenance</h3>
-              <p>
-                Relapse prevention, sustaining clinical improvement, ongoing safety/metabolic monitoring, and
-                social reintegration.
-              </p>
-            </div>
-          </div>
+          <StepRail
+            label="Course of care"
+            steps={[
+              {
+                title: "Acute phase",
+                body: "Rapid symptom reduction, crisis stabilization, behavioural control, and baseline metabolic and ECG assessments.",
+              },
+              {
+                title: "Stabilisation",
+                body: "Consolidating treatment response, managing tolerability, and supporting structured re-entry into daily life.",
+              },
+              {
+                title: "Maintenance",
+                body: "Relapse prevention, sustaining clinical improvement, ongoing safety and metabolic monitoring, and social reintegration.",
+              },
+            ]}
+          />
         </section>
 
         {/* Role of Olanzapine */}
         <section className="s" id="olz">
           <h2>The role of olanzapine in schizophrenia</h2>
-          <div className="grid g4">
-            <div className="card">
-              <h3>Symptom domains</h3>
-              <p>Proven efficacy across positive, negative, and depressive symptom domains.</p>
-            </div>
-            <div className="card">
-              <h3>Evidence base</h3>
-              <p>Over 25 years of randomized controlled clinical trial evidence in adult schizophrenia.</p>
-            </div>
-            <div className="card">
-              <h3>Delivery options</h3>
-              <p>Coated oral tablets, rapid IM injection, and long-acting injectable ZYPADHERA.</p>
-            </div>
-            <div className="card">
-              <h3>Continuation therapy</h3>
-              <p>Proven maintenance of clinical improvement in continuation therapy for initial responders.</p>
-            </div>
+          <div className="card tw" style={{ padding: 0 }}>
+            <table>
+              <thead>
+                <tr>
+                  <th>Dimension</th>
+                  <th>What the evidence describes</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><b>Symptom domains</b></td>
+                  <td>Efficacy across positive, negative, and depressive symptom domains.</td>
+                </tr>
+                <tr>
+                  <td><b>Evidence base</b></td>
+                  <td>More than 25 years of randomised controlled trial evidence in adult schizophrenia.</td>
+                </tr>
+                <tr>
+                  <td><b>Delivery options</b></td>
+                  <td>Coated oral tablets, rapid intramuscular injection, and long-acting injectable ZYPADHERA.</td>
+                </tr>
+                <tr>
+                  <td><b>Continuation therapy</b></td>
+                  <td>Maintenance of clinical improvement in continuation therapy for patients with an initial response.</td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </section>
 

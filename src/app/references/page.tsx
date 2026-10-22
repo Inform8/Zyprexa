@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import SectionNav from "@/components/SectionNav";
 import {
   IconDownload,
   IconBuilding,
@@ -142,6 +143,8 @@ export default function ReferencesPage() {
           </div>
         </div>
       </div>
+
+      <SectionNav />
 
       <div className="w">
         {/* Searchable Bibliography */}

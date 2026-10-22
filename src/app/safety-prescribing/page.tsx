@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import { ScheduleMatrix } from "@/components/Figures";
+import SectionNav from "@/components/SectionNav";
 import {
   IconShield,
   IconAlert,
@@ -47,6 +49,8 @@ export default function SafetyPrescribingPage() {
           </div>
         </div>
       </div>
+
+      <SectionNav />
 
       <div className="w">
         {/* Important Safety Information Box */}
@@ -307,58 +311,31 @@ export default function SafetyPrescribingPage() {
         <section className="s" id="monitoring">
           <h2>Monitoring recommendations</h2>
           <p className="lead">Structured monitoring framework for metabolic and physical health parameters</p>
-          <div className="grid g4">
-            <div className="card">
-              <h3>Weight &amp; BMI</h3>
-              <p>Baseline, weeks 4, 8, 12; then quarterly thereafter.</p>
-            </div>
-            <div className="card">
-              <h3>Fasting glucose</h3>
-              <p>Baseline, week 12; then annually (more frequently in patients with diabetes risk).</p>
-            </div>
-            <div className="card">
-              <h3>Lipid profile</h3>
-              <p>Baseline, week 12; then periodically (at least every 5 years).</p>
-            </div>
-            <div className="card">
-              <h3>Blood pressure</h3>
-              <p>Baseline and periodic monitoring, particularly in patients over 65.</p>
-            </div>
-          </div>
-
-          <div className="card" style={{ marginTop: "16px" }}>
-            <h3>Monitoring timeline</h3>
-            <div className="tl">
-              <div>
-                <b>Baseline</b>
-                Weight/BMI, glucose, lipids, BP
-              </div>
-              <div>
-                <b>Week 4</b>
-                Weight/BMI
-              </div>
-              <div>
-                <b>Week 8</b>
-                Weight/BMI
-              </div>
-              <div>
-                <b>Week 12</b>
-                Weight/BMI, glucose, lipids
-              </div>
-              <div>
-                <b>Quarterly</b>
-                Weight/BMI
-              </div>
-              <div>
-                <b>Annually</b>
-                Fasting glucose
-              </div>
-              <div>
-                <b>Every 5 yrs</b>
-                Lipid profile
-              </div>
-            </div>
-          </div>
+          <ScheduleMatrix
+            columns={["Baseline", "Week 4", "Week 8", "Week 12", "Quarterly", "Annually", "Every 5 yrs"]}
+            rows={[
+              {
+                label: "Weight & BMI",
+                note: "Baseline, weeks 4, 8 and 12, then quarterly thereafter.",
+                marks: [true, true, true, true, true, false, false],
+              },
+              {
+                label: "Fasting glucose",
+                note: "Baseline and week 12, then annually. Check more often when diabetes risk is present.",
+                marks: [true, false, false, true, false, true, false],
+              },
+              {
+                label: "Lipid profile",
+                note: "Baseline and week 12, then periodically, at least every 5 years.",
+                marks: [true, false, false, true, false, false, true],
+              },
+              {
+                label: "Blood pressure",
+                note: "Baseline, then periodic monitoring, particularly in patients over 65. Later visits are clinical judgement rather than a fixed week.",
+                marks: [true, false, false, false, false, false, false],
+              },
+            ]}
+          />
         </section>
 
         {/* Drug Interactions */}
