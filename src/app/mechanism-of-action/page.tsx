@@ -128,11 +128,13 @@ export default function MechanismOfActionPage() {
     const enter = stage.closest(".page-enter");
     enter?.addEventListener("animationend", measure);
     const frame = window.requestAnimationFrame(measure);
+    const later = window.setTimeout(measure, 650);
     return () => {
       ro.disconnect();
       img?.removeEventListener("load", measure);
       enter?.removeEventListener("animationend", measure);
       window.cancelAnimationFrame(frame);
+      window.clearTimeout(later);
     };
   }, []);
 
