@@ -15,11 +15,15 @@ function pageForPath(pathname: string) {
   );
 }
 
-function readOffset(bar: HTMLElement | null) {
+function readOffset() {
   const root = getComputedStyle(document.documentElement);
   const headerH = parseFloat(root.getPropertyValue("--header-height")) || 64;
-  const barH = bar?.getBoundingClientRect().height || 0;
-  return headerH + barH + SCROLL_GAP;
+  return headerH + SCROLL_GAP;
+}
+
+function readZoom() {
+  const zoom = parseFloat(getComputedStyle(document.documentElement).zoom);
+  return Number.isFinite(zoom) && zoom > 0 ? zoom : 1;
 }
 
 export default function SectionNav() {
@@ -49,10 +53,8 @@ export default function SectionNav() {
         document.documentElement.style.setProperty("--header-height", `${height}px`);
       }
       const nav = navRef.current;
-      if (nav) {
-        const height = Math.round(nav.getBoundingClientRect().height);
-        document.documentElement.style.setProperty("--section-nav-height", `${height}px`);
-      }
+      const height = nav ? Math.round(nav.getBoundingClientRect().height) : 0;
+      document.documentElement.style.setProperty("--section-nav-height", `${height}px`);
     };
 
     apply();
@@ -68,7 +70,7 @@ export default function SectionNav() {
 
   const updateActive = useCallback(() => {
     if (lockRef.current || sections.length === 0) return;
-    const line = readOffset(navRef.current);
+    const line = readOffset();
     let current = sections[0].id;
     for (const sec of sections) {
       const el = document.getElementById(sec.id);
@@ -120,7 +122,7 @@ export default function SectionNav() {
     lockRef.current = true;
     setActiveId(id);
 
-    const top = window.scrollY + target.getBoundingClientRect().top - readOffset(navRef.current);
+    const top = window.scrollY + (target.getBoundingClientRect().top - readOffset()) * readZoom();
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     window.scrollTo({ top: Math.max(0, top), behavior: reduce ? "auto" : "smooth" });
     window.history.replaceState(null, "", `#${id}`);
