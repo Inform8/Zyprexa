@@ -5,12 +5,13 @@ import { AreaChart } from "@/components/Figures";
 import { Cite } from "@/components/Cite";
 import { IconAlert, IconBook, IconChart, IconDoc, IconRepeat } from "@/components/Icons";
 
+const RECEPTOR_COLOR = "#4b2bb0";
+
 interface ReceptorInfo {
   code: string;
   name: string;
   short: string;
   system: string;
-  color: string;
   desc: string;
   note: string;
   dot: { x: number; y: number };
@@ -24,7 +25,6 @@ const RECEPTORS: Record<string, ReceptorInfo> = {
     name: "Dopamine D₂ (D₁–D₅)",
     short: "D₂ Dopamine",
     system: "Dopaminergic system · Antagonist profile",
-    color: "#0084ff",
     desc: "Olanzapine has affinity for dopamine receptors, including D2 receptors. Dopamine receptor antagonism is relevant to its antipsychotic activity. Dopaminergic signalling is involved in multiple brain functions, and the relationship between receptor activity and individual symptom domains is complex.",
     note: "Described in relation to antipsychotic activity. Relative affinity is not shown, and the SmPC does not assign a single clinical effect to this receptor alone.",
     dot: { x: 481, y: 275 },
@@ -36,7 +36,6 @@ const RECEPTORS: Record<string, ReceptorInfo> = {
     name: "Serotonin 5-HT₂A (5-HT₂A/2C, 3, 6)",
     short: "5-HT₂A Serotonin",
     system: "Serotonergic system · Antagonist profile",
-    color: "#ff2a70",
     desc: "Olanzapine also has affinity for serotonin receptors, including 5-HT2A and 5-HT2C. Its serotonin and dopamine receptor activity contributes to its overall pharmacological profile. The clinical effects of olanzapine cannot be attributed to one receptor interaction alone.",
     note: "Described in relation to antipsychotic activity. Relative affinity is not shown, and the SmPC does not assign a single clinical effect to this receptor alone.",
     dot: { x: 613, y: 240 },
@@ -48,7 +47,6 @@ const RECEPTORS: Record<string, ReceptorInfo> = {
     name: "Adrenergic α₁",
     short: "α₁ Adrenergic",
     system: "Adrenergic system · Antagonist profile",
-    color: "#ff7e00",
     desc: "Preclinical binding profiles indicate affinity for alpha-1 adrenergic receptors. In vitro affinity does not by itself establish a clinical effect.",
     note: "The SmPC reports receptor affinity. It does not attribute orthostatic hypotension or dizziness to this receptor alone.",
     dot: { x: 323, y: 268 },
@@ -60,7 +58,6 @@ const RECEPTORS: Record<string, ReceptorInfo> = {
     name: "Muscarinic M₁–₅",
     short: "M₁–M₅ Muscarinic",
     system: "Muscarinic system · Antagonist profile",
-    color: "#00b894",
     desc: "Preclinical binding profiles indicate affinity for muscarinic M1–M5 receptors. In vitro affinity does not by itself establish a clinical effect.",
     note: "The SmPC reports receptor affinity. It does not attribute anticholinergic adverse effects to these receptors alone.",
     dot: { x: 447, y: 344 },
@@ -72,7 +69,6 @@ const RECEPTORS: Record<string, ReceptorInfo> = {
     name: "Histamine H₁",
     short: "H₁ Histamine",
     system: "Histaminergic system · Antagonist profile",
-    color: "#5822b4",
     desc: "Preclinical binding profiles indicate affinity for histamine H1 receptors. In vitro affinity does not translate directly into clinical efficacy, potency, or a causal link to a particular adverse reaction.",
     note: "The SmPC reports receptor affinity. It does not attribute somnolence or increased appetite to this receptor alone.",
     dot: { x: 601, y: 424 },
@@ -281,7 +277,7 @@ export default function MechanismOfActionPage() {
                         y1={r.line.y1}
                         x2={r.line.x2}
                         y2={r.line.y2}
-                        stroke={r.color}
+                        stroke={RECEPTOR_COLOR}
                         strokeWidth={active ? 3.5 : 2}
                         opacity={active ? 1 : 0.75}
                         strokeLinecap="round"
@@ -307,7 +303,7 @@ export default function MechanismOfActionPage() {
                           cx={r.dot.x}
                           cy={r.dot.y}
                           r={active ? 30 : 24}
-                          fill={r.color}
+                          fill={RECEPTOR_COLOR}
                           fillOpacity={active ? 0.32 : 0.2}
                           className="bind__target-halo"
                         />
@@ -315,7 +311,7 @@ export default function MechanismOfActionPage() {
                           cx={r.dot.x}
                           cy={r.dot.y}
                           r={10}
-                          fill={r.color}
+                          fill={RECEPTOR_COLOR}
                           stroke="#ffffff"
                           strokeWidth={2.5}
                         />
@@ -344,15 +340,15 @@ export default function MechanismOfActionPage() {
                           width={r.badge.w}
                           height={r.badge.h}
                           rx={21}
-                          fill={active ? r.color : "#ffffff"}
-                          stroke={r.color}
+                          fill={active ? RECEPTOR_COLOR : "#ffffff"}
+                          stroke={RECEPTOR_COLOR}
                           strokeWidth={2}
                           filter={active ? "url(#activeShadow)" : "url(#badgeShadow)"}
                           className="bind__badge-rect"
                         />
                         <text x={r.badge.x + r.badge.w / 2} y={r.badge.y + 26} textAnchor="middle">
                           <tspan
-                            fill={active ? "#ffffff" : r.color}
+                            fill={active ? "#ffffff" : RECEPTOR_COLOR}
                             fontSize={15}
                             fontWeight={700}
                             fontFamily="var(--font-inter), 'Inter', sans-serif"
@@ -360,7 +356,7 @@ export default function MechanismOfActionPage() {
                             {r.code}
                           </tspan>
                           <tspan
-                            fill={active ? "#ffffff" : r.color}
+                            fill={active ? "#ffffff" : RECEPTOR_COLOR}
                             fontSize={15}
                             fontWeight={700}
                             dx={6}
@@ -377,7 +373,7 @@ export default function MechanismOfActionPage() {
             </div>
             <aside className="bind__detail">
               <div className="bind__head">
-                <b className="bind__code" style={{ color: selected.color }}>{selected.code}</b>
+                <b className="bind__code">{selected.code}</b>
                 <div>
                   <h3>{selected.name}</h3>
                   <p>

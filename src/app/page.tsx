@@ -15,13 +15,13 @@ export default function HomePage() {
       <div className="hero hero--home">
         <div className="w">
           <div>
-            <p className="eb eb--rule">Medical information for healthcare professionals</p>
+            {/* <p className="eb eb--rule">Medical information for healthcare professionals</p> */}
             <div className="brand">
               ZYPREXA<i>olanzapine</i>
             </div>
-            <p className="source-line" style={{ marginTop: 0 }}>
+            {/* <p className="source-line" style={{ marginTop: 0 }}>
               ZYPREXA® coated tablets · EU SmPC · Prepared October 2026 · Job code to be assigned for the target market
-            </p>
+            </p> */}
             <h1 className="serif" style={{ fontSize: "clamp(24px, 3vw, 38px)", margin: "16px 0 10px" }}>
               Evidence-informed treatment in schizophrenia and manic episodes in bipolar disorder
             </h1>
