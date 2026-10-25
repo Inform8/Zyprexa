@@ -11,14 +11,14 @@ export default function ConditionsOfUsePage() {
     <main id="app">
       <div className="hero hero--text">
         <div className="w">
-          <div>
+          <div className="hero-copy">
             <p className="eb">Legal</p>
             <h1 className="serif">Conditions of Use</h1>
             <p>
               Content is provided for healthcare professionals and is based on the EU Summary of Product
               Characteristics for ZYPREXA coated tablets.
             </p>
-            <div className="row">
+            <div className="hero-tabs">
               <Link className="btn" href="/safety-monitoring#reporting">
                 Adverse-reaction contacts →
               </Link>
@@ -27,6 +27,7 @@ export default function ConditionsOfUsePage() {
               </Link>
             </div>
           </div>
+          <div className="hero-art" aria-hidden="true" />
         </div>
       </div>
 

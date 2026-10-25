@@ -12,14 +12,14 @@ export default function LegalPage() {
     <main id="app">
       <div className="hero hero--text">
         <div className="w">
-          <div>
+          <div className="hero-copy">
             <p className="eb">Legal</p>
             <h1 className="serif">Privacy, cookies and terms</h1>
             <p>
               Final legal text for the target market has not been supplied. The sections below are placeholders so
               the required links exist. Replace them with the approved documents before distribution.
             </p>
-            <div className="row">
+            <div className="hero-tabs">
               <a className="btn" href="#privacy">
                 Privacy policy →
               </a>
@@ -31,6 +31,7 @@ export default function LegalPage() {
               </a>
             </div>
           </div>
+          <div className="hero-art" aria-hidden="true" />
         </div>
       </div>
 

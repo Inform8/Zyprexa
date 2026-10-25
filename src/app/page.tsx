@@ -17,7 +17,7 @@ export default function HomePage() {
     <main id="app" className="home-page">
       <div className="hero hero--home">
         <div className="w">
-          <div>
+          <div className="hero-copy">
             <p className="eb">Product overview</p>
             <div className="brand">
               ZYPREXA<i>olanzapine · coated tablets</i>
