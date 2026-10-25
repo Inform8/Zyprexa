@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import UtilityBar from "@/components/UtilityBar";
 import Header from "@/components/Header";
-import SectionNav from "@/components/SectionNav";
 import PageNav from "@/components/PageNav";
 import Footer from "@/components/Footer";
 import HcpDialog from "@/components/HcpDialog";
@@ -47,7 +46,6 @@ export default function RootLayout({
           <span className="c6" />
         </div>
         <Header />
-        <SectionNav />
         {children}
         <PageNav />
         <Footer />

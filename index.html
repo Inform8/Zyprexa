@@ -282,8 +282,25 @@
         }
 
         section.s {
-            padding: 40px 0 4px;
+            padding: 28px 0 0;
             scroll-margin-top: 110px
+        }
+
+        section.s:last-of-type {
+            padding-bottom: 48px
+        }
+
+        #app > div > .w {
+            padding-bottom: 12px
+        }
+
+        .sec-box {
+            background: rgba(255, 255, 255, 0.88);
+            border: 1px solid var(--line);
+            border-radius: 20px;
+            padding: 28px 28px 24px;
+            box-shadow: 0 2px 16px #4b2bb00a;
+            backdrop-filter: blur(6px);
         }
 
         h2 {
@@ -1110,7 +1127,7 @@
             return `<div class="card ${k}">${stepHtml}<h3>${t}</h3><p>${p || ""}</p></div>`;
         };
         const A = (h, i, t, p, k = "") => `<a class="card ${k}" href="${h}"><h3>${t}</h3><p>${p}</p><span style="margin-top:auto;padding-top:10px;font-size:12.5px;font-weight:600;color:var(--pri)">Explore section →</span></a>`;
-        const S = (id, t, lead, body) => `<section class="s" id="${id}"><h2>${t}</h2>${lead ? `<p class="lead">${lead}</p>` : ""}${body}</section>`;
+        const S = (id, t, lead, body) => `<section class="s" id="${id}"><div class="sec-box"><h2>${t}</h2>${lead ? `<p class="lead">${lead}</p>` : ""}${body}</div></section>`;
         const G = (n, a, x = "") => `<div class="grid g${n} ${x}">${a.join("")}</div>`;
         const AC = a => a.map(([t, p], i) => `<details ${i == 0 ? "" : ""}><summary>${t}</summary>${p.startsWith("<") ? p : `<p>${p}</p>`}</details>`).join("");
         const PAL = ["#7c4dff", "#b9a8ee", "#db2777", "#059669", "#d97706", "#2563eb"];
@@ -1173,7 +1190,7 @@
 
         P.evidence = {
             n: "Clinical evidence", secs: [["explorer", "Study explorer"], ["schizophrenia", "Schizophrenia"], ["mania", "Acute mania"], ["recurrence", "Recurrence prevention"], ["longterm", "Long-term"], ["guidelines", "Guidelines"]],
-            html: () => hero("Clinical Evidence", "A comprehensive review of the clinical data for olanzapine in schizophrenia and bipolar disorder.", "ev") + `<div class="w"><section class="s"><div class="card grid g3 keep stat"><div><b>9</b>Clinical studies in EU SmPC section 5.1</div><div><b>4</b>Study categories (Schizophrenia, Acute Mania, Recurrence, Long-Term)</div><div><b>12+</b>Evaluated primary and secondary endpoints</div></div></section>` +
+            html: () => hero("Clinical Evidence", "A comprehensive review of the clinical data for olanzapine in schizophrenia and bipolar disorder.", "ev") + `<div class="w"><section class="s"><div class="sec-box"><div class="card grid g3 keep stat"><div><b>9</b>Clinical studies in EU SmPC section 5.1</div><div><b>4</b>Study categories (Schizophrenia, Acute Mania, Recurrence, Long-Term)</div><div><b>12+</b>Evaluated primary and secondary endpoints</div></div></div></section>` +
                 S("explorer", "Interactive study explorer", "Complete 9-study dataset. Filter by category.", `<div class="tabs" id="flt">${["All", "Schizophrenia", "Acute mania", "Recurrence prevention", "Long-term"].map((x, i) => `<button class="${i ? "" : "on"}">${x}</button>`).join("")}</div><div class="card tw" style="padding:0"><table><thead><tr><th>Population</th><th>Design & comparator</th><th>Duration</th><th>Endpoint</th><th>Outcome reported in EU SmPC 5.1</th></tr></thead><tbody id="stb"></tbody></table></div>`) +
                 S("schizophrenia", "Schizophrenia – efficacy", "", `<div class="grid g3">` + cols("MADRS change (schizophrenia with depressive symptoms)", [["Olanzapine", 6.0, "−6.0", 0], ["Haloperidol", 3.1, "−3.1", 1]], 8, { sub: "n = 1,481; baseline MADRS 16.6; p = 0.001" }) + cols("Beasley 1996 – BPRS total change (Week 6 LOCF)", [["Placebo", 3.1, "−3.1", 1], ["Olz 5 mg", 6.7, "−6.7", 0], ["Olz 10 mg", 12.6, "−12.6*", 0], ["Olz 15 mg", 15.2, "−15.2*", 0], ["Haloperidol", 12.9, "−12.9*", 2]], 17, { sub: "* p ≤ 0.001 vs placebo (olanzapine 10/15 mg); p ≤ 0.01 (haloperidol)" }) + cols("Beasley 1996 – SANS negative symptoms change", [["Placebo", 1.9, "−1.9", 1], ["Olz 5 mg", 8.7, "−8.7*", 0], ["Olz 10 mg", 6.1, "−6.1", 0], ["Olz 15 mg", 13.5, "−13.5*†", 0], ["Haloperidol", 6.6, "−6.6", 2]], 16, { sub: "* p ≤ 0.05 (5 mg), p ≤ 0.001 (15 mg) vs placebo; † p ≤ 0.05 vs haloperidol" }) + `</div><div class="card" style="margin-top:16px"><h3>Beasley et al. 1996 – design</h3><p>6-week, randomised, double-blind trial in 335 patients comparing olanzapine (low 5 ± 2.5 mg, medium 10 ± 2.5 mg, high 15 ± 2.5 mg) with haloperidol (15 ± 5 mg) and placebo.</p></div><div class="grid g3" style="margin-top:16px">` + dnc("Somnolence (high dose vs placebo)", [dn(39.1, "Olanzapine 15 mg", "#7c4dff"), dn(16.2, "Placebo", "#b9a8ee")]) + dnc("Acute dystonia", [dn(0, "Olanzapine", "#7c4dff", "0%"), dn(13, "Haloperidol", "#d97706", "13.0%")]) + `<div class="card stat"><b>+3.5 kg</b><p>Mean weight gain on high-dose olanzapine in the trial.</p></div></div>`) +
                 S("mania", "Acute mania – Tohen et al. 1999", "3-week double-blind, parallel-group trial in 139 bipolar I manic/mixed patients.", `<div class="grid g2">` + cols("YMRS total change", [["Olanzapine", 10.26, "−10.26", 0], ["Placebo", 4.88, "−4.88", 1]], 12, { note: "Difference −5.38 points (p = 0.02)." }) + dnc("Responders (≥50% YMRS improvement)", [dn(48.6, "Olanzapine", "#7c4dff"), dn(24.2, "Placebo", "#b9a8ee")], "48.6% vs 24.2% (p = 0.004)") + `</div>`) +

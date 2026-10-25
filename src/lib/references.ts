@@ -174,7 +174,47 @@ export const REFERENCES: Reference[] = [
     usedFor: "Cited for receptor occupancy at clinical doses (mechanism of action, Figure 2).",
     links: [{ label: "doi:10.1176/ajp.155.7.921", href: "https://doi.org/10.1176/ajp.155.7.921" }],
   },
+  {
+    n: 13,
+    title: "ZYPREXA (olanzapine) Prescribing Information.",
+    authors: "U.S. Food and Drug Administration",
+    source: "Silver Spring, MD: FDA; 2021",
+    year: 2021,
+    category: "regulatory",
+    kind: "Prescribing information",
+    topics: ["Pharmacology"],
+    usedFor: "Cited only for the links between receptor activity and certain adverse effects.",
+    links: [],
+  },
 ];
+
+export const REF_FILTERS = [
+  { id: "all", label: "All" },
+  { id: "prescribing", label: "Prescribing information" },
+  { id: "disease", label: "Disease background" },
+  { id: "efficacy", label: "Efficacy" },
+  { id: "mechanism", label: "Mechanism" },
+  { id: "guidelines", label: "Guidelines" },
+  { id: "safety", label: "Safety" },
+] as const;
+
+export type RefFilterId = (typeof REF_FILTERS)[number]["id"];
+
+export const REF_TAGS: Record<number, Exclude<RefFilterId, "all">[]> = {
+  1: ["prescribing", "efficacy", "safety", "mechanism"],
+  2: ["prescribing"],
+  3: ["prescribing"],
+  4: ["disease"],
+  5: ["disease", "mechanism"],
+  6: ["guidelines"],
+  7: ["guidelines"],
+  8: ["guidelines", "safety"],
+  9: ["guidelines"],
+  10: ["efficacy", "safety"],
+  11: ["efficacy", "safety"],
+  12: ["mechanism"],
+  13: ["mechanism"],
+};
 
 export const ABBREVIATIONS: { term: string; definition: string }[] = [
   { term: "ALT, AST", definition: "Alanine and aspartate aminotransferase" },

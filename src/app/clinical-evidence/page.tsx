@@ -1,699 +1,478 @@
-"use client";
-
-import { useState } from "react";
-import { ColumnChart } from "@/components/Figures";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { Cite } from "@/components/Cite";
+import { HBars, VBars } from "@/components/Charts";
+import { HashPanel, HashTabBar, HashTabsProvider } from "@/components/HashTabs";
 
-interface Study {
-  cat: string;
-  pop: string;
-  design: string;
-  dur: string;
-  endpoint: string;
-  outcome: string;
-}
+export const metadata: Metadata = {
+  title: "Clinical evidence",
+  description: "Clinical evidence for olanzapine in schizophrenia, manic episodes and recurrence prevention.",
+};
 
-const STUDIES: Study[] = [
-  {
-    cat: "Schizophrenia",
-    pop: "Schizophrenia (positive & negative symptoms, n > 2,900)",
-    design: "2 placebo-controlled, 3 comparator-controlled trials",
-    dur: "Not stated in SmPC 5.1",
-    endpoint: "Positive & negative symptoms",
-    outcome:
-      "Statistically significantly greater improvement in negative as well as positive symptoms in 2/2 placebo and 2/3 comparator trials.",
-  },
-  {
-    cat: "Schizophrenia",
-    pop: "Schizophrenia with depressive symptoms (n = 1,481, baseline MADRS 16.6)",
-    design: "Double-blind vs. haloperidol",
-    dur: "Not stated in SmPC 5.1",
-    endpoint: "Secondary analysis: MADRS mood score change",
-    outcome: "−6.0 olanzapine vs. −3.1 haloperidol (p = 0.001). Statistically significant mood improvement.",
-  },
-  {
-    cat: "Acute mania",
-    pop: "Bipolar manic / mixed episode (monotherapy)",
-    design: "Double-blind vs. placebo",
-    dur: "3 weeks",
-    endpoint: "Not specified in SmPC: reduction of manic symptoms",
-    outcome: "Superior efficacy to placebo in reduction of manic symptoms over 3 weeks.",
-  },
-  {
-    cat: "Acute mania",
-    pop: "Bipolar manic / mixed episode (active comparator)",
-    design: "Double-blind vs. divalproex",
-    dur: "3 weeks",
-    endpoint: "Not specified in SmPC: reduction of manic symptoms",
-    outcome: "Superior efficacy to divalproex in reduction of manic symptoms over 3 weeks.",
-  },
-  {
-    cat: "Acute mania",
-    pop: "Bipolar manic / mixed episode",
-    design: "Double-blind vs. haloperidol",
-    dur: "6 & 12 weeks",
-    endpoint: "Symptomatic remission rate",
-    outcome: "Comparable efficacy results to haloperidol in proportion of patients in symptomatic remission.",
-  },
-  {
-    cat: "Acute mania",
-    pop: "Bipolar patients on lithium/valproate ≥ 2 weeks",
-    design: "Add-on olanzapine 10 mg vs. mood stabilizer monotherapy",
-    dur: "6 weeks",
-    endpoint: "Manic symptom reduction",
-    outcome: "Greater symptom reduction than lithium or valproate monotherapy.",
-  },
-  {
-    cat: "Recurrence prevention",
-    pop: "Manic episode in remission on olanzapine",
-    design: "Randomised vs. placebo",
-    dur: "12 months",
-    endpoint: "Primary: Bipolar recurrence rate",
-    outcome: "Statistically significant superiority over placebo; prevented relapse into mania or depression.",
-  },
-  {
-    cat: "Recurrence prevention",
-    pop: "Manic episode in remission on olanzapine + lithium",
-    design: "Randomised: olanzapine alone vs. lithium alone",
-    dur: "12 months",
-    endpoint: "Primary: Bipolar recurrence rate",
-    outcome: "Statistically non-inferior to lithium: 30.0% vs. 38.3% (p = 0.055).",
-  },
-  {
-    cat: "Recurrence prevention",
-    pop: "Manic or mixed episode, stabilised on olanzapine plus lithium or valproate",
-    design: "Co-therapy vs. lithium/valproate alone",
-    dur: "18 months",
-    endpoint: "Delay of bipolar recurrence",
-    outcome:
-      "Not statistically significantly superior to mood stabilizer monotherapy in delaying syndromic recurrence.",
-  },
+const tabs = [
+  { id: "schizophrenia", label: "4.1 Schizophrenia" },
+  { id: "manic-episodes", label: "4.2 Manic episodes" },
+  { id: "recurrence", label: "4.3 Recurrence prevention" },
+  { id: "guidelines", label: "4.4 Guidelines" },
 ];
 
 export default function ClinicalEvidencePage() {
-  const [filter, setFilter] = useState("All");
-
-  const categories = ["All", "Schizophrenia", "Acute mania", "Recurrence prevention"];
-
-  const filteredStudies =
-    filter === "All" ? STUDIES : STUDIES.filter((s) => s.cat === filter);
-
   return (
     <main id="app">
-      {/* Editorial Hero */}
-      <div className="hero">
-        <div className="w">
-          <div>
-            <p className="eb">Clinical Evidence · EU SmPC Section 5.1</p>
-            <h1 className="serif">Clinical evidence for olanzapine</h1>
-            <p>
-              Reviewing clinical outcomes in schizophrenia, manic episodes, and recurrence prevention in bipolar
-              disorder.
-            </p>
-            <div className="row">
-              <a className="btn" href="#explorer">
-                Study explorer ↓
-              </a>
-              <a className="btn g" href="#schizophrenia">
-                Schizophrenia trials
-              </a>
+      <HashTabsProvider label="Evidence by indication" tabs={tabs}>
+        <div className="hero hero--text">
+          <div className="w">
+            <div className="hero-copy">
+              <p className="eb">Clinical evidence</p>
+              <h1 className="serif">Clinical evidence for olanzapine</h1>
+              <p>Choose an indication below to see key results. Open a study for its design, safety findings and limitations.</p>
+              <HashTabBar />
             </div>
-          </div>
-          <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/clinical-studies.jpg"
-              alt="Clinical study charts, laboratory slide, and research documents"
-              loading="lazy"
-            />
+            <div className="hero-art" aria-hidden="true" />
           </div>
         </div>
-      </div>
 
-      <div className="w">
-        <section className="s">
-          <p className="story">
-            The clinical evidence for olanzapine includes studies of symptom improvement in schizophrenia, treatment
-            of manic episodes and prevention of recurrence in bipolar disorder.
-          </p>
-          <p className="story">
-            Evidence should be considered in the context of the indication, patient population, comparator, endpoint
-            and duration of follow-up. Individual study results do not necessarily predict the response of every
-            patient.
-          </p>
-        </section>
-
-        {/* Interactive Study Explorer */}
-        <section className="s" id="explorer">
-          <h2>Interactive study explorer</h2>
-          <p className="lead">
-            Complete 9-study dataset from EU SmPC section 5.1. Filter by category.
-            <Cite n={1} section="5.1" />
-          </p>
-
-          <div className="tabs" id="flt">
-            {categories.map((c) => (
-              <button
-                key={c}
-                type="button"
-                className={filter === c ? "on" : ""}
-                onClick={() => setFilter(c)}
-              >
-                {c}
-              </button>
-            ))}
-          </div>
-
-          <div className="card tw" style={{ padding: 0 }}>
-            <table>
-              <thead>
-                <tr>
-                  <th>Population</th>
-                  <th>Design &amp; comparator</th>
-                  <th>Duration</th>
-                  <th>Endpoint</th>
-                  <th>Outcome reported in EU SmPC 5.1</th>
-                </tr>
-              </thead>
-              <tbody>
-                {filteredStudies.map((s, idx) => (
-                  <tr key={idx}>
-                    <td>
-                      <b>{s.pop}</b>
-                    </td>
-                    <td>{s.design}</td>
-                    <td>{s.dur}</td>
-                    <td>{s.endpoint}</td>
-                    <td>{s.outcome}</td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
-          </div>
-          <p className="source-line">
-            * Duration and other parameters are those of the EU registration trials summarised in SmPC section 5.1.
-            Where the SmPC does not state duration, endpoint, sample size, blinding or inclusion criteria, the cell
-            says so. Those details are not inferred.
-          </p>
-          <p className="source-line">
-            Primary publications cited here: Beasley et al. 1996 (reference 10) for the 6-week North American
-            schizophrenia trial, and Tohen et al. 1999 (reference 11) for the published acute mania versus placebo
-            trial. The other rows are an EU SmPC section 5.1 summary; their primary publications were not supplied.
-          </p>
-        </section>
-
-        {/* Schizophrenia Efficacy Section */}
-        <section className="s" id="schizophrenia">
-          <div className="sec-card">
-            <div className="sec-head">
-              <h2>Schizophrenia – Pivotal Efficacy &amp; Safety Profile</h2>
+        <HashPanel id="schizophrenia">
+          <div className="w">
+            <section className="s">
+              <h2>
+                <span className="sec-no">4.1</span>
+                Schizophrenia
+              </h2>
               <p>
-                Beasley et al. 1996 and pivotal multi-center clinical trials reported in EU SmPC 5.1.
-                <Cite n={[10, 1]} />
+                Across five controlled trials, olanzapine improved both positive and negative symptoms. A published
+                dose-ranging trial and a secondary analysis of mood symptoms add detail.
               </p>
-            </div>
-
-            {/* Row 1: Core Efficacy Outcomes */}
-            <div className="grid g3">
-              {/* MADRS Column Chart */}
-              <div className="card">
-                <div>
-                  <h3>MADRS change (depressive symptoms)</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>n = 1,481; baseline MADRS 16.6</p>
-                  <ColumnChart
-                    label="MADRS change"
-                    bars={[
-                      { label: "Olanzapine", value: 6, display: "−6.0" },
-                      { label: "Haloperidol", value: 3.1, display: "−3.1", tone: "alt" },
-                    ]}
-                  />
+              <div className="kpis">
+                <div className="kpi">
+                  <b>2 of 2</b>
+                  <span>
+                    placebo-controlled trials: significantly greater improvement in negative and positive symptoms
+                    <Cite n={1} section="5.1" />
+                  </span>
                 </div>
-                <div className="stat-note highlight">
-                  p = 0.001 vs haloperidol
+                <div className="kpi">
+                  <b>2 of 3</b>
+                  <span>
+                    comparator-controlled trials: significantly greater improvement in negative and positive symptoms
+                    <Cite n={1} section="5.1" />
+                  </span>
                 </div>
-              </div>
-
-              {/* Beasley 1996 BPRS Total Change */}
-              <div className="card">
-                <div>
-                  <h3>Beasley 1996 – BPRS total change (Wk 6)</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>* p ≤ 0.001 vs placebo; haloperidol p ≤ 0.01</p>
-                  <ColumnChart
-                    label="BPRS total change at week 6"
-                    bars={[
-                      { label: "Placebo", value: 3.1, display: "−3.1", tone: "soft" },
-                      { label: "5 mg", value: 6.7, display: "−6.7" },
-                      { label: "10 mg", value: 12.6, display: "−12.6" },
-                      { label: "15 mg", value: 15.2, display: "−15.2" },
-                      { label: "Halo", value: 12.9, display: "−12.9", tone: "alt" },
-                    ]}
-                  />
-                </div>
-                <div className="stat-note highlight">
-                  High dose −15.2 vs Plac −3.1 (p ≤ 0.001)
+                <div className="kpi">
+                  <b>&gt; 2,900</b>
+                  <span>
+                    patients across these trials, with both positive and negative symptoms
+                    <Cite n={1} section="5.1" />
+                  </span>
                 </div>
               </div>
 
-              {/* Beasley 1996 SANS Negative Symptoms Change */}
-              <div className="card">
-                <div>
-                  <h3>Beasley 1996 – SANS negative symptoms</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>* p ≤ 0.05 vs placebo; † p ≤ 0.05 vs haloperidol</p>
-                  <ColumnChart
-                    label="SANS negative symptom change"
-                    bars={[
-                      { label: "Placebo", value: 1.9, display: "−1.9", tone: "soft" },
-                      { label: "5 mg", value: 8.7, display: "−8.7" },
-                      { label: "10 mg", value: 6.1, display: "−6.1" },
-                      { label: "15 mg", value: 13.5, display: "−13.5" },
-                      { label: "Halo", value: 6.6, display: "−6.6", tone: "alt" },
-                    ]}
-                  />
-                </div>
-                <div className="stat-note highlight">
-                  High dose −13.5 vs Plac −1.9 (p ≤ 0.05)
-                </div>
-              </div>
-            </div>
+              <details id="beasley-1996" open>
+                <summary>North American double-blind trial · Beasley et al. 1996 · 6 weeks · n = 335</summary>
+                <p className="study-lead">BPRS total −15.2 with olanzapine 15 ± 2.5 mg vs −3.1 with placebo.</p>
 
-            {/* Study Architecture Banner */}
-            <div className="card" style={{ marginTop: "16px", background: "rgba(255, 255, 255, 0.72)" }}>
-              <h3 style={{ fontSize: "15px", marginBottom: "4px" }}>Beasley et al. 1996 – Study Architecture</h3>
-              <p style={{ margin: 0, fontSize: "13px" }}>
-                6-week randomised double-blind trial in 335 patients comparing olanzapine (low dose 5 ± 2.5 mg/day, medium dose 10 ± 2.5 mg/day, high dose 15 ± 2.5 mg/day) with haloperidol (15 ± 5 mg/day) and placebo.
-              </p>
-            </div>
-
-            {/* Row 2: Safety & Tolerability Profile */}
-            <div className="grid g3" style={{ marginTop: "16px" }}>
-              <div className="card">
-                <div>
-                  <h3>Somnolence incidence</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>High dose (15 mg/day) vs placebo</p>
-                  <div className="dnr">
-                    <div>
-                      <div
-                        className="dn"
-                        style={
-                          {
-                            "--p": 39.1,
-                            "--c": "#7c4dff",
-                          } as React.CSSProperties
-                        }
-                      >
-                        <b>39.1%</b>
-                      </div>
-                      <span style={{ fontSize: "12px", fontWeight: 600 }}>Olanzapine 15 mg</span>
-                    </div>
-                    <div>
-                      <div
-                        className="dn"
-                        style={
-                          {
-                            "--p": 16.2,
-                            "--c": "#b9a8ee",
-                          } as React.CSSProperties
-                        }
-                      >
-                        <b>16.2%</b>
-                      </div>
-                      <span style={{ fontSize: "12px", fontWeight: 600 }}>Placebo</span>
-                    </div>
+                <div className="g2" style={{ marginTop: 14, marginBottom: 16 }}>
+                  <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                    <h4 style={{ margin: "0 0 10px" }}>Results — BPRS total (overall symptoms)</h4>
+                    <HBars
+                      caption="Mean change from baseline (LOCF). * significantly better than placebo."
+                      rows={[
+                        { label: "Placebo", value: "−3.1", width: 19, tone: "muted" },
+                        { label: "Olz 5 ± 2.5 mg", value: "−6.7", width: 42, tone: "soft" },
+                        { label: "Olz 10 ± 2.5 mg", value: "−12.6 *", width: 79 },
+                        { label: "Olz 15 ± 2.5 mg", value: "−15.2 *", width: 95 },
+                        { label: "Haloperidol", value: "−12.9 *", width: 81, tone: "soft" },
+                      ]}
+                    />
+                  </div>
+                  <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+                    <h4 style={{ margin: "0 0 10px" }}>Results — SANS composite (negative symptoms)</h4>
+                    <HBars
+                      caption="* versus placebo. † also versus haloperidol."
+                      rows={[
+                        { label: "Placebo", value: "−1.9", width: 12, tone: "muted" },
+                        { label: "Olz 5 ± 2.5 mg", value: "−8.7 *", width: 58, tone: "soft" },
+                        { label: "Olz 10 ± 2.5 mg", value: "−6.1", width: 40 },
+                        { label: "Olz 15 ± 2.5 mg", value: "−13.5 * †", width: 90 },
+                        { label: "Haloperidol", value: "−6.6", width: 44, tone: "soft" },
+                      ]}
+                    />
                   </div>
                 </div>
-                <div className="stat-note highlight">
-                  Transient sedation during acute titration
-                </div>
-              </div>
-
-              <div className="card">
-                <div>
-                  <h3>Acute dystonia incidence</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>Extrapyramidal motor liability comparator</p>
-                  <div className="dnr">
-                    <div>
-                      <div
-                        className="dn"
-                        style={
-                          {
-                            "--p": 0,
-                            "--c": "#7c4dff",
-                          } as React.CSSProperties
-                        }
-                      >
-                        <b>0%</b>
-                      </div>
-                      <span style={{ fontSize: "12px", fontWeight: 600 }}>Olanzapine</span>
-                    </div>
-                    <div>
-                      <div
-                        className="dn"
-                        style={
-                          {
-                            "--p": 13,
-                            "--c": "#d97706",
-                          } as React.CSSProperties
-                        }
-                      >
-                        <b>13.0%</b>
-                      </div>
-                      <span style={{ fontSize: "12px", fontWeight: 600 }}>Haloperidol</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="stat-note highlight">
-                  0% olanzapine vs 13.0% haloperidol
-                </div>
-              </div>
-
-              <div className="card stat">
-                <div>
-                  <h3>Mean trial weight gain</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>Fixed 6-week acute exposure window</p>
-                  <div className="viz-box" style={{ justifyContent: "center", alignItems: "center" }}>
-                    <div style={{ background: "rgba(124, 77, 255, 0.08)", padding: "18px 24px", borderRadius: "16px", border: "1px solid rgba(124, 77, 255, 0.16)", width: "100%" }}>
-                      <b style={{ fontSize: "40px", color: "var(--pri)", display: "block", fontFamily: "var(--font-inter), sans-serif", fontWeight: 700, lineHeight: 1 }}>
-                        +3.5 kg
-                      </b>
-                      <p style={{ marginTop: "8px", fontSize: "12.5px", color: "var(--mut)" }}>
-                        Mean gain on high-dose olanzapine (15 mg/day)
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="stat-note highlight">
-                  Metabolic baseline monitoring required
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Acute Mania Section */}
-        <section className="s" id="mania">
-          <div className="sec-card">
-            <div className="sec-head">
-              <h2>Acute mania – Tohen et al. 1999</h2>
-              <p>
-                3-week double-blind, parallel-group trial in 139 bipolar I manic/mixed patients (EU SmPC 5.1).
-                <Cite n={[11, 1]} />
-              </p>
-            </div>
-            <div className="grid g2">
-              {/* Left Card: YMRS Total Score Change */}
-              <div className="card">
-                <div>
-                  <h3>YMRS total score change</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>Primary efficacy endpoint at Week 3</p>
-                  <div className="viz-box">
-                    <div className="cols">
-                      <div>
-                        <b>−10.26</b>
-                        <i style={{ height: "85%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>−4.88</b>
-                        <i style={{ height: "40%", background: "#b9a8ee" }} />
-                      </div>
-                    </div>
-                    <div className="cl">
-                      <span>Olanzapine</span>
-                      <span>Placebo</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="stat-note highlight">
-                  Difference −5.38 points (p = 0.02)
-                </div>
-              </div>
-
-              {/* Right Card: Responders */}
-              <div className="card">
-                <div>
-                  <h3>Responders (≥50% YMRS improvement)</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>Categorical treatment response threshold</p>
-                  <div className="dnr">
-                    <div>
-                      <div
-                        className="dn"
-                        style={
-                          {
-                            "--p": 48.6,
-                            "--c": "#7c4dff",
-                          } as React.CSSProperties
-                        }
-                      >
-                        <b>48.6%</b>
-                      </div>
-                      <span style={{ fontSize: "12px", fontWeight: 600 }}>Olanzapine</span>
-                    </div>
-                    <div>
-                      <div
-                        className="dn"
-                        style={
-                          {
-                            "--p": 24.2,
-                            "--c": "#b9a8ee",
-                          } as React.CSSProperties
-                        }
-                      >
-                        <b>24.2%</b>
-                      </div>
-                      <span style={{ fontSize: "12px", fontWeight: 600 }}>Placebo</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="stat-note highlight">
-                  Response rate: 48.6% vs 24.2% (p = 0.004)
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Recurrence Prevention */}
-        <section className="s" id="recurrence">
-          <div className="sec-card">
-            <div className="sec-head">
-              <h2>Bipolar Recurrence Prevention – 12-Month Studies</h2>
-              <p>
-                Relapse prevention data in patients achieving remission on olanzapine (EU SmPC 5.1).
-                <Cite n={1} section="5.1" />
-              </p>
-            </div>
-            <div className="grid g2">
-              <div className="card">
-                <div>
-                  <h3>Bipolar recurrence rate (%)</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>12-month double-blind active-comparator trial</p>
-                  <div className="viz-box">
-                    <div className="cols">
-                      <div>
-                        <b>30.0%</b>
-                        <i style={{ height: "60%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>38.3%</b>
-                        <i style={{ height: "76%", background: "#b9a8ee" }} />
-                      </div>
-                    </div>
-                    <div className="cl">
-                      <span>Olanzapine</span>
-                      <span>Lithium</span>
-                    </div>
-                  </div>
-                </div>
-                <div className="stat-note highlight">
-                  Non-inferior to lithium (p = 0.055)
-                </div>
-              </div>
-
-              <div className="card">
-                <div>
-                  <h3>Superiority vs. placebo in 12-month trial</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>Placebo-controlled recurrence prevention trial</p>
-                  <div className="viz-box" style={{ justifyContent: "center", alignItems: "center", textAlign: "center" }}>
-                    <div style={{ background: "rgba(124, 77, 255, 0.08)", padding: "18px 20px", borderRadius: "16px", border: "1px solid rgba(124, 77, 255, 0.16)", width: "100%" }}>
-                      <b style={{ fontSize: "22px", color: "var(--pri)", display: "block", fontFamily: "var(--font-inter), sans-serif", fontWeight: 700, marginBottom: "6px" }}>
-                        Dual Relapse Prevention
-                      </b>
-                      <p style={{ margin: 0, fontSize: "12.5px", color: "var(--ink)" }}>
-                        Statistically significantly superior to placebo on the primary endpoint, delaying and preventing relapse into both mania and depression.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="stat-note highlight">
-                  Statistically superior to placebo (p &lt; 0.001)
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Long-term Exposure & Weight Gain */}
-        <section className="s" id="longterm">
-          <div className="sec-card">
-            <div className="sec-head">
-              <h2>Long-Term Exposure &amp; Categorical Weight Gain</h2>
-              <p>
-                EU SmPC Section 4.8 weight gain threshold analysis and 18-month co-therapy study findings.
-                <Cite n={1} section="4.8" />
-              </p>
-            </div>
-            <div className="grid g2">
-              <div className="card">
-                <div>
-                  <h3>Proportion of adults gaining weight</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>Categorical thresholds across exposure durations</p>
-                  <div className="viz-box" style={{ height: "190px" }}>
-                    <div className="cols" style={{ height: "125px" }}>
-                      <div>
-                        <b>22.2%</b>
-                        <i style={{ height: "32%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>64.4%</b>
-                        <i style={{ height: "92%", background: "#db2777" }} />
-                      </div>
-                      <div>
-                        <b>4.2%</b>
-                        <i style={{ height: "6%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>31.7%</b>
-                        <i style={{ height: "45%", background: "#db2777" }} />
-                      </div>
-                      <div>
-                        <b>0.8%</b>
-                        <i style={{ height: "2%", background: "#7c4dff" }} />
-                      </div>
-                      <div>
-                        <b>12.3%</b>
-                        <i style={{ height: "18%", background: "#db2777" }} />
-                      </div>
-                    </div>
-                    <div className="cl" style={{ fontSize: "10.5px" }}>
-                      <span>≥7% ST</span>
-                      <span>≥7% LT</span>
-                      <span>≥15% ST</span>
-                      <span>≥15% LT</span>
-                      <span>≥25% ST</span>
-                      <span>≥25% LT</span>
-                    </div>
-                  </div>
-                  <div className="leg" style={{ marginTop: "6px" }}>
-                    <span>
-                      <i style={{ background: "#7c4dff" }} />
-                      Short-term (median 47 days)
-                    </span>
-                    <span>
-                      <i style={{ background: "#db2777" }} />
-                      Long-term (≥ 48 weeks)
-                    </span>
-                  </div>
-                </div>
-                <div className="stat-note highlight">
-                  Metabolic baseline and periodic monitoring recommended
-                </div>
-              </div>
-
-              <div className="card">
-                <div>
-                  <h3>18-month co-therapy study findings</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>Combination vs mood stabilizer monotherapy</p>
-                  <div className="viz-box" style={{ justifyContent: "center", alignItems: "center" }}>
-                    <div style={{ background: "rgba(124, 77, 255, 0.08)", padding: "18px 20px", borderRadius: "16px", border: "1px solid rgba(124, 77, 255, 0.16)", width: "100%" }}>
-                      <b style={{ fontSize: "15px", color: "var(--ink)", display: "block", marginBottom: "8px" }}>
-                        Syndromic Recurrence Endpoint
-                      </b>
-                      <p style={{ margin: 0, fontSize: "12.5px", color: "var(--mut)", lineHeight: "1.6" }}>
-                        In an 18-month study of patients stabilized with olanzapine and lithium or valproate, long-term co-therapy was not statistically significantly superior to mood stabilizer monotherapy in delaying recurrence.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="stat-note">
-                  Not statistically significantly superior to lithium or valproate alone
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Guideline Context */}
-        <section className="s" id="guidelines">
-          <div className="sec-card">
-            <div className="sec-head">
-              <h2>Guideline and formulary context</h2>
-              <p>
-                Treatment guidelines place olanzapine among several options. Recommendations depend on the phase of
-                illness, the patient&apos;s preferences and how well the adverse-effect profile suits that person.
-              </p>
-            </div>
-            <div className="grid g3">
-              <div className="card">
-                <div>
-                  <h3>BAP 2016</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>British Association for Psychopharmacology</p>
-                  <p style={{ marginTop: "10px" }}>
-                    For severe mania, haloperidol, olanzapine, risperidone and quetiapine are described as particularly
-                    effective. In long-term treatment, lithium is recommended as initial monotherapy. Olanzapine is
-                    among the agents shown to prevent manic relapse. Weight gain is noted as a prominent adverse effect.
-                    <Cite n={7} />
+                <div className="study-findings">
+                  <p>
+                    In overall symptoms (BPRS total), the medium and high olanzapine dose ranges and haloperidol were superior to placebo.
+                    <Cite n={10} />
+                  </p>
+                  <p>
+                    In negative symptoms (SANS composite), the low and high olanzapine ranges were superior to placebo, and the high range was also superior to haloperidol.
+                    <Cite n={10} />
+                  </p>
+                  <p className="source-line">
+                    * p ≤ 0.01 versus placebo (p ≤ 0.05 for SANS, olanzapine 5 ± 2.5 mg). † p ≤ 0.05 versus haloperidol. Redrawn from Beasley et al. 1996, Table 5.
+                    <Cite n={10} />
                   </p>
                 </div>
-                <div className="stat-note">
-                  Bipolar disorder
+
+                <h4>Study design</h4>
+                <dl className="plain-list">
+                  <div><dt><b>Design</b></dt><dd>Randomised, double-blind, placebo- and active-controlled; 22 sites, US and Canada</dd></div>
+                  <div><dt><b>Patients</b></dt><dd>n = 335; DSM-III-R schizophrenia, acute exacerbation; BPRS total ≥ 24; about 91% chronic course</dd></div>
+                  <div><dt><b>Arms</b></dt><dd>Olanzapine 5 ± 2.5, 10 ± 2.5 or 15 ± 2.5 mg/day; haloperidol 15 ± 5 mg/day; placebo</dd></div>
+                  <div><dt><b>Duration</b></dt><dd>6 weeks (acute phase)</dd></div>
+                  <div><dt><b>Endpoints</b></dt><dd>Change in BPRS total and BPRS positive versus placebo; SANS composite versus placebo and haloperidol (LOCF)<Cite n={10} /></dd></div>
+                </dl>
+
+                <h4>Safety findings</h4>
+                <div className="kpis">
+                  <div className="kpi"><b>39.1% <small>vs 16.2%</small></b><span>somnolence, olanzapine 15 ± 2.5 mg vs placebo</span></div>
+                  <div className="kpi"><b>+3.5 kg</b><span>mean weight change at endpoint, olanzapine 15 ± 2.5 mg</span></div>
+                  <div className="kpi"><b>0% <small>vs 13.0%</small></b><span>acute dystonia, olanzapine vs haloperidol</span></div>
+                </div>
+                <div className="safety-note">
+                  <p style={{ margin: 0 }}>
+                    Dose-related transaminase elevations occurred; six olanzapine-treated patients discontinued because of raised ALT without clinical signs of hepatic dysfunction.
+                    <Cite n={10} />
+                  </p>
+                </div>
+
+                <h4>Limitations</h4>
+                <ul className="study-limitations">
+                  <li>Six-week acute phase only.</li>
+                  <li>High placebo response.</li>
+                  <li>The haloperidol dose (mean modal 16.4 mg/day) has been discussed as higher than optimal, which may favour comparisons against it.<Cite n={[10, 8]} /></li>
+                </ul>
+              </details>
+
+              <details id="mood-analysis">
+                <summary>Mood symptoms in schizophrenia and related disorders · n = 1,481 · baseline MADRS 16.6</summary>
+                <p className="study-lead">MADRS change −6.0 with olanzapine vs −3.1 with haloperidol (p = 0.001).</p>
+                <HBars
+                  caption="Mean change from baseline to endpoint. Bars represent improvement as scores fall. p = 0.001."
+                  rows={[
+                    { label: "Olanzapine", value: "−6.0", width: 75 },
+                    { label: "Haloperidol", value: "−3.1", width: 39, tone: "soft" },
+                  ]}
+                />
+                <div className="study-findings">
+                  <p>
+                    Patients had schizophrenia, schizoaffective disorder or related disorders, with varying degrees of
+                    depressive symptoms. A prospective secondary analysis of mood-score change favoured olanzapine.
+                    <Cite n={1} section="5.1" />
+                  </p>
+                </div>
+                <div className="safety-note">
+                  <p style={{ margin: 0 }}>
+                    <strong>Limitation.</strong> This was a secondary analysis, not the primary outcome of the study.
+                  </p>
+                </div>
+              </details>
+            </section>
+          </div>
+        </HashPanel>
+
+        <HashPanel id="manic-episodes">
+          <div className="w">
+            <section className="s">
+              <h2>
+                <span className="sec-no">4.2</span>
+                Manic episodes
+              </h2>
+              <p>
+                In moderate to severe manic episodes, olanzapine reduced manic symptoms versus placebo and divalproex,
+                and when added to lithium or valproate.
+              </p>
+              <div className="kpis">
+                <div className="kpi">
+                  <b>
+                    48.6% <small>vs 24.2%</small>
+                  </b>
+                  <span>
+                    patients responding at 3 weeks, olanzapine vs placebo (p = 0.004)
+                    <Cite n={11} />
+                  </span>
+                </div>
+                <div className="kpi">
+                  <b>
+                    −10.3 <small>vs −4.9</small>
+                  </b>
+                  <span>
+                    mean change in YMRS total at 3 weeks (p = 0.02)
+                    <Cite n={11} />
+                  </span>
+                </div>
+                <div className="kpi">
+                  <b>6 weeks</b>
+                  <span>
+                    add-on to lithium or valproate: greater reduction in manic symptoms than either alone
+                    <Cite n={1} section="5.1" />
+                  </span>
                 </div>
               </div>
-              <div className="card">
-                <div>
-                  <h3>APA 2021</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>American Psychiatric Association</p>
-                  <p style={{ marginTop: "10px" }}>
-                    Treat with an antipsychotic and monitor response and adverse effects. Continue an antipsychotic
-                    after symptoms improve, preferably the same one. The guideline does not rank individual
-                    antipsychotics. A long-acting injection may be used if the patient prefers it or adherence has
-                    been poor.
+
+              <details id="tohen-1999" open>
+                <summary>Olanzapine versus placebo in acute mania · Tohen et al. 1999 · 3 weeks · n = 139</summary>
+                <p className="study-lead">48.6% vs 24.2% of patients responded (p = 0.004).</p>
+
+                <div className="g2" style={{ marginTop: 14, marginBottom: 16 }}>
+                  <div>
+                    <h4>Results — Mean change in YMRS total</h4>
+                    <VBars
+                      max={12}
+                      caption="p = 0.02"
+                      rows={[
+                        { label: "Olanzapine", value: 10.26, display: "−10.26" },
+                        { label: "Placebo", value: 4.88, display: "−4.88", tone: "soft" },
+                      ]}
+                    />
+                  </div>
+                  <div>
+                    <h4>Results — Responders (≥ 50% YMRS decrease)</h4>
+                    <VBars
+                      max={60}
+                      caption="p = 0.004 · 34/70 vs 16/66"
+                      rows={[
+                        { label: "Olanzapine", value: 48.6, display: "48.6%" },
+                        { label: "Placebo", value: 24.2, display: "24.2%", tone: "soft" },
+                      ]}
+                    />
+                  </div>
+                </div>
+                <div className="study-findings">
+                  <p>
+                    Olanzapine produced a significantly greater mean improvement in YMRS total score than placebo (primary endpoint; difference −5.38 points), and significantly more patients responded.
+                    <Cite n={11} />
+                  </p>
+                  <p className="source-line">
+                    Change from baseline to endpoint (LOCF) and proportion of patients with ≥ 50% decrease in YMRS at 3 weeks. Redrawn from Tohen et al. 1999.
+                    <Cite n={11} />
+                  </p>
+                </div>
+
+                <h4>Study design</h4>
+                <dl className="plain-list">
+                  <div><dt><b>Design</b></dt><dd>Randomised, double-blind, placebo-controlled, parallel group; 16 US sites</dd></div>
+                  <div><dt><b>Patients</b></dt><dd>n = 139 (olanzapine 70, placebo 69); DSM-IV bipolar I disorder, manic or mixed episode; YMRS ≥ 20; 53% with psychotic features</dd></div>
+                  <div><dt><b>Dosing</b></dt><dd>Started at 10 mg/day, adjustable 5–20 mg/day; mean modal dose 14.9 mg/day</dd></div>
+                  <div><dt><b>Duration</b></dt><dd>3 weeks</dd></div>
+                  <div><dt><b>Endpoints</b></dt><dd>Primary: change in YMRS total (LOCF). Response defined in advance as ≥ 50% YMRS decrease<Cite n={11} /></dd></div>
+                </dl>
+
+                <h4>Safety findings</h4>
+                <div className="kpis">
+                  <div className="kpi"><b>32.9% <small>vs 17.4%</small></b><span>somnolence, olanzapine vs placebo</span></div>
+                  <div className="kpi"><b>+1.65 kg <small>vs −0.44</small></b><span>mean weight change over 3 weeks</span></div>
+                  <div className="kpi"><b>17.6% <small>vs 0%</small></b><span>treatment-emergent ALT elevations</span></div>
+                </div>
+                <div className="safety-note">
+                  <p style={{ margin: 0 }}>
+                    Dry mouth (25.7% vs 8.7%), dizziness (22.9% vs 5.8%) and weight gain reported as an adverse event (11.4% vs 1.4%) were also more frequent with olanzapine.
+                    <Cite n={11} />
+                  </p>
+                </div>
+
+                <h4>Limitations</h4>
+                <ul className="study-limitations">
+                  <li>Three-week duration.</li>
+                  <li>High placebo dropout (65.2%).</li>
+                  <li>Concomitant lorazepam permitted.</li>
+                  <li>The trial started at 10 mg/day; the recommended starting dose for monotherapy of a manic episode is 15 mg/day.<Cite n={[11, 1]} /></li>
+                </ul>
+              </details>
+
+              <details id="mania-programme">
+                <summary>Further controlled studies in manic or mixed episodes · 3 to 12 weeks</summary>
+                <ul className="plain-list">
+                  <li>
+                    <b>Versus placebo · 3 weeks.</b> Superior efficacy in reducing manic symptoms.
+                    <Cite n={1} section="5.1" />
+                  </li>
+                  <li>
+                    <b>Versus divalproex · 3 weeks.</b> Superior efficacy to valproate semisodium (divalproex) in
+                    reducing manic symptoms.
+                    <Cite n={1} section="5.1" />
+                  </li>
+                  <li>
+                    <b>Versus haloperidol · 6 and 12 weeks.</b> Comparable proportion of patients in symptomatic
+                    remission from mania and depression.
+                    <Cite n={1} section="5.1" />
+                  </li>
+                  <li>
+                    <b>Add-on to lithium or valproate · 6 weeks.</b> In patients already treated for at least 2 weeks,
+                    adding olanzapine 10 mg reduced manic symptoms more than lithium or valproate alone.
+                    <Cite n={1} section="5.1" />
+                  </li>
+                </ul>
+                <p className="source-line">Effect sizes are not available for these studies, so results are described in words.</p>
+              </details>
+            </section>
+          </div>
+        </HashPanel>
+
+        <HashPanel id="recurrence">
+          <div className="w">
+            <section className="s">
+              <h2>
+                <span className="sec-no">4.3</span>
+                Recurrence prevention
+              </h2>
+              <p>
+                In patients whose manic episode responded, continued olanzapine was superior to placebo in preventing
+                recurrence and non-inferior to lithium. Added to lithium or valproate, it was not superior to either
+                alone.
+              </p>
+              <div className="kpis">
+                <div className="kpi">
+                  <b>Superior</b>
+                  <span>
+                    to placebo on bipolar recurrence over 12 months
+                    <Cite n={1} section="5.1" />
+                  </span>
+                </div>
+                <div className="kpi">
+                  <b>
+                    30.0% <small>vs 38.3%</small>
+                  </b>
+                  <span>
+                    recurrence vs lithium over 12 months: non-inferior (p = 0.055)
+                    <Cite n={1} section="5.1" />
+                  </span>
+                </div>
+                <div className="kpi">
+                  <b>Not superior</b>
+                  <span>
+                    as 18-month co-therapy, versus lithium or valproate alone
+                    <Cite n={1} section="5.1" />
+                  </span>
+                </div>
+              </div>
+
+              <details id="recurrence-placebo" open>
+                <summary>Continued olanzapine versus placebo · Remission on olanzapine · 12 months</summary>
+                <p className="study-lead">Statistically significantly superior to placebo on bipolar recurrence.</p>
+                <div className="study-findings">
+                  <p>
+                    <b>Design.</b> Patients with a manic episode who achieved remission on olanzapine were randomised to
+                    olanzapine or placebo for 12 months.
+                  </p>
+                  <p>
+                    <b>Result.</b> Olanzapine was statistically significantly superior to placebo on the primary
+                    endpoint of bipolar recurrence, and also showed an advantage in preventing recurrence into either
+                    mania or depression.
+                    <Cite n={1} section="5.1" />
+                  </p>
+                  <p className="source-line">Recurrence rates are not available for this study, so no chart is shown.</p>
+                </div>
+              </details>
+
+              <details id="recurrence-lithium">
+                <summary>Olanzapine versus lithium · 12 months · recurrence 30.0% vs 38.3%</summary>
+                <HBars
+                  caption="Patients with bipolar recurrence at 12 months (primary endpoint). Olanzapine was statistically non-inferior to lithium, p = 0.055."
+                  rows={[
+                    { label: "Olanzapine", value: "30.0%", width: 60 },
+                    { label: "Lithium", value: "38.3%", width: 77, tone: "soft" },
+                  ]}
+                />
+                <div className="study-findings">
+                  <p style={{ margin: 0 }}>
+                    After remission on olanzapine plus lithium, patients were randomised to olanzapine alone or lithium
+                    alone. Olanzapine was statistically non-inferior to lithium on the primary endpoint of bipolar
+                    recurrence.
+                    <Cite n={1} section="5.1" />
+                  </p>
+                </div>
+              </details>
+
+              <details id="recurrence-cotherapy">
+                <summary>Olanzapine added to lithium or valproate · 18 months</summary>
+                <div className="study-findings">
+                  <p style={{ margin: 0 }}>
+                    In patients with a manic or mixed episode stabilised on olanzapine plus lithium or valproate,
+                    continuing olanzapine co-therapy was not statistically significantly superior to lithium or valproate
+                    alone in delaying bipolar recurrence, defined by syndromic (diagnostic) criteria.
+                    <Cite n={1} section="5.1" />
+                  </p>
+                </div>
+              </details>
+            </section>
+          </div>
+        </HashPanel>
+
+        <HashPanel id="guidelines">
+          <div className="w">
+            <section className="s">
+              <h2>
+                <span className="sec-no">4.4</span>
+                Guidelines
+              </h2>
+              <p>
+                Guidelines place olanzapine among several options rather than ahead of them. Recommendations depend on
+                the phase of illness, patient preference and how well the adverse-effect profile suits the individual.
+              </p>
+              <div className="g2">
+                <article className="card">
+                  <h3>
+                    APA practice guideline, 2021
                     <Cite n={6} />
-                  </p>
-                </div>
-                <div className="stat-note">
-                  Schizophrenia
-                </div>
-              </div>
-              <div className="card">
-                <div>
-                  <h3>WPA 2008</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>World Psychiatric Association</p>
-                  <p style={{ marginTop: "10px" }}>
-                    Apart from clozapine, the review found no consistent efficacy differences between second-generation
-                    antipsychotics. Olanzapine is associated with more weight gain and metabolic adverse effects than
-                    most comparators.
+                  </h3>
+                  <p className="eb">Schizophrenia</p>
+                  <ul>
+                    <li>Treat with an antipsychotic and monitor effectiveness and side effects (1A).</li>
+                    <li>Continue antipsychotic treatment after symptoms improve (1A), preferably with the same medicine (2B).</li>
+                    <li>Clozapine for treatment-resistant schizophrenia (1B).</li>
+                    <li>Long-acting injectable if preferred or adherence is poor (2B).</li>
+                    <li>Individual antipsychotics are not ranked.</li>
+                  </ul>
+                </article>
+                <article className="card">
+                  <h3>
+                    BAP guidelines, 2016
+                    <Cite n={7} />
+                  </h3>
+                  <p className="eb">Bipolar disorder</p>
+                  <ul>
+                    <li>Severe mania: haloperidol, olanzapine, risperidone and quetiapine described as particularly effective.</li>
+                    <li>Long term: olanzapine is among the agents shown to prevent manic relapse; lithium is recommended as initial monotherapy.</li>
+                    <li>Weight gain is a prominent adverse effect of olanzapine.</li>
+                  </ul>
+                </article>
+                <article className="card">
+                  <h3>
+                    WPA review, 2008
                     <Cite n={8} />
-                  </p>
-                </div>
-                <div className="stat-note">Schizophrenia</div>
-              </div>
-              <div className="card">
-                <div>
-                  <h3>WHO EML 2023</h3>
-                  <p className="muted" style={{ fontSize: "12.5px" }}>World Health Organization</p>
-                  <p style={{ marginTop: "10px" }}>
-                    Olanzapine is listed as a therapeutic alternative to risperidone for psychotic disorders and to
-                    quetiapine for bipolar disorders.
+                  </h3>
+                  <p className="eb">Schizophrenia</p>
+                  <ul>
+                    <li>Apart from clozapine, no consistent efficacy differences between second-generation antipsychotics.</li>
+                    <li>Olanzapine is associated with more weight gain and metabolic adverse effects than most comparators.</li>
+                  </ul>
+                </article>
+                <article className="card">
+                  <h3>
+                    WHO Essential Medicines List, 2023
                     <Cite n={9} />
-                  </p>
-                </div>
-                <div className="stat-note">
-                  Formulary listing
-                </div>
+                  </h3>
+                  <p className="eb">Psychotic and bipolar disorders</p>
+                  <ul>
+                    <li>Olanzapine listed as a therapeutic alternative to risperidone (psychotic disorders) and to quetiapine (bipolar disorders).</li>
+                  </ul>
+                </article>
               </div>
-            </div>
+            </section>
+            <section className="s" id="reading-evidence">
+              <h2>Reading this evidence</h2>
+              <p>
+                Consider each result in the context of its population, comparator, endpoint and duration. Individual
+                study results do not predict the response of every patient.
+              </p>
+              <Link className="more-link" href="/references">
+                All references →
+              </Link>
+            </section>
           </div>
-        </section>
-      </div>
+        </HashPanel>
+      </HashTabsProvider>
     </main>
   );
 }

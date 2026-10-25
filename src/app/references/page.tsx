@@ -1,335 +1,249 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { REFERENCES, type RefCategory } from "@/lib/references";
-
-type RefFilter = "all" | RefCategory;
-
-const FILTERS: { id: RefFilter; label: string }[] = [
-  { id: "all", label: "All" },
-  { id: "study", label: "Clinical studies" },
-  { id: "guideline", label: "Guidelines" },
-  { id: "regulatory", label: "Regulatory" },
-];
-
-function categoryLabel(category: RefCategory) {
-  return category === "study" ? "Clinical study" : category === "guideline" ? "Guideline" : "Regulatory";
-}
-
-const ABBREVIATIONS = [
-  ["ALT / AST", "Alanine / Aspartate aminotransferase"],
-  ["AUC", "Area under the concentration–time curve"],
-  ["BPRS", "Brief Psychiatric Rating Scale"],
-  ["Cmax", "Maximum observed plasma concentration"],
-  ["CNS", "Central nervous system"],
-  ["CYP1A2", "Cytochrome P450 1A2 isoenzyme"],
-  ["D₂", "Dopamine receptor subtype 2"],
-  ["EMA", "European Medicines Agency"],
-  ["EPS", "Extrapyramidal symptoms"],
-  ["5-HT₂A", "5-hydroxytryptamine (serotonin) receptor subtype 2A"],
-  ["Ki", "Receptor inhibition binding constant"],
-  ["LOCF", "Last observation carried forward"],
-  ["MADRS", "Montgomery–Åsberg Depression Rating Scale"],
-  ["NMDA", "N-methyl-D-aspartate glutamate receptor"],
-  ["NMS", "Neuroleptic malignant syndrome"],
-  ["PET", "Positron emission tomography"],
-  ["QTc", "Corrected QT interval on ECG"],
-  ["SANS", "Scale for the Assessment of Negative Symptoms"],
-  ["SmPC", "Summary of Product Characteristics"],
-  ["YMRS", "Young Mania Rating Scale"],
-];
+import { ABBREVIATIONS, REFERENCES, type RefCategory } from "@/lib/references";
 
 export default function ReferencesPage() {
-  const [refQuery, setRefQuery] = useState("");
-  const [refFilter, setRefFilter] = useState<RefFilter>("all");
-  const [abbQuery, setAbbQuery] = useState("");
+  const [category, setCategory] = useState<"all" | RefCategory>("all");
+  const [search, setSearch] = useState("");
 
-  const filteredRefs = useMemo(() => {
-    const q = refQuery.trim().toLowerCase();
-    return REFERENCES.filter((r) => {
-      if (refFilter !== "all" && r.category !== refFilter) return false;
-      if (!q) return true;
-      return [String(r.n), r.title, r.authors, r.source, r.kind, r.usedFor, r.topics.join(" ")]
-        .join(" ")
-        .toLowerCase()
-        .includes(q);
+  const counts = useMemo(() => {
+    return {
+      all: REFERENCES.length,
+      study: REFERENCES.filter((r) => r.category === "study").length,
+      guideline: REFERENCES.filter((r) => r.category === "guideline").length,
+      regulatory: REFERENCES.filter((r) => r.category === "regulatory").length,
+    };
+  }, []);
+
+  const filtered = useMemo(() => {
+    return REFERENCES.filter((ref) => {
+      const matchCat = category === "all" || ref.category === category;
+      if (!matchCat) return false;
+      if (!search.trim()) return true;
+      const q = search.toLowerCase();
+      return (
+        ref.title.toLowerCase().includes(q) ||
+        ref.authors.toLowerCase().includes(q) ||
+        ref.source.toLowerCase().includes(q) ||
+        ref.usedFor.toLowerCase().includes(q) ||
+        ref.kind.toLowerCase().includes(q) ||
+        ref.topics.some((t) => t.toLowerCase().includes(q))
+      );
     });
-  }, [refQuery, refFilter]);
+  }, [category, search]);
 
-  const counts = (id: RefFilter) =>
-    REFERENCES.filter((r) => id === "all" || r.category === id).length;
-
-  const filteredAbbs = ABBREVIATIONS.filter(([abbr, def]) => {
-    const q = abbQuery.toLowerCase();
-    return abbr.toLowerCase().includes(q) || def.toLowerCase().includes(q);
-  });
+  const categoryLabels: Record<RefCategory, string> = {
+    regulatory: "REGULATORY",
+    guideline: "GUIDELINE",
+    study: "CLINICAL STUDY",
+  };
 
   return (
     <main id="app">
-      {/* Editorial Hero */}
-      <div className="hero">
+      <div className="hero hero--text">
         <div className="w">
-          <div>
-            <p className="eb">Documentation &amp; Evidence Library</p>
-            <h1 className="serif">References &amp; Resources</h1>
-            <p>Regulatory documents, full references, literature matrix and clinical resources.</p>
-            <div className="row">
-              <a className="btn" href="#references">
-                Search references ↓
+          <div className="hero-copy">
+            <p className="eb">References</p>
+            <h1 className="serif">References</h1>
+            <p>
+              The sources behind the content on this website. Superscript numbers on each page link to the matching
+              entry here.
+            </p>
+            <div className="hero-tabs">
+              <a className="btn" href="#literature">
+                Literature &amp; documents
               </a>
-              <a className="btn g" href="#regulatory">
-                Regulatory documents
+              <a className="btn g" href="#abbreviations">
+                Abbreviations
               </a>
             </div>
           </div>
-          <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/assets/medical-books-stack.jpg"
-              alt="Medical reference books and clinical journal archive"
-              loading="lazy"
-            />
-          </div>
+          <div className="hero-art" aria-hidden="true" />
         </div>
       </div>
 
       <div className="w">
-        {/* Searchable Bibliography */}
-        <section className="s" id="references">
-          <h2>References ({REFERENCES.length})</h2>
-          <div className="ref-board">
+        <section className="s" id="literature">
+          <h2>Literature and Product Documents</h2>
+
+          <div className="ref-table-card">
             <div className="ref-toolbar">
-              <input
-                className="src"
-                type="search"
-                value={refQuery}
-                onChange={(e) => setRefQuery(e.target.value)}
-                placeholder="Search references, topics or keywords…"
-                aria-label="Search references"
-              />
-              <div className="ref-filters" role="tablist" aria-label="Filter references">
-                {FILTERS.map((filter) => (
-                  <button
-                    key={filter.id}
-                    type="button"
-                    role="tab"
-                    aria-selected={refFilter === filter.id}
-                    className={refFilter === filter.id ? "is-on" : ""}
-                    onClick={() => setRefFilter(filter.id)}
-                  >
-                    {filter.label} <span>({counts(filter.id)})</span>
-                  </button>
-                ))}
+              <div className="ref-search-wrap">
+                <input
+                  type="text"
+                  className="ref-search-input"
+                  placeholder="Search references, topics or keywords..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  aria-label="Search references"
+                />
+              </div>
+
+              <div className="ref-pills" role="tablist" aria-label="Filter by category">
+                <button
+                  type="button"
+                  className={`ref-pill ${category === "all" ? "active" : ""}`}
+                  onClick={() => setCategory("all")}
+                >
+                  All ({counts.all})
+                </button>
+                <button
+                  type="button"
+                  className={`ref-pill ${category === "study" ? "active" : ""}`}
+                  onClick={() => setCategory("study")}
+                >
+                  Clinical studies ({counts.study})
+                </button>
+                <button
+                  type="button"
+                  className={`ref-pill ${category === "guideline" ? "active" : ""}`}
+                  onClick={() => setCategory("guideline")}
+                >
+                  Guidelines ({counts.guideline})
+                </button>
+                <button
+                  type="button"
+                  className={`ref-pill ${category === "regulatory" ? "active" : ""}`}
+                  onClick={() => setCategory("regulatory")}
+                >
+                  Regulatory ({counts.regulatory})
+                </button>
               </div>
             </div>
 
-            {filteredRefs.length === 0 ? (
-              <p className="ref-empty">No references match “{refQuery.trim()}”.</p>
-            ) : (
-              <div className="ref-catalog-wrap">
-                <table className="ref-table ref-catalog">
-                  <colgroup>
-                    <col className="ref-catalog__col-n" />
-                    <col className="ref-catalog__col-type" />
-                    <col className="ref-catalog__col-cite" />
-                    <col className="ref-catalog__col-source" />
-                    <col className="ref-catalog__col-use" />
-                    <col className="ref-catalog__col-link" />
-                  </colgroup>
-                  <thead>
+            <div className="ref-table-wrap">
+              <table className="ref-table">
+                <thead>
+                  <tr>
+                    <th style={{ width: "48px" }}>No.</th>
+                    <th style={{ width: "160px" }}>Type</th>
+                    <th style={{ minWidth: "260px" }}>Reference</th>
+                    <th style={{ minWidth: "190px" }}>Source</th>
+                    <th style={{ minWidth: "240px" }}>Cited for</th>
+                    <th style={{ width: "160px" }}>Link</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filtered.length === 0 ? (
                     <tr>
-                      <th scope="col">No.</th>
-                      <th scope="col">Type</th>
-                      <th scope="col">Reference</th>
-                      <th scope="col">Source</th>
-                      <th scope="col">Cited for</th>
-                      <th scope="col">Link</th>
+                      <td colSpan={6} className="ref-table-empty">
+                        No references match &quot;{search}&quot;.
+                      </td>
                     </tr>
-                  </thead>
-                  <tbody>
-                    {filteredRefs.map((r) => (
-                      <tr key={r.n} id={`ref-${r.n}`}>
-                        <td className="ref-catalog__n">{String(r.n).padStart(2, "0")}</td>
-                        <td className="ref-catalog__type">
-                          <span>{categoryLabel(r.category)}</span>
-                          <span>{r.kind}</span>
-                        </td>
-                        <td className="ref-catalog__cite">
-                          <b>{r.authors}.</b> {r.title}
-                        </td>
-                        <td>
-                          {r.source}
-                          {r.year ? ` · ${r.year}` : ""}
-                        </td>
-                        <td>{r.usedFor}</td>
-                        <td>
-                          {r.links[0] ? (
-                            <a href={r.links[0].href} target="_blank" rel="noopener noreferrer">
-                              {r.links[0].label} ↗
-                            </a>
-                          ) : (
-                            <span className="ref-nolink">No external link</span>
-                          )}
-                        </td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            )}
+                  ) : (
+                    filtered.map((ref) => {
+                      const numStr = String(ref.n).padStart(2, "0");
+                      const authorWithDot = ref.authors.endsWith(".") ? ref.authors : `${ref.authors}.`;
+                      const sourceText =
+                        ref.year && !ref.source.includes(String(ref.year))
+                          ? `${ref.source} · ${ref.year}`
+                          : ref.source;
+
+                      return (
+                        <tr
+                          key={ref.n}
+                          id={`ref-${ref.n}`}
+                          style={{ scrollMarginTop: "calc(var(--header-height, 64px) + 24px)" }}
+                        >
+                          <td className="ref-table-num">{numStr}</td>
+                          <td className="ref-table-type">
+                            <span className="ref-table-type-cat">{categoryLabels[ref.category]}</span>
+                            <span className="ref-table-type-kind">{ref.kind.toUpperCase()}</span>
+                          </td>
+                          <td className="ref-table-ref">
+                            <strong>{authorWithDot}</strong> {ref.title}
+                          </td>
+                          <td className="ref-table-source">{sourceText}</td>
+                          <td className="ref-table-cited">{ref.usedFor}</td>
+                          <td>
+                            {ref.links && ref.links.length > 0 ? (
+                              ref.links.map((link) => (
+                                <a
+                                  key={link.href}
+                                  href={link.href}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="ref-table-link"
+                                >
+                                  {link.label} ↗
+                                </a>
+                              ))
+                            ) : (
+                              <span className="ref-table-nolink">No external link</span>
+                            )}
+                          </td>
+                        </tr>
+                      );
+                    })
+                  )}
+                </tbody>
+              </table>
+            </div>
           </div>
         </section>
 
-        {/* Literature Matrix by Clinical Topic */}
-        <section className="s" id="guidelines">
-          <h2>Literature matrix</h2>
-          <div className="ref-board ref-board--table">
-            <table className="ref-table">
+        <section className="s" id="medical-information">
+          <h2>Medical information</h2>
+          <div className="card" style={{ padding: "24px 26px" }}>
+            <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--ink)", margin: "0 0 10px" }}>
+              Inquiries and Market Support
+            </h3>
+            <p style={{ margin: "0 0 14px", color: "#4a4570", fontSize: "14px", lineHeight: 1.55 }}>
+              For questions about ZYPREXA, contact the medical information service for your market. Local representatives
+              of the marketing authorisation holder are listed in the patient leaflet.
+            </p>
+            <div
+              style={{
+                padding: "14px 18px",
+                borderRadius: 12,
+                background: "rgba(244, 239, 255, 0.6)",
+                border: "1px solid var(--line)",
+              }}
+            >
+              <strong
+                style={{
+                  display: "block",
+                  color: "var(--pri)",
+                  fontSize: "13px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.04em",
+                  marginBottom: 4,
+                }}
+              >
+                Marketing Authorisation Holder
+              </strong>
+              <p style={{ margin: 0, color: "var(--ink)", fontSize: "14px", fontWeight: 500 }}>
+                CHEPLAPHARM Registration GmbH, Weiler Straße 5e, 79540 Lörrach, Germany
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="s" id="abbreviations">
+          <h2>Abbreviations</h2>
+          <div className="card tw">
+            <table>
+              <caption className="source-line" style={{ fontWeight: 600, color: "var(--mut)", marginBottom: 12 }}>
+                Clinical and pharmacological abbreviations used across this website
+              </caption>
               <thead>
                 <tr>
-                  <th>Clinical topic</th>
-                  <th>Supporting references</th>
+                  <th style={{ width: "220px", color: "var(--pri)", fontWeight: 700 }}>Abbreviation</th>
+                  <th style={{ color: "var(--pri)", fontWeight: 700 }}>Full clinical definition</th>
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>
-                    <b>Disease background &amp; neurobiology</b>
-                  </td>
-                  <td>Refs 4, 5</td>
-                </tr>
-                <tr>
-                  <td>
-                    <b>Schizophrenia clinical efficacy</b>
-                  </td>
-                  <td>Ref 1 (Section 5.1), Ref 10 (Beasley 1996)</td>
-                </tr>
-                <tr>
-                  <td>
-                    <b>Acute mania clinical efficacy</b>
-                  </td>
-                  <td>Ref 1 (Section 5.1), Ref 11 (Tohen 1999)</td>
-                </tr>
-                <tr>
-                  <td>
-                    <b>Bipolar recurrence prevention</b>
-                  </td>
-                  <td>Ref 1 (Section 5.1)</td>
-                </tr>
-                <tr>
-                  <td>
-                    <b>Guideline and formulary context</b>
-                  </td>
-                  <td>Refs 6 (APA), 7 (BAP), 8 (WPA), 9 (WHO EML)</td>
-                </tr>
-                <tr>
-                  <td>
-                    <b>Pharmacology and receptor binding</b>
-                  </td>
-                  <td>Ref 1 (Section 5.1), Ref 12 (Kapur 1998). Receptor–adverse-effect links from the US label are not used.</td>
-                </tr>
-                <tr>
-                  <td>
-                    <b>Safety, adverse reactions and metabolic monitoring</b>
-                  </td>
-                  <td>Ref 1 (Sections 4.4, 4.8)</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        {/* Official Regulatory Product Documents */}
-        <section className="s" id="regulatory">
-          <h2>Official regulatory product documents</h2>
-          <div className="grid g2">
-            <a
-              className="card"
-              href="https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h3>ZYPREXA SmPC</h3>
-              <p>EMA Annex I official prescribing summary of product characteristics (PDF).</p>
-            </a>
-            <a
-              className="card"
-              href="https://www.ema.europa.eu/en/medicines/human/EPAR/zyprexa"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h3>Patient Information Leaflet (PIL)</h3>
-              <p>EMA Annex III B official instructions and information for patients – EMA product page.</p>
-            </a>
-            <a
-              className="card"
-              href="https://www.ema.europa.eu/en/medicines/human/EPAR/zypadhera"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <h3>ZYPADHERA SmPC</h3>
-              <p>Separate official prescribing document for prolonged-release suspension – EMA page.</p>
-            </a>
-            <div className="card">
-              <h3>ZYPREXA VELOTAB</h3>
-              <p>
-                Orodispersible tablets are a separate oral formulation. They are mentioned in related product
-                literature. A VELOTAB SmPC was not supplied for this site, so dosing and excipients for VELOTAB are
-                not described here. Use the SmPC approved for that formulation in the target market.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Medical Information Contact */}
-        <section className="s" id="medical">
-          <h2>Medical information &amp; marketing authorisation contact</h2>
-          <div className="grid g2" style={{ alignItems: "stretch" }}>
-            <div className="card">
-              <h3>Marketing Authorisation Holder</h3>
-              <p style={{ marginTop: "6px" }}>
-                CHEPLAPHARM Registration GmbH
-                <br />
-                Weiler Straße 5e, 79540 Lörrach, Germany
-              </p>
-            </div>
-            <div className="card">
-              <h3>Medical enquiries</h3>
-              <p style={{ marginTop: "6px" }}>
-                A market-specific medical information telephone number, email and web form were not supplied. Until
-                they are confirmed, use the local representatives listed in the package leaflet.
-              </p>
-              <p style={{ marginTop: "10px" }}>
-                Telephone: to be confirmed for the target market
-                <br />
-                Email: to be confirmed for the target market
-                <br />
-                Enquiry form: to be confirmed for the target market
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* Abbreviations Glossary */}
-        <section className="s" id="abbreviations">
-          <h2>Master clinical abbreviations glossary</h2>
-          <div className="ref-board ref-board--table">
-            <input
-              className="src"
-              type="search"
-              value={abbQuery}
-              onChange={(e) => setAbbQuery(e.target.value)}
-              placeholder="Search abbreviations or definitions…"
-              aria-label="Search abbreviations"
-            />
-            <table className="ref-table">
-              <tbody>
-                {filteredAbbs.map(([abbr, def]) => (
-                  <tr key={abbr}>
-                    <td style={{ width: "25%" }}>
-                      <b>{abbr}</b>
+                {ABBREVIATIONS.map((item) => (
+                  <tr key={item.term}>
+                    <td>
+                      <strong style={{ color: "var(--ink)", fontSize: "14px" }}>
+                        {item.term}
+                      </strong>
                     </td>
-                    <td>{def}</td>
+                    <td style={{ color: "#4a4570", fontSize: "14px", lineHeight: 1.5 }}>
+                      {item.definition}
+                    </td>
                   </tr>
                 ))}
               </tbody>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { EXTERNAL } from "@/lib/site";
 
 export interface NavSectionItem {
   id: string;
@@ -17,85 +18,72 @@ export interface NavItem {
 
 export const NAV_ITEMS: NavItem[] = [
   {
-    name: "Home",
+    name: "Overview",
     href: "/",
     secs: [
-      { id: "indications", title: "Approved indications" },
-      { id: "topics", title: "Explore key topics" },
-      { id: "about", title: "About olanzapine" },
-      { id: "receptors", title: "Receptor profile" },
-      { id: "pi", title: "Prescribing information" },
-    ],
-  },
-  {
-    name: "Schizophrenia",
-    href: "/schizophrenia",
-    secs: [
-      { id: "overview", title: "Overview" },
-      { id: "symptoms", title: "Symptoms" },
-      { id: "neurobiology", title: "Neurobiology" },
-      { id: "phases", title: "Treatment phases" },
-      { id: "olz", title: "Role of olanzapine" },
-      { id: "care", title: "Care continuity" },
-    ],
-  },
-  {
-    name: "Bipolar disorder",
-    href: "/bipolar-disorder",
-    secs: [
-      { id: "overview", title: "Overview" },
-      { id: "episodes", title: "Mood episodes" },
-      { id: "objectives", title: "Treatment objectives" },
-      { id: "indications", title: "Indications vs non-indications" },
+      { id: "indications", title: "Indications" },
+      { id: "mechanism", title: "Mechanism of action" },
       { id: "evidence", title: "Clinical evidence" },
-      { id: "guidelines", title: "Guidelines" },
+      { id: "dosing-glance", title: "Dosing" },
       { id: "safety", title: "Safety" },
     ],
   },
   {
-    name: "Clinical evidence",
-    href: "/clinical-evidence",
+    name: "Disease background",
+    href: "/disease-background",
     secs: [
-      { id: "explorer", title: "Study explorer" },
       { id: "schizophrenia", title: "Schizophrenia" },
-      { id: "mania", title: "Acute mania" },
-      { id: "recurrence", title: "Recurrence prevention" },
-      { id: "longterm", title: "Long-term" },
-      { id: "guidelines", title: "Guidelines" },
+      { id: "bipolar", title: "Bipolar disorder" },
     ],
   },
   {
     name: "Mechanism of action",
     href: "/mechanism-of-action",
     secs: [
-      { id: "overview", title: "Overview" },
-      { id: "systems", title: "Receptor systems" },
-      { id: "pet", title: "PET occupancy" },
-      { id: "relevance", title: "Clinical relevance" },
+      { id: "receptor-profile", title: "Receptor profile" },
+      { id: "occupancy", title: "Receptor occupancy" },
+      { id: "interpretation", title: "Clinical relevance" },
     ],
   },
   {
-    name: "Safety & prescribing",
-    href: "/safety-prescribing",
+    name: "Clinical evidence",
+    href: "/clinical-evidence",
+    secs: [
+      { id: "schizophrenia", title: "Schizophrenia" },
+      { id: "manic-episodes", title: "Bipolar disorder: manic episodes" },
+      { id: "recurrence", title: "Bipolar disorder: recurrence prevention" },
+      { id: "guidelines", title: "Guidelines" },
+    ],
+  },
+  {
+    name: "Dosing",
+    href: "/dosing-administration",
+    secs: [
+      { id: "formulations", title: "Formulations" },
+      { id: "dosing", title: "Starting doses" },
+      { id: "discontinuation", title: "Stopping treatment" },
+    ],
+  },
+  {
+    name: "Safety & monitoring",
+    href: "/safety-monitoring",
     secs: [
       { id: "contraindications", title: "Contraindications" },
-      { id: "dosing", title: "Dosing" },
-      { id: "formulations", title: "Formulations" },
       { id: "warnings", title: "Warnings" },
       { id: "monitoring", title: "Monitoring" },
+      { id: "weight", title: "Weight over time" },
       { id: "interactions", title: "Interactions" },
-      { id: "special", title: "Pregnancy" },
+      { id: "pregnancy", title: "Pregnancy" },
       { id: "adverse-reactions", title: "Adverse reactions" },
+      { id: "reporting", title: "Reporting" },
     ],
   },
   {
     name: "References",
     href: "/references",
     secs: [
-      { id: "references", title: "References" },
-      { id: "guidelines", title: "Literature matrix" },
-      { id: "regulatory", title: "Regulatory documents" },
-      { id: "medical", title: "Medical information" },
+      { id: "literature", title: "References" },
+      { id: "medical-information", title: "Medical information" },
       { id: "abbreviations", title: "Abbreviations" },
     ],
   },
@@ -105,11 +93,24 @@ export default function Header() {
   const pathname = usePathname();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [activeDropdownIdx, setActiveDropdownIdx] = useState<number | null>(null);
+  const [compactNav, setCompactNav] = useState(false);
 
   useEffect(() => {
     setMobileMenuOpen(false);
     setActiveDropdownIdx(null);
   }, [pathname]);
+
+  useEffect(() => {
+    const apply = () => {
+      const burger = document.getElementById("burger");
+      const compact = burger ? getComputedStyle(burger).display !== "none" : false;
+      setCompactNav(compact);
+      if (compact) setActiveDropdownIdx(null);
+    };
+    apply();
+    window.addEventListener("resize", apply);
+    return () => window.removeEventListener("resize", apply);
+  }, []);
 
   useEffect(() => {
     const header = document.querySelector<HTMLElement>("header.site-header");
@@ -173,8 +174,9 @@ export default function Header() {
           <button
             id="burger"
             type="button"
-            aria-label="Toggle navigation menu"
+            aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
             aria-expanded={mobileMenuOpen}
+            aria-controls="nav"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
           >
             {mobileMenuOpen ? "✕" : "☰"}
@@ -192,12 +194,28 @@ export default function Header() {
               return (
                 <li
                   key={item.href}
-                  onMouseEnter={() => setActiveDropdownIdx(idx)}
+                  onMouseEnter={() => {
+                    if (!compactNav) setActiveDropdownIdx(idx);
+                  }}
                   onMouseLeave={() => setActiveDropdownIdx(null)}
+                  onFocus={() => {
+                    if (!compactNav) setActiveDropdownIdx(idx);
+                  }}
+                  onBlur={(event) => {
+                    if (!event.currentTarget.contains(event.relatedTarget as Node | null)) {
+                      setActiveDropdownIdx(null);
+                    }
+                  }}
+                  onKeyDown={(event) => {
+                    if (event.key === "Escape") setActiveDropdownIdx(null);
+                  }}
                 >
                   <Link
                     href={item.href}
                     className={isActive ? "on" : ""}
+                    aria-current={isActive ? "page" : undefined}
+                    aria-expanded={compactNav ? undefined : isOpen}
+                    aria-haspopup={compactNav ? undefined : "true"}
                     onClick={() => {
                       setMobileMenuOpen(false);
                       setActiveDropdownIdx(null);
@@ -206,8 +224,8 @@ export default function Header() {
                     {item.name}
                   </Link>
 
-                  {/* Dropdown: Exactly ONE dropdown rendered at any given time */}
-                  {isOpen && (
+                  {/* Section links for the current page. Hidden on the compact menu so it stays a single list. */}
+                  {!compactNav && isOpen && (
                     <div className="dd is-visible">
                       {item.secs.map((sec) => {
                         const linkHref =
@@ -235,9 +253,15 @@ export default function Header() {
           </ul>
 
           <div className="header-cta">
-            <Link className="btn" href="/safety-prescribing#dosing">
-              Prescribing info
-            </Link>
+            <a
+              className="btn"
+              href={EXTERNAL.smpcPdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Prescribing information, Zyprexa EU product information PDF, opens in a new tab"
+            >
+              Prescribing information
+            </a>
           </div>
         </div>
       </header>

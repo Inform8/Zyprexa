@@ -9,12 +9,12 @@ interface PageInfo {
 }
 
 export const SITE_PAGES: PageInfo[] = [
-  { name: "Home", href: "/" },
-  { name: "Schizophrenia", href: "/schizophrenia" },
-  { name: "Bipolar disorder", href: "/bipolar-disorder" },
-  { name: "Clinical evidence", href: "/clinical-evidence" },
+  { name: "Overview", href: "/" },
+  { name: "Disease background", href: "/disease-background" },
   { name: "Mechanism of action", href: "/mechanism-of-action" },
-  { name: "Safety & prescribing", href: "/safety-prescribing" },
+  { name: "Clinical evidence", href: "/clinical-evidence" },
+  { name: "Dosing", href: "/dosing-administration" },
+  { name: "Safety & monitoring", href: "/safety-monitoring" },
   { name: "References", href: "/references" },
 ];
 
@@ -31,7 +31,7 @@ export default function PageNav() {
   if (currentIndex === -1) {
     // For legal or unknown page
     prevPage = { name: "Home", href: "/" };
-    nextPage = { name: "Schizophrenia", href: "/schizophrenia" };
+    nextPage = { name: "Disease background", href: "/disease-background" };
   } else {
     if (currentIndex > 0) {
       prevPage = SITE_PAGES[currentIndex - 1];

@@ -74,7 +74,7 @@ export default function SectionNav() {
     let current = sections[0].id;
     for (const sec of sections) {
       const el = document.getElementById(sec.id);
-      if (!el) continue;
+      if (!el || el.hidden || el.closest("[hidden]")) continue;
       if (el.getBoundingClientRect().top <= line + 1) current = sec.id;
     }
     setActiveId((prev) => (prev === current ? prev : current));
@@ -118,6 +118,12 @@ export default function SectionNav() {
     const target = document.getElementById(id);
     if (!target) return;
     event.preventDefault();
+    if (target.hidden || target.closest("[hidden]")) {
+      window.history.replaceState(null, "", `#${id}`);
+      window.dispatchEvent(new Event("app-hash"));
+      setActiveId(id);
+      return;
+    }
     releaseRef.current?.();
     lockRef.current = true;
     setActiveId(id);

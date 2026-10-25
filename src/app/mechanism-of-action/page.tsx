@@ -1,503 +1,201 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { AreaChart } from "@/components/Figures";
+import type { Metadata } from "next";
+import Link from "next/link";
 import { Cite } from "@/components/Cite";
-import { IconAlert, IconBook, IconChart, IconDoc, IconRepeat } from "@/components/Icons";
+import { OccupancyChart } from "@/components/OccupancyChart";
 
-const RECEPTOR_COLOR = "#4b2bb0";
-
-interface ReceptorInfo {
-  code: string;
-  name: string;
-  short: string;
-  system: string;
-  desc: string;
-  note: string;
-  dot: { x: number; y: number };
-  badge: { x: number; y: number; w: number; h: number };
-  line: { x1: number; y1: number; x2: number; y2: number };
-}
-
-const RECEPTORS: Record<string, ReceptorInfo> = {
-  D: {
-    code: "D₂",
-    name: "Dopamine D₂ (D₁–D₅)",
-    short: "D₂ Dopamine",
-    system: "Dopaminergic system · Antagonist profile",
-    desc: "Olanzapine has affinity for dopamine receptors, including D2 receptors. Dopamine receptor antagonism is relevant to its antipsychotic activity. Dopaminergic signalling is involved in multiple brain functions, and the relationship between receptor activity and individual symptom domains is complex.",
-    note: "Described in relation to antipsychotic activity. Relative affinity is not shown, and the SmPC does not assign a single clinical effect to this receptor alone.",
-    dot: { x: 481, y: 275 },
-    badge: { x: 404, y: 32, w: 180, h: 42 },
-    line: { x1: 494, y1: 74, x2: 481, y2: 275 },
-  },
-  S: {
-    code: "5-HT₂A",
-    name: "Serotonin 5-HT₂A (5-HT₂A/2C, 3, 6)",
-    short: "5-HT₂A Serotonin",
-    system: "Serotonergic system · Antagonist profile",
-    desc: "Olanzapine also has affinity for serotonin receptors, including 5-HT2A and 5-HT2C. Its serotonin and dopamine receptor activity contributes to its overall pharmacological profile. The clinical effects of olanzapine cannot be attributed to one receptor interaction alone.",
-    note: "Described in relation to antipsychotic activity. Relative affinity is not shown, and the SmPC does not assign a single clinical effect to this receptor alone.",
-    dot: { x: 613, y: 240 },
-    badge: { x: 704, y: 166, w: 194, h: 42 },
-    line: { x1: 704, y1: 187, x2: 613, y2: 240 },
-  },
-  A: {
-    code: "α₁",
-    name: "Adrenergic α₁",
-    short: "α₁ Adrenergic",
-    system: "Adrenergic system · Antagonist profile",
-    desc: "Preclinical binding profiles indicate affinity for alpha-1 adrenergic receptors. In vitro affinity does not by itself establish a clinical effect.",
-    note: "The SmPC reports receptor affinity. It does not attribute orthostatic hypotension or dizziness to this receptor alone.",
-    dot: { x: 323, y: 268 },
-    badge: { x: 52, y: 184, w: 180, h: 42 },
-    line: { x1: 232, y1: 205, x2: 323, y2: 268 },
-  },
-  M: {
-    code: "M₁–M₅",
-    name: "Muscarinic M₁–₅",
-    short: "M₁–M₅ Muscarinic",
-    system: "Muscarinic system · Antagonist profile",
-    desc: "Preclinical binding profiles indicate affinity for muscarinic M1–M5 receptors. In vitro affinity does not by itself establish a clinical effect.",
-    note: "The SmPC reports receptor affinity. It does not attribute anticholinergic adverse effects to these receptors alone.",
-    dot: { x: 447, y: 344 },
-    badge: { x: 142, y: 448, w: 196, h: 42 },
-    line: { x1: 338, y1: 460, x2: 447, y2: 344 },
-  },
-  H: {
-    code: "H₁",
-    name: "Histamine H₁",
-    short: "H₁ Histamine",
-    system: "Histaminergic system · Antagonist profile",
-    desc: "Preclinical binding profiles indicate affinity for histamine H1 receptors. In vitro affinity does not translate directly into clinical efficacy, potency, or a causal link to a particular adverse reaction.",
-    note: "The SmPC reports receptor affinity. It does not attribute somnolence or increased appetite to this receptor alone.",
-    dot: { x: 601, y: 424 },
-    badge: { x: 688, y: 482, w: 176, h: 42 },
-    line: { x1: 688, y1: 496, x2: 601, y2: 424 },
-  },
+export const metadata: Metadata = {
+  title: "Mechanism of action",
+  description: "Receptor-binding profile, receptor occupancy and the clinical relevance of olanzapine pharmacology.",
 };
 
-function receptorFromLocation() {
-  if (typeof window === "undefined") return "";
-  const key = new URLSearchParams(window.location.search).get("r") ?? "";
-  return key in RECEPTORS ? key : "";
-}
+const families = [
+  {
+    id: "r-dopamine",
+    title: "Dopamine receptor activity",
+    subtypes: "D1, D2, D3, D4, D5",
+    kind: "Described in relation to antipsychotic activity",
+    body: (
+      <>
+        <p>
+          Olanzapine has affinity for dopamine receptors, including D2 receptors.
+          <Cite n={1} section="5.1" />
+        </p>
+        <p>
+          Dopamine receptor antagonism is relevant to its antipsychotic activity. Dopaminergic signalling is involved
+          in multiple brain functions, and the relationship between receptor activity and individual symptom domains is
+          complex.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "r-serotonin",
+    title: "Serotonin receptor activity",
+    subtypes: "5-HT2A/2C, 5-HT3, 5-HT6",
+    kind: "Described in relation to antipsychotic activity",
+    body: (
+      <>
+        <p>
+          Olanzapine also has affinity for serotonin receptors, including 5-HT2A and 5-HT2C receptors.
+          <Cite n={1} section="5.1" />
+        </p>
+        <p>
+          Its serotonin and dopamine receptor activity contributes to its overall pharmacological profile. However, the
+          clinical effects of olanzapine cannot be attributed to one receptor interaction alone.
+        </p>
+      </>
+    ),
+  },
+  {
+    id: "r-histamine",
+    title: "Histamine H1 receptors",
+    subtypes: "H1",
+    kind: "Described in relation to adverse effects",
+    body: (
+      <p>
+        Relevant to effects such as somnolence and increased appetite.
+        <Cite n={13} section="12.2" />
+      </p>
+    ),
+  },
+  {
+    id: "r-muscarinic",
+    title: "Muscarinic receptors",
+    subtypes: "M1–M5",
+    kind: "Described in relation to adverse effects",
+    body: (
+      <p>
+        Relevant to anticholinergic adverse effects.
+        <Cite n={13} section="12.2" />
+      </p>
+    ),
+  },
+  {
+    id: "r-alpha",
+    title: "Alpha-1 adrenergic receptors",
+    subtypes: "α1",
+    kind: "Described in relation to adverse effects",
+    body: (
+      <p>
+        Relevant to orthostatic hypotension and dizziness.
+        <Cite n={13} section="12.2" />
+      </p>
+    ),
+  },
+];
 
-export default function MechanismOfActionPage() {
-  const [selectedKey, setSelectedKey] = useState<string>("H");
-  const selected = RECEPTORS[selectedKey];
-
-  const selectReceptor = (key: string) => {
-    setSelectedKey(key);
-    const url = new URL(window.location.href);
-    url.searchParams.set("r", key);
-    window.history.replaceState(null, "", `${url.pathname}${url.search}${url.hash}`);
-  };
-
-  useEffect(() => {
-    const linked = receptorFromLocation();
-    if (linked) setSelectedKey(linked);
-    if (window.location.hash === "#systems") {
-      document.getElementById("systems")?.scrollIntoView({ block: "start" });
-    }
-  }, []);
-
+export default function MechanismPage() {
   return (
     <main id="app">
-      {/* Editorial Hero */}
-      <div className="hero">
+      <div className="hero hero--text">
         <div className="w">
-          <div>
-            <p className="eb">Pharmacology</p>
+          <div className="hero-copy">
+            <p className="eb">Mechanism of action</p>
             <h1 className="serif">Understanding the pharmacology of olanzapine</h1>
             <p>A broad receptor-binding profile contributes to its pharmacological effects.</p>
-            <div className="row">
-              <a className="btn" href="#systems">
-                Interactive receptor map ↓
+            <p>
+              Olanzapine is an antipsychotic, antimanic and mood-stabilising agent with activity across several
+              neurotransmitter receptor systems.
+              <Cite n={1} section="5.1" />
+            </p>
+            <div className="hero-tabs">
+              <a className="btn" href="#receptor-profile">
+                3.1 Receptor profile
               </a>
-              <a className="btn g" href="#pet">
-                PET occupancy data
+              <a className="btn g" href="#occupancy">
+                3.2 Receptor occupancy
+              </a>
+              <a className="btn g" href="#interpretation">
+                3.3 Clinical relevance
               </a>
             </div>
           </div>
-          <div>
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/assets/hero-brain-3d.jpg" alt="Brain neural network illustration" />
-          </div>
+          <div className="hero-art" aria-hidden="true" />
         </div>
       </div>
 
       <div className="w">
-        {/* Core Receptor Systems */}
-        <section className="s" id="overview">
-          <h2>Receptor profile overview</h2>
-          <p className="lead">
-            Olanzapine exhibits a broad in vitro receptor-binding profile across multiple neurotransmitter systems.
-            European SmPC section 5.1 describes preclinical affinities for serotonin, dopamine, muscarinic, histamine
-            and adrenergic receptor families.
-            <Cite n={1} section="5.1" />
-          </p>
-          <div className="grid g3">
-            <div className="card">
-              <h3>Dopaminergic system</h3>
-              <p>
-                Preclinical binding to dopamine D₁, D₂, D₃, D₄, and D₅ receptors. Dopamine antagonism is a recognized
-                mechanism in antipsychotic activity.
-              </p>
-            </div>
-            <div className="card">
-              <h3>Serotonergic system</h3>
-              <p>
-                Affinity for serotonin 5-HT₂A, 5-HT₂C, 5-HT₃, and 5-HT₆ receptors. The 5-HT₂A/D₂ ratio is a defining
-                characteristic of atypical antipsychotics.
-              </p>
-            </div>
-            <div className="card">
-              <h3>Other systems</h3>
-              <p>
-                In vitro affinity for cholinergic muscarinic receptors (M₁–M₅), histamine H₁ receptors, and α₁-adrenergic
-                receptors.
-              </p>
-            </div>
+        <section className="s" id="receptor-profile">
+          <h2>
+            <span className="sec-no">3.1</span>
+            Receptor-binding profile
+          </h2>
+          <p>Select a receptor family to see what it is linked to. Every family is listed below.</p>
+          <div className="g2" style={{ marginBottom: 16 }}>
+            <p className="source-line">Solid emphasis: described in relation to antipsychotic activity.</p>
+            <p className="source-line">Outlined emphasis: described in relation to adverse effects.</p>
           </div>
-          <p className="source-line">
-            Source: EU SmPC section 5.1. The table of binding profiles in the SmPC reports affinity for 5-HT₂A/2C, 5-HT₃,
-            5-HT₆; D₁, D₂, D₃, D₄, D₅; muscarinic M₁–M₅; histamine H₁; and α₁-adrenergic receptors.
-            <Cite n={1} section="5.1" />
-          </p>
-        </section>
-
-        {/* Receptor systems comparison */}
-        <section className="s" id="systems-overview">
-          <h2>Receptor systems &amp; clinical relevance</h2>
-          <p className="lead">
-            The pharmacological profile involves simultaneous interactions across dopaminergic, serotonergic,
-            cholinergic, histaminergic and adrenergic systems.
-          </p>
-          <div className="table-wrap card">
-            <table>
-              <thead>
-                <tr>
-                  <th>Receptor System</th>
-                  <th>Receptors Identified in SmPC</th>
-                  <th>Preclinical Binding</th>
-                  <th>Clinical Context from SmPC</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><b>Serotonergic</b></td>
-                  <td>5-HT₂A, 5-HT₂C, 5-HT₃, 5-HT₆</td>
-                  <td>Affinity (K<sub>i</sub> &lt; 100 nM)</td>
-                  <td>Antipsychotic activity; 5-HT₂A antagonism contributes to atypical profile</td>
-                </tr>
-                <tr>
-                  <td><b>Dopaminergic</b></td>
-                  <td>D₁, D₂, D₃, D₄, D₅</td>
-                  <td>Affinity (K<sub>i</sub> &lt; 100 nM)</td>
-                  <td>Antipsychotic activity mediated primarily through D₂ antagonism</td>
-                </tr>
-                <tr>
-                  <td><b>Muscarinic</b></td>
-                  <td>M₁–M₅</td>
-                  <td>Affinity (K<sub>i</sub> &lt; 100 nM)</td>
-                  <td>Anticholinergic effects; preclinical evidence of receptor interaction</td>
-                </tr>
-                <tr>
-                  <td><b>Histaminergic</b></td>
-                  <td>H₁</td>
-                  <td>Affinity (K<sub>i</sub> &lt; 100 nM)</td>
-                  <td>Associated with somnolence and weight gain in clinical use</td>
-                </tr>
-                <tr>
-                  <td><b>Adrenergic</b></td>
-                  <td>α₁</td>
-                  <td>Affinity (K<sub>i</sub> &lt; 100 nM)</td>
-                  <td>May contribute to orthostatic hypotension</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-          <p className="source-line">
-            *EU SmPC section 5.1 notes affinities for 5-HT₂A/2C, 5-HT₃, 5-HT₆; D₁, D₂, D₃, D₄, D₅; muscarinic M₁–M₅; H₁; and α₁
-            adrenergic receptors. Affinity in preclinical studies (Ki &lt; 100 nM) does not translate directly into
-            clinical efficacy or potency, and the EU SmPC does not assign individual adverse reactions to single
-            receptors.
-          </p>
-        </section>
-
-        {/* Interactive Receptor Map */}
-        <section className="s" id="systems">
-          <div className="spectrum-head">
-            <h2>Receptor binding map</h2>
-            <p>Select a receptor to view binding data and clinical context<Cite n={1} section="5.1" /></p>
-          </div>
-          <div className="bind">
-            <div className="bind__stage">
-              <div className="bind__stage-wrapper">
-                <svg
-                  className="bind__svg"
-                  viewBox="0 0 930 638"
-                  preserveAspectRatio="xMidYMid meet"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <defs>
-                    <filter id="badgeShadow" x="-10%" y="-20%" width="120%" height="150%">
-                      <feDropShadow dx="0" dy="4" stdDeviation="5" floodColor="rgba(0,0,0,0.12)" />
-                    </filter>
-                    <filter id="activeShadow" x="-15%" y="-25%" width="130%" height="160%">
-                      <feDropShadow dx="0" dy="6" stdDeviation="8" floodColor="rgba(88,34,180,0.32)" />
-                    </filter>
-                  </defs>
-
-                  {/* Subtle radial glow behind brain */}
-                  <radialGradient id="brainGlow" cx="50%" cy="50%" r="50%">
-                    <stop offset="0%" stopColor="rgba(244, 240, 255, 0.7)" />
-                    <stop offset="100%" stopColor="rgba(255, 255, 255, 0)" />
-                  </radialGradient>
-                  <ellipse cx="465" cy="320" rx="420" ry="280" fill="url(#brainGlow)" />
-
-                  {/* Clean High-Resolution Brain Illustration */}
-                  <image
-                    href="/assets/receptor-brain-hd.png"
-                    x="55"
-                    y="46"
-                    width="820"
-                    height="546"
-                    preserveAspectRatio="xMidYMid meet"
-                  />
-
-                  {/* Leader Lines */}
-                  {Object.entries(RECEPTORS).map(([key, r]) => {
-                    const active = selectedKey === key;
-                    return (
-                      <line
-                        key={`line-${key}`}
-                        x1={r.line.x1}
-                        y1={r.line.y1}
-                        x2={r.line.x2}
-                        y2={r.line.y2}
-                        stroke={RECEPTOR_COLOR}
-                        strokeWidth={active ? 3.5 : 2}
-                        opacity={active ? 1 : 0.75}
-                        strokeLinecap="round"
-                        className="bind__leader"
-                      />
-                    );
-                  })}
-
-                  {/* Target Halos & Dots */}
-                  {Object.entries(RECEPTORS).map(([key, r]) => {
-                    const active = selectedKey === key;
-                    return (
-                      <g
-                        key={`target-${key}`}
-                        className="bind__target-grp"
-                        onClick={() => selectReceptor(key)}
-                        role="button"
-                        tabIndex={0}
-                        style={{ cursor: "pointer" }}
-                        aria-label={`Target ${r.short}`}
-                      >
-                        <circle
-                          cx={r.dot.x}
-                          cy={r.dot.y}
-                          r={active ? 30 : 24}
-                          fill={RECEPTOR_COLOR}
-                          fillOpacity={active ? 0.32 : 0.2}
-                          className="bind__target-halo"
-                        />
-                        <circle
-                          cx={r.dot.x}
-                          cy={r.dot.y}
-                          r={10}
-                          fill={RECEPTOR_COLOR}
-                          stroke="#ffffff"
-                          strokeWidth={2.5}
-                        />
-                      </g>
-                    );
-                  })}
-
-                  {/* Callout Badges */}
-                  {Object.entries(RECEPTORS).map(([key, r]) => {
-                    const active = selectedKey === key;
-                    const displayName = r.short.replace(r.code, "").trim();
-                    return (
-                      <g
-                        key={`badge-${key}`}
-                        className="bind__badge-grp"
-                        onClick={() => selectReceptor(key)}
-                        role="button"
-                        tabIndex={0}
-                        style={{ cursor: "pointer" }}
-                        aria-pressed={active}
-                        aria-label={r.short}
-                      >
-                        <rect
-                          x={r.badge.x}
-                          y={r.badge.y}
-                          width={r.badge.w}
-                          height={r.badge.h}
-                          rx={21}
-                          fill={active ? RECEPTOR_COLOR : "#ffffff"}
-                          stroke={RECEPTOR_COLOR}
-                          strokeWidth={2}
-                          filter={active ? "url(#activeShadow)" : "url(#badgeShadow)"}
-                          className="bind__badge-rect"
-                        />
-                        <text x={r.badge.x + r.badge.w / 2} y={r.badge.y + 26} textAnchor="middle">
-                          <tspan
-                            fill={active ? "#ffffff" : RECEPTOR_COLOR}
-                            fontSize={15}
-                            fontWeight={700}
-                            fontFamily="var(--font-inter), 'Inter', sans-serif"
-                          >
-                            {r.code}
-                          </tspan>
-                          <tspan
-                            fill={active ? "#ffffff" : RECEPTOR_COLOR}
-                            fontSize={15}
-                            fontWeight={700}
-                            dx={6}
-                            fontFamily="var(--font-inter), 'Inter', sans-serif"
-                          >
-                            {displayName}
-                          </tspan>
-                        </text>
-                      </g>
-                    );
-                  })}
-                </svg>
-              </div>
-            </div>
-            <aside className="bind__detail">
-              <div className="bind__head">
-                <b className="bind__code">{selected.code}</b>
-                <div>
-                  <h3>{selected.name}</h3>
-                  <p>
-                    {selected.system.split(" · ")[0]}
-                    <span>{selected.system.split(" · ")[1]}</span>
-                  </p>
-                </div>
-              </div>
-              <div className="bind__facts">
-                <div>
-                  <span>Preclinical binding affinity</span>
-                  <strong>K<sub>i</sub> &lt; 100 nM</strong>
-                </div>
-                <div>
-                  <span>Data source</span>
-                  <strong>
-                    EU SmPC section 5.1
-                    <Cite n={1} section="5.1" />
-                  </strong>
-                </div>
-              </div>
-              <div className="bind__block">
-                <h4>About this receptor</h4>
-                <p>{selected.desc}</p>
-              </div>
-              <div className="bind__block">
-                <h4>Clinical context</h4>
-                <p>{selected.note}</p>
-                {(selectedKey === "D" || selectedKey === "S") && (
-                  <p>
-                    Occupancy at clinical doses is reported in Kapur 1998.
-                    <Cite n={12} />
-                  </p>
-                )}
-              </div>
-              <p className="bind__note">
-                <span>
-                  In vitro affinity does not translate directly into clinical efficacy or potency, and the EU SmPC
-                  does not assign individual adverse reactions to a single receptor.
-                </span>
-              </p>
-            </aside>
-          </div>
-        </section>
-
-        {/* PET Occupancy */}
-        <section className="s" id="pet">
-          <h2>In vivo PET receptor occupancy</h2>
-          <p className="lead">Kapur et al. 1998; Figure 2</p>
-          <div className="grid g2" style={{ alignItems: "stretch" }}>
-            <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-              <div>
-                <h3>Striatal D₂ occupancy at steady state (%)</h3>
-                <AreaChart
-                  label="Striatal D2 occupancy by dose"
-                  yMax={100}
-                  points={[
-                    { label: "5 mg", value: 55, display: "55% · observed range 43–64%" },
-                    { label: "10 mg", value: 73, display: "73% · observed range 71–75%" },
-                    { label: "15 mg", value: 75, display: "75% · observed range 73–76%" },
-                    { label: "20 mg", value: 76, display: "76% · observed range 74–80%" },
-                  ]}
-                />
-              </div>
-              <p style={{ marginTop: "8px", fontSize: "12.5px" }}>
-                Observed steady-state occupancy ranges: 43–64%, 71–75%, 73–76%, and 74–80%.
-              </p>
-            </div>
-
-            <div className="card" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-              <div>
-                <h3>5-HT₂ occupancy</h3>
-                <div className="dnr">
-                  <div>
-                    <div
-                      className="dn"
-                      style={
-                        {
-                          "--p": 90,
-                          "--c": "#db2777",
-                        } as React.CSSProperties
-                      }
-                    >
-                      <b>&gt;90%</b>
-                    </div>
-                    Exceeded 90% across all clinical doses (5 to 20 mg/day)
-                  </div>
-                </div>
-
-                <h3 style={{ marginTop: "16px" }}>How to read the occupancy data</h3>
-                <p style={{ marginTop: "6px" }}>
-                  Across 10–20 mg/day, individual D<sub>2</sub> occupancy ranged from 71% to 80%. Twelve patients
-                  were studied (three per dose). Receptor occupancy does not by itself predict the clinical response
-                  of an individual patient.
-                  <Cite n={12} />
+          {/* Top two more content boxes using full width across 2 columns */}
+          <div className="g2" style={{ marginBottom: 18 }}>
+            {families.slice(0, 2).map((family) => (
+              <article className="card" id={family.id} key={family.id} style={{ padding: 24 }}>
+                <p className="eb">{family.kind}</p>
+                <h3>{family.title}</h3>
+                <p>
+                  <b>{family.subtypes}</b>
                 </p>
-              </div>
-              <p style={{ fontSize: "12px", color: "var(--mut)", marginTop: "16px" }}>
-                Source: Kapur S et al. Am J Psychiatry. 1998;155(7):921–928.
-                <Cite n={12} />
-              </p>
-            </div>
+                {family.body}
+              </article>
+            ))}
           </div>
+
+          {/* Downline with the 3 smaller content boxes */}
+          <div className="g3">
+            {families.slice(2).map((family) => (
+              <article className="card" id={family.id} key={family.id} style={{ padding: 22 }}>
+                <p className="eb">{family.kind}</p>
+                <h3>{family.title}</h3>
+                <p>
+                  <b>{family.subtypes}</b>
+                </p>
+                {family.body}
+              </article>
+            ))}
+          </div>
+          <p className="source-line" style={{ marginTop: 14 }}>
+            Figure 1. Receptor families at which olanzapine showed affinity (Ki &lt; 100 nM) in preclinical studies.
+            Relative affinities are not represented. These interactions help explain why treatment selection and
+            monitoring must consider both therapeutic objectives and potential adverse effects.
+            <Cite n={1} section="5.1" />
+          </p>
         </section>
 
-        {/* Clinical Relevance */}
-        <section className="s" id="relevance">
-          <h2>From pharmacology to clinical practice</h2>
-          <p className="story">
+        <section className="s" id="occupancy">
+          <h2>
+            <span className="sec-no">3.2</span>
+            5-HT2 and D2 occupancy across the dose range
+          </h2>
+          <p>
+            Olanzapine has greater affinity for serotonin 5-HT2 than dopamine D2 receptors. In a PET study in patients
+            with schizophrenia, 5-HT2 occupancy was above 90% at every dose, while D2 occupancy rose with dose.
+            <Cite n={[1, 12]} />
+          </p>
+          <OccupancyChart />
+          <p className="source-line" style={{ marginTop: 14 }}>
+            Individual occupancy in 12 patients; numbers show mean D2 occupancy per dose. Redrawn from Kapur et al.
+            1998, Table 1. Doses above 20 mg/day reported in the paper are not shown.
+            <Cite n={12} />
+          </p>
+        </section>
+
+        <section className="s" id="interpretation">
+          <h2>
+            <span className="sec-no">3.3</span>
+            From pharmacology to clinical practice
+          </h2>
+          <p>
             A mechanism-of-action explanation provides context for understanding the pharmacology of olanzapine. It
-            does not, by itself, establish the magnitude of clinical benefit or predict the response of an individual
-            patient.
+            does not, by itself, establish the magnitude of clinical benefit or predict the response of an
+            individual patient.
           </p>
-          <p className="story">
-            Clinical efficacy and safety should be evaluated using the relevant clinical evidence and approved
-            product information.
-          </p>
-          <div className="row">
-            <a className="btn" href="/clinical-evidence">
-              Review the clinical evidence
-            </a>
-            <a className="btn g" href="/safety-prescribing">
+          <p>Clinical efficacy and safety should be judged on the clinical evidence and the prescribing information.</p>
+          <div className="row" style={{ marginTop: 22 }}>
+            <Link className="btn" href="/clinical-evidence">
+              Review the clinical evidence →
+            </Link>
+            <Link className="btn g" href="/safety-monitoring">
               Safety and prescribing
-            </a>
+            </Link>
           </div>
         </section>
       </div>

@@ -12,12 +12,25 @@ export default function LegalPage() {
     <main id="app">
       <div className="hero hero--text">
         <div className="w">
-          <p className="eb">Legal</p>
-          <h1 className="serif">Privacy, cookies and terms</h1>
-          <p>
-            Final legal text for the target market has not been supplied. The sections below are placeholders so
-            the required links exist. Replace them with the approved documents before distribution.
-          </p>
+          <div>
+            <p className="eb">Legal</p>
+            <h1 className="serif">Privacy, cookies and terms</h1>
+            <p>
+              Final legal text for the target market has not been supplied. The sections below are placeholders so
+              the required links exist. Replace them with the approved documents before distribution.
+            </p>
+            <div className="row">
+              <a className="btn" href="#privacy">
+                Privacy policy →
+              </a>
+              <a className="btn g" href="#cookies">
+                Cookie preferences
+              </a>
+              <a className="btn g" href="#terms">
+                Terms of use
+              </a>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -65,7 +78,7 @@ export default function LegalPage() {
               the target market.
             </p>
             <p>
-              <Link href="/safety-prescribing#reporting">Adverse-reaction reporting contacts</Link>
+              <Link href="/safety-monitoring#reporting">Adverse-reaction reporting contacts</Link>
               {" · "}
               <Link href="/references#medical">Medical information</Link>
             </p>
