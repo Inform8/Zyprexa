@@ -2043,7 +2043,7 @@ details .kpi span {
   box-shadow: 0 2px 8px -2px rgba(100, 30, 131, 0.2);
 }
 
-/* References Cards & Filters (Matching requested modern clinical card layout) */
+/* References Cards & Filters (Strictly adhering to official website branding tokens) */
 .ref-section-container {
   margin-top: 16px;
 }
@@ -2067,24 +2067,24 @@ details .kpi span {
   width: 100%;
   padding: 8px 18px;
   border-radius: 9999px;
-  border: 1px solid #ded5ee;
+  border: 1px solid var(--line);
   font-size: 13.5px;
   color: var(--ink);
-  background: #ffffff;
+  background: var(--surface);
   outline: none;
   transition: all 0.2s ease;
 }
 
 .ref-search-input:focus {
   border-color: var(--pri);
-  box-shadow: 0 0 0 3px rgba(75, 43, 176, 0.12);
+  box-shadow: 0 0 0 3px rgba(100, 30, 131, 0.12);
 }
 
 .ref-search-input::placeholder {
-  color: #928a9f;
+  color: var(--mut);
 }
 
-/* Filter Pills matching screenshot */
+/* Filter Pills using official branding tokens */
 .ref-filter-bar {
   display: flex;
   align-items: center;
@@ -2097,9 +2097,9 @@ details .kpi span {
   border-radius: 9999px;
   font-size: 13px;
   font-weight: 500;
-  border: 1px solid #7c4dff;
-  background: #ffffff;
-  color: #1e1a3a;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
   cursor: pointer;
   transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
   white-space: nowrap;
@@ -2110,17 +2110,17 @@ details .kpi span {
 }
 
 .ref-filter-btn:hover {
-  background: #f6f1fe;
-  border-color: #5d28d0;
-  color: #160042;
+  background: var(--soft);
+  border-color: var(--pri);
+  color: var(--pri);
 }
 
 .ref-filter-btn.active {
-  background: #0d0639;
-  border-color: #0d0639;
+  background: var(--ink);
+  border-color: var(--ink);
   color: #ffffff;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(13, 6, 57, 0.25);
+  box-shadow: 0 2px 8px rgba(30, 26, 58, 0.28);
 }
 
 /* Reference Cards List */
@@ -2132,25 +2132,25 @@ details .kpi span {
 }
 
 .ref-card-item {
-  background: #ffffff;
-  border: 1px solid #dcd3f3;
+  background: var(--surface);
+  border: 1px solid var(--line);
   border-radius: 16px;
   padding: 22px 28px;
-  box-shadow: 0 2px 10px rgba(75, 43, 176, 0.03);
+  box-shadow: 0 2px 10px rgba(100, 30, 131, 0.03);
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
   scroll-margin-top: calc(var(--header-height, 64px) + 24px);
 }
 
 .ref-card-item:hover {
-  border-color: #a78bfa;
-  box-shadow: 0 4px 18px rgba(75, 43, 176, 0.08);
+  border-color: var(--p2);
+  box-shadow: 0 4px 18px rgba(100, 30, 131, 0.08);
 }
 
 .ref-card-item:target,
 .ref-card-item.is-targeted {
-  border-color: #4b2bb0;
-  background: #fbf9ff;
-  box-shadow: 0 0 0 3px rgba(75, 43, 176, 0.16);
+  border-color: var(--pri);
+  background: var(--paper);
+  box-shadow: 0 0 0 3px rgba(100, 30, 131, 0.14);
 }
 
 .ref-card-header {
@@ -2172,7 +2172,7 @@ details .kpi span {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: #090235;
+  background: var(--ink);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -2190,14 +2190,14 @@ details .kpi span {
 .ref-card-author {
   font-size: 16px;
   font-weight: 700;
-  color: #090235;
+  color: var(--ink);
   margin: 0 0 4px 0;
   line-height: 1.35;
 }
 
 .ref-card-citation {
   font-size: 13.5px;
-  color: #374151;
+  color: var(--mut);
   line-height: 1.55;
   margin: 0;
 }
@@ -2213,8 +2213,9 @@ details .kpi span {
 }
 
 .ref-tag-pill {
-  background: #f3eefc;
-  color: #6b21a8;
+  background: var(--soft);
+  color: var(--pri);
+  border: 1px solid var(--line);
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.05em;
@@ -2229,12 +2230,12 @@ details .kpi span {
 .ref-card-takeaway {
   margin-top: 14px;
   margin-left: 48px;
-  background: #f8fafc;
+  background: var(--paper);
   border-radius: 12px;
-  border-left: 3.5px solid #7c4dff;
+  border-left: 3.5px solid var(--pri);
   padding: 12px 20px;
   font-size: 13.5px;
-  color: #334155;
+  color: var(--ink);
   line-height: 1.55;
 }
 
@@ -2251,24 +2252,24 @@ details .kpi span {
   gap: 4px;
   font-size: 12.5px;
   font-weight: 600;
-  color: #6b21a8;
+  color: var(--pri);
   text-decoration: none;
   transition: color 0.15s ease, transform 0.15s ease;
 }
 
 .ref-card-link-action:hover {
-  color: #4b2bb0;
+  color: var(--accent-hover);
   text-decoration: underline;
   transform: translateX(1px);
 }
 
 .ref-empty-state {
-  background: #ffffff;
-  border: 1px dashed #ded5ee;
+  background: var(--surface);
+  border: 1px dashed var(--line);
   border-radius: 16px;
   padding: 48px 24px;
   text-align: center;
-  color: #625e82;
+  color: var(--mut);
   font-size: 14px;
 }
 
