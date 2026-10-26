@@ -231,7 +231,7 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <div className="card tw" style={{ padding: 22 }}>
+            <div className="card tw">
               <table>
                 <caption className="source-line" style={{ fontWeight: 600, color: "var(--mut)", marginBottom: 10 }}>Recommended starting doses</caption>
                 <thead>

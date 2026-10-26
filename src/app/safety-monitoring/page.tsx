@@ -356,9 +356,8 @@ export default function SafetyPage() {
             </div>
           </div>
           <div className="g2" style={{ marginTop: 20 }}>
-            <div className="card" style={{ padding: 20 }}>
-              <h3 style={{ fontSize: "16px", marginBottom: "12px", color: "var(--pri)", fontWeight: 600 }}>All adults, by exposure</h3>
               <VBars
+                title="All adults, by exposure"
                 max={70}
                 caption="Percentage of patients reaching each weight-gain threshold. Clinically significant weight gain was observed across all baseline BMI categories."
                 rows={[
@@ -370,17 +369,14 @@ export default function SafetyPage() {
                   { label: "≥ 25% long-term", value: 12.3, display: "12.3%" },
                 ]}
               />
-            </div>
-            <div className="card" style={{ padding: 20 }}>
-              <h3 style={{ fontSize: "16px", marginBottom: "12px", color: "var(--pri)", fontWeight: 600 }}>Bipolar disorder clinical studies</h3>
               <HBars
+                title="Bipolar disorder clinical studies"
                 caption="Patients gaining ≥ 7% of baseline body weight."
                 rows={[
                   { label: "Acute, combination (up to 6 weeks)", value: "17.4%", width: 35, tone: "soft" },
                   { label: "Recurrence prevention (up to 12 months)", value: "39.9%", width: 80 },
                 ]}
               />
-            </div>
           </div>
           <p className="source-line" style={{ marginTop: 12 }}>
             Weight-gain thresholds across short-term and long-term exposures and bipolar disorder clinical trials.

@@ -74,6 +74,17 @@ export default function ReferencesPage() {
           <div className="ref-section-container">
             {/* Filter toolbar: Pills matching the requested style */}
             <div className="ref-toolbar">
+              <div className="ref-search-wrap">
+                <input
+                  type="text"
+                  className="ref-search-input"
+                  placeholder="Search references or keywords..."
+                  value={search}
+                  onChange={(e) => setSearch(e.target.value)}
+                  aria-label="Search references"
+                />
+              </div>
+
               <div className="ref-filter-bar" role="tablist" aria-label="Filter references by category">
                 {REF_FILTERS.map((item) => (
                   <button
@@ -87,17 +98,6 @@ export default function ReferencesPage() {
                     {item.label}
                   </button>
                 ))}
-              </div>
-
-              <div className="ref-search-wrap">
-                <input
-                  type="text"
-                  className="ref-search-input"
-                  placeholder="Search references or keywords..."
-                  value={search}
-                  onChange={(e) => setSearch(e.target.value)}
-                  aria-label="Search references"
-                />
               </div>
             </div>
 

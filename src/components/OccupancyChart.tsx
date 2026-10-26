@@ -10,7 +10,7 @@ const DOSES = [
 export function OccupancyChart() {
   return (
     <div className="g2">
-      <div className="card tw" style={{ padding: 18 }}>
+      <div className="card tw">
         <table>
           <caption>Table. Striatal D2 and 5-HT2 occupancy across daily doses</caption>
           <thead>
