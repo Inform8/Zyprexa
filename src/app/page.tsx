@@ -44,9 +44,13 @@ export default function HomePage() {
               </a>
             </div>
           </div>
-          <div className="hero-art">
+          <div className="hero-art hero-art--home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img className="product-cutout" src="/assets/products/coated-tablets.png" alt="ZYPREXA coated tablet packs" />
+            <img
+              className="hero-product-img"
+              src="/assets/zyprexa-formulations-hero.jpg"
+              alt="ZYPREXA formulations: ZypAdhera, IntraMuscular, Coated tablets, and Velotab"
+            />
           </div>
         </div>
       </div>
