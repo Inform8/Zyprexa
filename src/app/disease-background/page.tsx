@@ -274,7 +274,7 @@ export default function DiseaseBackgroundPage() {
                 </article>
               </div>
               <p className="source-line">
-                Phases of care as a clinical framework. Progression is not fixed, and individual patients may
+                Figure 2. Phases of care as a clinical framework. Progression is not fixed, and individual patients may
                 move between phases. Treatment needs can change over time; phases may recur.
               </p>
               <details>
