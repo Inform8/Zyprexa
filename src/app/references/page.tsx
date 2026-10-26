@@ -218,7 +218,7 @@ export default function ReferencesPage() {
 
             <div className="medical-review-badge-box">
               <span className="medical-review-badge-label">Last Reviewed:</span>
-              <span className="medical-review-badge-date">August 2026</span>
+              <span className="medical-review-badge-date">October 2026</span>
             </div>
           </div>
         </section>
