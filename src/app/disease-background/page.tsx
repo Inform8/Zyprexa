@@ -53,10 +53,7 @@ export default function DiseaseBackgroundPage() {
             </section>
 
             <section className="s" id="symptoms">
-              <h2>
-                <span className="sec-no">2.1</span>
-                Understanding the symptom domains
-              </h2>
+              <h2>Understanding the symptom domains</h2>
               <div className="domains domains--rows">
                 <article className="domain">
                   <div className="domain__head">
@@ -125,10 +122,7 @@ export default function DiseaseBackgroundPage() {
             </section>
 
             <section className="s" id="neurobiology">
-              <h2>
-                <span className="sec-no">2.2</span>
-                The neurobiology of schizophrenia
-              </h2>
+              <h2>The neurobiology of schizophrenia</h2>
               <div className="section-intro">
                 <p>
                   Schizophrenia is associated with complex changes in brain function and neurotransmission. One widely
@@ -218,10 +212,7 @@ export default function DiseaseBackgroundPage() {
             </section>
 
             <section className="s" id="course-of-care">
-              <h2>
-                <span className="sec-no">2.3</span>
-                Treatment across the course of schizophrenia
-              </h2>
+              <h2>Treatment across the course of schizophrenia</h2>
               <p>
                 Treatment needs can change over time. The following phases are a useful clinical framework rather than
                 a rigid sequence that applies identically to every patient.
@@ -312,10 +303,7 @@ export default function DiseaseBackgroundPage() {
             </section>
 
             <section className="s" id="episodes">
-              <h2>
-                <span className="sec-no">2.4</span>
-                Understanding mood episodes
-              </h2>
+              <h2>Understanding mood episodes</h2>
               <div className="domains domains--episodes">
                 <article className="domain">
                   <p className="eb">Elevated, expansive or irritable mood</p>
@@ -373,10 +361,7 @@ export default function DiseaseBackgroundPage() {
             </section>
 
             <section className="s" id="treatment">
-              <h2>
-                <span className="sec-no">2.5</span>
-                Treatment objectives
-              </h2>
+              <h2>Treatment objectives</h2>
               <div className="obj-layout">
                 <div>
                   <p>Treatment objectives depend on the phase of illness.</p>

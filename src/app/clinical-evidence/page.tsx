@@ -10,10 +10,10 @@ export const metadata: Metadata = {
 };
 
 const tabs = [
-  { id: "schizophrenia", label: "4.1 Schizophrenia" },
-  { id: "manic-episodes", label: "4.2 Manic episodes" },
-  { id: "recurrence", label: "4.3 Recurrence prevention" },
-  { id: "guidelines", label: "4.4 Guidelines" },
+  { id: "schizophrenia", label: "Schizophrenia" },
+  { id: "manic-episodes", label: "Manic episodes" },
+  { id: "recurrence", label: "Recurrence prevention" },
+  { id: "guidelines", label: "Guidelines" },
 ];
 
 export default function ClinicalEvidencePage() {
@@ -35,10 +35,7 @@ export default function ClinicalEvidencePage() {
         <HashPanel id="schizophrenia">
           <div className="w">
             <section className="s">
-              <h2>
-                <span className="sec-no">4.1</span>
-                Schizophrenia
-              </h2>
+              <h2>Schizophrenia</h2>
               <p>
                 Across five controlled trials, olanzapine improved both positive and negative symptoms. A published
                 dose-ranging trial and a secondary analysis of mood symptoms add detail.
@@ -174,10 +171,7 @@ export default function ClinicalEvidencePage() {
         <HashPanel id="manic-episodes">
           <div className="w">
             <section className="s">
-              <h2>
-                <span className="sec-no">4.2</span>
-                Manic episodes
-              </h2>
+              <h2>Manic episodes</h2>
               <p>
                 In moderate to severe manic episodes, olanzapine reduced manic symptoms versus placebo and divalproex,
                 and when added to lithium or valproate.
@@ -312,10 +306,7 @@ export default function ClinicalEvidencePage() {
         <HashPanel id="recurrence">
           <div className="w">
             <section className="s">
-              <h2>
-                <span className="sec-no">4.3</span>
-                Recurrence prevention
-              </h2>
+              <h2>Recurrence prevention</h2>
               <p>
                 In patients whose manic episode responded, continued olanzapine was superior to placebo in preventing
                 recurrence and non-inferior to lithium. Added to lithium or valproate, it was not superior to either
@@ -402,10 +393,7 @@ export default function ClinicalEvidencePage() {
         <HashPanel id="guidelines">
           <div className="w">
             <section className="s">
-              <h2>
-                <span className="sec-no">4.4</span>
-                Guidelines
-              </h2>
+              <h2>Guidelines</h2>
               <p>
                 Guidelines place olanzapine among several options rather than ahead of them. Recommendations depend on
                 the phase of illness, patient preference and how well the adverse-effect profile suits the individual.

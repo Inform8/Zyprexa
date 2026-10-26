@@ -9,6 +9,15 @@ import {
   type RefFilterId,
 } from "@/lib/references";
 
+const TAG_LABELS: Record<string, string> = {
+  prescribing: "PRESCRIBING INFORMATION",
+  disease: "DISEASE BACKGROUND",
+  efficacy: "EFFICACY",
+  safety: "SAFETY",
+  mechanism: "MECHANISM",
+  guidelines: "GUIDELINES",
+};
+
 export default function ReferencesPage() {
   const [filter, setFilter] = useState<RefFilterId>("all");
   const [search, setSearch] = useState("");
@@ -130,7 +139,7 @@ export default function ReferencesPage() {
                           <div className="ref-card-tags" aria-label="Reference categories">
                             {tags.map((t) => (
                               <span key={t} className="ref-tag-pill">
-                                {t.toUpperCase()}
+                                {TAG_LABELS[t] || t.toUpperCase()}
                               </span>
                             ))}
                           </div>

@@ -48,13 +48,13 @@ export default function DosingPage() {
             </p>
             <div className="hero-tabs">
               <a className="btn" href="#formulations">
-                5.1 Formulations
+                Formulations
               </a>
               <a className="btn g" href="#dosing">
-                5.2 Starting doses
+                Starting doses
               </a>
               <a className="btn g" href="#discontinuation">
-                5.3 Stopping treatment
+                Stopping treatment
               </a>
             </div>
           </div>
@@ -64,10 +64,7 @@ export default function DosingPage() {
 
       <div className="w">
         <section className="s" id="formulations">
-          <h2>
-            <span className="sec-no">5.1</span>
-            Formulations
-          </h2>
+          <h2>Formulations</h2>
           <p>This site covers ZYPREXA coated tablets. The injectable formulations have separate prescribing information.</p>
           <div className="g3 pack-grid">
             {packs.map((pack) => (
@@ -102,10 +99,7 @@ export default function DosingPage() {
         </section>
 
         <section className="s" id="dosing">
-          <h2>
-            <span className="sec-no">5.2</span>
-            Starting doses and dose range
-          </h2>
+          <h2>Starting doses and dose range</h2>
           <div>
               <p>
                 Recommended starting doses for oral olanzapine in adults.
@@ -200,10 +194,7 @@ export default function DosingPage() {
         </section>
 
         <section className="s" id="discontinuation">
-          <h2>
-            <span className="sec-no">5.3</span>
-            Stopping treatment
-          </h2>
+          <h2>Stopping treatment</h2>
           <div>
               <p>
                 Acute symptoms such as sweating, insomnia, tremor, anxiety, nausea or vomiting have been reported

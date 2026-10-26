@@ -53,16 +53,16 @@ export default function SafetyPage() {
             </p>
             <div className="hero-tabs">
               <a className="btn" href="#contraindications">
-                6.1 Contraindications
+                Contraindications
               </a>
               <a className="btn g" href="#warnings">
-                6.2 Warnings
+                Warnings
               </a>
               <a className="btn g" href="#monitoring">
-                6.3 Monitoring
+                Monitoring
               </a>
               <a className="btn g" href="#adverse-reactions">
-                6.4 Adverse reactions
+                Adverse reactions
               </a>
             </div>
           </div>
@@ -72,10 +72,7 @@ export default function SafetyPage() {
 
       <div className="w">
         <section className="s" id="contraindications">
-          <h2>
-            <span className="sec-no">6.1</span>
-            Contraindications
-          </h2>
+          <h2>Contraindications</h2>
           <p>
             Other conditions that need caution are covered under <a href="#warnings">warnings and precautions</a>.
           </p>
@@ -94,10 +91,7 @@ export default function SafetyPage() {
         </section>
 
         <section className="s" id="warnings">
-          <h2>
-            <span className="sec-no">6.2</span>
-            Important warnings and precautions
-          </h2>
+          <h2>Important warnings and precautions</h2>
           <p>
             During antipsychotic treatment, improvement in the patient&apos;s clinical condition may take several days
             to some weeks. Patients should be closely monitored during this period.
@@ -269,10 +263,7 @@ export default function SafetyPage() {
         </section>
 
         <section className="s" id="monitoring">
-          <h2>
-            <span className="sec-no">6.3</span>
-            Monitoring during treatment
-          </h2>
+          <h2>Monitoring during treatment</h2>
           <p>
             Example intervals in line with antipsychotic guidelines. Individualise monitoring to the patient&apos;s
             clinical circumstances.
@@ -335,10 +326,7 @@ export default function SafetyPage() {
         </section>
 
         <section className="s" id="weight">
-          <h2>
-            <span className="sec-no">6.4</span>
-            Weight and metabolic changes over time
-          </h2>
+          <h2>Weight and metabolic changes over time</h2>
           <p>
             The proportion of patients with clinically significant changes in weight, glucose and lipids increased with
             longer exposure (at least 48 weeks).
@@ -401,10 +389,7 @@ export default function SafetyPage() {
         </section>
 
         <section className="s" id="interactions">
-          <h2>
-            <span className="sec-no">6.5</span>
-            Drug interactions
-          </h2>
+          <h2>Drug interactions</h2>
           <p>
             Olanzapine metabolism may be affected by medicines or substances that influence CYP1A2 activity. Review
             concomitant medicines, smoking status and relevant changes during treatment.
@@ -470,10 +455,7 @@ export default function SafetyPage() {
         </section>
 
         <section className="s" id="pregnancy">
-          <h2>
-            <span className="sec-no">6.6</span>
-            Pregnancy and breastfeeding
-          </h2>
+          <h2>Pregnancy and breastfeeding</h2>
           <div>
             <p>
               Because human experience is limited, olanzapine should be used in pregnancy only if the potential
@@ -490,10 +472,7 @@ export default function SafetyPage() {
         </section>
 
         <section className="s" id="adverse-reactions">
-          <h2>
-            <span className="sec-no">6.7</span>
-            Adverse reactions
-          </h2>
+          <h2>Adverse reactions</h2>
           <div className="g2">
             <div>
               <p>

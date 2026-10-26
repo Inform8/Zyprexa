@@ -100,13 +100,13 @@ export default function MechanismPage() {
             </p>
             <div className="hero-tabs">
               <a className="btn" href="#receptor-profile">
-                3.1 Receptor profile
+                Receptor profile
               </a>
               <a className="btn g" href="#occupancy">
-                3.2 Receptor occupancy
+                Receptor occupancy
               </a>
               <a className="btn g" href="#interpretation">
-                3.3 Clinical relevance
+                Clinical relevance
               </a>
             </div>
           </div>
@@ -116,10 +116,7 @@ export default function MechanismPage() {
 
       <div className="w">
         <section className="s" id="receptor-profile">
-          <h2>
-            <span className="sec-no">3.1</span>
-            Receptor-binding profile
-          </h2>
+          <h2>Receptor-binding profile</h2>
 
           {/* Top two more content boxes using full width across 2 columns */}
           <div className="g2" style={{ marginBottom: 18 }}>
@@ -157,10 +154,7 @@ export default function MechanismPage() {
         </section>
 
         <section className="s" id="occupancy">
-          <h2>
-            <span className="sec-no">3.2</span>
-            5-HT2 and D2 occupancy across the dose range
-          </h2>
+          <h2>5-HT2 and D2 occupancy across the dose range</h2>
           <p>
             Olanzapine has greater affinity for serotonin 5-HT2 than dopamine D2 receptors. In a PET study in patients
             with schizophrenia, 5-HT2 occupancy was above 90% at every dose, while D2 occupancy rose with dose.
@@ -175,10 +169,7 @@ export default function MechanismPage() {
         </section>
 
         <section className="s" id="interpretation">
-          <h2>
-            <span className="sec-no">3.3</span>
-            From pharmacology to clinical practice
-          </h2>
+          <h2>From pharmacology to clinical practice</h2>
           <p>
             A mechanism-of-action explanation provides context for understanding the pharmacology of olanzapine. It
             does not, by itself, establish the magnitude of clinical benefit or predict the response of an
