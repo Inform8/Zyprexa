@@ -47,9 +47,9 @@ export default function HomePage() {
           <div className="hero-art hero-art--home">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              className="hero-product-img"
-              src="/assets/zyprexa-packs-cutout.png"
-              alt="ZYPREXA formulations: ZypAdhera, IntraMuscular, Coated tablets, and Velotab"
+              className="hero-home-img"
+              src="/assets/home.png"
+              alt="ZYPREXA neural mechanism of action and receptor pathways"
             />
           </div>
         </div>
