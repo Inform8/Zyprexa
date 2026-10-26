@@ -48,7 +48,7 @@ export default function HomePage() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               className="hero-home-img"
-              src="/assets/home.png"
+              src="/assets/neural-brain-hero.png"
               alt="ZYPREXA neural mechanism of action and receptor pathways"
             />
           </div>
