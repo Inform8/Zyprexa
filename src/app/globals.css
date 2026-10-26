@@ -2144,11 +2144,17 @@ details .kpi span {
 }
 
 .ref-filter-btn.active {
-  background: var(--ink);
-  border-color: var(--ink);
+  background: var(--pri);
+  border-color: var(--pri);
   color: #ffffff;
   font-weight: 600;
-  box-shadow: 0 2px 8px rgba(30, 26, 58, 0.28);
+  box-shadow: 0 2px 10px rgba(100, 30, 131, 0.28);
+}
+
+.ref-filter-btn.active:hover {
+  background: var(--accent-hover);
+  border-color: var(--accent-hover);
+  color: #ffffff;
 }
 
 /* Reference Cards List */
@@ -2200,7 +2206,7 @@ details .kpi span {
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  background: var(--ink);
+  background: var(--pri);
   color: #ffffff;
   display: flex;
   align-items: center;
@@ -2209,6 +2215,7 @@ details .kpi span {
   font-weight: 700;
   flex-shrink: 0;
   margin-top: 1px;
+  box-shadow: 0 2px 6px rgba(100, 30, 131, 0.22);
 }
 
 .ref-card-info {
