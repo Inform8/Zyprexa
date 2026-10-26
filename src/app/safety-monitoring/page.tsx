@@ -80,17 +80,17 @@ export default function SafetyPage() {
             Other conditions that need caution are covered under <a href="#warnings">warnings and precautions</a>.
           </p>
           <div className="alert">
-              <h3>Contraindicated</h3>
-              <p>
-                Oral olanzapine is contraindicated in patients with:
-                <Cite n={1} section="4.3" />
-              </p>
-              <ul>
-                <li>Hypersensitivity to olanzapine or to any of the excipients</li>
-                <li>Known risk of narrow-angle glaucoma</li>
-              </ul>
-              <p>Excipients include lactose monohydrate. See the prescribing information for the full list.</p>
-            </div>
+            <h3>Contraindicated</h3>
+            <p>
+              Oral olanzapine is contraindicated in patients with:
+              <Cite n={1} section="4.3" />
+            </p>
+            <ul>
+              <li>Hypersensitivity to olanzapine or to any of the excipients</li>
+              <li>Known risk of narrow-angle glaucoma</li>
+            </ul>
+            <p>Excipients include lactose monohydrate. See the prescribing information for the full list.</p>
+          </div>
         </section>
 
         <section className="s" id="warnings">
@@ -395,7 +395,7 @@ export default function SafetyPage() {
             </div>
           </div>
           <p className="source-line" style={{ marginTop: 12 }}>
-            Figure 2. Weight-gain thresholds across short-term and long-term exposures and bipolar disorder clinical trials.
+            Weight-gain thresholds across short-term and long-term exposures and bipolar disorder clinical trials.
             <Cite n={1} section="4.8" />
           </p>
         </section>
@@ -475,18 +475,18 @@ export default function SafetyPage() {
             Pregnancy and breastfeeding
           </h2>
           <div>
-              <p>
-                Because human experience is limited, olanzapine should be used in pregnancy only if the potential
-                benefit justifies the potential risk to the foetus.
-                <Cite n={1} section="4.6" />
-              </p>
-              <p>
-                Newborns exposed to antipsychotics, including olanzapine, during the third trimester are at risk of
-                adverse reactions including extrapyramidal and/or withdrawal symptoms, and should be monitored
-                carefully.
-              </p>
-              <p>Olanzapine is excreted in breast milk. Patients should be advised not to breastfeed an infant if they are taking olanzapine.</p>
-            </div>
+            <p>
+              Because human experience is limited, olanzapine should be used in pregnancy only if the potential
+              benefit justifies the potential risk to the foetus.
+              <Cite n={1} section="4.6" />
+            </p>
+            <p>
+              Newborns exposed to antipsychotics, including olanzapine, during the third trimester are at risk of
+              adverse reactions including extrapyramidal and/or withdrawal symptoms, and should be monitored
+              carefully.
+            </p>
+            <p>Olanzapine is excreted in breast milk. Patients should be advised not to breastfeed an infant if they are taking olanzapine.</p>
+          </div>
         </section>
 
         <section className="s" id="adverse-reactions">

@@ -84,7 +84,7 @@ export const REFERENCES: Reference[] = [
     category: "study",
     kind: "Review article",
     topics: ["Disease background"],
-    usedFor: "Cited for the dopamine, glutamate and serotonin hypotheses (schizophrenia, Figure 2).",
+    usedFor: "Cited for the dopamine, glutamate and serotonin hypotheses (disease background, Figure 1).",
     links: [{ label: "doi:10.1017/S1092852918001013", href: "https://doi.org/10.1017/S1092852918001013" }],
   },
   {
@@ -147,7 +147,7 @@ export const REFERENCES: Reference[] = [
     category: "study",
     kind: "Randomised trial",
     topics: ["Clinical efficacy"],
-    usedFor: "Cited for the published schizophrenia trial (clinical evidence, Figure 2).",
+    usedFor: "Cited for the published schizophrenia trial (clinical evidence, North American acute trial).",
     links: [{ label: "Publisher page", href: "https://www.nature.com/articles/1380403" }],
   },
   {
@@ -159,7 +159,7 @@ export const REFERENCES: Reference[] = [
     category: "study",
     kind: "Randomised trial",
     topics: ["Clinical efficacy"],
-    usedFor: "Cited for the published acute mania trial (clinical evidence, Figure 3).",
+    usedFor: "Cited for the published acute mania trial (clinical evidence, Tohen et al. 1999).",
     links: [{ label: "doi:10.1176/ajp.156.5.702", href: "https://doi.org/10.1176/ajp.156.5.702" }],
   },
   {
@@ -171,7 +171,7 @@ export const REFERENCES: Reference[] = [
     category: "study",
     kind: "PET imaging study",
     topics: ["Pharmacology"],
-    usedFor: "Cited for receptor occupancy at clinical doses (mechanism of action, Figure 2).",
+    usedFor: "Cited for receptor occupancy at clinical doses (mechanism of action, receptor occupancy).",
     links: [{ label: "doi:10.1176/ajp.155.7.921", href: "https://doi.org/10.1176/ajp.155.7.921" }],
   },
   {
