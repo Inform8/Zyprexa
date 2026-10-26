@@ -583,11 +583,11 @@ header.site-header.is-hidden {
   z-index: 1;
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: 36px;
+  gap: 32px;
   align-items: center;
-  padding-top: 52px;
-  padding-bottom: 52px;
-  min-height: var(--hero-height);
+  padding-top: 20px;
+  padding-bottom: 28px;
+  min-height: auto;
 }
 
 .hero--text .w,
@@ -832,13 +832,13 @@ header.site-header.is-hidden {
   -webkit-mask-image: none !important;
   mask-image: none !important;
   width: 100%;
-  max-width: 660px;
+  max-width: 520px;
   height: auto;
-  max-height: min(560px, calc(var(--hero-height) - 50px));
+  max-height: 440px;
   object-fit: contain;
   display: block;
   margin: 0 auto;
-  filter: drop-shadow(0 18px 46px rgba(30, 26, 58, 0.16));
+  filter: drop-shadow(0 16px 36px rgba(30, 26, 58, 0.14));
 }
 
 .row {
