@@ -118,7 +118,7 @@ export default function DiseaseBackgroundPage() {
                 </article>
               </div>
               <p className="source-line">
-                Figure 1. Three symptom domains of schizophrenia, with examples. Domains are not mutually exclusive and
+                Three symptom domains of schizophrenia, with examples. Domains are not mutually exclusive and
                 individual presentations vary.
                 <Cite n={4} />
               </p>
@@ -210,7 +210,7 @@ export default function DiseaseBackgroundPage() {
                 </div>
 
                 <figcaption className="source-line hypo-caption">
-                  Figure 2. Simplified schematic of the dopamine, glutamate and serotonin hypotheses and their proposed
+                  Figure 1. Simplified schematic of the dopamine, glutamate and serotonin hypotheses and their proposed
                   links. It does not depict anatomy or individual neurons. Adapted from Stahl 2018.
                   <Cite n={5} />
                 </figcaption>
@@ -226,6 +226,12 @@ export default function DiseaseBackgroundPage() {
                 Treatment needs can change over time. The following phases are a useful clinical framework rather than
                 a rigid sequence that applies identically to every patient.
               </p>
+              <div className="phase-flow-stage">
+                <img
+                  src="/assets/Purple Three-Step Process Flow.png"
+                  alt="Three-step process flow representing acute treatment, stabilization, and maintenance phases with potential recurrence loop"
+                />
+              </div>
               <div className="domains">
                 <article className="domain">
                   <div className="domain__head">
@@ -268,7 +274,7 @@ export default function DiseaseBackgroundPage() {
                 </article>
               </div>
               <p className="source-line">
-                Figure 3. Phases of care as a clinical framework. Progression is not fixed, and individual patients may
+                Figure 2. Phases of care as a clinical framework. Progression is not fixed, and individual patients may
                 move between phases. Treatment needs can change over time; phases may recur.
               </p>
               <details>
@@ -360,7 +366,7 @@ export default function DiseaseBackgroundPage() {
                 </article>
               </div>
               <p className="source-line">
-                Figure 4. Features of manic, mixed and depressive episodes.
+                Features of manic, mixed and depressive episodes.
                 <Cite n={4} /> The arrangement groups episode features; it does not represent an illness course, the
                 order in which episodes occur, or their frequency.
               </p>

@@ -103,7 +103,10 @@ export default function HomePage() {
 
         <section className="s" id="indications">
           <h2>Approved indications</h2>
-          <p>For adults. Comprehensive clinical background for both conditions is available in Disease background.</p>
+          <p>
+            For adults. Comprehensive clinical background for both conditions is available in{" "}
+            <Link href="/disease-background">Disease background</Link>.
+          </p>
           <ol className="ind-cards">
             <li>
               <div className="ind-card-inner">
@@ -163,7 +166,7 @@ export default function HomePage() {
           <h2>Mechanism of action</h2>
           <div className="g2">
             <div className="card" style={{ padding: 22, display: "flex", flexDirection: "column" }}>
-              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--ink)", margin: "0 0 8px" }}>Receptor binding profile</h3>
+              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--pri)", margin: "0 0 8px" }}>Receptor binding profile</h3>
               <p style={{ margin: "0 0 10px", color: "#4a4570", fontSize: "14px", lineHeight: "1.55" }}>
                 Olanzapine is an antipsychotic, antimanic and mood-stabilising agent with affinity for several receptor
                 families. It has greater affinity for serotonin 5-HT2 than dopamine D2 receptors.
@@ -248,7 +251,7 @@ export default function HomePage() {
           <h2>Dosing at a glance</h2>
           <div className="g2">
             <div className="card" style={{ padding: 22, display: "flex", flexDirection: "column" }}>
-              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--ink)", margin: "0 0 8px" }}>Administration &amp; dose range</h3>
+              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--pri)", margin: "0 0 8px" }}>Administration &amp; dose range</h3>
               <p style={{ margin: "0 0 10px", color: "#4a4570", fontSize: "14px", lineHeight: "1.55" }}>
                 Administered once daily with or without food. The licensed daily dose range is <strong>5–20 mg/day</strong>,
                 individualised according to clinical status.
@@ -304,28 +307,28 @@ export default function HomePage() {
           <h2>Important safety information</h2>
           <div className="g2" style={{ marginTop: 18 }}>
             <div className="card" style={{ padding: 22 }}>
-              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--ink)", margin: "0 0 8px" }}>Contraindications</h3>
+              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--pri)", margin: "0 0 8px" }}>Contraindications</h3>
               <p style={{ margin: 0, color: "#4a4570", fontSize: "14px", lineHeight: "1.55" }}>
                 Hypersensitivity to olanzapine or any excipient; known risk of narrow-angle glaucoma.
                 <Cite n={1} section="4.3" />
               </p>
             </div>
             <div className="card" style={{ padding: 22 }}>
-              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--ink)", margin: "0 0 8px" }}>Dementia-related psychosis</h3>
+              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--pri)", margin: "0 0 8px" }}>Dementia-related psychosis</h3>
               <p style={{ margin: 0, color: "#4a4570", fontSize: "14px", lineHeight: "1.55" }}>
                 Not recommended: increased mortality and risk of cerebrovascular accident in elderly patients.
                 <Cite n={1} section="4.4" />
               </p>
             </div>
             <div className="card" style={{ padding: 22 }}>
-              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--ink)", margin: "0 0 8px" }}>Weight and metabolic changes</h3>
+              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--pri)", margin: "0 0 8px" }}>Weight and metabolic changes</h3>
               <p style={{ margin: 0, color: "#4a4570", fontSize: "14px", lineHeight: "1.55" }}>
                 Monitor weight, blood glucose and lipids at baseline and regularly during treatment.
                 <Cite n={1} section="4.4" />
               </p>
             </div>
             <div className="card" style={{ padding: 22 }}>
-              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--ink)", margin: "0 0 8px" }}>Neuroleptic malignant syndrome</h3>
+              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--pri)", margin: "0 0 8px" }}>Neuroleptic malignant syndrome</h3>
               <p style={{ margin: 0, color: "#4a4570", fontSize: "14px", lineHeight: "1.55" }}>
                 If signs occur, all antipsychotic medicines, including olanzapine, must be discontinued.
                 <Cite n={1} section="4.4" />

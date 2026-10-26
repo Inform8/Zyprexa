@@ -120,11 +120,7 @@ export default function MechanismPage() {
             <span className="sec-no">3.1</span>
             Receptor-binding profile
           </h2>
-          <p>Select a receptor family to see what it is linked to. Every family is listed below.</p>
-          <div className="g2" style={{ marginBottom: 16 }}>
-            <p className="source-line">Solid emphasis: described in relation to antipsychotic activity.</p>
-            <p className="source-line">Outlined emphasis: described in relation to adverse effects.</p>
-          </div>
+
           {/* Top two more content boxes using full width across 2 columns */}
           <div className="g2" style={{ marginBottom: 18 }}>
             {families.slice(0, 2).map((family) => (
@@ -153,7 +149,7 @@ export default function MechanismPage() {
             ))}
           </div>
           <p className="source-line" style={{ marginTop: 14 }}>
-            Figure 1. Receptor families at which olanzapine showed affinity (Ki &lt; 100 nM) in preclinical studies.
+            Receptor families at which olanzapine showed affinity (Ki &lt; 100 nM) in preclinical studies.
             Relative affinities are not represented. These interactions help explain why treatment selection and
             monitoring must consider both therapeutic objectives and potential adverse effects.
             <Cite n={1} section="5.1" />
