@@ -83,7 +83,6 @@ export const NAV_ITEMS: NavItem[] = [
     href: "/references",
     secs: [
       { id: "literature", title: "References" },
-      { id: "medical-information", title: "Medical information" },
       { id: "abbreviations", title: "Abbreviations" },
     ],
   },

@@ -166,43 +166,6 @@ export default function ReferencesPage() {
           </div>
         </section>
 
-        <section className="s" id="medical-information">
-          <h2>Medical information</h2>
-          <div className="card" style={{ padding: "24px 26px" }}>
-            <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--ink)", margin: "0 0 10px" }}>
-              Inquiries and Market Support
-            </h3>
-            <p style={{ margin: "0 0 14px", color: "#4a4570", fontSize: "14px", lineHeight: 1.55 }}>
-              For questions about ZYPREXA, contact the medical information service for your market. Local representatives
-              of the marketing authorisation holder are listed in the patient leaflet.
-            </p>
-            <div
-              style={{
-                padding: "14px 18px",
-                borderRadius: 12,
-                background: "rgba(244, 239, 255, 0.6)",
-                border: "1px solid var(--line)",
-              }}
-            >
-              <strong
-                style={{
-                  display: "block",
-                  color: "var(--pri)",
-                  fontSize: "13px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.04em",
-                  marginBottom: 4,
-                }}
-              >
-                Marketing Authorisation Holder
-              </strong>
-              <p style={{ margin: 0, color: "var(--ink)", fontSize: "14px", fontWeight: 500 }}>
-                CHEPLAPHARM Registration GmbH, Weiler Straße 5e, 79540 Lörrach, Germany
-              </p>
-            </div>
-          </div>
-        </section>
-
         <section className="s" id="abbreviations">
           <h2>Abbreviations</h2>
           <div className="card tw">

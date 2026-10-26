@@ -92,7 +92,6 @@ export const NAV: NavSection[] = [
     href: "/references",
     links: [
       { label: "References", href: "/references#literature" },
-      { label: "Medical information", href: "/references#medical-information" },
       { label: "Abbreviations", href: "/references#abbreviations" },
     ],
   },
@@ -127,7 +126,6 @@ export const FOOTER_GROUPS: { title: string; links: NavLink[] }[] = [
     title: "References",
     links: [
       { label: "References", href: "/references#literature" },
-      { label: "Medical information", href: "/references#medical-information" },
       { label: "Abbreviations", href: "/references#abbreviations" },
     ],
   },
