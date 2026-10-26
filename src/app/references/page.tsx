@@ -1,25 +1,26 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ABBREVIATIONS, REFERENCES, type RefCategory } from "@/lib/references";
+import {
+  ABBREVIATIONS,
+  REFERENCES,
+  REF_FILTERS,
+  REF_TAGS,
+  type RefFilterId,
+} from "@/lib/references";
 
 export default function ReferencesPage() {
-  const [category, setCategory] = useState<"all" | RefCategory>("all");
+  const [filter, setFilter] = useState<RefFilterId>("all");
   const [search, setSearch] = useState("");
-
-  const counts = useMemo(() => {
-    return {
-      all: REFERENCES.length,
-      study: REFERENCES.filter((r) => r.category === "study").length,
-      guideline: REFERENCES.filter((r) => r.category === "guideline").length,
-      regulatory: REFERENCES.filter((r) => r.category === "regulatory").length,
-    };
-  }, []);
 
   const filtered = useMemo(() => {
     return REFERENCES.filter((ref) => {
-      const matchCat = category === "all" || ref.category === category;
-      if (!matchCat) return false;
+      if (filter !== "all") {
+        const tags = REF_TAGS[ref.n] || [];
+        if (!tags.includes(filter as Exclude<RefFilterId, "all">)) {
+          return false;
+        }
+      }
       if (!search.trim()) return true;
       const q = search.toLowerCase();
       return (
@@ -31,13 +32,7 @@ export default function ReferencesPage() {
         ref.topics.some((t) => t.toLowerCase().includes(q))
       );
     });
-  }, [category, search]);
-
-  const categoryLabels: Record<RefCategory, string> = {
-    regulatory: "REGULATORY",
-    guideline: "GUIDELINE",
-    study: "CLINICAL STUDY",
-  };
+  }, [filter, search]);
 
   return (
     <main id="app">
@@ -67,118 +62,106 @@ export default function ReferencesPage() {
         <section className="s" id="literature">
           <h2>Literature and Product Documents</h2>
 
-          <div className="ref-table-card">
+          <div className="ref-section-container">
+            {/* Filter toolbar: Pills matching the requested style */}
             <div className="ref-toolbar">
+              <div className="ref-filter-bar" role="tablist" aria-label="Filter references by category">
+                {REF_FILTERS.map((item) => (
+                  <button
+                    key={item.id}
+                    type="button"
+                    role="tab"
+                    aria-selected={filter === item.id}
+                    className={`ref-filter-btn ${filter === item.id ? "active" : ""}`}
+                    onClick={() => setFilter(item.id)}
+                  >
+                    {item.label}
+                  </button>
+                ))}
+              </div>
+
               <div className="ref-search-wrap">
                 <input
                   type="text"
                   className="ref-search-input"
-                  placeholder="Search references, topics or keywords..."
+                  placeholder="Search references or keywords..."
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   aria-label="Search references"
                 />
               </div>
-
-              <div className="ref-pills" role="tablist" aria-label="Filter by category">
-                <button
-                  type="button"
-                  className={`ref-pill ${category === "all" ? "active" : ""}`}
-                  onClick={() => setCategory("all")}
-                >
-                  All ({counts.all})
-                </button>
-                <button
-                  type="button"
-                  className={`ref-pill ${category === "study" ? "active" : ""}`}
-                  onClick={() => setCategory("study")}
-                >
-                  Clinical studies ({counts.study})
-                </button>
-                <button
-                  type="button"
-                  className={`ref-pill ${category === "guideline" ? "active" : ""}`}
-                  onClick={() => setCategory("guideline")}
-                >
-                  Guidelines ({counts.guideline})
-                </button>
-                <button
-                  type="button"
-                  className={`ref-pill ${category === "regulatory" ? "active" : ""}`}
-                  onClick={() => setCategory("regulatory")}
-                >
-                  Regulatory ({counts.regulatory})
-                </button>
-              </div>
             </div>
 
-            <div className="ref-table-wrap">
-              <table className="ref-table">
-                <thead>
-                  <tr>
-                    <th style={{ width: "48px" }}>No.</th>
-                    <th style={{ width: "160px" }}>Type</th>
-                    <th style={{ minWidth: "260px" }}>Reference</th>
-                    <th style={{ minWidth: "190px" }}>Source</th>
-                    <th style={{ minWidth: "240px" }}>Cited for</th>
-                    <th style={{ width: "160px" }}>Link</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filtered.length === 0 ? (
-                    <tr>
-                      <td colSpan={6} className="ref-table-empty">
-                        No references match &quot;{search}&quot;.
-                      </td>
-                    </tr>
-                  ) : (
-                    filtered.map((ref) => {
-                      const numStr = String(ref.n).padStart(2, "0");
-                      const authorWithDot = ref.authors.endsWith(".") ? ref.authors : `${ref.authors}.`;
-                      const sourceText =
-                        ref.year && !ref.source.includes(String(ref.year))
-                          ? `${ref.source} · ${ref.year}`
-                          : ref.source;
+            {/* List of Reference Cards matching the requested style */}
+            <div className="ref-cards-list">
+              {filtered.length === 0 ? (
+                <div className="ref-empty-state">
+                  No references found for &quot;{search}&quot;.
+                </div>
+              ) : (
+                filtered.map((ref) => {
+                  const authorWithDot = ref.authors.endsWith(".") ? ref.authors : `${ref.authors}.`;
+                  const sourceText =
+                    ref.year && !ref.source.includes(String(ref.year))
+                      ? `${ref.source} · ${ref.year}`
+                      : ref.source;
+                  const tags = REF_TAGS[ref.n] || [ref.category];
 
-                      return (
-                        <tr
-                          key={ref.n}
-                          id={`ref-${ref.n}`}
-                          style={{ scrollMarginTop: "calc(var(--header-height, 64px) + 24px)" }}
-                        >
-                          <td className="ref-table-num">{numStr}</td>
-                          <td className="ref-table-type">
-                            <span className="ref-table-type-cat">{categoryLabels[ref.category]}</span>
-                            <span className="ref-table-type-kind">{ref.kind.toUpperCase()}</span>
-                          </td>
-                          <td className="ref-table-ref">
-                            <strong>{authorWithDot}</strong> {ref.title}
-                          </td>
-                          <td className="ref-table-source">{sourceText}</td>
-                          <td className="ref-table-cited">{ref.usedFor}</td>
-                          <td>
-                            {ref.links && ref.links.length > 0 ? (
-                              ref.links.map((link) => (
+                  return (
+                    <article
+                      key={ref.n}
+                      id={`ref-${ref.n}`}
+                      className="ref-card-item"
+                    >
+                      <div className="ref-card-header">
+                        <div className="ref-card-main">
+                          <div className="ref-card-badge" aria-label={`Reference ${ref.n}`}>
+                            {ref.n}
+                          </div>
+                          <div className="ref-card-info">
+                            <h3 className="ref-card-author">{authorWithDot}</h3>
+                            <p className="ref-card-citation">
+                              {ref.title} {sourceText}.
+                            </p>
+                          </div>
+                        </div>
+
+                        {tags.length > 0 && (
+                          <div className="ref-card-tags" aria-label="Reference categories">
+                            {tags.map((t) => (
+                              <span key={t} className="ref-tag-pill">
+                                {t.toUpperCase()}
+                              </span>
+                            ))}
+                          </div>
+                        )}
+                      </div>
+
+                      {ref.usedFor && (
+                        <div className="ref-card-takeaway">
+                          <p style={{ margin: 0 }}>{ref.usedFor}</p>
+
+                          {ref.links && ref.links.length > 0 && (
+                            <div className="ref-card-links">
+                              {ref.links.map((link) => (
                                 <a
                                   key={link.href}
                                   href={link.href}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="ref-table-link"
+                                  className="ref-card-link-action"
                                 >
                                   {link.label} ↗
                                 </a>
-                              ))
-                            ) : (
-                              <span className="ref-table-nolink">No external link</span>
-                            )}
-                          </td>
-                        </tr>
-                      );
-                    })
-                  )}
-                </tbody>
-              </table>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                    </article>
+                  );
+                })
+              )}
             </div>
           </div>
         </section>

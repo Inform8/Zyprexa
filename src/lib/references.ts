@@ -189,31 +189,32 @@ export const REFERENCES: Reference[] = [
 ];
 
 export const REF_FILTERS = [
-  { id: "all", label: "All" },
-  { id: "prescribing", label: "Prescribing information" },
-  { id: "disease", label: "Disease background" },
+  { id: "all", label: "All References" },
   { id: "efficacy", label: "Efficacy" },
+  { id: "dosing", label: "Dosing" },
+  { id: "safety", label: "Safety" },
   { id: "mechanism", label: "Mechanism" },
   { id: "guidelines", label: "Guidelines" },
-  { id: "safety", label: "Safety" },
+  { id: "pharmacokinetics", label: "Pharmacokinetics" },
+  { id: "prescribing", label: "Prescribing" },
 ] as const;
 
 export type RefFilterId = (typeof REF_FILTERS)[number]["id"];
 
 export const REF_TAGS: Record<number, Exclude<RefFilterId, "all">[]> = {
-  1: ["prescribing", "efficacy", "safety", "mechanism"],
-  2: ["prescribing"],
-  3: ["prescribing"],
-  4: ["disease"],
-  5: ["disease", "mechanism"],
-  6: ["guidelines"],
-  7: ["guidelines"],
-  8: ["guidelines", "safety"],
+  1: ["prescribing", "dosing", "efficacy", "safety", "mechanism"],
+  2: ["prescribing", "dosing"],
+  3: ["prescribing", "dosing"],
+  4: ["guidelines"],
+  5: ["mechanism"],
+  6: ["guidelines", "efficacy", "dosing"],
+  7: ["guidelines", "efficacy"],
+  8: ["guidelines", "safety", "efficacy"],
   9: ["guidelines"],
   10: ["efficacy", "safety"],
   11: ["efficacy", "safety"],
-  12: ["mechanism"],
-  13: ["mechanism"],
+  12: ["mechanism", "pharmacokinetics"],
+  13: ["mechanism", "safety", "prescribing"],
 };
 
 export const ABBREVIATIONS: { term: string; definition: string }[] = [
