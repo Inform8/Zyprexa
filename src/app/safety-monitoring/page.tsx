@@ -570,7 +570,7 @@ export default function SafetyPage() {
             <a href={EXTERNAL.smpcPdf} target="_blank" rel="noopener noreferrer">
               View full prescribing information
             </a>
-            <a href={EXTERNAL.emaPage} target="_blank" rel="noopener noreferrer">
+            <a href={EXTERNAL.patientLeafletPdf} target="_blank" rel="noopener noreferrer">
               Access patient leaflet
             </a>
           </div>

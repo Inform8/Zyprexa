@@ -46,16 +46,6 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    name: "Clinical evidence",
-    href: "/clinical-evidence",
-    secs: [
-      { id: "schizophrenia", title: "Schizophrenia" },
-      { id: "manic-episodes", title: "Bipolar disorder: manic episodes" },
-      { id: "recurrence", title: "Bipolar disorder: recurrence prevention" },
-      { id: "guidelines", title: "Guidelines" },
-    ],
-  },
-  {
     name: "Dosing",
     href: "/dosing-administration",
     secs: [
@@ -76,6 +66,16 @@ export const NAV_ITEMS: NavItem[] = [
       { id: "pregnancy", title: "Pregnancy" },
       { id: "adverse-reactions", title: "Adverse reactions" },
       { id: "reporting", title: "Reporting" },
+    ],
+  },
+  {
+    name: "Clinical evidence",
+    href: "/clinical-evidence",
+    secs: [
+      { id: "schizophrenia", title: "Schizophrenia" },
+      { id: "manic-episodes", title: "Bipolar disorder: manic episodes" },
+      { id: "recurrence", title: "Bipolar disorder: recurrence prevention" },
+      { id: "guidelines", title: "Guidelines" },
     ],
   },
   {

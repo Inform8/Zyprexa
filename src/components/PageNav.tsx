@@ -12,9 +12,9 @@ export const SITE_PAGES: PageInfo[] = [
   { name: "Overview", href: "/" },
   { name: "Disease background", href: "/disease-background" },
   { name: "Mechanism of action", href: "/mechanism-of-action" },
-  { name: "Clinical evidence", href: "/clinical-evidence" },
   { name: "Dosing", href: "/dosing-administration" },
   { name: "Safety & monitoring", href: "/safety-monitoring" },
+  { name: "Clinical evidence", href: "/clinical-evidence" },
   { name: "References", href: "/references" },
 ];
 

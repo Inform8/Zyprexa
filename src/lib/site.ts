@@ -10,6 +10,8 @@ export const EXTERNAL = {
   smpcPdf:
     "https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf",
   emaPage: "https://www.ema.europa.eu/en/medicines/human/EPAR/zyprexa",
+  patientLeafletPdf:
+    "https://www.ema.europa.eu/en/documents/overview/zyprexa-epar-summary-public_en.pdf",
 } as const;
 
 export interface NavLink {
@@ -53,16 +55,6 @@ export const NAV: NavSection[] = [
     ],
   },
   {
-    label: "Clinical evidence",
-    href: "/clinical-evidence",
-    links: [
-      { label: "Schizophrenia", href: "/clinical-evidence#schizophrenia" },
-      { label: "Bipolar disorder: manic episodes", href: "/clinical-evidence#manic-episodes" },
-      { label: "Bipolar disorder: recurrence prevention", href: "/clinical-evidence#recurrence" },
-      { label: "Guidelines", href: "/clinical-evidence#guidelines" },
-    ],
-  },
-  {
     label: "Dosing",
     href: "/dosing-administration",
     links: [
@@ -83,6 +75,16 @@ export const NAV: NavSection[] = [
       { label: "Pregnancy", href: "/safety-monitoring#pregnancy" },
       { label: "Adverse reactions", href: "/safety-monitoring#adverse-reactions" },
       { label: "Reporting", href: "/safety-monitoring#reporting" },
+    ],
+  },
+  {
+    label: "Clinical evidence",
+    href: "/clinical-evidence",
+    links: [
+      { label: "Schizophrenia", href: "/clinical-evidence#schizophrenia" },
+      { label: "Bipolar disorder: manic episodes", href: "/clinical-evidence#manic-episodes" },
+      { label: "Bipolar disorder: recurrence prevention", href: "/clinical-evidence#recurrence" },
+      { label: "Guidelines", href: "/clinical-evidence#guidelines" },
     ],
   },
   {
