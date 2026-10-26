@@ -32,9 +32,9 @@ export const NAV: NavSection[] = [
     links: [
       { label: "Indications", href: "/#indications" },
       { label: "Mechanism of action", href: "/#mechanism" },
-      { label: "Clinical evidence", href: "/#evidence" },
       { label: "Dosing", href: "/#dosing-glance" },
       { label: "Safety", href: "/#safety" },
+      { label: "Clinical evidence", href: "/#evidence" },
     ],
   },
   {

@@ -23,9 +23,9 @@ export const NAV_ITEMS: NavItem[] = [
     secs: [
       { id: "indications", title: "Indications" },
       { id: "mechanism", title: "Mechanism of action" },
-      { id: "evidence", title: "Clinical evidence" },
       { id: "dosing-glance", title: "Dosing" },
       { id: "safety", title: "Safety" },
+      { id: "evidence", title: "Clinical evidence" },
     ],
   },
   {
@@ -252,15 +252,13 @@ export default function Header() {
           </ul>
 
           <div className="header-cta">
-            <a
+            <Link
               className="btn"
-              href={EXTERNAL.smpcPdf}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Prescribing information, Zyprexa EU product information PDF, opens in a new tab"
+              href="/"
+              aria-label="HCP Reference, navigate to overview page"
             >
-              Prescribing information
-            </a>
+              HCP Reference
+            </Link>
           </div>
         </div>
       </header>

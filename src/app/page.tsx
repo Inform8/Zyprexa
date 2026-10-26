@@ -33,14 +33,14 @@ export default function HomePage() {
               <a className="btn" href="#indications">
                 Approved indications
               </a>
-              <a className="btn g" href="#evidence">
-                Clinical evidence
-              </a>
               <a className="btn g" href="#dosing-glance">
                 Dosing
               </a>
               <a className="btn g" href="#safety">
                 Safety information
+              </a>
+              <a className="btn g" href="#evidence">
+                Clinical evidence
               </a>
             </div>
           </div>
@@ -57,6 +57,26 @@ export default function HomePage() {
 
       <div className="w">
         <div className="g4" style={{ marginTop: 22 }} aria-label="Key figures">
+          <article className="card stat">
+            <b>&gt; 90%</b>
+            <p>
+              5-HT2 receptor occupancy at every dose from 5 to 20 mg/day
+              <Cite n={12} />
+            </p>
+            <Link className="more-link" href="/mechanism-of-action#occupancy">
+              Mechanism of action
+            </Link>
+          </article>
+          <article className="card stat">
+            <b>5–20 mg</b>
+            <p>
+              once-daily dose range, individualised
+              <Cite n={1} section="4.2" />
+            </p>
+            <Link className="more-link" href="/dosing-administration#dosing">
+              Dosing
+            </Link>
+          </article>
           <article className="card stat">
             <b>&gt; 2,900</b>
             <p>
@@ -77,26 +97,6 @@ export default function HomePage() {
             </p>
             <Link className="more-link" href="/clinical-evidence#tohen-1999">
               Clinical evidence
-            </Link>
-          </article>
-          <article className="card stat">
-            <b>&gt; 90%</b>
-            <p>
-              5-HT2 receptor occupancy at every dose from 5 to 20 mg/day
-              <Cite n={12} />
-            </p>
-            <Link className="more-link" href="/mechanism-of-action#occupancy">
-              Mechanism of action
-            </Link>
-          </article>
-          <article className="card stat">
-            <b>5–20 mg</b>
-            <p>
-              once-daily dose range, individualised
-              <Cite n={1} section="4.2" />
-            </p>
-            <Link className="more-link" href="/dosing-administration#dosing">
-              Dosing
             </Link>
           </article>
         </div>
@@ -207,46 +207,6 @@ export default function HomePage() {
           </div>
         </section>
 
-        <section className="s" id="evidence">
-          <h2>Clinical evidence at a glance</h2>
-          <div className="g3">
-            {[
-              {
-                title: "Schizophrenia",
-                href: "/clinical-evidence#schizophrenia",
-                text: "Significantly greater improvement in negative and positive symptoms in 2 of 2 placebo-controlled and 2 of 3 comparator-controlled trials.",
-                n: 1 as const,
-                section: "5.1",
-              },
-              {
-                title: "Bipolar disorder · Manic episodes",
-                href: "/clinical-evidence#manic-episodes",
-                text: "Greater reduction in manic symptoms than placebo and divalproex, and as add-on to lithium or valproate.",
-                n: 1 as const,
-                section: "5.1",
-              },
-              {
-                title: "Bipolar disorder · Recurrence prevention",
-                href: "/clinical-evidence#recurrence",
-                text: "Superior to placebo over 12 months; non-inferior to lithium (recurrence 30.0% vs 38.3%). Not superior as 18-month add-on to lithium or valproate.",
-                n: 1 as const,
-                section: "5.1",
-              },
-            ].map((row) => (
-              <div className="card evidence-card" key={row.title}>
-                <h3>{row.title}</h3>
-                <p>
-                  {row.text}
-                  <Cite n={row.n} section={row.section} />
-                </p>
-                <Link className="more-link" href={row.href}>
-                  Trials →
-                </Link>
-              </div>
-            ))}
-          </div>
-        </section>
-
         <section className="s" id="dosing-glance">
           <h2>Dosing at a glance</h2>
           <div className="g2">
@@ -342,6 +302,46 @@ export default function HomePage() {
             <Link className="more-link" href="/safety-monitoring#adverse-reactions">
               Adverse reactions →
             </Link>
+          </div>
+        </section>
+
+        <section className="s" id="evidence">
+          <h2>Clinical evidence at a glance</h2>
+          <div className="g3">
+            {[
+              {
+                title: "Schizophrenia",
+                href: "/clinical-evidence#schizophrenia",
+                text: "Significantly greater improvement in negative and positive symptoms in 2 of 2 placebo-controlled and 2 of 3 comparator-controlled trials.",
+                n: 1 as const,
+                section: "5.1",
+              },
+              {
+                title: "Bipolar disorder · Manic episodes",
+                href: "/clinical-evidence#manic-episodes",
+                text: "Greater reduction in manic symptoms than placebo and divalproex, and as add-on to lithium or valproate.",
+                n: 1 as const,
+                section: "5.1",
+              },
+              {
+                title: "Bipolar disorder · Recurrence prevention",
+                href: "/clinical-evidence#recurrence",
+                text: "Superior to placebo over 12 months; non-inferior to lithium (recurrence 30.0% vs 38.3%). Not superior as 18-month add-on to lithium or valproate.",
+                n: 1 as const,
+                section: "5.1",
+              },
+            ].map((row) => (
+              <div className="card evidence-card" key={row.title}>
+                <h3>{row.title}</h3>
+                <p>
+                  {row.text}
+                  <Cite n={row.n} section={row.section} />
+                </p>
+                <Link className="more-link" href={row.href}>
+                  Trials →
+                </Link>
+              </div>
+            ))}
           </div>
         </section>
 
