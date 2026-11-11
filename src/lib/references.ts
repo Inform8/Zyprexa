@@ -113,6 +113,49 @@ export const REFERENCES: Reference[] = [
   },
   {
     n: 8,
+    title: "S3-Leitlinie Schizophrenie (Living Guideline).",
+    authors: "Deutsche Gesellschaft für Psychiatrie und Psychotherapie, Psychosomatik und Nervenheilkunde e. V. (DGPPN).",
+    source: "AWMF Register Nr. 038-009. Version 4.0/4.1; 2025.",
+    year: 2025,
+    category: "guideline",
+    kind: "Clinical practice guideline",
+    topics: ["Guideline and formulary context"],
+    usedFor:
+      "German S3 recommendations on antipsychotic choice, clozapine intolerance alternatives and relapse prevention in schizophrenia.",
+    links: [
+      {
+        label: "AWMF register 038-009",
+        href: "https://register.awmf.org/de/leitlinien/detail/038-009",
+      },
+    ],
+  },
+  {
+    n: 9,
+    title: "Psychosis and schizophrenia in adults: prevention and management. Clinical guideline CG178.",
+    authors: "National Institute for Health and Care Excellence.",
+    source: "London: NICE; 2014.",
+    year: 2014,
+    category: "guideline",
+    kind: "Clinical practice guideline",
+    topics: ["Guideline and formulary context"],
+    usedFor: "NICE recommendations on antipsychotic choice, shared decision-making and treatment trials in adults.",
+    links: [{ label: "NICE CG178", href: "https://www.nice.org.uk/guidance/cg178" }],
+  },
+  {
+    n: 10,
+    title: "Bipolar disorder: assessment and management. Clinical guideline CG185.",
+    authors: "National Institute for Health and Care Excellence.",
+    source: "London: NICE; 2014.",
+    year: 2014,
+    category: "guideline",
+    kind: "Clinical practice guideline",
+    topics: ["Guideline and formulary context"],
+    usedFor:
+      "NICE recommendations on antipsychotics for mania and on lithium as first-line long-term treatment, with olanzapine among the alternatives.",
+    links: [{ label: "NICE CG185", href: "https://www.nice.org.uk/guidance/cg185" }],
+  },
+  {
+    n: 11,
     title:
       "World Psychiatric Association Pharmacopsychiatry Section statement on comparative effectiveness of antipsychotics in the treatment of schizophrenia.",
     authors: "Tandon R, Belmaker RH, Gattaz WF, et al.",
@@ -121,11 +164,11 @@ export const REFERENCES: Reference[] = [
     category: "guideline",
     kind: "Consensus statement",
     topics: ["Guideline and formulary context", "Clinical efficacy"],
-    usedFor: "Review of comparative efficacy and tolerability of antipsychotics.",
+    usedFor: "Source cited for a limitation discussion of the Beasley 1996 comparator dose.",
     links: [{ label: "doi:10.1016/j.schres.2007.11.033", href: "https://doi.org/10.1016/j.schres.2007.11.033" }],
   },
   {
-    n: 9,
+    n: 12,
     title:
       "The selection and use of essential medicines 2023: report of the WHO Expert Committee (including the 23rd WHO Model List of Essential Medicines).",
     authors: "World Health Organization.",
@@ -138,7 +181,7 @@ export const REFERENCES: Reference[] = [
     links: [],
   },
   {
-    n: 10,
+    n: 13,
     title: "Olanzapine versus placebo and haloperidol: acute phase results of the North American double-blind olanzapine trial.",
     authors: "Beasley CM Jr, Tollefson G, Tran P, et al.",
     source: "Neuropsychopharmacology. 1996;14(2):111–123.",
@@ -150,7 +193,7 @@ export const REFERENCES: Reference[] = [
     links: [{ label: "Publisher page", href: "https://www.nature.com/articles/1380403" }],
   },
   {
-    n: 11,
+    n: 14,
     title: "Olanzapine versus placebo in the treatment of acute mania.",
     authors: "Tohen M, Sanger TM, McElroy SL, et al.",
     source: "Am J Psychiatry. 1999;156(5):702–709.",
@@ -162,7 +205,7 @@ export const REFERENCES: Reference[] = [
     links: [{ label: "doi:10.1176/ajp.156.5.702", href: "https://doi.org/10.1176/ajp.156.5.702" }],
   },
   {
-    n: 12,
+    n: 15,
     title: "5-HT2 and D2 receptor occupancy of olanzapine in schizophrenia: a PET investigation.",
     authors: "Kapur S, Zipursky RB, Remington G, et al.",
     source: "Am J Psychiatry. 1998;155(7):921–928.",
@@ -174,7 +217,7 @@ export const REFERENCES: Reference[] = [
     links: [{ label: "doi:10.1176/ajp.155.7.921", href: "https://doi.org/10.1176/ajp.155.7.921" }],
   },
   {
-    n: 13,
+    n: 16,
     title: "ZYPREXA (olanzapine) Prescribing Information.",
     authors: "U.S. Food and Drug Administration.",
     source: "Silver Spring, MD: FDA; 2021.",
@@ -207,12 +250,15 @@ export const REF_TAGS: Record<number, Exclude<RefFilterId, "all">[]> = {
   5: ["disease", "mechanism"],
   6: ["guidelines"],
   7: ["guidelines"],
-  8: ["guidelines", "safety"],
+  8: ["guidelines"],
   9: ["guidelines"],
-  10: ["efficacy", "safety"],
-  11: ["efficacy", "safety"],
-  12: ["mechanism"],
-  13: ["mechanism", "safety", "prescribing"],
+  10: ["guidelines"],
+  11: ["guidelines", "safety"],
+  12: ["guidelines"],
+  13: ["efficacy", "safety"],
+  14: ["efficacy", "safety"],
+  15: ["mechanism"],
+  16: ["mechanism", "safety", "prescribing"],
 };
 
 export const ABBREVIATIONS: { term: string; definition: string }[] = [

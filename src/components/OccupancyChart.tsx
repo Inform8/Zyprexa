@@ -38,7 +38,7 @@ export function OccupancyChart() {
         </table>
         <p className="source-line" style={{ marginTop: 12 }}>
           Three patients per dose, at steady state.
-          <Cite n={12} />
+          <Cite n={15} />
         </p>
         <details style={{ marginTop: 12 }}>
           <summary>Study design and limitations</summary>
@@ -46,7 +46,7 @@ export function OccupancyChart() {
             Twelve patients with schizophrenia were randomly assigned to fixed daily doses of 5–20 mg. Striatal D2
             occupancy was measured with [11C]raclopride PET; baseline was estimated from age-corrected controls rather
             than each patient&apos;s own scan.
-            <Cite n={12} />
+            <Cite n={15} />
           </p>
           <p>Receptor occupancy does not by itself predict the clinical response of an individual patient.</p>
         </details>
@@ -65,7 +65,7 @@ export function OccupancyChart() {
         <figcaption className="source-line">
           Mean D2 occupancy by dose. 5-HT2 occupancy was above 90% at every dose from 5 to 20 mg/day (individual values
           about 91% to 100%). Doses above 20 mg/day reported in the paper are not shown.
-          <Cite n={12} />
+          <Cite n={15} />
         </figcaption>
       </figure>
     </div>

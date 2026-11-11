@@ -22,7 +22,7 @@ export default function HomePage() {
             <div className="brand">
               ZYPREXA<i>olanzapine · coated tablets</i>
             </div>
-            <h1 className="serif">Olanzapine for schizophrenia and bipolar mania</h1>
+            <h1 className="serif">Olanzapine for schizophrenia and bipolar disorder</h1>
             <p>
               ZYPREXA is indicated for the treatment of schizophrenia and of moderate to severe manic episodes. In
               patients whose manic episode has responded to olanzapine, it is also indicated for preventing recurrence
@@ -61,7 +61,7 @@ export default function HomePage() {
             <b>&gt; 90%</b>
             <p>
               5-HT2 receptor occupancy at every dose from 5 to 20 mg/day
-              <Cite n={12} />
+              <Cite n={15} />
             </p>
             <Link className="more-link" href="/mechanism-of-action#occupancy">
               Mechanism of action
@@ -92,8 +92,8 @@ export default function HomePage() {
               48.6% <small>vs 24.2%</small>
             </b>
             <p>
-              responders at 3 weeks in manic episodes, vs placebo
-              <Cite n={11} />
+              responders at 3 weeks in manic episodes, olanzapine vs placebo
+              <Cite n={14} />
             </p>
             <Link className="more-link" href="/clinical-evidence#tohen-1999">
               Clinical evidence
@@ -175,7 +175,7 @@ export default function HomePage() {
               <p style={{ margin: "0 0 14px", color: "#4a4570", fontSize: "14px", lineHeight: "1.55" }}>
                 Across the dose range of 5–20 mg/day, 5-HT2 occupancy was above 90%, while D2 occupancy rose with dose
                 to a mean of 76% at 20 mg/day.
-                <Cite n={12} />
+                <Cite n={15} />
               </p>
               <div style={{ marginTop: "auto" }}>
                 <Link className="more-link" href="/mechanism-of-action">
@@ -288,7 +288,7 @@ export default function HomePage() {
               </p>
             </div>
             <div className="card" style={{ padding: 22 }}>
-              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--pri)", margin: "0 0 8px" }}>Neuroleptic malignant syndrome</h3>
+              <h3 style={{ fontSize: "16.5px", fontWeight: 700, color: "var(--pri)", margin: "0 0 8px" }}>Neuroleptic malignant syndrome (NMS)</h3>
               <p style={{ margin: 0, color: "#4a4570", fontSize: "14px", lineHeight: "1.55" }}>
                 If signs occur, all antipsychotic medicines, including olanzapine, must be discontinued.
                 <Cite n={1} section="4.4" />
@@ -326,7 +326,7 @@ export default function HomePage() {
               {
                 title: "Bipolar disorder · Recurrence prevention",
                 href: "/clinical-evidence#recurrence",
-                text: "Superior to placebo over 12 months; non-inferior to lithium (recurrence 30.0% vs 38.3%). Not superior as 18-month add-on to lithium or valproate.",
+                text: "Superior to placebo over 12 months; non-inferior to lithium (recurrence 30.0% with olanzapine vs 38.3% with lithium). Not superior in delaying bipolar recurrence as 18-month add-on versus lithium or valproate alone.",
                 n: 1 as const,
                 section: "5.1",
               },

@@ -8,9 +8,9 @@ export function HBars({
   title?: string;
 }) {
   return (
-    <figure className="card chart-card" style={{ padding: 18, height: "100%", display: "flex", flexDirection: "column" }}>
+    <figure className="card chart-card">
       {title ? <h3 className="chart-title">{title}</h3> : null}
-      <div style={{ flex: "1 1 auto" }}>
+      <div className="chart-card__body">
         {rows.map((row) => (
           <div className="hbar-row" key={row.label}>
             <span>{row.label}</span>
@@ -21,7 +21,7 @@ export function HBars({
           </div>
         ))}
       </div>
-      {caption ? <figcaption className="source-line" style={{ marginTop: "auto", paddingTop: 10 }}>{caption}</figcaption> : null}
+      {caption ? <figcaption className="source-line chart-card__caption">{caption}</figcaption> : null}
     </figure>
   );
 }
@@ -38,23 +38,23 @@ export function VBars({
   max: number;
 }) {
   return (
-    <figure className="card chart-card" style={{ padding: 18, height: "100%", display: "flex", flexDirection: "column" }}>
+    <figure className="card chart-card">
       {title ? <h3 className="chart-title">{title}</h3> : null}
-      <div className="vbars-wrap">
+      <div className="vbars-wrap chart-card__body">
         <div className="vbars" aria-hidden="true">
           {rows.map((row) => (
             <div className="vbar" key={row.label}>
               <strong>{row.display}</strong>
               <i
                 className={row.tone === "soft" ? "soft" : undefined}
-                style={{ height: `${Math.max(6, (row.value / max) * 160)}px` }}
+                style={{ height: `${Math.max(6, (row.value / max) * 140)}px` }}
               />
               <span>{row.label}</span>
             </div>
           ))}
         </div>
       </div>
-      {caption ? <figcaption className="source-line" style={{ marginTop: "auto", paddingTop: 10 }}>{caption}</figcaption> : null}
+      {caption ? <figcaption className="source-line chart-card__caption">{caption}</figcaption> : null}
     </figure>
   );
 }

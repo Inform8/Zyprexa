@@ -15,6 +15,7 @@ export const SITE_PAGES: PageInfo[] = [
   { name: "Dosing", href: "/dosing-administration" },
   { name: "Safety & monitoring", href: "/safety-monitoring" },
   { name: "Clinical evidence", href: "/clinical-evidence" },
+  { name: "Clinical guidelines", href: "/clinical-guidelines" },
   { name: "References", href: "/references" },
 ];
 

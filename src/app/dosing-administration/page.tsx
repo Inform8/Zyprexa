@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 const packs = [
   {
     eyebrow: "This page",
-    title: "ZYPREXA coated tablets (oral olanzapine)",
-    text: "All dosing and safety content below refers to the oral formulation.",
+    title: "ZYPREXA coated tablets",
+    text: "All dosing and safety content below refers to ZYPREXA coated tablets.",
     image: "/assets/products/coated-tablets.png",
     alt: "ZYPREXA coated tablet packs, 2.5 mg to 20 mg",
   },
@@ -88,11 +88,11 @@ export default function DosingPage() {
               alt="ZYPREXA Velotab orodispersible tablets, 5 mg to 20 mg"
             />
             <div>
-              <p className="eb">Separate oral formulation</p>
-              <h3>ZYPREXA Velotab orodispersible tablets</h3>
+              <p className="eb">Separate prescribing information</p>
+              <h3>ZYPREXA VELOTAB orodispersible tablets</h3>
               <p>
                 Orodispersible tablets are a separate oral presentation. Dosing and safety on this page refer to ZYPREXA
-                coated tablets. Confirm the Velotab product information before prescribing that formulation.
+                coated tablets. Confirm the VELOTAB product information before prescribing that formulation.
               </p>
             </div>
           </article>
@@ -102,7 +102,7 @@ export default function DosingPage() {
           <h2>Starting doses and dose range</h2>
           <div>
               <p>
-                Recommended starting doses for oral olanzapine in adults.
+                Recommended starting doses for ZYPREXA coated tablets in adults.
                 <Cite n={1} section="4.2" />
               </p>
               <div className="card tw">

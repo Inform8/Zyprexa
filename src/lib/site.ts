@@ -84,7 +84,15 @@ export const NAV: NavSection[] = [
       { label: "Schizophrenia", href: "/clinical-evidence#schizophrenia" },
       { label: "Bipolar disorder: manic episodes", href: "/clinical-evidence#manic-episodes" },
       { label: "Bipolar disorder: recurrence prevention", href: "/clinical-evidence#recurrence" },
-      { label: "Guidelines", href: "/clinical-evidence#guidelines" },
+    ],
+  },
+  {
+    label: "Clinical guidelines",
+    href: "/clinical-guidelines",
+    links: [
+      { label: "Schizophrenia", href: "/clinical-guidelines#schizophrenia" },
+      { label: "Bipolar disorder", href: "/clinical-guidelines#bipolar" },
+      { label: "WHO Essential Medicines", href: "/clinical-guidelines#who" },
     ],
   },
   {
@@ -110,7 +118,7 @@ export const FOOTER_GROUPS: { title: string; links: NavLink[] }[] = [
     title: "Evidence",
     links: [
       { label: "Clinical evidence", href: "/clinical-evidence" },
-      { label: "Schizophrenia trials", href: "/clinical-evidence#schizophrenia" },
+      { label: "Clinical guidelines", href: "/clinical-guidelines" },
       { label: "Mechanism of action", href: "/mechanism-of-action" },
     ],
   },

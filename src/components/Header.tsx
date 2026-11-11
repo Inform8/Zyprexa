@@ -75,7 +75,15 @@ export const NAV_ITEMS: NavItem[] = [
       { id: "schizophrenia", title: "Schizophrenia" },
       { id: "manic-episodes", title: "Bipolar disorder: manic episodes" },
       { id: "recurrence", title: "Bipolar disorder: recurrence prevention" },
-      { id: "guidelines", title: "Guidelines" },
+    ],
+  },
+  {
+    name: "Clinical guidelines",
+    href: "/clinical-guidelines",
+    secs: [
+      { id: "schizophrenia", title: "Schizophrenia" },
+      { id: "bipolar", title: "Bipolar disorder" },
+      { id: "who", title: "WHO Essential Medicines" },
     ],
   },
   {

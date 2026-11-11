@@ -9,11 +9,15 @@ export const metadata: Metadata = {
   description: "Contraindications, warnings, monitoring and adverse reactions for ZYPREXA coated tablets.",
 };
 
-const reactions = [
+const veryCommonReactions = [
   "Somnolence",
   "Weight gain",
-  "Eosinophilia",
+  "Orthostatic hypotension",
   "Elevated prolactin",
+];
+
+const commonReactions = [
+  "Eosinophilia",
   "Elevated cholesterol, glucose and triglyceride levels",
   "Glucosuria",
   "Increased appetite",
@@ -23,7 +27,6 @@ const reactions = [
   "Leukopenia",
   "Neutropenia",
   "Dyskinesia",
-  "Orthostatic hypotension",
   "Anticholinergic effects",
   "Transient asymptomatic elevations of hepatic aminotransferases",
   "Rash",
@@ -79,7 +82,7 @@ export default function SafetyPage() {
           <div className="alert">
             <h3>Contraindicated</h3>
             <p>
-              Oral olanzapine is contraindicated in patients with:
+              ZYPREXA coated tablets are contraindicated in patients with:
               <Cite n={1} section="4.3" />
             </p>
             <ul>
@@ -143,9 +146,9 @@ export default function SafetyPage() {
                 <p>Sedation and orthostatic hypotension should be considered when assessing falls risk, concomitant medication and individual tolerability.</p>
               </details>
               <details id="nms">
-                <summary>Neuroleptic malignant syndrome</summary>
+                <summary>Neuroleptic malignant syndrome (NMS)</summary>
                 <p>
-                  Neuroleptic malignant syndrome is a potentially life-threatening condition associated with
+                  Neuroleptic malignant syndrome (NMS) is a potentially life-threatening condition associated with
                   antipsychotic medicines. Clinical manifestations include hyperpyrexia, muscle rigidity, altered
                   mental status and autonomic instability.
                   <Cite n={1} section="4.4" />
@@ -428,7 +431,7 @@ export default function SafetyPage() {
                 <tr>
                   <td>Direct and indirect dopamine agonists</td>
                   <td>Olanzapine may antagonise their effects</td>
-                  <td>Anti-Parkinsonian medicines not recommended in patients with Parkinson&apos;s disease and dementia</td>
+                  <td>Concomitant use of olanzapine with anti-Parkinsonian medicines is not recommended in patients with Parkinson&apos;s disease and dementia</td>
                 </tr>
                 <tr>
                   <td>Medicines that increase QTc</td>
@@ -493,7 +496,14 @@ export default function SafetyPage() {
                 <div className="kpi">
                   <b>Very common</b>
                   <span>
-                    somnolence and weight gain (≥ 1 in 10 patients)
+                    more than 1 in 10: somnolence, weight gain, orthostatic hypotension, elevated prolactin
+                    <Cite n={1} section="4.8" />
+                  </span>
+                </div>
+                <div className="kpi">
+                  <b>Common</b>
+                  <span>
+                    1 to 10 in 100: 22 further reactions listed below
                     <Cite n={1} section="4.8" />
                   </span>
                 </div>
@@ -503,11 +513,11 @@ export default function SafetyPage() {
 
           <article className="reaction-card">
             <div className="reaction-card__head">
-              <h3>All adverse reactions reported in ≥ 1% of adults in clinical trials</h3>
-              <span className="reaction-badge">26 reported · Clinical trials</span>
+              <h3>Very common, more than 1 in 10</h3>
+              <span className="reaction-badge">4 reactions · Clinical trials</span>
             </div>
-            <ul className="reaction-chips" aria-label="Adverse reactions reported in at least 1% of adults">
-              {reactions.map((item) => (
+            <ul className="reaction-chips" aria-label="Very common adverse reactions, more than 1 in 10 adults">
+              {veryCommonReactions.map((item) => (
                 <li className="reaction-chip" key={item}>
                   {item}
                 </li>
@@ -515,6 +525,24 @@ export default function SafetyPage() {
             </ul>
             <p className="source-line" style={{ marginTop: 14 }}>
               Frequencies as listed for adults in clinical trials.
+              <Cite n={1} section="4.8" />
+            </p>
+          </article>
+
+          <article className="reaction-card" style={{ marginTop: 16 }}>
+            <div className="reaction-card__head">
+              <h3>Common, 1 to 10 in 100</h3>
+              <span className="reaction-badge">22 reactions · Clinical trials</span>
+            </div>
+            <ul className="reaction-chips" aria-label="Common adverse reactions, 1 to 10 in 100 adults">
+              {commonReactions.map((item) => (
+                <li className="reaction-chip" key={item}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+            <p className="source-line" style={{ marginTop: 14 }}>
+              Remaining reactions reported in ≥ 1% of adults in clinical trials.
               <Cite n={1} section="4.8" />
             </p>
           </article>

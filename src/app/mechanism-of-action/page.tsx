@@ -54,7 +54,7 @@ const families = [
     body: (
       <p>
         Relevant to effects such as somnolence and increased appetite.
-        <Cite n={13} section="12.2" />
+        <Cite n={16} section="12.2" />
       </p>
     ),
   },
@@ -66,7 +66,7 @@ const families = [
     body: (
       <p>
         Relevant to anticholinergic adverse effects.
-        <Cite n={13} section="12.2" />
+        <Cite n={16} section="12.2" />
       </p>
     ),
   },
@@ -78,7 +78,7 @@ const families = [
     body: (
       <p>
         Relevant to orthostatic hypotension and dizziness.
-        <Cite n={13} section="12.2" />
+        <Cite n={16} section="12.2" />
       </p>
     ),
   },
@@ -158,13 +158,13 @@ export default function MechanismPage() {
           <p>
             Olanzapine has greater affinity for serotonin 5-HT2 than dopamine D2 receptors. In a PET study in patients
             with schizophrenia, 5-HT2 occupancy was above 90% at every dose, while D2 occupancy rose with dose.
-            <Cite n={[1, 12]} />
+            <Cite n={[1, 15]} />
           </p>
           <OccupancyChart />
           <p className="source-line" style={{ marginTop: 14 }}>
             Individual occupancy in 12 patients; numbers show mean D2 occupancy per dose. Redrawn from Kapur et al.
             1998, Table 1. Doses above 20 mg/day reported in the paper are not shown.
-            <Cite n={12} />
+            <Cite n={15} />
           </p>
         </section>
 
