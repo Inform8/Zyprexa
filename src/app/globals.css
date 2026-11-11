@@ -1254,6 +1254,57 @@ svg.i {
   gap: 28px;
   align-items: center;
   box-shadow: 0 14px 34px rgba(100, 30, 131, 0.07);
+  margin-top: 36px;
+  margin-bottom: 48px;
+}
+
+/* Keep clear vertical rhythm between stacked page sections */
+.w > section.s + section.s,
+.w > section.s + section.pi,
+.w > section.pi + section.s {
+  margin-top: 36px;
+}
+
+#adverse-reactions > p {
+  width: 100%;
+  max-width: none;
+  margin: 0 0 10px;
+}
+
+#adverse-reactions > .more-link {
+  display: inline-flex;
+  margin-bottom: 18px;
+}
+
+#adverse-reactions .ar-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin: 0 0 8px;
+  width: 100%;
+}
+
+#adverse-reactions .ar-kpis .kpi {
+  min-width: 0;
+  height: 100%;
+}
+
+#adverse-reactions .reaction-card {
+  margin-top: 24px;
+}
+
+#adverse-reactions .reaction-card + .reaction-card {
+  margin-top: 20px;
+}
+
+@media (max-width: 900px) {
+  #adverse-reactions .ar-kpis {
+    grid-template-columns: 1fr;
+  }
+}
+
+#reporting {
+  margin-bottom: 0;
 }
 
 .pi .eb {
@@ -1628,6 +1679,7 @@ caption {
 th, td {
   padding: 11px 16px;
   text-align: left;
+  text-align-last: left;
   border-bottom: 1px solid var(--line);
   vertical-align: top;
 }
@@ -1637,6 +1689,51 @@ th {
   color: var(--pri);
   font-weight: 600;
   white-space: nowrap;
+}
+
+/* Starting-dose tables: keep both columns left-aligned and avoid the dose
+   column drifting to the far right of a full-width table. */
+#dosing .card.tw > table,
+#dosing-glance .card.tw > table {
+  table-layout: fixed;
+  width: 100%;
+}
+
+#dosing .card.tw > table th,
+#dosing .card.tw > table td,
+#dosing-glance .card.tw > table th,
+#dosing-glance .card.tw > table td {
+  text-align: left !important;
+  text-align-last: left !important;
+}
+
+#dosing .card.tw > table th:first-child,
+#dosing .card.tw > table td:first-child,
+#dosing-glance .card.tw > table th:first-child,
+#dosing-glance .card.tw > table td:first-child {
+  width: 62%;
+}
+
+#dosing .card.tw > table th:last-child,
+#dosing .card.tw > table td:last-child,
+#dosing-glance .card.tw > table th:last-child,
+#dosing-glance .card.tw > table td:last-child {
+  width: 38%;
+  white-space: normal;
+}
+
+#dosing .card.tw > table th:last-child,
+#dosing-glance .card.tw > table th:last-child {
+  white-space: nowrap;
+}
+
+#dosing > div > p,
+#dosing h3,
+#dosing details,
+#dosing details summary,
+#dosing details p {
+  text-align: left;
+  text-align-last: left;
 }
 
 .card.tw > .source-line,

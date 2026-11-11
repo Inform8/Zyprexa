@@ -472,42 +472,36 @@ export default function SafetyPage() {
 
         <section className="s" id="adverse-reactions">
           <h2>Adverse reactions</h2>
-          <div className="g2">
-            <div>
-              <p>
-                Frequently reported adverse reactions include somnolence, weight gain, increased appetite, dizziness,
-                orthostatic hypotension and changes in glucose and lipid parameters. The full prescribing information
-                gives the complete profile and frequency categories.
+          <p>
+            Frequently reported adverse reactions include somnolence, weight gain, increased appetite, dizziness,
+            orthostatic hypotension and changes in glucose and lipid parameters. The full prescribing information
+            gives the complete profile and frequency categories.
+            <Cite n={1} section="4.8" />
+          </p>
+          <a className="more-link" href={EXTERNAL.smpcPdf} target="_blank" rel="noopener noreferrer">
+            Full adverse-reaction table →
+          </a>
+          <div className="kpis ar-kpis">
+            <div className="kpi">
+              <b>~30%</b>
+              <span>
+                prolactin above normal in trials up to 12 weeks (normal baseline); generally mild
                 <Cite n={1} section="4.8" />
-              </p>
-              <a className="more-link" href={EXTERNAL.smpcPdf} target="_blank" rel="noopener noreferrer">
-                Full adverse-reaction table →
-              </a>
+              </span>
             </div>
-            <div>
-              <div className="kpis">
-                <div className="kpi">
-                  <b>~30%</b>
-                  <span>
-                    prolactin above normal in trials up to 12 weeks (normal baseline); generally mild
-                    <Cite n={1} section="4.8" />
-                  </span>
-                </div>
-                <div className="kpi">
-                  <b>Very common</b>
-                  <span>
-                    more than 1 in 10: somnolence, weight gain, orthostatic hypotension, elevated prolactin
-                    <Cite n={1} section="4.8" />
-                  </span>
-                </div>
-                <div className="kpi">
-                  <b>Common</b>
-                  <span>
-                    1 to 10 in 100: 22 further reactions listed below
-                    <Cite n={1} section="4.8" />
-                  </span>
-                </div>
-              </div>
+            <div className="kpi">
+              <b>Very common</b>
+              <span>
+                more than 1 in 10: somnolence, weight gain, orthostatic hypotension, elevated prolactin
+                <Cite n={1} section="4.8" />
+              </span>
+            </div>
+            <div className="kpi">
+              <b>Common</b>
+              <span>
+                1 to 10 in 100: 22 further reactions listed below
+                <Cite n={1} section="4.8" />
+              </span>
             </div>
           </div>
 

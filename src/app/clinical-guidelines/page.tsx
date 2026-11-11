@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Cite } from "@/components/Cite";
 
 export const metadata: Metadata = {
@@ -164,17 +163,6 @@ export default function ClinicalGuidelinesPage() {
               </li>
             </ul>
           </article>
-        </section>
-
-        <section className="s" aria-label="Related pages">
-          <div className="row" style={{ gap: 20 }}>
-            <Link className="more-link" href="/clinical-evidence">
-              Clinical evidence →
-            </Link>
-            <Link className="more-link" href="/references">
-              All references →
-            </Link>
-          </div>
         </section>
       </div>
     </main>
