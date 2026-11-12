@@ -41,7 +41,7 @@ export default function ConditionsOfUsePage() {
               information for the market in which the medicine is prescribed.
             </p>
             <p>
-              ZYPREXA® is a registered trademark of CHEPLAPHARM. Prepared October 2026. Job code to be assigned for
+              ZYPREXA® is a registered trademark of CHEPLAPHARM. Prepared November 2026. Job code to be assigned for
               the target market.
             </p>
             <p>
