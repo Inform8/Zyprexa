@@ -46,24 +46,6 @@ export const NAV_ITEMS: NavItem[] = [
     ],
   },
   {
-    name: "Clinical evidence",
-    href: "/clinical-evidence",
-    secs: [
-      { id: "schizophrenia", title: "Schizophrenia" },
-      { id: "manic-episodes", title: "Bipolar disorder: manic episodes" },
-      { id: "recurrence", title: "Bipolar disorder: recurrence prevention" },
-    ],
-  },
-  {
-    name: "Clinical guidelines",
-    href: "/clinical-guidelines",
-    secs: [
-      { id: "schizophrenia", title: "Schizophrenia" },
-      { id: "bipolar", title: "Bipolar disorder" },
-      { id: "who", title: "WHO Essential Medicines" },
-    ],
-  },
-  {
     name: "Dosing",
     href: "/dosing-administration",
     secs: [
@@ -84,6 +66,24 @@ export const NAV_ITEMS: NavItem[] = [
       { id: "pregnancy", title: "Pregnancy" },
       { id: "adverse-reactions", title: "Adverse reactions" },
       { id: "reporting", title: "Reporting" },
+    ],
+  },
+  {
+    name: "Clinical evidence",
+    href: "/clinical-evidence",
+    secs: [
+      { id: "schizophrenia", title: "Schizophrenia" },
+      { id: "manic-episodes", title: "Bipolar disorder: manic episodes" },
+      { id: "recurrence", title: "Bipolar disorder: recurrence prevention" },
+    ],
+  },
+  {
+    name: "Clinical guidelines",
+    href: "/clinical-guidelines",
+    secs: [
+      { id: "schizophrenia", title: "Schizophrenia" },
+      { id: "bipolar", title: "Bipolar disorder" },
+      { id: "who", title: "WHO Essential Medicines" },
     ],
   },
   {
