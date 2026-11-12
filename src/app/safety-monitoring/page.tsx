@@ -9,38 +9,6 @@ export const metadata: Metadata = {
   description: "Contraindications, warnings, monitoring and adverse reactions for ZYPREXA coated tablets.",
 };
 
-const veryCommonReactions = [
-  "Somnolence",
-  "Weight gain",
-  "Orthostatic hypotension",
-  "Elevated prolactin",
-];
-
-const commonReactions = [
-  "Eosinophilia",
-  "Elevated cholesterol, glucose and triglyceride levels",
-  "Glucosuria",
-  "Increased appetite",
-  "Dizziness",
-  "Akathisia",
-  "Parkinsonism",
-  "Leukopenia",
-  "Neutropenia",
-  "Dyskinesia",
-  "Anticholinergic effects",
-  "Transient asymptomatic elevations of hepatic aminotransferases",
-  "Rash",
-  "Asthenia",
-  "Fatigue",
-  "Pyrexia",
-  "Arthralgia",
-  "Increased alkaline phosphatase",
-  "High gamma glutamyltransferase",
-  "High uric acid",
-  "High creatine phosphokinase",
-  "Oedema",
-];
-
 export default function SafetyPage() {
   return (
     <main id="app">
@@ -499,47 +467,11 @@ export default function SafetyPage() {
             <div className="kpi">
               <b>Common</b>
               <span>
-                1 to 10 in 100: 22 further reactions listed below
+                1 to 10 in 100: see full prescribing information for the complete list
                 <Cite n={1} section="4.8" />
               </span>
             </div>
           </div>
-
-          <article className="reaction-card">
-            <div className="reaction-card__head">
-              <h3>Very common, more than 1 in 10</h3>
-              <span className="reaction-badge">4 reactions · Clinical trials</span>
-            </div>
-            <ul className="reaction-chips" aria-label="Very common adverse reactions, more than 1 in 10 adults">
-              {veryCommonReactions.map((item) => (
-                <li className="reaction-chip" key={item}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <p className="source-line" style={{ marginTop: 14 }}>
-              Frequencies as listed for adults in clinical trials.
-              <Cite n={1} section="4.8" />
-            </p>
-          </article>
-
-          <article className="reaction-card" style={{ marginTop: 16 }}>
-            <div className="reaction-card__head">
-              <h3>Common, 1 to 10 in 100</h3>
-              <span className="reaction-badge">22 reactions · Clinical trials</span>
-            </div>
-            <ul className="reaction-chips" aria-label="Common adverse reactions, 1 to 10 in 100 adults">
-              {commonReactions.map((item) => (
-                <li className="reaction-chip" key={item}>
-                  {item}
-                </li>
-              ))}
-            </ul>
-            <p className="source-line" style={{ marginTop: 14 }}>
-              Remaining reactions reported in ≥ 1% of adults in clinical trials.
-              <Cite n={1} section="4.8" />
-            </p>
-          </article>
         </section>
 
         <section className="s" id="reporting">

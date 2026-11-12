@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import { Cite } from "@/components/Cite";
 import { HBars, VBars } from "@/components/Charts";
 import { HashPanel, HashTabBar, HashTabsProvider } from "@/components/HashTabs";
@@ -204,7 +203,7 @@ export default function ClinicalEvidencePage() {
                 </div>
                 <div className="kpi">
                   <b>
-                    −10.3 <small>vs −4.9 points</small>
+                    −10.3 points <small>vs −4.9 points</small>
                   </b>
                   <span>
                     mean change in Young Mania Rating Scale (YMRS) total score at 3 weeks, olanzapine vs placebo (p =
@@ -431,24 +430,6 @@ export default function ClinicalEvidencePage() {
           </div>
         </HashPanel>
       </HashTabsProvider>
-
-      <div className="w">
-        <section className="s" id="reading-evidence">
-          <h2>Reading this evidence</h2>
-          <p>
-            Consider each result in the context of its population, comparator, endpoint and duration. Individual study
-            results do not predict the response of every patient.
-          </p>
-          <div className="row" style={{ marginTop: 12, gap: 20 }}>
-            <Link className="more-link" href="/clinical-guidelines">
-              Clinical guidelines →
-            </Link>
-            <Link className="more-link" href="/references">
-              All references →
-            </Link>
-          </div>
-        </section>
-      </div>
     </main>
   );
 }
