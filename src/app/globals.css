@@ -770,15 +770,13 @@ header.site-header.is-hidden {
 .hero .row,
 .hero-tabs {
   display: flex;
-  flex-wrap: nowrap;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 10px;
   align-items: center;
-  margin-top: 22px;
+  margin-top: 16px;
+  padding: 8px 4px;
   max-width: 100%;
-  overflow-x: auto;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
-  -webkit-overflow-scrolling: touch;
+  overflow: visible;
 }
 
 .hero .row::-webkit-scrollbar,
@@ -867,9 +865,9 @@ header.site-header.is-hidden {
   .hero-tabs {
     display: flex;
     flex-wrap: wrap;
-    margin-top: 18px;
+    margin-top: 16px;
     gap: 8px;
-    padding-bottom: 4px;
+    padding: 8px 4px;
     overflow: visible;
   }
 

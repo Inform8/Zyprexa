@@ -14,9 +14,6 @@ export default function CountryHero() {
             <a className="btn" href="#country-directory">
               Select country
             </a>
-            <a className="btn g" href="#legend-notes">
-              Legend &amp; notes
-            </a>
             <a className="btn g" href="#reporting">
               Reporting side effects
             </a>
