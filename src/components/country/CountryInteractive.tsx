@@ -68,135 +68,138 @@ export default function CountryInteractive() {
             Approved Market:
           </label>
 
-          <div className="country-dropdown-wrapper">
-            <button
-              id="country-selector-btn"
-              type="button"
-              onClick={() => setIsOpen(!isOpen)}
-              className={`country-dropdown-btn ${isOpen ? "is-open" : ""}`}
-              aria-expanded={isOpen}
-              aria-haspopup="listbox"
-              aria-label="Select market"
-            >
-              <div className="country-dropdown-btn-label">
-                {selectedCountry ? (
-                  <>
-                    <span className="country-dot" aria-hidden="true">
-                      {selectedCountry.sourceBadge}
-                    </span>
-                    <span className="country-btn-text">
-                      <strong>{selectedCountry.country}</strong>
-                      <span className="country-pill-badge">{selectedCountry.documentType}</span>
-                    </span>
-                  </>
-                ) : (
-                  <span className="country-placeholder-text">
-                    -- Select your country from the list --
-                  </span>
-                )}
-              </div>
-
-              <svg
-                className={`country-chevron ${isOpen ? "rotate" : ""}`}
-                width="14"
-                height="14"
-                viewBox="0 0 24 24"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                aria-hidden="true"
+          <div className="country-selector-controls">
+            <div className="country-dropdown-wrapper">
+              <button
+                id="country-selector-btn"
+                type="button"
+                onClick={() => setIsOpen(!isOpen)}
+                className={`country-dropdown-btn ${isOpen ? "is-open" : ""}`}
+                aria-expanded={isOpen}
+                aria-haspopup="listbox"
+                aria-label="Select market"
               >
-                <polyline points="6 9 12 15 18 9" />
-              </svg>
-            </button>
-
-            {/* Popover Dropdown Menu */}
-            {isOpen && (
-              <div className="country-popover" role="dialog" aria-label="Country selection list">
-                <div className="country-popover-search">
-                  <svg
-                    width="14"
-                    height="14"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="var(--mut)"
-                    strokeWidth="2"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    aria-hidden="true"
-                  >
-                    <circle cx="11" cy="11" r="8" />
-                    <line x1="21" y1="21" x2="16.65" y2="16.65" />
-                  </svg>
-                  <input
-                    type="text"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Search 30 countries..."
-                    autoFocus
-                    className="country-search-input"
-                    aria-label="Search countries"
-                  />
-                  {searchQuery && (
-                    <button
-                      type="button"
-                      onClick={() => setSearchQuery("")}
-                      className="country-search-clear"
-                      aria-label="Clear search"
-                    >
-                      ✕
-                    </button>
+                <div className="country-dropdown-btn-label">
+                  {selectedCountry ? (
+                    <>
+                      <span className="country-dot" aria-hidden="true">
+                        {selectedCountry.sourceBadge}
+                      </span>
+                      <span className="country-btn-text">
+                        <strong>{selectedCountry.country}</strong>
+                        <span className="country-pill-badge">{selectedCountry.documentType}</span>
+                      </span>
+                    </>
+                  ) : (
+                    <span className="country-placeholder-text">
+                      -- Select your country from the list --
+                    </span>
                   )}
                 </div>
 
-                <ul className="country-options-list" role="listbox">
-                  {filteredOptions.length > 0 ? (
-                    filteredOptions.map((c) => {
-                      const isSelected = selectedCountryId === c.id;
-                      return (
-                        <li key={c.id} role="option" aria-selected={isSelected}>
-                          <button
-                            type="button"
-                            onClick={() => handleSelectCountry(c.id)}
-                            className={`country-option-item ${isSelected ? "is-selected" : ""}`}
-                          >
-                            <div className="country-option-left">
-                              <span className="country-source-icon" aria-hidden="true">
-                                {c.sourceBadge}
-                              </span>
-                              <span className="country-option-name">{c.country}</span>
-                            </div>
-                            <div className="country-option-right">
-                              <span className="country-option-doc">{c.documentType}</span>
-                              {isSelected && <span className="country-checkmark">✓</span>}
-                            </div>
-                          </button>
-                        </li>
-                      );
-                    })
-                  ) : (
-                    <li className="country-no-results">
-                      No country found matching &ldquo;{searchQuery}&rdquo;
-                    </li>
-                  )}
-                </ul>
-              </div>
+                <svg
+                  className={`country-chevron ${isOpen ? "rotate" : ""}`}
+                  width="14"
+                  height="14"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  aria-hidden="true"
+                >
+                  <polyline points="6 9 12 15 18 9" />
+                </svg>
+              </button>
+
+              {/* Popover Dropdown Menu */}
+              {isOpen && (
+                <div className="country-popover" role="dialog" aria-label="Country selection list">
+                  <div className="country-popover-search">
+                    <svg
+                      width="14"
+                      height="14"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="var(--mut)"
+                      strokeWidth="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      aria-hidden="true"
+                    >
+                      <circle cx="11" cy="11" r="8" />
+                      <line x1="21" y1="21" x2="16.65" y2="16.65" />
+                    </svg>
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => setSearchQuery(e.target.value)}
+                      placeholder="Search 30 countries..."
+                      autoFocus
+                      className="country-search-input"
+                      aria-label="Search countries"
+                    >
+                    </input>
+                    {searchQuery && (
+                      <button
+                        type="button"
+                        onClick={() => setSearchQuery("")}
+                        className="country-search-clear"
+                        aria-label="Clear search"
+                      >
+                        ✕
+                      </button>
+                    )}
+                  </div>
+
+                  <ul className="country-options-list" role="listbox">
+                    {filteredOptions.length > 0 ? (
+                      filteredOptions.map((c) => {
+                        const isSelected = selectedCountryId === c.id;
+                        return (
+                          <li key={c.id} role="option" aria-selected={isSelected}>
+                            <button
+                              type="button"
+                              onClick={() => handleSelectCountry(c.id)}
+                              className={`country-option-item ${isSelected ? "is-selected" : ""}`}
+                            >
+                              <div className="country-option-left">
+                                <span className="country-source-icon" aria-hidden="true">
+                                  {c.sourceBadge}
+                                </span>
+                                <span className="country-option-name">{c.country}</span>
+                              </div>
+                              <div className="country-option-right">
+                                <span className="country-option-doc">{c.documentType}</span>
+                                {isSelected && <span className="country-checkmark">✓</span>}
+                              </div>
+                            </button>
+                          </li>
+                        );
+                      })
+                    ) : (
+                      <li className="country-no-results">
+                        No country found matching &ldquo;{searchQuery}&rdquo;
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              )}
+            </div>
+
+            {/* Clear Button (only shown when a country is selected) */}
+            {selectedCountry && (
+              <button
+                type="button"
+                onClick={handleClear}
+                className="country-clear-btn"
+                aria-label="Clear country selection"
+              >
+                ✕ Clear
+              </button>
             )}
           </div>
-
-          {/* Clear Button (only shown when a country is selected) */}
-          {selectedCountry && (
-            <button
-              type="button"
-              onClick={handleClear}
-              className="country-clear-btn"
-              aria-label="Clear country selection"
-            >
-              ✕ Clear
-            </button>
-          )}
         </div>
       </div>
 
@@ -325,6 +328,94 @@ export default function CountryInteractive() {
               </tr>
             </tbody>
           </table>
+
+          {/* Mobile Card View (optimized for screens <= 768px) */}
+          <div className="country-mobile-card">
+            <div className="country-mobile-head">
+              <div className="country-mobile-title-wrap">
+                <span className="country-source-badge" aria-hidden="true">
+                  {selectedCountry.sourceBadge}
+                </span>
+                <div>
+                  <h3 className="country-mobile-country-name">{selectedCountry.country}</h3>
+                  <span className="country-doc-type-label">{selectedCountry.documentType}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="country-mobile-section">
+              <span className="country-mobile-label">Marketing Authorisation Holder</span>
+              <div className="country-mobile-val">
+                <strong className="country-mah-title">{selectedCountry.mah}</strong>
+                <span className="country-mah-addr">{selectedCountry.mahAddress}</span>
+              </div>
+            </div>
+
+            <div className="country-mobile-section">
+              <span className="country-mobile-label">Indication Summary</span>
+              <div className="country-mobile-val country-table-indication-text">
+                {selectedCountry.indication.split("\n").map((line, i) => (
+                  <p key={i}>{line}</p>
+                ))}
+                {selectedCountry.hasSwissFootnote && (
+                  <p className="country-footnote-note">
+                    ** Verbatim text from locally approved Fachinformation
+                  </p>
+                )}
+              </div>
+            </div>
+
+            <div className="country-mobile-section">
+              <span className="country-mobile-label">Product Information Link*</span>
+              <div className="country-mobile-val">
+                <div className="country-table-links-list">
+                  {selectedCountry.links.map((link) => (
+                    <a
+                      key={link.url}
+                      href={link.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="country-table-link-btn"
+                      aria-label={`View ${link.label} for ${selectedCountry.country} (opens in new tab)`}
+                    >
+                      <span>{link.label}</span>
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <div className="country-mobile-section">
+              <span className="country-mobile-label">Adverse Event Reporting</span>
+              <div className="country-mobile-val">
+                <div className="country-table-ae-list">
+                  {selectedCountry.aeEmail && (
+                    <div className="country-table-ae-item">
+                      <span className="country-ae-prefix">E:</span>
+                      <a
+                        href={`mailto:${selectedCountry.aeEmail}`}
+                        className="country-ae-link"
+                      >
+                        {selectedCountry.aeEmail}
+                      </a>
+                    </div>
+                  )}
+                  {selectedCountry.aePhone && (
+                    <div className="country-table-ae-item">
+                      <span className="country-ae-prefix">T:</span>
+                      <a
+                        href={`tel:${selectedCountry.aePhone}`}
+                        className="country-ae-link"
+                      >
+                        {selectedCountry.aePhone}
+                      </a>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       )}
 
