@@ -10,28 +10,18 @@ export default function LegendAndNotes() {
           <span className="country-legend-badge" aria-hidden="true">
             🟢
           </span>
-          <div>
+          <span className="country-legend-text">
             <strong>EU SmPC in English and official EU languages</strong>
-            <p>
-              Centralised marketing authorisation granted by the European Commission, supervised by
-              the European Medicines Agency (EMA). Applicable across EU/EEA Member States in their
-              respective official languages.
-            </p>
-          </div>
+          </span>
         </div>
 
         <div className="country-legend-item">
           <span className="country-legend-badge" aria-hidden="true">
             🔵
           </span>
-          <div>
+          <span className="country-legend-text">
             <strong>National equivalent (non-EU market, correct document type by design)</strong>
-            <p>
-              Locally approved national product documentation: the Fachinformation for
-              Switzerland (Swissmedic) and the electronic Medicines Compendium (emc) SmPC for the
-              United Kingdom (MHRA).
-            </p>
-          </div>
+          </span>
         </div>
       </div>
 

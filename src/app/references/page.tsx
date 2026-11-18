@@ -207,23 +207,6 @@ export default function ReferencesPage() {
             </table>
           </div>
         </section>
-
-        <section className="s" id="medical-review">
-          <div className="medical-review-card">
-            <div className="medical-review-content">
-              <h3 className="medical-review-title">Medical Review Statement</h3>
-              <p className="medical-review-text">
-                All clinical claims on this platform are referenced to primary literature or current
-                regulatory documents. Superscript numbers correspond to the evidence hub above.
-              </p>
-            </div>
-
-            <div className="medical-review-badge-box">
-              <span className="medical-review-badge-label">Last Reviewed:</span>
-              <span className="medical-review-badge-date">November 2026</span>
-            </div>
-          </div>
-        </section>
       </div>
     </main>
   );

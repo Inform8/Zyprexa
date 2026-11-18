@@ -7652,26 +7652,25 @@ section.s a.country-table-link-btn:hover {
 
 .country-legend-item {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
-  padding: 16px;
+  padding: 12px 16px;
   background: #fbf9ff;
   border: 1px solid #ede5fc;
   border-radius: 12px;
 }
 
 .country-legend-badge {
-  font-size: 20px;
+  font-size: 18px;
   line-height: 1;
   flex-shrink: 0;
-  margin-top: 2px;
 }
 
 .country-legend-item strong {
   display: block;
   font-size: 13.5px;
   color: var(--ink);
-  margin-bottom: 4px;
+  margin-bottom: 0;
 }
 
 .country-legend-item p {
