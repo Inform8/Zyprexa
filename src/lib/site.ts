@@ -12,6 +12,14 @@ export const EXTERNAL = {
   emaPage: "https://www.ema.europa.eu/en/medicines/human/EPAR/zyprexa",
   patientLeafletPdf:
     "https://www.ema.europa.eu/en/documents/overview/zyprexa-epar-summary-public_en.pdf",
+  zyprexaCoatedSmPC:
+    "https://www.ema.europa.eu/en/documents/product-information/zyprexa-epar-product-information_en.pdf",
+  zyprexaVelotabSmPC:
+    "https://www.ema.europa.eu/en/documents/product-information/zyprexa-velotab-epar-product-information_en.pdf",
+  zyprexaImSmPC:
+    "https://ec.europa.eu/health/documents/community-register/2001/200107024322/anx_4322_en.pdf",
+  zypadheraSmPC:
+    "https://www.ema.europa.eu/en/documents/product-information/zypadhera-epar-product-information_en.pdf",
 } as const;
 
 export interface NavLink {
@@ -103,6 +111,15 @@ export const NAV: NavSection[] = [
       { label: "Abbreviations", href: "/references#abbreviations" },
     ],
   },
+  {
+    label: "Zyprexa in your country",
+    href: "/zyprexa-in-your-country",
+    links: [
+      { label: "Country directory", href: "/zyprexa-in-your-country#country-directory" },
+      { label: "Reporting side effects", href: "/zyprexa-in-your-country#reporting" },
+      { label: "Accuracy statement", href: "/zyprexa-in-your-country#accuracy" },
+    ],
+  },
 ];
 
 export const FOOTER_GROUPS: { title: string; links: NavLink[] }[] = [
@@ -131,8 +148,10 @@ export const FOOTER_GROUPS: { title: string; links: NavLink[] }[] = [
     ],
   },
   {
-    title: "References",
+    title: "Prescribing & Regulatory",
     links: [
+      { label: "Zyprexa in your country", href: "/zyprexa-in-your-country" },
+      { label: "Summary of Product Characteristics", href: "/dosing-administration#formulations" },
       { label: "References", href: "/references#literature" },
       { label: "Abbreviations", href: "/references#abbreviations" },
     ],

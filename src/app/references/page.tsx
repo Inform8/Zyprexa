@@ -109,11 +109,13 @@ export default function ReferencesPage() {
                 </div>
               ) : (
                 filtered.map((ref) => {
-                  const authorWithDot = ref.authors.endsWith(".") ? ref.authors : `${ref.authors}.`;
-                  const sourceText =
+                  const cleanTrailingDot = (str: string) => str.trim().replace(/\.+$/, "");
+                  const authorWithDot = `${cleanTrailingDot(ref.authors)}.`;
+                  const rawSource =
                     ref.year && !ref.source.includes(String(ref.year))
                       ? `${ref.source} · ${ref.year}`
                       : ref.source;
+                  const sourceWithDot = `${cleanTrailingDot(rawSource)}.`;
                   const tags = REF_TAGS[ref.n] || [ref.category];
 
                   return (
@@ -130,7 +132,7 @@ export default function ReferencesPage() {
                           <div className="ref-card-info">
                             <h3 className="ref-card-author">{authorWithDot}</h3>
                             <p className="ref-card-citation">
-                              {ref.title} {sourceText}.
+                              {ref.title} {sourceWithDot}
                             </p>
                           </div>
                         </div>

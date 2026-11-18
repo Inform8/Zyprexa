@@ -30,8 +30,8 @@ export const REFERENCES: Reference[] = [
   {
     n: 1,
     title: "ZYPREXA 2.5 mg, 5 mg, 7.5 mg, 10 mg, 15 mg and 20 mg coated tablets. Summary of Product Characteristics.",
-    authors: "CHEPLAPHARM Registration GmbH.",
-    source: "European Medicines Agency.",
+    authors: "CHEPLAPHARM Registration GmbH",
+    source: "European Medicines Agency",
     category: "regulatory",
     kind: "Summary of Product Characteristics",
     topics: ["Product information", "Clinical efficacy", "Pharmacology"],
@@ -42,20 +42,25 @@ export const REFERENCES: Reference[] = [
   {
     n: 2,
     title: "ZYPREXA 10 mg powder for solution for injection. Summary of Product Characteristics.",
-    authors: "CHEPLAPHARM Registration GmbH.",
-    source: "European Medicines Agency.",
+    authors: "CHEPLAPHARM Registration GmbH",
+    source: "European Commission",
     category: "regulatory",
     kind: "Summary of Product Characteristics",
     topics: ["Product information"],
     usedFor: "Source for the intramuscular formulation.",
-    links: [{ label: "Prescribing information (EMA)", href: `${SMPC}/zyprexa-epar-product-information_en.pdf` }],
+    links: [
+      {
+        label: "Prescribing information (EC)",
+        href: "https://ec.europa.eu/health/documents/community-register/2001/200107024322/anx_4322_en.pdf",
+      },
+    ],
   },
   {
     n: 3,
     title:
       "ZYPADHERA 210 mg, 300 mg and 405 mg powder and solvent for prolonged release suspension for injection. Summary of Product Characteristics.",
-    authors: "CHEPLAPHARM Registration GmbH.",
-    source: "European Medicines Agency.",
+    authors: "CHEPLAPHARM Registration GmbH",
+    source: "European Medicines Agency",
     category: "regulatory",
     kind: "Summary of Product Characteristics",
     topics: ["Product information"],
@@ -219,14 +224,31 @@ export const REFERENCES: Reference[] = [
   {
     n: 16,
     title: "ZYPREXA (olanzapine) Prescribing Information.",
-    authors: "U.S. Food and Drug Administration.",
-    source: "Silver Spring, MD: FDA; 2021.",
+    authors: "U.S. Food and Drug Administration",
+    source: "Silver Spring, MD: FDA; 2021",
     year: 2021,
     category: "regulatory",
     kind: "Prescribing information",
     topics: ["Pharmacology"],
     usedFor: "Clinical pharmacology rationale connecting specific receptor activities (H1, M1, α1) with adverse effect profiles.",
     links: [],
+  },
+  {
+    n: 17,
+    title:
+      "ZYPREXA VELOTAB 5 mg, 10 mg, 15 mg and 20 mg orodispersible tablets. Summary of Product Characteristics.",
+    authors: "CHEPLAPHARM Registration GmbH",
+    source: "European Medicines Agency",
+    category: "regulatory",
+    kind: "Summary of Product Characteristics",
+    topics: ["Product information"],
+    usedFor: "Source for the orodispersible formulation.",
+    links: [
+      {
+        label: "Prescribing information (EMA)",
+        href: `${SMPC}/zyprexa-velotab-epar-product-information_en.pdf`,
+      },
+    ],
   },
 ];
 
@@ -259,6 +281,7 @@ export const REF_TAGS: Record<number, Exclude<RefFilterId, "all">[]> = {
   14: ["efficacy", "safety"],
   15: ["mechanism"],
   16: ["mechanism", "safety", "prescribing"],
+  17: ["prescribing"],
 };
 
 export const ABBREVIATIONS: { term: string; definition: string }[] = [

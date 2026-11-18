@@ -17,6 +17,7 @@ export const SITE_PAGES: PageInfo[] = [
   { name: "Clinical evidence", href: "/clinical-evidence" },
   { name: "Clinical guidelines", href: "/clinical-guidelines" },
   { name: "References", href: "/references" },
+  { name: "Zyprexa in your country", href: "/zyprexa-in-your-country" },
 ];
 
 export default function PageNav() {

@@ -94,6 +94,15 @@ export const NAV_ITEMS: NavItem[] = [
       { id: "abbreviations", title: "Abbreviations" },
     ],
   },
+  {
+    name: "Zyprexa in your country",
+    href: "/zyprexa-in-your-country",
+    secs: [
+      { id: "country-directory", title: "Country directory" },
+      { id: "reporting", title: "Reporting side effects" },
+      { id: "accuracy", title: "Accuracy statement" },
+    ],
+  },
 ];
 
 export default function Header() {
@@ -162,18 +171,12 @@ export default function Header() {
               setMobileMenuOpen(false);
               setActiveDropdownIdx(null);
             }}
-            style={{ display: "flex", alignItems: "center", textDecoration: "none", padding: "4px 0" }}
           >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/assets/zyprexa-logo.png"
               alt="ZYPREXA® (olanzapine)"
-              style={{
-                height: "36px",
-                width: "auto",
-                maxWidth: "180px",
-                objectFit: "contain",
-                display: "block",
-              }}
+              className="site-logo-img"
             />
           </Link>
 

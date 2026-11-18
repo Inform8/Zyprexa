@@ -48,7 +48,7 @@ function ReferenceCard({ r, target, query }: { r: Reference; target: boolean; qu
         </div>
         <p className="ref-title">{hl(r.title)}</p>
         <p className="ref-meta">
-          {hl(r.authors)}. {hl(r.source)}.
+          {hl(r.authors.trim().replace(/\.+$/, ""))}. {hl(r.source.trim().replace(/\.+$/, ""))}.
         </p>
         <div className="ref-actions">
           {r.links.length > 0 ? (
