@@ -327,6 +327,40 @@ export default function CountryInteractive() {
           </table>
         </div>
       )}
+
+      {/* Regulatory Legend & Footnotes - Integrated into section without card background or heading */}
+      <div className="country-inline-legend-wrap" id="legend-notes">
+        <div className="country-inline-legend-row">
+          <div className="country-inline-legend-item">
+            <span className="country-inline-legend-dot" aria-hidden="true">
+              🟢
+            </span>
+            <span className="country-inline-legend-text">
+              EU SmPC in English and official EU languages
+            </span>
+          </div>
+
+          <div className="country-inline-legend-item">
+            <span className="country-inline-legend-dot" aria-hidden="true">
+              🔵
+            </span>
+            <span className="country-inline-legend-text">
+              National equivalent (non-EU market, correct document type by design)
+            </span>
+          </div>
+        </div>
+
+        <div className="country-footnotes-wrap">
+          <p className="country-footnote-item">
+            <strong>*</strong> This column links to the locally applicable prescribing information for
+            each market: the Summary of Product Characteristics (SmPC) for EU markets, the
+            Fachinformation for Switzerland, as applicable to each jurisdiction.
+          </p>
+          <p className="country-footnote-item">
+            <strong>**</strong> Verbatim text from locally approved Fachinformation.
+          </p>
+        </div>
+      </div>
     </section>
   );
 }

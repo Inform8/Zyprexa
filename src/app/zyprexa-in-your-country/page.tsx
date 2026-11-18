@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import CountryHero from "@/components/country/CountryHero";
 import CountryIntro from "@/components/country/CountryIntro";
 import CountryInteractive from "@/components/country/CountryInteractive";
-import LegendAndNotes from "@/components/country/LegendAndNotes";
 import ReportingSideEffects from "@/components/country/ReportingSideEffects";
 import AccuracyReviewStatement from "@/components/country/AccuracyReviewStatement";
 
@@ -19,7 +18,6 @@ export default function ZyprexaInYourCountryPage() {
       <div className="w">
         <CountryIntro />
         <CountryInteractive />
-        <LegendAndNotes />
         <ReportingSideEffects />
         <AccuracyReviewStatement />
       </div>
