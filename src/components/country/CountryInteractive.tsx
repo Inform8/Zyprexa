@@ -53,7 +53,7 @@ export default function CountryInteractive() {
     >
       <div className="section-head" style={{ marginBottom: 20 }}>
         <p className="eb">Market-Specific Prescribing Reference</p>
-        <h2>Regulatory and Prescribing Overview Across All 30 Markets</h2>
+        <h2 className="country-section-title">Regulatory and Prescribing Overview Across All 30 Markets</h2>
         <p>
           Select an approved market from the dropdown below to view its Marketing Authorisation
           Holder, locally approved indication, official SmPC link, and adverse event reporting

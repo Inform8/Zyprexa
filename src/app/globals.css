@@ -7145,6 +7145,18 @@ section.country-section,
   z-index: 500 !important;
 }
 
+/* Table Section Heading - matches other section card headings */
+.country-section-title,
+.country-section h2,
+#country-directory h2 {
+  font-size: 20px !important;
+  line-height: 1.3 !important;
+  font-weight: 700 !important;
+  color: var(--pri) !important;
+  margin: 0 0 8px !important;
+  letter-spacing: -0.01em !important;
+}
+
 /* Single Dropdown & Clear Button Toolbar - Centered (Only dropdown bar and label) */
 .country-single-toolbar {
   margin: 12px 0 24px 0;
@@ -7714,11 +7726,12 @@ section.s a.country-table-link-btn:hover {
   margin-top: 2px;
 }
 
-.country-alert-heading {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--pri);
-  margin: 0 0 6px;
+.country-alert-heading,
+#reporting h2 {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--pri) !important;
+  margin: 0 0 6px !important;
 }
 
 .country-alert-body {
@@ -7751,11 +7764,12 @@ section.s a.country-table-link-btn:hover {
   }
 }
 
-.country-accuracy-heading {
-  font-size: 16px;
-  font-weight: 700;
-  color: var(--pri);
-  margin: 0 0 6px;
+.country-accuracy-heading,
+#accuracy h2 {
+  font-size: 18px !important;
+  font-weight: 700 !important;
+  color: var(--pri) !important;
+  margin: 0 0 6px !important;
 }
 
 .country-accuracy-body {

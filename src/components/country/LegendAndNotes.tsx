@@ -1,7 +1,7 @@
 export default function LegendAndNotes() {
   return (
     <div className="card country-legend-card" id="legend-notes" style={{ marginTop: 20 }}>
-      <h3 style={{ fontSize: "16px", fontWeight: 700, color: "var(--pri)", marginBottom: 12 }}>
+      <h3 className="country-legend-title" style={{ fontSize: "18px", fontWeight: 700, color: "var(--pri)", marginBottom: 12 }}>
         Regulatory Legend &amp; Footnotes
       </h3>
 
