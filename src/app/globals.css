@@ -2304,6 +2304,51 @@ details .kpi span {
   line-height: 1.55;
 }
 
+/* Conditions of Use: one panel with stacked sections (matches Roaccutane layout) */
+.conditions-body {
+  padding: 40px 48px;
+  line-height: 1.8;
+}
+
+.conditions-body .legal-section + .legal-section {
+  margin-top: 48px;
+}
+
+.conditions-body .legal-section h2 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin: 0 0 20px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #f0ebf7;
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--pri);
+}
+
+.conditions-body .legal-section h2::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--pri);
+  flex-shrink: 0;
+}
+
+.conditions-body .legal-section p {
+  margin: 0 0 16px;
+}
+
+.conditions-body .legal-section p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 640px) {
+  .conditions-body {
+    padding: 24px 20px;
+  }
+}
+
 /* References Cards & Filters (Strictly adhering to official website branding tokens) */
 .ref-section-container {
   margin-top: 16px;
