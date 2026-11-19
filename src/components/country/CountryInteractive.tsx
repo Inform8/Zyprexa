@@ -272,6 +272,11 @@ export default function CountryInteractive() {
                       <p key={i}>{line}</p>
                     ))}
                   </div>
+                  {selectedCountry.hasSwissFootnote && (
+                    <p className="country-footnote-note">
+                      ** Verbatim text from locally approved Fachinformation
+                    </p>
+                  )}
                 </td>
 
                 {/* Product Information Link* */}
@@ -352,6 +357,11 @@ export default function CountryInteractive() {
                 {selectedCountry.indication.split("\n").map((line, i) => (
                   <p key={i}>{line}</p>
                 ))}
+                {selectedCountry.hasSwissFootnote && (
+                  <p className="country-footnote-note">
+                    ** Verbatim text from locally approved Fachinformation
+                  </p>
+                )}
               </div>
             </div>
 

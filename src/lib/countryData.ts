@@ -28,6 +28,7 @@ export interface CountryEntry {
   sourceBadge: string;
   documentType: string;
   indication: string;
+  hasSwissFootnote?: boolean;
   links: CountryLink[];
   aeRaw: string;
   aeEmail?: string;
@@ -290,7 +291,8 @@ const COUNTRY_DATA_UNSORTED: CountryEntry[] = [
     "sourceType": "national",
     "sourceBadge": "🔵",
     "documentType": "Fachinformation",
-    "indication": "Schizophrenia.\nOlanzapine is indicated as monotherapy or in combination with lithium or valproate for the treatment of acute manic episodes in bipolar disorder. \nIf an acute manic episode in patients with bipolar disorder has responded to olanzapine, olanzapine is indicated for relapse prevention.",
+    "indication": "Schizophrenia.\nOlanzapine is indicated as monotherapy or in combination with lithium or valproate for the treatment of acute manic episodes in bipolar disorder. \nIf an acute manic episode in patients with bipolar disorder has responded to olanzapine, olanzapine is indicated for relapse prevention.**",
+    "hasSwissFootnote": true,
     "links": [
       {
         "label": "Zyprexa Coated Tablet 2.5 mg",
