@@ -28,14 +28,13 @@ export interface CountryEntry {
   sourceBadge: string;
   documentType: string;
   indication: string;
-  hasSwissFootnote?: boolean;
   links: CountryLink[];
   aeRaw: string;
   aeEmail?: string;
   aePhone?: string;
 }
 
-export const COUNTRY_DATA: CountryEntry[] = [
+const COUNTRY_DATA_UNSORTED: CountryEntry[] = [
   {
     "id": "denmark",
     "country": "Denmark",
@@ -45,7 +44,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg dansk (DA)",
@@ -65,7 +63,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg Deutsch (DE)",
@@ -85,7 +82,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg български (BG)",
@@ -105,7 +101,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg hrvatski (HR)",
@@ -125,7 +120,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg eesti (ET)",
@@ -145,7 +139,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg magyar (HU)",
@@ -165,7 +158,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg",
@@ -185,7 +177,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg latviešu (LV)",
@@ -205,7 +196,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg lietuvių (LT)",
@@ -225,7 +215,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg (NL)",
@@ -245,7 +234,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg ελληνικά (EL)",
@@ -265,15 +253,14 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg română (RO)",
         "url": "https://www.ema.europa.eu/ro/documents/product-information/zyprexa-epar-product-information_ro.pdf"
       }
     ],
-    "aeRaw": "E: [RO-SafetyDrug@magnapharm.eu](mailto:RO-SafetyDrug@magnapharm.eu)\nT: +40372502221",
-    "aeEmail": "RO-SafetyDrug@magnapharm.eu",
+    "aeRaw": "E: [safety-RO@magnapharm.eu](mailto:safety-RO@magnapharm.eu)\nT: +40372502221",
+    "aeEmail": "safety-RO@magnapharm.eu",
     "aePhone": "+40372502221"
   },
   {
@@ -285,7 +272,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg čeština (CS)",
@@ -304,8 +290,7 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceType": "national",
     "sourceBadge": "🔵",
     "documentType": "Fachinformation",
-    "indication": "Schizophrenia.\nOlanzapine is indicated as monotherapy or in combination with lithium or valproate for the treatment of acute manic episodes in bipolar disorder. \nIf an acute manic episode in patients with bipolar disorder has responded to olanzapine, olanzapine is indicated for relapse prevention.**",
-    "hasSwissFootnote": true,
+    "indication": "Schizophrenia.\nOlanzapine is indicated as monotherapy or in combination with lithium or valproate for the treatment of acute manic episodes in bipolar disorder. \nIf an acute manic episode in patients with bipolar disorder has responded to olanzapine, olanzapine is indicated for relapse prevention.",
     "links": [
       {
         "label": "Zyprexa Coated Tablet 2.5 mg",
@@ -325,7 +310,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg español (ES)",
@@ -345,7 +329,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🔵",
     "documentType": "SmPC (MHRA)",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg",
@@ -365,7 +348,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg français (FR)",
@@ -385,7 +367,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg italiano (IT)",
@@ -405,7 +386,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg Malti (MT)",
@@ -425,7 +405,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg polski (PL)",
@@ -445,7 +424,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg slovenčina (SK)",
@@ -465,7 +443,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg slovenščina (SL)",
@@ -485,7 +462,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg suomi (FI)",
@@ -505,7 +481,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg svenska (SV)",
@@ -525,7 +500,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg Íslenska (IS)",
@@ -545,7 +519,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg norsk (NO)",
@@ -565,7 +538,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg Nederlands (NL)",
@@ -585,7 +557,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg português (PT)",
@@ -605,7 +576,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg Deutsch (DE)",
@@ -625,7 +595,6 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "sourceBadge": "🟢",
     "documentType": "EU SmPC",
     "indication": "Olanzapine is indicated for the treatment of schizophrenia.\nOlanzapine is effective in maintaining the clinical improvement during continuation therapy in patients who have shown an initial treatment response.\nOlanzapine is indicated for the treatment of moderate to severe manic episode.\nIn patients whose manic episode has responded to olanzapine treatment, olanzapine is indicated for the prevention of recurrence in patients with bipolar disorder",
-    "hasSwissFootnote": false,
     "links": [
       {
         "label": "Zyprexa 2.5 mg Nederlands (NL)",
@@ -641,3 +610,8 @@ export const COUNTRY_DATA: CountryEntry[] = [
     "aePhone": "+32496858749"
   }
 ];
+
+/** Countries sorted alphabetically for display in the market selector and table. */
+export const COUNTRY_DATA: CountryEntry[] = [...COUNTRY_DATA_UNSORTED].sort((a, b) =>
+  a.country.localeCompare(b.country, "en")
+);

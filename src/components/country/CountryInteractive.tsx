@@ -272,11 +272,6 @@ export default function CountryInteractive() {
                       <p key={i}>{line}</p>
                     ))}
                   </div>
-                  {selectedCountry.hasSwissFootnote && (
-                    <p className="country-footnote-note">
-                      ** Verbatim text from locally approved Fachinformation
-                    </p>
-                  )}
                 </td>
 
                 {/* Product Information Link* */}
@@ -357,11 +352,6 @@ export default function CountryInteractive() {
                 {selectedCountry.indication.split("\n").map((line, i) => (
                   <p key={i}>{line}</p>
                 ))}
-                {selectedCountry.hasSwissFootnote && (
-                  <p className="country-footnote-note">
-                    ** Verbatim text from locally approved Fachinformation
-                  </p>
-                )}
               </div>
             </div>
 
@@ -446,9 +436,6 @@ export default function CountryInteractive() {
             <strong>*</strong> This column links to the locally applicable prescribing information for
             each market: the Summary of Product Characteristics (SmPC) for EU markets, the
             Fachinformation for Switzerland, as applicable to each jurisdiction.
-          </p>
-          <p className="country-footnote-item">
-            <strong>**</strong> Verbatim text from locally approved Fachinformation.
           </p>
         </div>
       </div>
