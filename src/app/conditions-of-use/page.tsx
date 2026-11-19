@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import BackToWebsiteButton from "@/components/BackToWebsiteButton";
 
 export const metadata: Metadata = {
   title: "Conditions of Use",
@@ -19,12 +19,7 @@ export default function ConditionsOfUsePage() {
               Characteristics for ZYPREXA coated tablets.
             </p>
             <div className="hero-tabs">
-              <Link className="btn" href="/safety-monitoring#reporting">
-                Adverse-reaction contacts →
-              </Link>
-              <Link className="btn g" href="/references">
-                References
-              </Link>
+              <BackToWebsiteButton />
             </div>
           </div>
           <div className="hero-art" aria-hidden="true" />

@@ -24,6 +24,9 @@ export default function PageNav() {
   const pathname = usePathname();
   const normalizedPath = (pathname || "/").replace(/\/$/, "") || "/";
 
+  // Conditions of use has no previous/next navigation (matches Roaccutane).
+  if (normalizedPath === "/conditions-of-use") return null;
+
   // Find index of current page
   const currentIndex = SITE_PAGES.findIndex((page) => page.href === normalizedPath);
 
