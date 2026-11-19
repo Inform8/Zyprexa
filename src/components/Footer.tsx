@@ -3,8 +3,10 @@ import Link from "next/link";
 const CHEPLAPHARM_LOGO_SVG =
   "https://www.cheplapharm-reg.com/_assets/b28ddf122507f153edf02af498f63896/Images/cheplapharm-logo-icons.svg";
 
-const fullDisclaimer =
-  "This website contains information on ZYPREXA (olanzapine) coated tablets, which is based on the approved EU Summary of Product Characteristics (SmPC). It is intended for educational and reference purposes only for healthcare professionals in EU countries, United Kingdom and Switzerland. Always consult the current approved product information before prescribing. ZYPREXA® is a registered trademark of CHEPLAPHARM. Prepared November 2026. Job code to be assigned for the target market.";
+const disclaimerText =
+  "This website contains information on ZYPREXA (olanzapine) coated tablets, which is based on the approved EU Summary of Product Characteristics (SmPC). It is intended for educational and reference purposes only for healthcare professionals in EU countries, United Kingdom and Switzerland. Always consult the current approved product information before prescribing.";
+
+const trademarkText = "ZYPREXA® is a registered trademark of CHEPLAPHARM.";
 
 function CheplapharmLogoIcon({ className = "footer-logo" }: { className?: string }) {
   return (
@@ -94,7 +96,10 @@ export default function Footer() {
           </nav>
         </div>
 
-        <p className="footer-disclaimer">{fullDisclaimer}</p>
+        <div className="footer-disclaimer">
+          <p>{disclaimerText}</p>
+          <p className="footer-disclaimer-trademark">{trademarkText}</p>
+        </div>
 
         <div className="footer-copy">
           <CheplapharmLogoIcon />

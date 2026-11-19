@@ -274,7 +274,7 @@ export default function CountryInteractive() {
                   </div>
                   {selectedCountry.hasSwissFootnote && (
                     <p className="country-footnote-note">
-                      ** Verbatim text from locally approved Fachinformation
+                      Verbatim text from locally approved Fachinformation
                     </p>
                   )}
                 </td>

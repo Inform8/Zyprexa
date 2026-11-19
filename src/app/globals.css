@@ -3351,6 +3351,26 @@ ul.plain-list li strong {
   text-align-last: start;
 }
 
+.footer-disclaimer p {
+  margin: 0;
+}
+
+.footer-disclaimer p + p {
+  margin-top: 10px;
+}
+
+.footer-disclaimer-trademark {
+  text-align: left;
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  background: rgba(255, 255, 255, 0.12);
+  border-left: 3px solid #e7d6ff;
+  padding: 6px 10px;
+  border-radius: 6px;
+}
+
 .footer-copy {
   display: flex;
   align-items: center;
